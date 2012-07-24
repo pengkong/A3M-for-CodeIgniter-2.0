@@ -28,7 +28,7 @@
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.0.0</h1></td>
+<td><h1>CodeIgniter User Guide Version 2.1.2</h1></td>
 <td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
 </tr>
 </table>
@@ -68,7 +68,7 @@ CAPTCHA Helper
 
 <p>The following functions are available:</p>
 
-<h2>captcha_create(<var>$data</var>)</h2>
+<h2>create_captcha(<var>$data</var>)</h2>
 
 <p>Takes an array of information to generate the CAPTCHA as input and creates the image to your specifications, returning an array of associative data about the image.</p>
 
@@ -167,7 +167,7 @@ $expiration = time()-7200; // Two hour limit<br />
 $this-&gt;db-&gt;query(&quot;DELETE FROM captcha WHERE captcha_time &lt; &quot;.$expiration);	<br />
 <br />
 // Then see if a captcha exists:<br />
-$sql = &quot;SELECT COUNT(*) AS count FROM captcha WHERE word = ? AND ip_address = ? AND date &gt; ?&quot;;<br />
+$sql = &quot;SELECT COUNT(*) AS count FROM captcha WHERE word = ? AND ip_address = ? AND captcha_time &gt; ?&quot;;<br />
 $binds = array($_POST[&#x27;captcha&#x27;], $this-&gt;input-&gt;ip_address(), $expiration);<br />
 $query = $this-&gt;db-&gt;query($sql, $binds);<br />
 $row = $query-&gt;row();<br />
@@ -183,12 +183,12 @@ if ($row-&gt;count == 0)<br />
 
 <div id="footer">
 <p>
-Previous Topic:&nbsp;&nbsp;<a href="url_helper.html">URL Helper</a>
+Previous Topic:&nbsp;&nbsp;<a href="array_helper.html">Array Helper</a>
 &nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
 <a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="../index.html">User Guide Home</a>
-</p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2011 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href="cookie_helper.html">Cookie Helper</a></p>
+<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>

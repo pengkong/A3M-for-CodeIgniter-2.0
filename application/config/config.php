@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/a3m_peanutbutter/';
+$config['base_url']	= '/a3m/';
 
 /*
 |--------------------------------------------------------------------------

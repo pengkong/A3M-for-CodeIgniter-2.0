@@ -28,7 +28,7 @@
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.0.0</h1></td>
+<td><h1>CodeIgniter User Guide Version 2.1.2</h1></td>
 <td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
 </tr>
 </table>
@@ -76,6 +76,21 @@ It is possible, however, for you to manually intervene with the output if you ne
 
 <p><strong>Important:</strong> If you do set your output manually, it must be the last thing done in the function you call it from.
 For example, if you build a page in one of your controller functions, don't set the output until the end.</p>
+
+
+<h2>$this->output->set_content_type();</h2>
+
+<p>Permits you to set the mime-type of your page so you can serve JSON data, JPEG's, XML, etc easily.</p>
+
+<code>$this->output<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;->set_content_type('application/json')<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;->set_output(json_encode(array('foo' => 'bar')));<br/>
+<br/>
+$this->output<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;->set_content_type('jpeg') // You could also use ".jpeg" which will have the full stop removed before looking in config/mimes.php<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;->set_output(file_get_contents('files/something.jpg'));</code>
+
+<p><strong>Important:</strong> Make sure any non-mime string you pass to this method exists in config/mimes.php or it will have no effect.</p>
 
 
 <h2>$this->output->get_output();</h2>
@@ -155,7 +170,7 @@ Previous Topic:&nbsp;&nbsp;<a href="language.html">Language Class</a>
 <a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
 Next Topic:&nbsp;&nbsp;<a href="pagination.html">Pagination Class</a>
 </p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2011 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>

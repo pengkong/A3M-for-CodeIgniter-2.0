@@ -1,4 +1,4 @@
 RewriteEngine on 
-RewriteRule ^$ /a3m_peanutbutter/index.php [L] 
+RewriteRule ^$ /a3m/index.php [L] 
 RewriteCond $1 !^(index\.php|resource|system|user_guide|robots\.txt|favicon\.ico) 
-RewriteRule ^(.*)$ /a3m_peanutbutter/index.php/$1 [L] 
+RewriteRule ^(.*)$ /a3m/index.php/$1 [L] 

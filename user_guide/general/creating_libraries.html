@@ -28,7 +28,7 @@
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.0.0</h1></td>
+<td><h1>CodeIgniter User Guide Version 2.1.2</h1></td>
 <td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
 </tr>
 </table>
@@ -101,11 +101,11 @@ they are initialized.</p>
 <br /><br />
 class Someclass {<br />
 <br />
-&nbsp;&nbsp;&nbsp;&nbsp;function some_function()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public function some_function()<br />
 &nbsp;&nbsp;&nbsp;&nbsp;{<br />
 &nbsp;&nbsp;&nbsp;&nbsp;}<br />
 }<br /><br />
-?&gt;</code>
+/* End of file Someclass.php */</code>
 
 
 <h2>Using Your Class</h2>
@@ -140,7 +140,7 @@ $this->load->library('Someclass', <kbd>$params</kbd>);</code>
 <br />
 class Someclass {<br />
 <br />
-&nbsp;&nbsp;&nbsp;&nbsp;function __construct($params)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public function __construct($params)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;{<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Do something with $params<br />
 &nbsp;&nbsp;&nbsp;&nbsp;}<br />
@@ -243,7 +243,7 @@ class MY_Email extends CI_Email {<br /><br />
 <code>
 class MY_Email extends CI_Email {<br />
 <br />
-&nbsp;&nbsp;&nbsp;&nbsp;function __construct()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public function __construct()<br />
 &nbsp;&nbsp;&nbsp;&nbsp;{<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent::__construct();<br />
 &nbsp;&nbsp;&nbsp;&nbsp;}<br />
@@ -286,7 +286,7 @@ Previous Topic:&nbsp;&nbsp;<a href="libraries.html">Using CodeIgniter Libraries<
 <a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
 Next Topic:&nbsp;&nbsp;<a href="drivers.html">Using CodeIgniter Drivers</a>
 </p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2011 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>

@@ -28,7 +28,7 @@
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.0.0</h1></td>
+<td><h1>CodeIgniter User Guide Version 2.1.2</h1></td>
 <td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
 </tr>
 </table>
@@ -61,9 +61,7 @@ Configuration
 <h1>Database Configuration</h1>
 
 <p>CodeIgniter has a config file that lets you store your database connection values (username, password, database name, etc.).
-The config file is located at:</p>
-
-<p><kbd>application/config/database.php</kbd></p>
+The config file is located at <samp>application/config/database.php</samp>. You can also set database connection values for specific <a href="../libraries/config.html">environments</a> by placing <strong>database.php</strong> it the respective environment config folder.</p>
 
 <p>The config settings are stored in a multi-dimensional array with this prototype:</p>
 
@@ -134,9 +132,9 @@ for the primary connection, but it too can be renamed to something more relevant
 <li><strong>cache_on</strong> - TRUE/FALSE (boolean) - Whether database query caching is enabled, see also <a href="caching.html">Database Caching Class</a>.</li>
 <li><strong>cachedir</strong> - The absolute server path to your database query cache directory.</li>
 <li><strong>char_set</strong> - The character set used in communicating with the database.</li>
-<li><strong>dbcollat</strong> - The character collation used in communicating with the database.</li>
-<li><strong>swap_pre</strong> - A default table prefix that should be swapped with <var>dbprefix</var>.  This is useful for distributed applications where you might run manually written queries, and need the prefix to still be customizable by the end user.</li>
-<li><strong>autoinit</strong> - Whether or not to automatically initialize the database.</li>
+<li><strong>dbcollat</strong> - The character collation used in communicating with the database. <p class="important"><strong>Note:</strong> For MySQL and MySQLi databases, this setting is only used as a backup if your server is running PHP &lt; 5.2.3 or MySQL &lt; 5.0.7 (and in table creation queries made with DB Forge). There is an incompatibility in PHP with mysql_real_escape_string() which can make your site vulnerable to SQL injection if you are using a multi-byte character set and are running versions lower than these. Sites using Latin-1 or UTF-8 database character set and collation are unaffected.</p></li>
+<li><strong>swap_pre</strong> - A default table prefix that should be swapped with <var>dbprefix</var>. This is useful for distributed applications where you might run manually written queries, and need the prefix to still be customizable by the end user.</li>
+<li><strong>autoinit</strong> - Whether or not to automatically connect to the database when the library loads. If set to false, the connection will take place prior to executing the first query.</li>
 <li><strong>stricton</strong> - TRUE/FALSE (boolean) - Whether to force "Strict Mode" connections, good for ensuring strict SQL while developing an application.</li>
 <li><strong>port</strong> - The database port number.  To use this value you have to add a line to the database config array.<code>$db['default']['port'] =  5432;</code>
 </ul>
@@ -159,7 +157,7 @@ Previous Topic:&nbsp;&nbsp;<a href="examples.html">Quick Start: Usage Examples</
 <a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
 Next Topic:&nbsp;&nbsp;<a href="connecting.html">Connecting to your Database</a>
 </p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2011 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>

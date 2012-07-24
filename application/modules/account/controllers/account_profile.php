@@ -40,6 +40,7 @@ class Account_profile extends CI_Controller {
 		// Delete profile picture
 		if ($action == 'delete')
 		{
+			unlink(FCPATH.'resource/user/profile/'.$data['account_details']->picture);	// delete previous picture
 			$this->account_details_model->update($data['account']->id, array('picture' => NULL));
 			redirect('account/account_profile');
 		}

@@ -28,7 +28,7 @@
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.0.0</h1></td>
+<td><h1>CodeIgniter User Guide Version 2.1.2</h1></td>
 <td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
 </tr>
 </table>
@@ -105,8 +105,8 @@ even add your own data to a user's session, but the process of reading, writing,
 <ul>
 <li>The user's unique Session ID (this is a statistically random string with very strong entropy, hashed with MD5 for portability, and regenerated (by default) every five minutes)</li>
 <li>The user's IP Address</li>
-<li>The user's User Agent data (the first 50 characters of the browser data string)</li>
-<li>The "last activity"  time stamp.</li>
+<li>The user's User Agent data (the first 120 characters of the browser data string)</li>
+<li>The "last activity" time stamp.</li>
 </ul>
 
 <p>The above data is stored in a cookie as a serialized array with this prototype:</p>
@@ -170,6 +170,23 @@ having to run a database query when you need it.</p>
 <p class="important"><strong>Note:</strong> Cookies can only hold 4KB of data, so be careful not to exceed the capacity.  The
 encryption process in particular produces a longer data string than the original so keep careful track of how much data you are storing.</p>
 
+<h2>Retrieving All Session Data</h2>
+<p>An array of all userdata can be retrieved as follows:</p>
+<code>$this-&gt;session-&gt;all_userdata()</code>
+
+<p>And returns an associative array like the following:</p>
+
+<pre>
+Array
+(
+    [session_id] => 4a5a5dca22728fb0a84364eeb405b601
+    [ip_address] => 127.0.0.1
+    [user_agent] => Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7;
+    [last_activity] => 1303142623
+)
+</pre>
+
+
 <h2>Removing Session Data</h2>
 <p>Just as set_userdata() can be used to add information into a session, unset_userdata() can be used to remove it, by passing the session key. For example, if you wanted to remove 'some_name' from your session information: </p>
 <p><code>$this-&gt;session-&gt;unset_userdata('some_name');</code></p>
@@ -201,15 +218,17 @@ be updated, they can only be generated when a new session is created.</p>
 <p>In order to store sessions, you must first create a database table for this purpose.  Here is the basic
 prototype (for MySQL) required by the session class:</p>
 
-<textarea class="textarea" style="width:100%" cols="50" rows="8">
+<textarea class="textarea" style="width:100%" cols="50" rows="10">
 CREATE TABLE IF NOT EXISTS  `ci_sessions` (
-session_id varchar(40) DEFAULT '0' NOT NULL,
-ip_address varchar(16) DEFAULT '0' NOT NULL,
-user_agent varchar(50) NOT NULL,
-last_activity int(10) unsigned DEFAULT 0 NOT NULL,
-user_data text DEFAULT '' NOT NULL,
-PRIMARY KEY (session_id)
-);</textarea>
+	session_id varchar(40) DEFAULT '0' NOT NULL,
+	ip_address varchar(45) DEFAULT '0' NOT NULL,
+	user_agent varchar(120) NOT NULL,
+	last_activity int(10) unsigned DEFAULT 0 NOT NULL,
+	user_data text NOT NULL,
+	PRIMARY KEY (session_id),
+	KEY `last_activity_idx` (`last_activity`)
+);
+</textarea>
 
 <p><strong>Note:</strong> By default the table is called <dfn>ci_sessions</dfn>, but you can name it anything you want
 as long as you update the <kbd>application/config/config.php</kbd> file so that it contains the name you have chosen.
@@ -315,7 +334,7 @@ Previous Topic:&nbsp;&nbsp;<a href="security.html">Security Class</a>
 <a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
 Next Topic:&nbsp;&nbsp;<a href="trackback.html">Trackback Class</a>
 </p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2011 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>

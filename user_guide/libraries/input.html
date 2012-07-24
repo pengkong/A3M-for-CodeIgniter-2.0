@@ -28,7 +28,7 @@
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.0.0</h1></td>
+<td><h1>CodeIgniter User Guide Version 2.1.2</h1></td>
 <td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
 </tr>
 </table>
@@ -73,11 +73,11 @@ Input Class
 <p>The security filtering function is called automatically when a new <a href="../general/controllers.html">controller</a> is invoked.  It does the following:</p>
 
 <ul>
-<li>Destroys the global GET array.  Since CodeIgniter does not utilize GET strings, there is no reason to allow it.</li>
+<li>If $config['allow_get_array'] is FALSE(default is TRUE), destroys the global GET array.</li>
 <li>Destroys all global variables in the event register_globals is turned on.</li>
-<li>Filters the POST/COOKIE array keys, permitting only alpha-numeric (and a few other) characters.</li>
+<li>Filters the GET/POST/COOKIE array keys, permitting only alpha-numeric (and a few other) characters.</li>
 <li>Provides XSS (Cross-site Scripting Hacks) filtering.  This can be enabled globally, or upon request.</li>
-<li>Standardizes newline characters to \n</li>
+<li>Standardizes newline characters to \n(In Windows \r\n)</li>
 </ul>
 
 
@@ -132,11 +132,31 @@ else<br />
 
 <code>$this->input->post('some_data', TRUE);</code>
 
+<p>To return an array of all POST items call without any parameters.</p>
+<p>To return all POST items and pass them through the XSS filter set the first parameter NULL while setting the second parameter to boolean;</p>
+<p>The function returns FALSE (boolean) if there are no items in the POST.</p>
+
+<code>
+	$this->input->post(NULL, TRUE); // returns all POST items with XSS filter
+	<br />
+	$this->input->post(); // returns all POST items without XSS filter
+</code>
+
 <h2>$this->input->get()</h2>
 
 <p>This function is identical to the post function, only it fetches get data:</p>
 
 <code>$this->input->get('some_data', TRUE);</code>
+
+<p>To return an array of all GET items call without any parameters.</p>
+<p>To return all GET items and pass them through the XSS filter set the first parameter NULL while setting the second parameter to boolean;</p>
+<p>The function returns FALSE (boolean) if there are no items in the GET.</p>
+
+<code>
+	$this->input->get(NULL, TRUE); // returns all GET items with XSS filter
+	<br />
+	$this->input->get(); // returns all GET items without XSS filtering
+</code>
 
 <h2>$this->input->get_post()</h2>
 
@@ -167,13 +187,14 @@ Array Method, and Discrete Parameters:</p>
 <p>Using this method, an associative array is passed to the first parameter:</p>
 
 <code>$cookie = array(<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'name'&nbsp;&nbsp;&nbsp;=> 'The Cookie Name',<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'value'&nbsp;&nbsp;=> 'The Value',<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'expire' => '86500',<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'domain' => '.some-domain.com',<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'path'&nbsp;&nbsp;&nbsp;=> '/',<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'prefix' => 'myprefix_',<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;'name'&nbsp;&nbsp;&nbsp;=> 'The Cookie Name',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;'value'&nbsp;&nbsp;=> 'The Value',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;'expire' => '86500',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;'domain' => '.some-domain.com',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;'path'&nbsp;&nbsp;&nbsp;=> '/',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;'prefix' => 'myprefix_',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;'secure' => TRUE<br />
+);<br />
 <br />
 $this->input->set_cookie($cookie);
 </code>
@@ -188,24 +209,25 @@ zero the cookie will only last as long as the browser is open.</p>
 <p>For site-wide cookies regardless of how your site is requested, add your URL to the <strong>domain</strong> starting with a period, like this:  .your-domain.com</p>
 <p>The path is usually not needed since the function sets a root path.</p>
 <p>The prefix is only needed if you need to avoid name collisions with other identically named cookies for your server.</p>
+<p>The secure boolean is only needed if you want to make it a secure cookie by setting it to TRUE.</p>
 
 <h4>Discrete Parameters</h4>
 
 <p>If you prefer, you can set the cookie by passing data using individual parameters:</p>
 
-<code>$this->input->set_cookie($name, $value, $expire, $domain, $path, $prefix);</code>
+<code>$this->input->set_cookie($name, $value, $expire, $domain, $path, $prefix, $secure);</code>
 
-<h2>$this->input->get_cookie()</h2>
+<h2>$this->input->cookie()</h2>
 
 <p>Lets you fetch a cookie.  The first parameter will contain the name of the cookie you are looking for (including any prefixes):</p>
 
-<code>get_cookie('some_cookie');</code>
+<code>cookie('some_cookie');</code>
 
 <p>The function returns FALSE (boolean) if the item you are attempting to retrieve does not exist.</p>
 
 <p>The second optional parameter lets you run the data through the XSS filter.  It's enabled by setting the second parameter to boolean TRUE;</p>
 
-<p><code>get_cookie('some_cookie', TRUE);</code></p>
+<p><code>cookie('some_cookie', TRUE);</code></p>
 
 
 <h2>$this->input->ip_address()</h2>
@@ -226,12 +248,12 @@ else<br />
 {<br />
 &nbsp;&nbsp;&nbsp;&nbsp; echo 'Valid';<br />
 }</code>
-
+<p>Accepts an optional second string parameter of "IPv4" or "IPv6" to specify an IP format. The default checks for both formats.</p> 
 
 <h2>$this->input->user_agent()</h2>
 <p>Returns the user agent (web browser) being used by the current user. Returns FALSE if it's not available.</p>
 <code>echo $this->input->user_agent();</code>
-
+<p>See the <a href="user_agent.html">User Agent Class</a> for methods which extract information from the user agent string.</p>
 
 <h2>$this->input->request_headers()</h2>
 <p>Useful if running in a non-Apache environment where <a href="http://php.net/apache_request_headers">apache_request_headers()</a> will not be supported.  Returns an array of headers.</p>
@@ -247,7 +269,11 @@ else<br />
 <h2>$this->input->is_ajax_request()</h2>
 <p>Checks to see if the <var>HTTP_X_REQUESTED_WITH</var> server header has been set, and returns a boolean response.</p>
 
-<code>$this->input->is_ajax_request()</code>
+
+<h2>$this->input->is_cli_request()</h2>
+<p>Checks to see if the <var>STDIN</var> constant is set, which is a failsafe way to see if PHP is being run on the command line.</p>
+
+<code>$this->input->is_cli_request()</code>
 
 
 </div>
@@ -262,7 +288,7 @@ Previous Topic:&nbsp;&nbsp;<a href="image_lib.html">Image Manipulation Class</a>
 <a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
 Next Topic:&nbsp;&nbsp;<a href="loader.html">Loader Class</a>
 </p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2011 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 
-<title>CodeIgniter User Guide : JavaScript Class</title>
+<title>JavaScript Class : CodeIgniter User Guide</title>
 
 <style type='text/css' media='all'>@import url('../userguide.css');</style>
 <link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
@@ -28,7 +28,7 @@
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.0.0</h1></td>
+<td><h1>CodeIgniter User Guide Version 2.1.2</h1></td>
 <td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
 </tr>
 </table>
@@ -42,7 +42,8 @@
 <td id="breadcrumb">
 <a href="http://codeigniter.com/">CodeIgniter Home</a> &nbsp;&#8250;&nbsp;
 <a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
-Input Class
+<a href="../general/drivers.html">Drivers</a> &nbsp;&#8250;&nbsp;
+JavaScript Driver
 </td>
 <td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="codeigniter.com/user_guide/" />Search User Guide&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
 </tr>
@@ -82,7 +83,7 @@ Input Class
 <h3>Set the path to the librarys with config items</h3>
 <p>There are some configuration items in Javascript library. These can either be set in application/config.php, within its own config/javascript.php file, or within any controller usings the set_item() function. </p>
 <p>An image to be used as an &quot;ajax loader&quot;, or progress indicator. Without one, the simple text message of &quot;loading&quot; will appear when Ajax calls need to be made.</p>
-<p><code>$config['javascript_location'] = 'http://localhost/codeigniter/themes/js/jquery/');<br />
+<p><code>$config['javascript_location'] = 'http://localhost/codeigniter/themes/js/jquery/';<br />
 		$config['javascript_ajax_img'] = 'images/ajax-loader.gif';</code></p>
 <p>If you keep your files in the same directories they were downloaded from, then you need not set this configuration items.</p>
 
@@ -146,7 +147,7 @@ $this->jquery->effect('bounce');
 <p><code> $this-&gt;jquery-&gt;animate(target, parameters, optional speed, optional extra information);</code></p>
 <ul>
 	<li>&quot;target&quot; will be any valid jQuery selector or selectors.</li>
-	<li>&quot;paramters&quot; in jQuery would generally include a series of CSS properties that you wish to change.</li>
+	<li>&quot;parameters&quot; in jQuery would generally include a series of CSS properties that you wish to change.</li>
 	<li>&quot;speed&quot; is optional, and is set to either slow, normal, fast, or alternatively a number of milliseconds.</li>
 	<li>&quot;extra information&quot; is optional, and could include a callback, or other additional information.</li>
 </ul>
@@ -234,12 +235,12 @@ $this-&gt;jquery-&gt;slideToggle(target,  optional speed, optional extra informa
 
 <div id="footer">
 <p>
-Previous Topic:&nbsp;&nbsp;<a href="input.html">Input Class</a>
+Previous Topic:&nbsp;&nbsp;<a href="../database/index.html">Database Class</a>
 &nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
 <a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
 <a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-Next Topic:&nbsp;&nbsp;<a href="language.html">Language Class</a></p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2011 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+Next Topic:&nbsp;&nbsp;<a href="../helpers/array_helper.html">Array Helper</a></p>
+<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>
