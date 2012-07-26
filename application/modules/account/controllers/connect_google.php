@@ -74,7 +74,7 @@ class Connect_google extends CI_Controller {
 							if (isset($ax_args['http://axschema.org/pref/language'][0])) $openid_google['language'] = $ax_args['http://axschema.org/pref/language'][0];
 							if (isset($ax_args['http://axschema.org/pref/timezone'][0])) $openid_google['timezone'] = $ax_args['http://axschema.org/pref/timezone'][0];
 							if (isset($ax_args['http://axschema.org/namePerson/first'][0])) $openid_google['firstname'] = $ax_args['http://axschema.org/namePerson/first'][0]; // google only
-							if (isset($ax_args['http://axschema.org/namePerson/last'][0])) $openid_google['lastname'] = ' '.$ax_args['http://axschema.org/namePerson/last'][0]; // google only
+							if (isset($ax_args['http://axschema.org/namePerson/last'][0])) $openid_google['lastname'] = $ax_args['http://axschema.org/namePerson/last'][0]; // google only
 						}
 						
 						// Store user's google data in session
