@@ -88,7 +88,7 @@
             <?php echo form_fieldset_close(); ?>
             <?php echo form_close(); ?>
         </div>
-		 <?php if (count($this->config->item('third_party_auth_providers')) > 0) : ?>
+		 <?php if ($this->config->item('third_party_auth_providers')) : ?>
 		   <div class="grid_6">
 			 <h3><?php echo sprintf(lang('sign_up_third_party_heading')); ?></h3>
 			 <ul>

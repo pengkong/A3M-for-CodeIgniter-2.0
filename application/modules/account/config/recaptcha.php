@@ -9,7 +9,7 @@
 |
 | recaptcha_theme	'red' | 'white' | 'blackglass' | 'clean' | 'custom'
 */
-$config['recaptcha_public_key']			= "";
+$config['recaptcha_public_key']		= "";
 $config['recaptcha_private_key']		= "";
 $config['recaptcha_theme']				= "white";
 

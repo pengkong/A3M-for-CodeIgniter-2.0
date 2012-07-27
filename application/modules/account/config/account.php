@@ -35,16 +35,16 @@ $config['sign_out_view_enabled'] 				= TRUE;
 | OpenID
 |--------------------------------------------------------------------------
 */
-$config['openid_file_store_path'] 				= 'system/cache';
+$config['openid_file_store_path'] 						= 'application/cache';
 $config['openid_google_discovery_endpoint'] 	= 'http://www.google.com/accounts/o8/id';
-$config['openid_yahoo_discovery_endpoint'] 		= 'http://www.yahoo.com/';
+$config['openid_yahoo_discovery_endpoint'] 	= 'http://www.yahoo.com/';
 
 /*
 |--------------------------------------------------------------------------
 | Third Party Auth
 |--------------------------------------------------------------------------
 */
-$config['third_party_auth_providers'] 			= array('facebook', 'twitter', 'google', 'yahoo', 'openid');
+$config['third_party_auth_providers'] 		= array('facebook', 'twitter', 'google', 'yahoo', 'openid');
 $config['openid_what_is_url'] 					= 'http://openidexplained.com/';
 
 /*
@@ -57,9 +57,9 @@ $config['openid_what_is_url'] 					= 'http://openidexplained.com/';
 |									* IMPORTANT * Do not reuse the password reset salt else where!
 |	password_reset_email 			Reset password sender email
 */
-$config['password_reset_expiration'] 			= 1800;
+$config['password_reset_expiration'] 		= 1800;
 $config['password_reset_secret'] 				= '';
-$config['password_reset_email'] 				= 'no-reply@a3m.mushmellow.com';
+$config['password_reset_email'] 				= 'no-reply@a3m.com';
 
 		
 /* End of file account.php */
