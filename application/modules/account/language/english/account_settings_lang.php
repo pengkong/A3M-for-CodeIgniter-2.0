@@ -21,7 +21,7 @@ $lang['settings_timezone']						= 'Timezone';
 $lang['settings_save']							= 'Save';
 $lang['settings_email_exist']					= 'This Email is already registered.';
 $lang['settings_dateofbirth_incomplete']		= 'The Date of Birth selection is incomplete.';
-$lang['settings_details_updated']				= 'Your account details has been updated.';
+$lang['settings_details_updated']				= 'Your account details have been updated.';
 
 $lang['dateofbirth_month']						= '- Month -';
 $lang['dateofbirth_day']						= '- Day -';
