@@ -25,7 +25,7 @@ class Connect_twitter extends CI_Controller {
 		maintain_ssl($this->config->item("ssl_enabled"));
 		
         // denied parameter returned when user clicks "Cancel, and return to app"
-		if ($this->input->get('denied'))
+        if ($this->input->get('denied'))
         {
             $this->authentication->is_signed_in() ?
             redirect('account/account_linked') :
