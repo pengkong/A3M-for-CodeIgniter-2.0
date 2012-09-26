@@ -81,8 +81,15 @@ class Account_settings extends CI_Controller {
 				$this->account_model->update_email($data['account']->id, $this->input->post('settings_email') ? $this->input->post('settings_email') : NULL);
 				
 				// Update account details
+                
 				if ($this->input->post('settings_dob_month') && $this->input->post('settings_dob_day') && $this->input->post('settings_dob_year'))
+                {
 					$attributes['dateofbirth'] = mdate('%Y-%m-%d', strtotime($this->input->post('settings_dob_day').'-'.$this->input->post('settings_dob_month').'-'.$this->input->post('settings_dob_year')));
+                }
+                else
+                {
+                    $attributes['dateofbirth'] = NULL;
+                }
 				$attributes['fullname'] = $this->input->post('settings_fullname') ? $this->input->post('settings_fullname') : NULL;
 				$attributes['firstname'] = $this->input->post('settings_firstname') ? $this->input->post('settings_firstname') : NULL;
 				$attributes['lastname'] = $this->input->post('settings_lastname') ? $this->input->post('settings_lastname') : NULL;
@@ -91,7 +98,13 @@ class Account_settings extends CI_Controller {
 				$attributes['country'] = $this->input->post('settings_country') ? $this->input->post('settings_country') : NULL;
 				$attributes['language'] = $this->input->post('settings_language') ? $this->input->post('settings_language') : NULL;
 				$attributes['timezone'] = $this->input->post('settings_timezone') ? $this->input->post('settings_timezone') : NULL;
-				$this->account_details_model->update($data['account']->id, $attributes);
+                
+                //update displayed account settings with any changes from model update
+				$attributes = $this->account_details_model->update($data['account']->id, $attributes);
+                foreach ($attributes as $key => $value)
+                {
+                    $data['account_details']->$key = $value;
+                }
 				
 				$data['settings_info'] = lang('settings_details_updated');
 			}
