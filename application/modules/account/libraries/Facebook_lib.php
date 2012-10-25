@@ -11,8 +11,8 @@ class Facebook_lib {
     {
 		// Obtain a reference to the ci super object
 		$this->CI =& get_instance();
-		
-        $this->CI->load->config('account/facebook');
+
+		$this->CI->load->config('account/facebook');
 		$this->CI->load->helper('account/facebook');
 		
 		// Require Facebook app keys to be configured
@@ -31,7 +31,7 @@ class Facebook_lib {
 		));
 		
 		// Check for Facebook session
-		if ($this->fb->getSession()) 
+		if ($this->fb->getUser())
 		{
 			try 
 			{
