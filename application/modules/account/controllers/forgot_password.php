@@ -81,7 +81,6 @@ class Forgot_password extends CI_Controller {
 					$this->email->to($account->email);
 					$this->email->subject(lang('reset_password_email_subject'));
 					$this->email->message($this->load->view('reset_password_email', array('username' => $account->username, 'password_reset_url' => anchor($password_reset_url, $password_reset_url)), TRUE));
-					echo $this->load->view('reset_password_email', array('username' => $account->username, 'password_reset_url' => anchor($password_reset_url, $password_reset_url)), TRUE);
 					@$this->email->send();
 					
 					// Load reset password sent view
