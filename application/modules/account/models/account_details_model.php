@@ -112,6 +112,8 @@ class Account_details_model extends CI_Model {
 			$attributes['account_id'] = $account_id;
 			$this->db->insert('a3m_account_details', $attributes);
 		}
+        
+		return $attributes;
 	}
 	
 }
