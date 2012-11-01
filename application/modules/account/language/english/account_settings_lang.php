@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 $lang['settings_page_name']						= 'Account Settings';
-$lang['settings_privacy_statement']				= 'The information we collect on this page is private and will not be shown any where on this website or shared with third parties without your explicit permission. For more information, read our %s.';
+$lang['settings_privacy_statement']				= 'The information we collect on this page is private and will not be shown anywhere on this website or shared with third parties without your explicit permission. For more information, read our %s.';
 $lang['settings_privacy_policy']				= 'privacy policy';
 $lang['settings_email']							= 'Email';
 $lang['settings_fullname']						= 'Full Name';
@@ -21,7 +21,7 @@ $lang['settings_timezone']						= 'Timezone';
 $lang['settings_save']							= 'Save';
 $lang['settings_email_exist']					= 'This Email is already registered.';
 $lang['settings_dateofbirth_incomplete']		= 'The Date of Birth selection is incomplete.';
-$lang['settings_details_updated']				= 'Your account details has been updated.';
+$lang['settings_details_updated']				= 'Your account details have been updated.';
 
 $lang['dateofbirth_month']						= '- Month -';
 $lang['dateofbirth_day']						= '- Day -';

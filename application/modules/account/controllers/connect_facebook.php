@@ -59,7 +59,7 @@ class Connect_facebook extends CI_Controller {
 							'firstname' => $this->facebook_lib->user['first_name'],
 							'lastname' => $this->facebook_lib->user['last_name'],
 							'gender' => $this->facebook_lib->user['gender'],
-							'dateofbirth' => $this->facebook_lib->user['birthday'],
+							//'dateofbirth' => $this->facebook_lib->user['birthday'],	// not a required field, not all users have it set
 							'picture' => 'http://graph.facebook.com/'.$this->facebook_lib->user['id'].'/picture/?type=large'
 							// $this->facebook_lib->user['link']
 							// $this->facebook_lib->user['bio']
@@ -83,8 +83,40 @@ class Connect_facebook extends CI_Controller {
 			}
 		}
 		
-		// Redirect to login url
-		header("Location: ".$this->facebook_lib->fb->getLoginUrl(array('req_perms' => 'user_birthday')));
+		// Redirect to login url (using js for fb)
+		?>
+		<!DOCTYPE html>
+		<html xmlns:fb="http://www.facebook.com/2008/fbml">
+		  <body>
+			<?php if (!$this->facebook_lib->user) { ?>
+			  <fb:login-button></fb:login-button>
+			<?php } ?>
+			<div id="fb-root"></div>
+			<script>               
+			  window.fbAsyncInit = function() {
+				FB.init({
+				  appId: '<?php echo $this->facebook_lib->fb->getAppID() ?>', 
+				  cookie: true, 
+				  xfbml: true,
+				  oauth: true
+				});
+				FB.Event.subscribe('auth.login', function(response) {
+				  window.location.reload();
+				});
+				FB.Event.subscribe('auth.logout', function(response) {
+				  window.location.reload();
+				});
+			  };
+			  (function() {
+				var e = document.createElement('script'); e.async = true;
+				e.src = document.location.protocol +
+				  '//connect.facebook.net/en_US/all.js';
+				document.getElementById('fb-root').appendChild(e);
+			  }());
+			</script>
+		  </body>
+		</html>
+		<?php 	
 	}
 	
 }

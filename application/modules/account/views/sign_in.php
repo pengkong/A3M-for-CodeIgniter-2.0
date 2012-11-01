@@ -94,6 +94,7 @@
             <?php echo form_close(); ?>
         </div>
         <div class="grid_6">
+		<?php if ($this->config->item('third_party_auth_providers')) : ?>
             <h3><?php echo sprintf(lang('sign_in_third_party_heading')); ?></h3>
             <ul>
                 <?php foreach($this->config->item('third_party_auth_providers') as $provider) : ?>
@@ -102,6 +103,7 @@
                 <?php endforeach; ?>
             </ul>
             <div class="clear"></div>
+		<?php endif; ?>
         </div>
         <div class="clear"></div>
     </div>
