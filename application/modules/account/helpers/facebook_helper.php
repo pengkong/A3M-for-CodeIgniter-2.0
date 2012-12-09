@@ -1212,6 +1212,38 @@ class Facebook
         // rebuild
         return $protocol . $parts['host'] . $port . $parts['path'] . $query;
     }
+	
+	  /**
+   * Parses the metadata cookie that our Javascript API set
+   *
+   * @return  an array mapping key to value
+   */
+  protected function getMetadataCookie() {
+    $cookie_name = $this->getMetadataCookieName();
+    if (!array_key_exists($cookie_name, $_COOKIE)) {
+      return array();
+    }
+
+    // The cookie value can be wrapped in "-characters so remove them
+    $cookie_value = trim($_COOKIE[$cookie_name], '"');
+
+    if (empty($cookie_value)) {
+      return array();
+    }
+
+    $parts = explode('&', $cookie_value);
+    $metadata = array();
+    foreach ($parts as $part) {
+      $pair = explode('=', $part, 2);
+      if (!empty($pair[0])) {
+        $metadata[urldecode($pair[0])] =
+          (count($pair) > 1) ? urldecode($pair[1]) : '';
+      }
+    }
+
+    return $metadata;
+  }
+
 
     /**
      * Returns true if and only if the key or key/value pair should
