@@ -1,6 +1,6 @@
-A3M is a CodeIgniter 2.X package that leverages on bleeding edge web technologies like OpenID and OAuth to create user-friendly user experiences for the account authentication & authorization process.
+A3M is a CodeIgniter 2.X package that leverages bleeding edge web technologies like OpenID and OAuth to create user-friendly user experiences for the account authentication & authorization process.
 
-Latest - A3M -PB&J on CI 2.1.2
+Latest - A3M -PB&J on CI2.1.3
 =====================================
 
 Download:
