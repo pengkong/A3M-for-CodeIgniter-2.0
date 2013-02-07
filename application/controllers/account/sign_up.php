@@ -123,4 +123,4 @@ class Sign_up extends CI_Controller {
 
 
 /* End of file sign_up.php */
-/* Location: ./application/modules/account/controllers/sign_up.php */
+/* Location: ./application/controllers/account/sign_up.php */

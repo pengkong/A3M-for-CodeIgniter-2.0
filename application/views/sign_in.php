@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<?php echo $this->load->view('head'); ?>	
+<?php echo $this->load->view('head', array('title' => lang('sign_in_page_name')) ); ?>	
 
 </head>
 <body>
@@ -93,7 +93,7 @@
 
         <?php echo form_fieldset_close(); ?>
         <?php echo form_close(); ?>
-	</div><!-- /span7 -->
+	</div><!-- /span6 -->
 
 	<div class="span6">
 	<?php if ($this->config->item('third_party_auth_providers')) : ?>
@@ -105,7 +105,7 @@
             <?php endforeach; ?>
         </ul>
 	<?php endif; ?>
-	</div><!-- /span5 -->
+	</div><!-- /span6 -->
 </div>
 
 <?php echo $this->load->view('footer'); ?>
