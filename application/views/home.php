@@ -28,7 +28,7 @@
     </div> 		
 	
 	<div class="offset1 span5">
-		 <h3>How do I customize <small>this stuff?</small></h3>   
+		 <h3>How do I <small>customize this stuff?</small></h3>   
 
 		<script src="resource/bootstrap/js/holder.js"></script>  <!-- Used for 64x64 placeholder boxes -->   
 		
@@ -58,7 +58,7 @@
 	</div>
     
     <div class="offset1 span5">
-		<h3>CSS, Images, Icons<small> and more</small></h3>   
+		<h3>Where are <small>the Images, Icons &amp; CSS ?</small></h3>   
 		
 		<div class="media">
 		  <a class="pull-left" href="#"><img class="media-object" data-src="holder.js/64x64"></a>

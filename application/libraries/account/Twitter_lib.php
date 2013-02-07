@@ -19,7 +19,7 @@ class Twitter_lib {
 		if ( ! $this->CI->config->item('twitter_consumer_key') || ! $this->CI->config->item('twitter_consumer_secret'))
 		{
 			echo 'Visit '.anchor('http://dev.twitter.com/apps', 'http://dev.twitter.com/apps').' to register your app.'.
-			'<br />The config file is located at "system\application\modules\account\config\twitter.php"';
+			'<br />The config file is located at "/application/config/account/twitter.php"';
 			die;
 		}
 		

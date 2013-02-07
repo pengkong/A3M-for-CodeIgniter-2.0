@@ -5,7 +5,7 @@
 	<title><?php echo isset($title) ? $title.' - '.lang('website_title') : lang('website_title'); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="A3M">
 	
 	<base href="<?php echo base_url(); ?>" />
 	
