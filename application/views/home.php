@@ -1,39 +1,95 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><?php echo $this->lang->line('website_title'); ?></title>
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<base href="<?php echo base_url(); ?>" />
-
-<link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico" />
-<link type="text/css" rel="stylesheet" href="resource/css/960gs/960gs.css" />
-<link type="text/css" rel="stylesheet" href="resource/css/style.css" />
+<?php echo $this->load->view('head'); ?>	
 
 </head>
 <body>
 
-	<?php echo $this->load->view('header'); ?>
-	<div id="content">
-		<div class="container_12">
-			<div class="grid_12">
+<?php echo $this->load->view('header'); ?>
+	
+<div class="container">
+<div class="row">
+	<div class="span12">
+	
+		<!-- Main hero unit for a primary marketing message or call to action -->
+		<div class="hero-unit" style="position: relative;">
+			<div class="ribbon-wrapper-green">
+				<div class="ribbon-green">v2.0</div>
+			</div>
 			
-				<b>Nothing here until you edit:</b>
-				<code>/applications/views/home.php</code>
-				
-				<b>For style changes, edit:</b>
-				<code>/resource/css/style.css</code>
-				
-				<p>If you like this project, please help contribute with <b>bug fixes &amp; enhancements</b> at <a href="https://github.com/pengkong/A3M-for-CodeIgniter-2.0">https://github.com/pengkong/A3M-for-CodeIgniter-2.0</a>.</p>
-				
-				
-			</div>			
-			<div class="clear"></div>
+			<h1>Welcome to <?php echo lang('website_title'); ?></h1>
+			<p>This is the homepage for your web-app. You can use this as a starting point for creating with A3M and building the rest of your site.
+			
+			If you like this project, please help contribute with <b>bug fixes &amp; enhancements</b> on <a href="https://github.com/pengkong/A3M-for-CodeIgniter-2.0">GitHub</a>.</p>
+			<p><a class="btn btn-primary btn-large pull-right" href="https://github.com/pengkong/A3M-for-CodeIgniter-2.0"><i class="icon-wrench icon-white"></i> Fork it &raquo;</a><br /></p>
 		</div>
+     
+    </div> 		
+	
+	<div class="offset1 span5">
+		 <h3>How do I customize <small>this stuff?</small></h3>   
+
+		<script src="resource/bootstrap/js/holder.js"></script>  <!-- Used for 64x64 placeholder boxes -->   
+		
+		<div class="media">
+		  <a class="pull-left" href="#"><img class="media-object" data-src="holder.js/64x64"></a>
+		  <div class="media-body">
+			<h4 class="media-heading">Managing your controllers</h4>
+			<code>/applications/controllers/</code>
+		  </div>
+		</div>
+		
+		<div class="media">
+		  <a class="pull-left" href="#"><img class="media-object" data-src="holder.js/64x64"></a>
+		  <div class="media-body">
+			<h4 class="media-heading">Managing your views</h4>
+			<code>/applications/views/</code>
+		  </div>
+		</div>
+
+		<div class="media">
+		  <a class="pull-left" href="#"><img class="media-object" data-src="holder.js/64x64"></a>
+		  <div class="media-body">
+			<h4 class="media-heading">Homepage changes</h4>
+			<code>/applications/views/home.php</code>
+		  </div>
+		</div>		
 	</div>
-	<?php echo $this->load->view('footer'); ?>
+    
+    <div class="offset1 span5">
+		<h3>CSS, Images, Icons<small> and more</small></h3>   
+		
+		<div class="media">
+		  <a class="pull-left" href="#"><img class="media-object" data-src="holder.js/64x64"></a>
+		  <div class="media-body">
+			<h4 class="media-heading">Your stylesheets are here</h4>
+			<code>/resource/css/</code>
+		  </div>		  
+		</div>
+
+		<div class="media">
+		  <a class="pull-left" href="#"><img class="media-object" data-src="holder.js/64x64"></a>
+		  <div class="media-body">
+			<h4 class="media-heading">Images live here</h4>
+			<code>/resource/img/</code>
+		  </div>		  
+		</div>
+		
+		<div class="media">
+		  <a class="pull-left" href="#"><img class="media-object" data-src="holder.js/64x64"></a>
+		  <div class="media-body">
+			<h4 class="media-heading">Twitter Bootstrap <small><a href="http://twitter.github.com/bootstrap/" title="Go-to Bootstrap site"><i class="icon-share"></i></a></small></h4>
+			<code>/resource/bootstrap/</code>
+		  </div>		  
+		</div>
+		
+	</div>
+	
+</div><!-- /end row -->
+</div>
+	
+<?php echo $this->load->view('footer'); ?>
 
 </body>
 </html>

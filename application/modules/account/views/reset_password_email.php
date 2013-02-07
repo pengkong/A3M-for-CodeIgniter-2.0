@@ -1,1 +1,0 @@
-<?php echo sprintf(lang('reset_password_email'), $username, $password_reset_url); ?>

@@ -10,7 +10,6 @@ class Home extends CI_Controller {
 		$this->load->helper(array('language', 'url', 'form', 'account/ssl'));
         $this->load->library(array('account/authentication'));
 		$this->load->model(array('account/account_model'));
-		$this->lang->load(array('general'));
 	}
 	
 	function index()

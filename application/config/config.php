@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= '/a3m/';
+$config['base_url']	= 'http://a3m.dev.webmojo.ca:8080/';
 
 /*
 |--------------------------------------------------------------------------
