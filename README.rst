@@ -1,10 +1,10 @@
+Newer Bootstrapped fork released:
+========================
++ https://github.com/donjakobo/A3M
+
+========================
+
 A3M is a CodeIgniter 2.X package that leverages bleeding edge web technologies like OpenID and OAuth to create user-friendly user experiences for the account authentication & authorization process.
-
-Latest - A3M -PB&J on CI2.1.3
-=====================================
-
-Download:
-    https://github.com/pengkong/A3M-for-CodeIgniter-2.0
 
 Key Features
 ============
