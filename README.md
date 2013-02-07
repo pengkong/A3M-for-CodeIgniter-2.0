@@ -34,10 +34,7 @@ A CodeIgniter 2.x package that leverages bleeding edge web technologies like Ope
 * `/resource/` - keeps external resources like css / images / javascript    
 * `/user_guide/` - latest 2.1.x guide for CI    
 
-## 3rd Party libraries used
-@TODO: Add referencing libraries here
-
-## Plugins
+## 3rd Party Libraries & Plugins
 @TODO: Update this list versions
 
 * [recaptcha_pi.php](http://code.google.com/p/recaptcha/) - recaptcha-php-1.11
