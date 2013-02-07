@@ -38,10 +38,10 @@ A CodeIgniter 2.x package that leverages bleeding edge web technologies like Ope
 @TODO: Add referencing libraries here
 
 ## Plugins
-@TODO: Update this list below: ------v
+@TODO: Update this list versions
 
 * [recaptcha_pi.php](http://code.google.com/p/recaptcha/) - recaptcha-php-1.11
-* [facebook_pi.php](https://github.com/facebook/php-sdk/) 
+* [facebook_pi.php](https://github.com/facebook/php-sdk/) - v.3.2.2 
 * [twitter_pi.php](https://github.com/jmathai/twitter-async)  
 * [phpass_pi.php](http://www.openwall.com/phpass/ phpass-0.2)
 * [openid_pi.php](http://sourcecookbook.com/en/recipes/60/janrain-s-php-openid-library-fixed-for-php-5-3-and-how-i-did-it php-openid-php5.3)  
@@ -50,16 +50,16 @@ A CodeIgniter 2.x package that leverages bleeding edge web technologies like Ope
 
 + Download the latest version of [A3M](https://github.com/donjakobo/A3M/)  
 + Extract to a folder accessible on your webserver (say `/a3m/` )  
-+ Create a database using the 'a3m_database.sql' script found it root folder of package  
-+ Modify /applicaion/config/config.php & /applicaion/config/database.php to match your setup (folder path + database credentials)  
-+ Modify your .htaccess file IF your default folder is different from `/a3m/` (example: `domain.com/a3m/`)  
-+ Note that twitter doesn't work if your base url is 'localhost' and facebook doesn't work if your base url is `127.0.0.1`. Therefore ensure that your base url is something like `yoursite.com`. One way to do that is to simply [map the hostname](http://en.wikipedia.org/wiki/Hosts_%28file%29) your want to `127.0.0.1` on your development machine.
++ Create a database using the `a3m_database.sql` script found it root folder of package  
++ Modify `/applicaion/config/config.php` & `/applicaion/config/database.php` to match your setup (folder path + database credentials)  
++ Modify your `.htaccess` file if your default folder is different from `/a3m/` (example: `domain.com/a3m/`)  
++ Note that twitter doesn't work if your base url is `localhost` and facebook won't work if your base url is `127.0.0.1`. Therefore ensure that your base url is something like `yoursite.com`. One way to do that is to simply [map the hostname](http://en.wikipedia.org/wiki/Hosts_%28file%29) your want to `127.0.0.1` on your development machine.
 + Configure your external OpenID providers in `/application/config/account/*`  
 
 ## Note
 Your twitter callback URL should take into account whether or not you have enabled SSL in your a3m config   
-+ https://domain.com/account/connect_twitter (SSL Enabled) 
-+ http://domain.com/account/connect_twitter (SSL Disabled) 
++ `https://domain.com/account/connect_twitter` (SSL **Enabled**) 
++ `http://domain.com/account/connect_twitter` (SSL Disabled) 
 
 Configuring this wrongly will result in an `EpiOAuthUnauthorizedException` exception being thrown.
 
