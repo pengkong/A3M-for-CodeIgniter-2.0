@@ -4,13 +4,12 @@ A CodeIgniter 2.x package that leverages bleeding edge web technologies like Ope
 
 ## Authors
 
-	Jakub   			
-		[@kubanishku](https://twitter.com/kubanishku/) on Twitter    
-		[@donjakobo](https://github.com/donjakobo) on GitHub   
+**Jakub**   			
++ [@kubanishku](https://twitter.com/kubanishku/) on Twitter    
++ [@donjakobo](https://github.com/donjakobo) on GitHub   
 	
-	PengKong   
-		[@pengkong](https://github.com/pengkong) on Github   
-		
+**PengKong**   
++ [@pengkong](https://github.com/pengkong) on Github   
 		
 ## Key Features & Design Goals
 
@@ -41,11 +40,11 @@ A CodeIgniter 2.x package that leverages bleeding edge web technologies like Ope
 ## Plugins
 @TODO: Update this list below: ------v
 
-* recaptcha_pi.php - http://code.google.com/p/recaptcha/ recaptcha-php-1.11
-* facebook_pi.php - https://github.com/facebook/php-sdk/
-* twitter_pi.php - https://github.com/jmathai/twitter-async
-* phpass_pi.php - http://www.openwall.com/phpass/ phpass-0.2
-* openid_pi.php - http://sourcecookbook.com/en/recipes/60/janrain-s-php-openid-library-fixed-for-php-5-3-and-how-i-did-it php-openid-php5.3
+* [recaptcha_pi.php](http://code.google.com/p/recaptcha/) - recaptcha-php-1.11
+* [facebook_pi.php](https://github.com/facebook/php-sdk/) 
+* [twitter_pi.php](https://github.com/jmathai/twitter-async)  
+* [phpass_pi.php](http://www.openwall.com/phpass/ phpass-0.2)
+* [openid_pi.php](http://sourcecookbook.com/en/recipes/60/janrain-s-php-openid-library-fixed-for-php-5-3-and-how-i-did-it php-openid-php5.3)  
 
 ## Installation Instructions
 
@@ -59,7 +58,8 @@ A CodeIgniter 2.x package that leverages bleeding edge web technologies like Ope
 
 ## Note
 Your twitter callback URL should take into account whether or not you have enabled SSL in your a3m config   
-+ https://a3m.mushmellow.com/a3m_mushmellow/account/connect_twitter (SSL Enabled) 
-+ http://a3m.mushmellow.com/a3m_mushmellow/account/connect_twitter (SSL Disabled)  
++ https://domain.com/account/connect_twitter (SSL Enabled) 
++ http://domain.com/account/connect_twitter (SSL Disabled) 
+
 Configuring this wrongly will result in an `EpiOAuthUnauthorizedException` exception being thrown.
 
