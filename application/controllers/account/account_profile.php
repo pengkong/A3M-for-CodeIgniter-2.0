@@ -13,7 +13,7 @@ class Account_profile extends CI_Controller {
 		
 		// Load the necessary stuff...
 		$this->load->config('account/account');
-		$this->load->helper(array('language', 'account/ssl', 'url'));
+		$this->load->helper(array('language', 'account/ssl', 'url', 'photo'));
         $this->load->library(array('account/authentication', 'form_validation'));
 		$this->load->model(array('account/account_model', 'account/account_details_model'));
 		$this->load->language(array('general', 'account/account_profile'));

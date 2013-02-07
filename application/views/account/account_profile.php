@@ -53,16 +53,16 @@
 			<label class="control-label" for="profile_picture"><?php echo lang('profile_picture'); ?></label>
 			<div class="controls">
                 <p>
-                    <?php if (isset($account_details->picture)) : ?>
-                    <img src="resource/user/profile/<?php echo $account_details->picture; ?>?t=<?php echo md5(time()); ?>" alt="Your picture" height="100" width="100"> &nbsp;
-					<?php echo anchor('account/account_profile/index/delete', '<i class="icon-trash"></i> '.lang('profile_delete_picture'), 'class="btn"'); ?>
+                    <?php if (isset($account_details->picture) && strlen(trim($account_details->picture)) > 0) : ?>
+						<?php echo showPhoto($account_details->picture); ?> &nbsp;
+						<?php echo anchor('account/account_profile/index/delete', '<i class="icon-trash"></i> '.lang('profile_delete_picture'), 'class="btn"'); ?>
                     <?php else : ?>
-                    <img src="resource/img/default-person.png" alt="" />
-                <?php echo form_upload(array(
-                    'name' => 'account_picture_upload',
-                    'id' => 'account_picture_upload'
-                )); ?>
-                <p><small><?php echo lang('profile_picture_guidelines'); ?></small></p>
+						<?php echo showPhoto(); ?>
+						<?php echo form_upload(array(
+							'name' => 'account_picture_upload',
+							'id' => 'account_picture_upload'
+						)); ?>
+						<p><small><?php echo lang('profile_picture_guidelines'); ?></small></p>
                     <?php endif; ?>
                 </p>
 				<?php if (!isset($account_details->picture)) : ?>

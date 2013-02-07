@@ -32,7 +32,7 @@ A CodeIgniter 2.x package that leverages bleeding edge web technologies like Ope
 * `/application/` - what you should be editing in    
 * `/system/` - default CodeIgniter system folder    
 * `/resource/` - keeps external resources like css / images / javascript    
-* `/user_guide/` - latest 2.1.2 guide for CI    
+* `/user_guide/` - latest 2.1.x guide for CI    
 
 ## 3rd Party libraries used
 @TODO: Add referencing libraries here
