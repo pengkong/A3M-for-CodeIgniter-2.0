@@ -8,6 +8,19 @@ Download and Fork at:
 ==       https://github.com/donjakobo/A3M/		  ==
 =====================================	
 
+
+Developed by
+======================
+
+	Jakub 			
+		https://twitter.com/kubanishku/  
+		https://github.com/donjakobo   				
+	
+	PengKong 
+		https://github.com/pengkong   
+		
+		
+		
 Key Features & Design Goals
 ======================
 
@@ -63,15 +76,3 @@ Your twitter callback URL should take into account whether or not you have enabl
 https://a3m.mushmellow.com/a3m_mushmellow/account/connect_twitter (SSL Enabled) 
 http://a3m.mushmellow.com/a3m_mushmellow/account/connect_twitter (SSL Disabled) Configuring this wrongly will result in an 'EpiOAuthUnauthorizedException' exception being thrown.
 
-
-Developed by
-======================
-
-	Jakub 			
-		https://twitter.com/kubanishku/
-		https://github.com/donjakobo				
-	
-	PengKong 
-		https://github.com/pengkong
-		
-		
