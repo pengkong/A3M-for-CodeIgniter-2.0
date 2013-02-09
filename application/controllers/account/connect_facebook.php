@@ -15,7 +15,7 @@ class Connect_facebook extends CI_Controller {
 		$this->load->config('account/account');
 		$this->load->helper(array('language', 'account/ssl', 'url'));
         $this->load->library(array('account/authentication', 'account/facebook_lib'));
-		$this->load->model(array('account/account_model', 'account_facebook_model'));
+		$this->load->model(array('account/account_model', 'account/account_facebook_model'));
 		$this->load->language(array('general', 'account/sign_in', 'account/account_linked', 'account/connect_third_party'));
 	}
 	
