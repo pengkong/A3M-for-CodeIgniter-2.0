@@ -80,11 +80,11 @@ class Forgot_password extends CI_Controller {
 					$this->email->from($this->config->item('password_reset_email'), lang('reset_password_email_sender'));
 					$this->email->to($account->email);
 					$this->email->subject(lang('reset_password_email_subject'));
-					$this->email->message($this->load->view('reset_password_email', array('username' => $account->username, 'password_reset_url' => anchor($password_reset_url, $password_reset_url)), TRUE));
+					$this->email->message($this->load->view('account/reset_password_email', array('username' => $account->username, 'password_reset_url' => anchor($password_reset_url, $password_reset_url)), TRUE));
 					@$this->email->send();
 					
 					// Load reset password sent view
-					$this->load->view('reset_password_sent', isset($data) ? $data : NULL);
+					$this->load->view('account/reset_password_sent', isset($data) ? $data : NULL);
 					return;
 				}
 			}
@@ -95,7 +95,7 @@ class Forgot_password extends CI_Controller {
 			$data['recaptcha'] = $this->recaptcha->load($recaptcha_result, $this->config->item("ssl_enabled"));
 		
 		// Load forgot password view
-		$this->load->view('forgot_password', isset($data) ? $data : NULL);
+		$this->load->view('account/forgot_password', isset($data) ? $data : NULL);
 	}
 	
 }
