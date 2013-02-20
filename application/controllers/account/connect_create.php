@@ -79,7 +79,7 @@ class Connect_create extends CI_Controller {
 			}
 		}
 		
-		$this->load->view('connect_create', isset($data) ? $data : NULL);
+		$this->load->view('account/connect_create', isset($data) ? $data : NULL);
 	}
 	
 	/**
