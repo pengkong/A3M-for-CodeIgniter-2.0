@@ -93,7 +93,7 @@ class Forgot_password extends CI_Controller {
 		// Load recaptcha code
 		if ($this->session->userdata('forget_password_recaptcha_pass') != TRUE) 
 			$data['recaptcha'] = $this->recaptcha->load($recaptcha_result, $this->config->item("ssl_enabled"));
-		
+
 		// Load forgot password view
 		$this->load->view('account/forgot_password', isset($data) ? $data : NULL);
 	}

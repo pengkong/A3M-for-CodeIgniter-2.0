@@ -2,7 +2,6 @@
 <html>
 <head>
 <?php echo $this->load->view('head', array('title' => lang('settings_page_name')) ); ?>	
-
 </head>
 <body>
 	

@@ -104,3 +104,21 @@ input.openid {
 .ribbon-green:after {
   right: 0;
 }
+
+/* Positioning */
+
+.right {
+	text-align: right;
+}
+
+.center {
+	text-align: center;
+}
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
