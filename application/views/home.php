@@ -30,7 +30,7 @@
 	<div class="offset1 span5">
 		 <h3>How do I <small>customize this stuff?</small></h3>   
 
-		<script src="resource/bootstrap/js/holder.js"></script>  <!-- Used for 64x64 placeholder boxes -->   
+		<script src="<?php echo RES_DIR?>/bootstrap/js/holder.js"></script>  <!-- Used for 64x64 placeholder boxes -->
 		
 		<div class="media">
 		  <a class="pull-left" href="#"><img class="media-object" data-src="holder.js/64x64"></a>
@@ -64,7 +64,7 @@
 		  <a class="pull-left" href="#"><img class="media-object" data-src="holder.js/64x64"></a>
 		  <div class="media-body">
 			<h4 class="media-heading">Your stylesheets are here</h4>
-			<code>/resource/css/</code>
+			<code>/<?php echo RES_DIR?>/css/</code>
 		  </div>		  
 		</div>
 
@@ -72,7 +72,7 @@
 		  <a class="pull-left" href="#"><img class="media-object" data-src="holder.js/64x64"></a>
 		  <div class="media-body">
 			<h4 class="media-heading">Images live here</h4>
-			<code>/resource/img/</code>
+			<code>/<?php echo RES_DIR?>/img/</code>
 		  </div>		  
 		</div>
 		
@@ -80,7 +80,7 @@
 		  <a class="pull-left" href="#"><img class="media-object" data-src="holder.js/64x64"></a>
 		  <div class="media-body">
 			<h4 class="media-heading">Twitter Bootstrap <small><a href="http://twitter.github.com/bootstrap/" title="Go-to Bootstrap site"><i class="icon-share"></i></a></small></h4>
-			<code>/resource/bootstrap/</code>
+			<code>/<?php echo RES_DIR?>/bootstrap/</code>
 		  </div>		  
 		</div>
 		

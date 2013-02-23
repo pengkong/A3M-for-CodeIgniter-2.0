@@ -40,7 +40,7 @@ class Account_profile extends CI_Controller {
 		// Delete profile picture
 		if ($action == 'delete')
 		{
-			unlink(FCPATH.'resource/user/profile/'.$data['account_details']->picture);	// delete previous picture
+			unlink(FCPATH.RES_DIR.'/user/profile/'.$data['account_details']->picture);	// delete previous picture
 			$this->account_details_model->update($data['account']->id, array('picture' => NULL));
 			redirect('account/account_profile');
 		}
@@ -72,7 +72,7 @@ class Account_profile extends CI_Controller {
 				// Load file uploading library - http://codeigniter.com/user_guide/libraries/file_uploading.html
 				$this->load->library('upload', array(
 					'overwrite' => true,
-					'upload_path' => FCPATH.'resource/user/profile',
+					'upload_path' => FCPATH.RES_DIR.'/user/profile',
 					'allowed_types' => 'jpg|png|gif',
 					'max_size' => '800' // kilobytes
 				));
@@ -93,8 +93,8 @@ class Account_profile extends CI_Controller {
 					$this->image_lib->clear();
 					$this->image_lib->initialize(array(
 						'image_library' => 'gd2',
-						'source_image' => FCPATH.'resource/user/profile/'.$picture['file_name'],
-						'new_image' => FCPATH.'resource/user/profile/pic_'.md5($data['account']->id).$picture['file_ext'],
+						'source_image' => FCPATH.RES_DIR.'/user/profile/'.$picture['file_name'],
+						'new_image' => FCPATH.RES_DIR.'/user/profile/pic_'.md5($data['account']->id).$picture['file_ext'],
 						'maintain_ratio' => FALSE,
 						'quality' => '100%',
 						'width' => 100,
@@ -114,7 +114,7 @@ class Account_profile extends CI_Controller {
 					}
 					
 					// Delete original uploaded file
-					unlink(FCPATH.'resource/user/profile/'.$picture['file_name']);
+					unlink(FCPATH.RES_DIR.'/user/profile/'.$picture['file_name']);
 				}
 			}
 			

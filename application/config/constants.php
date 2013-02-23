@@ -37,6 +37,11 @@ define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 /*
+ * Define root resources folder name for js/css/img files
+ */
+define('RES_DIR', 'resource');
+
+/*
  * Detect AJAX Request for MY_Session
  */
 define('IS_AJAX', isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'); 
