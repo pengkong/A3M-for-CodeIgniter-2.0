@@ -17,7 +17,7 @@ function showPhoto($picture = NULL, $param = NULL){
 		
 		if(!$remote) {
 			if($nocache) { $picture = $picture.'?t='.md5(time());  }		// only if $nocache is TRUE
-			$path = site_url('resource/user/profile/'.$picture); // . 		-- disabled time attachment, no need to break cache
+			$path = site_url(RES_DIR.'/user/profile/'.$picture); // . 		-- disabled time attachment, no need to break cache
 		} else {
 			
 			$path = $picture;
@@ -43,12 +43,12 @@ function showPhoto($picture = NULL, $param = NULL){
 		if ($check && !$remote) {
 			if(!fileExists($path)){
 			$title = "Photo not found! ";
-			$path = site_url('resource/img/default-person.png');
+			$path = site_url(RES_DIR.'/img/default-person.png');
 			}
 		}
 		
 	} else {	
-		$path = site_url('resource/img/default-person.png');
+		$path = site_url(RES_DIR.'/img/default-person.png');
 	}
 	
 	

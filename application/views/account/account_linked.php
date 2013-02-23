@@ -46,7 +46,7 @@
 					
 			<div class="row">
 				<div class="span1">
-					<img src="resource/img/auth_icons/facebook.png" alt="<?php echo lang('connect_facebook'); ?>" title="<?php echo lang('connect_facebook'); ?>" width="40" />
+					<img src="<?php echo RES_DIR?>/img/auth_icons/facebook.png" alt="<?php echo lang('connect_facebook'); ?>" title="<?php echo lang('connect_facebook'); ?>" width="40" />
 				</div>
 				<div class="span7">
 					<?php echo lang('connect_facebook'); ?><br />
@@ -77,7 +77,7 @@
 					
 			<div class="row">
 				<div class="span1">
-					<img src="resource/img/auth_icons/twitter.png" alt="<?php echo lang('connect_twitter'); ?>" title="<?php echo lang('connect_twitter'); ?>" width="40" />
+					<img src="<?php echo RES_DIR?>/img/auth_icons/twitter.png" alt="<?php echo lang('connect_twitter'); ?>" title="<?php echo lang('connect_twitter'); ?>" width="40" />
 				</div>
 				<div class="span7">
 					<?php echo lang('connect_twitter'); ?><br />
@@ -106,7 +106,7 @@
 			
 			<div class="row">
 				<div class="span1">
-					<img src="resource/img/auth_icons/<?php echo $openid_link->provider; ?>.png" alt="<?php echo lang('connect_'.$openid_link->provider); ?>" width="40" />
+					<img src="<?php echo RES_DIR?>/img/auth_icons/<?php echo $openid_link->provider; ?>.png" alt="<?php echo lang('connect_'.$openid_link->provider); ?>" width="40" />
 				</div>
 				<div class="span7">
 					<strong><?php echo lang('connect_'.$openid_link->provider); ?></strong><br />

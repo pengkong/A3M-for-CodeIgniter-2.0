@@ -10,13 +10,13 @@
 	<base href="<?php echo base_url(); ?>" />
 	
 	<link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico" />
-	<link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resource/bootstrap/css/bootstrap.min.css" />
-	<link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>resource/css/style.css" />
+	<link type="text/css" rel="stylesheet" href="<?php echo base_url().RES_DIR; ?>/bootstrap/css/bootstrap.min.css" />
+	<link type="text/css" rel="stylesheet" href="<?php echo base_url().RES_DIR; ?>/css/style.css" />
 
-	<link href="<?php echo base_url(); ?>resource/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="<?php echo base_url().RES_DIR; ?>/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 	
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
-	<script src="<?php echo base_url(); ?>resource/bootstrap/js/bootstrap.min.js"></script>
+	<script src="<?php echo base_url().RES_DIR; ?>/bootstrap/js/bootstrap.min.js"></script>
 	
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>

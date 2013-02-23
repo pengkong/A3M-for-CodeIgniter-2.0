@@ -5,8 +5,8 @@
 <title><?php echo lang('reset_password_page_name'); ?></title>
 <base href="<?php echo base_url(); ?>" />
 <link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico" />
-<link type="text/css" rel="stylesheet" href="resource/css/960gs/960gs.css" />
-<link type="text/css" rel="stylesheet" href="resource/css/style.css" />
+<link type="text/css" rel="stylesheet" href="<?php echo RES_DIR?>/css/960gs/960gs.css" />
+<link type="text/css" rel="stylesheet" href="<?php echo RES_DIR?>/css/style.css" />
 </head>
 <body>
 <?php echo $this->load->view('header'); ?>
