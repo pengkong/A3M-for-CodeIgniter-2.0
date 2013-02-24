@@ -44,4 +44,4 @@ $lang['gender_female']						= 'Female';
 
 
 /* End of file account_settings_lang.php */
-/* Location: ./application/modules/account/language/english/account_settings_lang.php */
+/* Location: ./application/language/english/account/account_settings_lang.php */

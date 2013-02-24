@@ -25,4 +25,4 @@ To reset your password, please click on the link below or copy and paste the URL
 
 
 /* End of file forgot_password_lang.php */
-/* Location: ./application/modules/account/language/english/forgot_password_lang.php */
+/* Location: ./application/language/english/account/forgot_password_lang.php */

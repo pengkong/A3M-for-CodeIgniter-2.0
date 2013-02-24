@@ -25,4 +25,4 @@ $lang['password_safe_guard_your_account']			= '<p>To safe guard your account, we
 
 
 /* End of file account_password_lang.php */
-/* Location: ./application/modules/account/language/english/account_password_lang.php */
+/* Location: ./application/language/english/account/account_password_lang.php */

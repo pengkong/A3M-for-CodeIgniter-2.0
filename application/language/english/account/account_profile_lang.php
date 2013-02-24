@@ -17,4 +17,4 @@ $lang['profile_picture_guidelines']			= 'Maximum file size of 800 kb. JPG, GIF, 
 
 
 /* End of file account_profile_lang.php */
-/* Location: ./application/modules/account/language/english/account_profile_lang.php */
+/* Location: ./application/language/english/account/account_profile_lang.php */

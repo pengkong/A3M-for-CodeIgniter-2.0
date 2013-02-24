@@ -31,4 +31,4 @@ $lang['connect_proceed']						= 'Proceed';
 
 
 /* End of file connect_third_party_lang.php */
-/* Location: ./application/modules/account/language/english/connect_third_party_lang.php */
+/* Location: ./application/language/english/account/connect_third_party_lang.php */

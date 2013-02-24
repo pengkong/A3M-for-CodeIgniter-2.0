@@ -20,4 +20,4 @@ $lang['linked_link_with_your_x_account']		= 'Link with your %s account';
 
 
 /* End of file account_linked_lang.php */
-/* Location: ./application/modules/account/language/english/account_linked_lang.php */
+/* Location: ./application/language/english/account/account_linked_lang.php */
