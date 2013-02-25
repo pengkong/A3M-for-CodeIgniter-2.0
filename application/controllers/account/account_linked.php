@@ -61,8 +61,8 @@ class Account_linked extends CI_Controller {
 		// Get Twitter accounts
 		if ($data['twitter_links'] = $this->account_twitter_model->get_by_account_id($this->session->userdata('account_id')))
 		{
-			$this->load->config('twitter');
-			$this->load->helper('twitter');
+			$this->load->config('account/twitter');
+			$this->load->helper('account/twitter');
 			foreach ($data['twitter_links'] as $index => $twitter_link) 
 			{
 				$data['num_of_linked_accounts']++;
@@ -93,4 +93,4 @@ class Account_linked extends CI_Controller {
 
 
 /* End of file account_linked.php */
-/* Location: ./application/modules/account/controllers/account_linked.php */
+/* Location: ./application/account/controllers/account_linked.php */
