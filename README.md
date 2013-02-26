@@ -14,6 +14,8 @@ A CodeIgniter 2.x package that leverages bleeding edge web technologies like Ope
 		
 ## Key Features & Design Goals
 
+See our **[app task board on Trello](https://trello.com/board/a3m/512c08b874b855f26200e690)** to get a glimps of to-do items
+
 * Native Sign Up, Sign In with 'Remember me' and Sign Out  
 * Native account Forgot Password and Reset Password  
 * Facebook/Twitter/Google/Yahoo/OpenID Sign Up, Sign In and Sign Out  
