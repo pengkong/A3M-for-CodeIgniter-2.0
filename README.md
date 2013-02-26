@@ -43,6 +43,12 @@ See our **[app task board on Trello](https://trello.com/board/a3m/512c08b874b855
 * [phpass_pi.php](http://www.openwall.com/phpass/) - Version 0.3 / genuine _(latest)_ 
 * [openid_pi.php](http://sourcecookbook.com/en/recipes/60/janrain-s-php-openid-library-fixed-for-php-5-3-and-how-i-did-it) - php-openid-php5.3  
 
+## Dependancies
+
+* CURL
+* DOM or domxml 
+* GMP or Bcmatch
+
 ## Installation Instructions
 
 + Download the latest version of [A3M](https://github.com/donjakobo/A3M/)
