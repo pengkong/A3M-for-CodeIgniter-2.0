@@ -127,8 +127,7 @@ class Auth_Yadis_ParanoidHTTPFetcher extends Auth_Yadis_HTTPFetcher {
                         Auth_OpenID_USER_AGENT.' '.$curl_user_agent);
             curl_setopt($c, CURLOPT_TIMEOUT, $off);
             curl_setopt($c, CURLOPT_URL, $url);
-			curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
-
+		
             curl_exec($c);
 
             $code = curl_getinfo($c, CURLINFO_HTTP_CODE);
@@ -191,8 +190,7 @@ class Auth_Yadis_ParanoidHTTPFetcher extends Auth_Yadis_HTTPFetcher {
         curl_setopt($c, CURLOPT_URL, $url);
         curl_setopt($c, CURLOPT_WRITEFUNCTION,
                     array(&$this, "_writeData"));
-		curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
-
+	
         curl_exec($c);
 
         $code = curl_getinfo($c, CURLINFO_HTTP_CODE);
