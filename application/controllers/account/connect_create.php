@@ -14,7 +14,7 @@ class Connect_create extends CI_Controller {
 		// Load the necessary stuff...
 		$this->load->config('account/account');
 		$this->load->helper(array('language', 'account/ssl', 'url'));
-        $this->load->library(array('account/authentication', 'form_validation'));
+        	$this->load->library(array('account/authentication', 'form_validation'));
 		$this->load->model(array('account/account_model', 'account/account_details_model', 'account/account_facebook_model', 'account/account_twitter_model', 'account/account_openid_model'));
 		$this->load->language(array('general', 'account/connect_third_party'));
 	}
@@ -29,6 +29,9 @@ class Connect_create extends CI_Controller {
 	{
 		// Enable SSL?
 		maintain_ssl($this->config->item("ssl_enabled"));
+		
+		// Redirect user to home if sign ups are disabled
+		if (!($this->config->item("sign_up_enabled"))) redirect('');
 		
 		// Redirect user to home if 'connect_create' session data doesn't exist
 		if ( ! $this->session->userdata('connect_create')) redirect('');
@@ -110,4 +113,4 @@ class Connect_create extends CI_Controller {
 
 
 /* End of file connect_create.php */
-/* Location: ./application/modules/account/controllers/connect_create.php */
+/* Location: ./application/account/controllers/connect_create.php */
