@@ -14,7 +14,7 @@ class Sign_up extends CI_Controller {
 		// Load the necessary stuff...
 		$this->load->config('account/account');
 		$this->load->helper(array('language', 'account/ssl', 'url'));
-        $this->load->library(array('account/authentication', 'account/recaptcha', 'form_validation'));
+       		$this->load->library(array('account/authentication', 'account/recaptcha', 'form_validation'));
 		$this->load->model(array('account/account_model', 'account/account_details_model'));
 		$this->load->language(array('general', 'account/sign_up', 'account/connect_third_party'));
 	}
@@ -48,7 +48,7 @@ class Sign_up extends CI_Controller {
 		));
 		
 		// Run form validation
-		if ($this->form_validation->run() === TRUE) 
+		if (($this->form_validation->run() === TRUE) && ($this->config->item("sign_up_enabled"))) 
 		{
 			// Check if user name is taken
 			if ($this->username_check($this->input->post('sign_up_username')) === TRUE)

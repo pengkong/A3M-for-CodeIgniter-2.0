@@ -10,6 +10,17 @@
 
 <div class="container">
     <div class="row">
+    
+        <?php if (!($this->config->item("sign_up_enabled"))):?>
+        <div class="span12">
+            <h3><?php echo lang('sign_up_heading'); ?></h3>
+            <div class="alert">
+                <strong>NOTICE: </strong> New account registrations are currently disabled.
+            </div>
+        </div>
+        <?php endif;?>
+        
+        <?php if ($this->config->item("sign_up_enabled")):?>
         <div class="span6">
 
 			<?php echo form_open(uri_string(), 'class="form-horizontal"'); ?>
@@ -108,7 +119,7 @@
         </ul>
 	<?php endif; ?>
 	</div><!-- /span6 -->
-	
+	<?php endif;?>
 	</div>
 </div>
 
@@ -116,3 +127,4 @@
 
 </body>
 </html>
+
