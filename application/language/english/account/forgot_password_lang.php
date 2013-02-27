@@ -20,8 +20,8 @@ $lang['reset_password_sent_instructions']				= "<h3>Okay, we've sent the instruc
 $lang['reset_password_resend_the_instructions']			= 'Re-sending the instructions';
 $lang['reset_password_email_sender'] 					= 'A3M';
 $lang['reset_password_email_subject'] 					= 'A3M Password Reset';
-$lang['reset_password_email']							= 'Hi %s\n\nWe have received a request to reset your password.\n
-To reset your password, please click on the link below or copy and paste the URL into your browser:\n%s';
+$lang['reset_password_email']							= "Hi %s<BR><BR>We have received a request to reset your password.<BR><BR>
++To reset your password, please click on the link below or copy and paste the URL into your browser:<BR>%s";
 
 
 /* End of file forgot_password_lang.php */
