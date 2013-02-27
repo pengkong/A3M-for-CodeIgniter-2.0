@@ -73,6 +73,12 @@ class Forgot_password extends CI_Controller {
 					// Load email library
 					$this->load->library('email');
 					
+					// Set up email preferences
+					$config['mailtype'] = 'html';
+					
+					// Initialise email lib
+					$this->email->initialize($config);
+					
 					// Generate reset password url
 					$password_reset_url = site_url('account/reset_password?id='.$account->id.'&token='.sha1($account->id.$time.$this->config->item('password_reset_secret')));
 					
