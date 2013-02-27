@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Account_model extends CI_Model {
-	
+
 	/**
 	 * Get account by id
 	 *
@@ -13,9 +13,9 @@ class Account_model extends CI_Model {
 	{
 		return $this->db->get_where('a3m_account', array('id' => $account_id))->row();
 	}
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Get account by username
 	 *
@@ -27,9 +27,9 @@ class Account_model extends CI_Model {
 	{
 		return $this->db->get_where('a3m_account', array('username' => $username))->row();
 	}
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Get account by email
 	 *
@@ -41,9 +41,9 @@ class Account_model extends CI_Model {
 	{
 		return $this->db->get_where('a3m_account', array('email' => $email))->row();
 	}
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Get account by username or email
 	 *
@@ -55,9 +55,9 @@ class Account_model extends CI_Model {
 	{
 		return $this->db->from('a3m_account')->where('username', $username_email)->or_where('email', $username_email)->get()->row();
 	}
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Create an account
 	 *
@@ -75,20 +75,15 @@ class Account_model extends CI_Model {
 			$hasher = new PasswordHash(PHPASS_HASH_STRENGTH, PHPASS_HASH_PORTABLE);
 			$hashed_password = $hasher->HashPassword($password);
 		}
-		
+
 		$this->load->helper('date');
-		$this->db->insert('a3m_account', array(
-			'username' => $username, 
-			'email' => $email, 
-			'password' => isset($hashed_password) ? $hashed_password : NULL, 
-			'createdon' => mdate('%Y-%m-%d %H:%i:%s', now())
-		));
-		
+		$this->db->insert('a3m_account', array('username' => $username, 'email' => $email, 'password' => isset($hashed_password) ? $hashed_password : NULL, 'createdon' => mdate('%Y-%m-%d %H:%i:%s', now())));
+
 		return $this->db->insert_id();
 	}
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Change account username
 	 *
@@ -101,9 +96,9 @@ class Account_model extends CI_Model {
 	{
 		$this->db->update('a3m_account', array('username' => $new_username), array('id' => $account_id));
 	}
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Change account email
 	 *
@@ -116,9 +111,9 @@ class Account_model extends CI_Model {
 	{
 		$this->db->update('a3m_account', array('email' => $new_email), array('id' => $account_id));
 	}
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Change account password
 	 *
@@ -132,12 +127,12 @@ class Account_model extends CI_Model {
 		$this->load->helper('account/phpass');
 		$hasher = new PasswordHash(PHPASS_HASH_STRENGTH, PHPASS_HASH_PORTABLE);
 		$new_hashed_password = $hasher->HashPassword($password_new);
-		
+
 		$this->db->update('a3m_account', array('password' => $new_hashed_password), array('id' => $account_id));
 	}
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Update account last signed in dateime
 	 *
@@ -148,12 +143,12 @@ class Account_model extends CI_Model {
 	function update_last_signed_in_datetime($account_id)
 	{
 		$this->load->helper('date');
-		
+
 		$this->db->update('a3m_account', array('lastsignedinon' => mdate('%Y-%m-%d %H:%i:%s', now())), array('id' => $account_id));
 	}
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Update password reset sent datetime
 	 *
@@ -164,14 +159,14 @@ class Account_model extends CI_Model {
 	function update_reset_sent_datetime($account_id)
 	{
 		$this->load->helper('date');
-		
+
 		$resetsenton = mdate('%Y-%m-%d %H:%i:%s', now());
-		
+
 		$this->db->update('a3m_account', array('resetsenton' => $resetsenton), array('id' => $account_id));
-		
+
 		return strtotime($resetsenton);
 	}
-	
+
 	/**
 	 * Remove password reset datetime
 	 *
@@ -183,9 +178,9 @@ class Account_model extends CI_Model {
 	{
 		$this->db->update('a3m_account', array('resetsenton' => NULL), array('id' => $account_id));
 	}
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Update account deleted datetime
 	 *
@@ -196,10 +191,10 @@ class Account_model extends CI_Model {
 	function update_deleted_datetime($account_id)
 	{
 		$this->load->helper('date');
-		
+
 		$this->db->update('a3m_account', array('deletedon' => mdate('%Y-%m-%d %H:%i:%s', now())), array('id' => $account_id));
 	}
-	
+
 	/**
 	 * Remove account deleted datetime
 	 *
@@ -211,9 +206,9 @@ class Account_model extends CI_Model {
 	{
 		$this->db->update('a3m_account', array('deletedon' => NULL), array('id' => $account_id));
 	}
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Update account suspended datetime
 	 *
@@ -224,10 +219,10 @@ class Account_model extends CI_Model {
 	function update_suspended_datetime($account_id)
 	{
 		$this->load->helper('date');
-		
+
 		$this->db->update('a3m_account', array('suspendedon' => mdate('%Y-%m-%d %H:%i:%s', now())), array('id' => $account_id));
 	}
-	
+
 	/**
 	 * Remove account suspended datetime
 	 *
@@ -239,9 +234,9 @@ class Account_model extends CI_Model {
 	{
 		$this->db->update('a3m_account', array('suspendedon' => NULL), array('id' => $account_id));
 	}
-	
+
 }
 
 
 /* End of file account_model.php */
-/* Location: ./application/modules/account/models/account_model.php */
+/* Location: ./application/account/models/account_model.php */

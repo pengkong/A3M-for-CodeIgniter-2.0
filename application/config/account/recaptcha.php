@@ -9,10 +9,10 @@
 |
 | recaptcha_theme	'red' | 'white' | 'blackglass' | 'clean' | 'custom'
 */
-$config['recaptcha_public_key']		= "";
-$config['recaptcha_private_key']		= "";
-$config['recaptcha_theme']				= "white";
+$config['recaptcha_public_key'] 	= "";
+$config['recaptcha_private_key'] 	= "";
+$config['recaptcha_theme'] 			= "white";
 
 
 /* End of file recaptcha.php */
-/* Location: ./application/modules/account/config/recaptcha.php */
+/* Location: ./application/account/config/recaptcha.php */

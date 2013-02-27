@@ -1,439 +1,422 @@
 <?php
-class EpiOAuth
-{
-  public $version = '1.0';
+class EpiOAuth {
+	public $version = '1.0';
 
-  protected $requestTokenUrl;
-  protected $accessTokenUrl;
-  protected $authenticateUrl;
-  protected $authorizeUrl;
-  protected $consumerKey;
-  protected $consumerSecret;
-  protected $token;
-  protected $tokenSecret;
-  protected $callback;
-  protected $signatureMethod;
-  protected $debug = false;
-  protected $useSSL = false;
-  protected $followLocation = false;
-  protected $headers = array();
-  protected $userAgent = 'EpiOAuth (http://github.com/jmathai/twitter-async/tree/)';
-  protected $connectionTimeout = 5;
-  protected $requestTimeout = 30;
+	protected $requestTokenUrl;
+	protected $accessTokenUrl;
+	protected $authenticateUrl;
+	protected $authorizeUrl;
+	protected $consumerKey;
+	protected $consumerSecret;
+	protected $token;
+	protected $tokenSecret;
+	protected $callback;
+	protected $signatureMethod;
+	protected $debug = FALSE;
+	protected $useSSL = FALSE;
+	protected $followLocation = FALSE;
+	protected $headers = array();
+	protected $userAgent = 'EpiOAuth (http://github.com/jmathai/twitter-async/tree/)';
+	protected $connectionTimeout = 5;
+	protected $requestTimeout = 30;
 
-  public function addHeader($header)
-  {
-    if(is_array($header) && !empty($header))
-      $this->headers = array_merge($this->headers, $header);
-    elseif(!empty($header))
-      $this->headers[] = $header;
-  }
+	public function addHeader($header)
+	{
+		if (is_array($header) && ! empty($header)) $this->headers = array_merge($this->headers, $header);
+		elseif ( ! empty($header)) $this->headers[] = $header;
+	}
 
-  public function getAccessToken($params = null)
-  {
-    if (isset($_GET['oauth_verifier']) && !isset($params['oauth_verifier']))
-    {
-      $params['oauth_verifier'] = $_GET['oauth_verifier'];
-    }
-    $resp = $this->httpRequest('POST', $this->getUrl($this->accessTokenUrl), $params);
-    return new EpiOAuthResponse($resp);
-  }
+	public function getAccessToken($params = NULL)
+	{
+		if (isset($_GET['oauth_verifier']) && ! isset($params['oauth_verifier']))
+		{
+			$params['oauth_verifier'] = $_GET['oauth_verifier'];
+		}
+		$resp = $this->httpRequest('POST', $this->getUrl($this->accessTokenUrl), $params);
+		return new EpiOAuthResponse($resp);
+	}
 
-  public function getAuthenticateUrl($token = null, $params = null)
-  { 
-    $token = $token ? $token : $this->getRequestToken($params);
-    if (is_object($token)) $token = $token->oauth_token;
-    $addlParams = empty($params) ? '' : '&'.http_build_query($params, '', '&');
-    return $this->getUrl($this->authenticateUrl) . '?oauth_token=' . $token . $addlParams;
-  }
+	public function getAuthenticateUrl($token = NULL, $params = NULL)
+	{
+		$token = $token ? $token : $this->getRequestToken($params);
+		if (is_object($token)) $token = $token->oauth_token;
+		$addlParams = empty($params) ? '' : '&'.http_build_query($params, '', '&');
+		return $this->getUrl($this->authenticateUrl).'?oauth_token='.$token.$addlParams;
+	}
 
-  public function getAuthorizeUrl($token = null, $params = null)
-  {
-    $token = $token ? $token : $this->getRequestToken($params);
-    if (is_object($token)) $token = $token->oauth_token;
-    return $this->getUrl($this->authorizeUrl) . '?oauth_token=' . $token;
-  }
+	public function getAuthorizeUrl($token = NULL, $params = NULL)
+	{
+		$token = $token ? $token : $this->getRequestToken($params);
+		if (is_object($token)) $token = $token->oauth_token;
+		return $this->getUrl($this->authorizeUrl).'?oauth_token='.$token;
+	}
 
-  // DEPRECATED in favor of getAuthorizeUrl()
-  public function getAuthorizationUrl($token = null)
-  { 
-    return $this->getAuthorizeUrl($token);
-  }
+	// DEPRECATED in favor of getAuthorizeUrl()
+	public function getAuthorizationUrl($token = NULL)
+	{
+		return $this->getAuthorizeUrl($token);
+	}
 
-  public function getRequestToken($params = null)
-  {
-    if (isset($this->callback) && !isset($params['oauth_callback']))
-    {
-      $params['oauth_callback'] = $this->callback;
-    }
-    $resp = $this->httpRequest('POST', $this->getUrl($this->requestTokenUrl), $params);
-    return new EpiOAuthResponse($resp);
-  }
+	public function getRequestToken($params = NULL)
+	{
+		if (isset($this->callback) && ! isset($params['oauth_callback']))
+		{
+			$params['oauth_callback'] = $this->callback;
+		}
+		$resp = $this->httpRequest('POST', $this->getUrl($this->requestTokenUrl), $params);
+		return new EpiOAuthResponse($resp);
+	}
 
-  public function getUrl($url)
-  {
-    if($this->useSSL === true)
-      return preg_replace('/^http:/', 'https:', $url);
+	public function getUrl($url)
+	{
+		if ($this->useSSL === TRUE) return preg_replace('/^http:/', 'https:', $url);
 
-    return $url;
-  }
+		return $url;
+	}
 
-  public function httpRequest($method = null, $url = null, $params = null, $isMultipart = false)
-  {
-    if(empty($method) || empty($url))
-      return false;
+	public function httpRequest($method = NULL, $url = NULL, $params = NULL, $isMultipart = FALSE)
+	{
+		if (empty($method) || empty($url)) return FALSE;
 
-    if(empty($params['oauth_signature']))
-      $params = $this->prepareParameters($method, $url, $params);
+		if (empty($params['oauth_signature'])) $params = $this->prepareParameters($method, $url, $params);
 
-    switch($method)
-    {
-      case 'GET':
-        return $this->httpGet($url, $params);
-        break;
-      case 'POST':
-        return $this->httpPost($url, $params, $isMultipart);
-        break;
-      case 'DELETE':
-        return $this->httpDelete($url, $params);
-        break;
+		switch ($method)
+		{
+			case 'GET':
+				return $this->httpGet($url, $params);
+				break;
+			case 'POST':
+				return $this->httpPost($url, $params, $isMultipart);
+				break;
+			case 'DELETE':
+				return $this->httpDelete($url, $params);
+				break;
 
-    }
-  }
+		}
+	}
 
-  public function setDebug($bool=false)
-  {
-    $this->debug = (bool)$bool;
-  }
+	public function setDebug($bool = FALSE)
+	{
+		$this->debug = (bool)$bool;
+	}
 
-  public function setFollowLocation($bool)
-  {
-    $this->followLocation = (bool)$bool;
-  }
+	public function setFollowLocation($bool)
+	{
+		$this->followLocation = (bool)$bool;
+	}
 
-  public function setTimeout($requestTimeout = null, $connectionTimeout = null)
-  {
-    if($requestTimeout !== null)
-      $this->requestTimeout = floatval($requestTimeout);
-    if($connectionTimeout !== null)
-      $this->connectionTimeout = floatval($connectionTimeout);
-  }
+	public function setTimeout($requestTimeout = NULL, $connectionTimeout = NULL)
+	{
+		if ($requestTimeout !== NULL) $this->requestTimeout = floatval($requestTimeout);
+		if ($connectionTimeout !== NULL) $this->connectionTimeout = floatval($connectionTimeout);
+	}
 
-  public function setToken($token = null, $secret = null)
-  {
-    $this->token = $token;
-    $this->tokenSecret = $secret;
-  }
+	public function setToken($token = NULL, $secret = NULL)
+	{
+		$this->token = $token;
+		$this->tokenSecret = $secret;
+	}
 
-  public function setCallback($callback = null)
-  {
-    $this->callback = $callback;
-  }
+	public function setCallback($callback = NULL)
+	{
+		$this->callback = $callback;
+	}
 
-  public function useSSL($use = false)
-  {
-    $this->useSSL = (bool)$use;
-  }
+	public function useSSL($use = FALSE)
+	{
+		$this->useSSL = (bool)$use;
+	}
 
-  protected function addDefaultHeaders($url, $oauthHeaders)
-  {
-    $_h = array('Expect:');
-    $urlParts = parse_url($url);
-    $oauth = 'Authorization: OAuth realm="' . $urlParts['scheme'] . '://' . $urlParts['host'] . $urlParts['path'] . '",';
-    foreach($oauthHeaders as $name => $value)
-    {
-      $oauth .= "{$name}=\"{$value}\",";
-    }
-    $_h[] = substr($oauth, 0, -1);
-    $_h[] = "User-Agent: {$this->userAgent}";
-    $this->addHeader($_h);
-  }
+	protected function addDefaultHeaders($url, $oauthHeaders)
+	{
+		$_h = array('Expect:');
+		$urlParts = parse_url($url);
+		$oauth = 'Authorization: OAuth realm="'.$urlParts['scheme'].'://'.$urlParts['host'].$urlParts['path'].'",';
+		foreach ($oauthHeaders as $name => $value)
+		{
+			$oauth .= "{$name}=\"{$value}\",";
+		}
+		$_h[] = substr($oauth, 0, - 1);
+		$_h[] = "User-Agent: {$this->userAgent}";
+		$this->addHeader($_h);
+	}
 
-  protected function buildHttpQueryRaw($params)
-  {
-    $retval = '';
-    foreach((array)$params as $key => $value)
-      $retval .= "{$key}={$value}&";
-    $retval = substr($retval, 0, -1);
-    return $retval;
-  }
+	protected function buildHttpQueryRaw($params)
+	{
+		$retval = '';
+		foreach ((array)$params as $key => $value) $retval .= "{$key}={$value}&";
+		$retval = substr($retval, 0, - 1);
+		return $retval;
+	}
 
-  protected function curlInit($url)
-  {
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $this->headers); 
-    curl_setopt($ch, CURLOPT_TIMEOUT, $this->requestTimeout);
-    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->connectionTimeout);
-    curl_setopt($ch, CURLOPT_ENCODING, '');
-    if($this->followLocation)
-      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    if(isset($_SERVER ['SERVER_ADDR']) && !empty($_SERVER['SERVER_ADDR']) && $_SERVER['SERVER_ADDR'] != '127.0.0.1')
-      curl_setopt($ch, CURLOPT_INTERFACE, $_SERVER ['SERVER_ADDR']);
+	protected function curlInit($url)
+	{
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $this->headers);
+		curl_setopt($ch, CURLOPT_TIMEOUT, $this->requestTimeout);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->connectionTimeout);
+		curl_setopt($ch, CURLOPT_ENCODING, '');
+		if ($this->followLocation) curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+		if (isset($_SERVER ['SERVER_ADDR']) && ! empty($_SERVER['SERVER_ADDR']) && $_SERVER['SERVER_ADDR'] != '127.0.0.1') curl_setopt($ch, CURLOPT_INTERFACE, $_SERVER ['SERVER_ADDR']);
 
-    // if the certificate exists then use it, else bypass ssl checks
-    if(file_exists($cert = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'ca-bundle.crt'))
-    {
-      curl_setopt($ch, CURLOPT_CAINFO, $cert);
-      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-      curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-    }
-    else
-    {
-      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-      curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-    }
-    return $ch;
-  }
+		// if the certificate exists then use it, else bypass ssl checks
+		if (file_exists($cert = dirname(__FILE__).DIRECTORY_SEPARATOR.'ca-bundle.crt'))
+		{
+			curl_setopt($ch, CURLOPT_CAINFO, $cert);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, TRUE);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+		}
+		else
+		{
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+		}
+		return $ch;
+	}
 
-  protected function emptyHeaders()
-  {
-    $this->headers = array();
-  }
+	protected function emptyHeaders()
+	{
+		$this->headers = array();
+	}
 
-  protected function encode_rfc3986($string)
-  {
-    return str_replace('+', ' ', str_replace('%7E', '~', rawurlencode(($string))));
-  }
+	protected function encode_rfc3986($string)
+	{
+		return str_replace('+', ' ', str_replace('%7E', '~', rawurlencode(($string))));
+	}
 
-  protected function generateNonce()
-  {
-    if(isset($this->nonce)) // for unit testing
-      return $this->nonce;
+	protected function generateNonce()
+	{
+		if (isset($this->nonce)) // for unit testing
+			return $this->nonce;
 
-    return md5(uniqid(rand(), true));
-  }
+		return md5(uniqid(rand(), TRUE));
+	}
 
-  // parameters should already have been passed through prepareParameters
-  // no need to double encode
-  protected function generateSignature($method = null, $url = null, $params = null)
-  {
-    if(empty($method) || empty($url))
-      return false;
+	// parameters should already have been passed through prepareParameters
+	// no need to double encode
+	protected function generateSignature($method = NULL, $url = NULL, $params = NULL)
+	{
+		if (empty($method) || empty($url)) return FALSE;
 
-    // concatenating and encode
-    $concatenatedParams = $this->encode_rfc3986($this->buildHttpQueryRaw($params));
+		// concatenating and encode
+		$concatenatedParams = $this->encode_rfc3986($this->buildHttpQueryRaw($params));
 
-    // normalize url
-    $normalizedUrl = $this->encode_rfc3986($this->normalizeUrl($url));
-    $method = $this->encode_rfc3986($method); // don't need this but why not?
+		// normalize url
+		$normalizedUrl = $this->encode_rfc3986($this->normalizeUrl($url));
+		$method = $this->encode_rfc3986($method); // don't need this but why not?
 
-    $signatureBaseString = "{$method}&{$normalizedUrl}&{$concatenatedParams}";
-    return $this->signString($signatureBaseString);
-  }
+		$signatureBaseString = "{$method}&{$normalizedUrl}&{$concatenatedParams}";
+		return $this->signString($signatureBaseString);
+	}
 
-  protected function executeCurl($ch)
-  {
-    if($this->isAsynchronous)
-      return $this->curl->addCurl($ch);
-    else
-      return $this->curl->addEasyCurl($ch);
-  }
+	protected function executeCurl($ch)
+	{
+		if ($this->isAsynchronous) return $this->curl->addCurl($ch);
+		else
+			return $this->curl->addEasyCurl($ch);
+	}
 
-  protected function httpDelete($url, $params) {
-      $this->addDefaultHeaders($url, $params['oauth']);
-      $ch = $this->curlInit($url);
-      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-      curl_setopt($ch, CURLOPT_POSTFIELDS, $this->buildHttpQueryRaw($params['request']));
-      $resp = $this->executeCurl($ch);
-      $this->emptyHeaders();
-      return $resp;
-  }
+	protected function httpDelete($url, $params)
+	{
+		$this->addDefaultHeaders($url, $params['oauth']);
+		$ch = $this->curlInit($url);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $this->buildHttpQueryRaw($params['request']));
+		$resp = $this->executeCurl($ch);
+		$this->emptyHeaders();
+		return $resp;
+	}
 
-  protected function httpGet($url, $params = null)
-  {
-    if(count($params['request']) > 0)
-    {
-      $url .= '?';
-      foreach($params['request'] as $k => $v)
-      {
-        $url .= "{$k}={$v}&";
-      }
-      $url = substr($url, 0, -1);
-    }
-    $this->addDefaultHeaders($url, $params['oauth']);
-    $ch = $this->curlInit($url);
-    $resp = $this->executeCurl($ch);
-    $this->emptyHeaders();
+	protected function httpGet($url, $params = NULL)
+	{
+		if (count($params['request']) > 0)
+		{
+			$url .= '?';
+			foreach ($params['request'] as $k => $v)
+			{
+				$url .= "{$k}={$v}&";
+			}
+			$url = substr($url, 0, - 1);
+		}
+		$this->addDefaultHeaders($url, $params['oauth']);
+		$ch = $this->curlInit($url);
+		$resp = $this->executeCurl($ch);
+		$this->emptyHeaders();
 
-    return $resp;
-  }
+		return $resp;
+	}
 
-  protected function httpPost($url, $params = null, $isMultipart)
-  {
-    $this->addDefaultHeaders($url, $params['oauth']);
-    $ch = $this->curlInit($url);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    // php's curl extension automatically sets the content type
-    // based on whether the params are in string or array form
-    if($isMultipart)
-      curl_setopt($ch, CURLOPT_POSTFIELDS, $params['request']);
-    else
-      curl_setopt($ch, CURLOPT_POSTFIELDS, $this->buildHttpQueryRaw($params['request']));
-    $resp = $this->executeCurl($ch);
-    $this->emptyHeaders();
+	protected function httpPost($url, $params = NULL, $isMultipart)
+	{
+		$this->addDefaultHeaders($url, $params['oauth']);
+		$ch = $this->curlInit($url);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		// php's curl extension automatically sets the content type
+		// based on whether the params are in string or array form
+		if ($isMultipart) curl_setopt($ch, CURLOPT_POSTFIELDS, $params['request']);
+		else
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $this->buildHttpQueryRaw($params['request']));
+		$resp = $this->executeCurl($ch);
+		$this->emptyHeaders();
 
-    return $resp;
-  }
+		return $resp;
+	}
 
-  protected function normalizeUrl($url = null)
-  {
-    $urlParts = parse_url($url);
-    $scheme = strtolower($urlParts['scheme']);
-    $host   = strtolower($urlParts['host']);
-    $port = isset($urlParts['port']) ? intval($urlParts['port']) : 0;
+	protected function normalizeUrl($url = NULL)
+	{
+		$urlParts = parse_url($url);
+		$scheme = strtolower($urlParts['scheme']);
+		$host = strtolower($urlParts['host']);
+		$port = isset($urlParts['port']) ? intval($urlParts['port']) : 0;
 
-    $retval = strtolower($scheme) . '://' . strtolower($host);
+		$retval = strtolower($scheme).'://'.strtolower($host);
 
-    if(!empty($port) && (($scheme === 'http' && $port != 80) || ($scheme === 'https' && $port != 443)))
-      $retval .= ":{$port}";
+		if ( ! empty($port) && (($scheme === 'http' && $port != 80) || ($scheme === 'https' && $port != 443))) $retval .= ":{$port}";
 
-    $retval .= $urlParts['path'];
-    if(!empty($urlParts['query']))
-    {
-      $retval .= "?{$urlParts['query']}";
-    }
+		$retval .= $urlParts['path'];
+		if ( ! empty($urlParts['query']))
+		{
+			$retval .= "?{$urlParts['query']}";
+		}
 
-    return $retval;
-  }
+		return $retval;
+	}
 
-  protected function isMultipart($params = null)
-  {
-    if($params)
-    {
-      foreach($params as $k => $v)
-      {
-        if(strncmp('@',$k,1) === 0)
-          return true;
-      }
-    }
-    return false;
-  }
+	protected function isMultipart($params = NULL)
+	{
+		if ($params)
+		{
+			foreach ($params as $k => $v)
+			{
+				if (strncmp('@', $k, 1) === 0) return TRUE;
+			}
+		}
+		return FALSE;
+	}
 
-  protected function prepareParameters($method = null, $url = null, $params = null)
-  {
-    if(empty($method) || empty($url))
-      return false;
+	protected function prepareParameters($method = NULL, $url = NULL, $params = NULL)
+	{
+		if (empty($method) || empty($url)) return FALSE;
 
-    $oauth['oauth_consumer_key'] = $this->consumerKey;
-    $oauth['oauth_token'] = $this->token;
-    $oauth['oauth_nonce'] = $this->generateNonce();
-    $oauth['oauth_timestamp'] = !isset($this->timestamp) ? time() : $this->timestamp; // for unit test
-    $oauth['oauth_signature_method'] = $this->signatureMethod;
-    if(isset($params['oauth_verifier']))
-    {
-      $oauth['oauth_verifier'] = $params['oauth_verifier'];
-      unset($params['oauth_verifier']);
-    }
-    $oauth['oauth_version'] = $this->version;
-    // encode all oauth values
-    foreach($oauth as $k => $v)
-      $oauth[$k] = $this->encode_rfc3986($v);
-    // encode all non '@' params
-    // keep sigParams for signature generation (exclude '@' params)
-    // rename '@key' to 'key'
-    $sigParams = array();
-    $hasFile = false;
-    if(is_array($params))
-    {
-      foreach($params as $k => $v)
-      {
-        if(strncmp('@',$k,1) !== 0)
-        {
-          $sigParams[$k] = $this->encode_rfc3986($v);
-          $params[$k] = $this->encode_rfc3986($v);
-        }
-        else
-        {
-          $params[substr($k, 1)] = $v;
-          unset($params[$k]);
-          $hasFile = true;
-        }
-      }
-      
-      if($hasFile === true)
-        $sigParams = array();
-    }
+		$oauth['oauth_consumer_key'] = $this->consumerKey;
+		$oauth['oauth_token'] = $this->token;
+		$oauth['oauth_nonce'] = $this->generateNonce();
+		$oauth['oauth_timestamp'] = ! isset($this->timestamp) ? time() : $this->timestamp; // for unit test
+		$oauth['oauth_signature_method'] = $this->signatureMethod;
+		if (isset($params['oauth_verifier']))
+		{
+			$oauth['oauth_verifier'] = $params['oauth_verifier'];
+			unset($params['oauth_verifier']);
+		}
+		$oauth['oauth_version'] = $this->version;
+		// encode all oauth values
+		foreach ($oauth as $k => $v) $oauth[$k] = $this->encode_rfc3986($v);
+		// encode all non '@' params
+		// keep sigParams for signature generation (exclude '@' params)
+		// rename '@key' to 'key'
+		$sigParams = array();
+		$hasFile = FALSE;
+		if (is_array($params))
+		{
+			foreach ($params as $k => $v)
+			{
+				if (strncmp('@', $k, 1) !== 0)
+				{
+					$sigParams[$k] = $this->encode_rfc3986($v);
+					$params[$k] = $this->encode_rfc3986($v);
+				}
+				else
+				{
+					$params[substr($k, 1)] = $v;
+					unset($params[$k]);
+					$hasFile = TRUE;
+				}
+			}
 
-    $sigParams = array_merge($oauth, (array)$sigParams);
+			if ($hasFile === TRUE) $sigParams = array();
+		}
 
-    // sorting
-    ksort($sigParams);
+		$sigParams = array_merge($oauth, (array)$sigParams);
 
-    // signing
-    $oauth['oauth_signature'] = $this->encode_rfc3986($this->generateSignature($method, $url, $sigParams));
-    return array('request' => $params, 'oauth' => $oauth);
-  }
+		// sorting
+		ksort($sigParams);
 
-  protected function signString($string = null)
-  {
-    $retval = false;
-    switch($this->signatureMethod)
-    {
-      case 'HMAC-SHA1':
-        $key = $this->encode_rfc3986($this->consumerSecret) . '&' . $this->encode_rfc3986($this->tokenSecret);
-        $retval = base64_encode(hash_hmac('sha1', $string, $key, true));
-        break;
-    }
+		// signing
+		$oauth['oauth_signature'] = $this->encode_rfc3986($this->generateSignature($method, $url, $sigParams));
+		return array('request' => $params, 'oauth' => $oauth);
+	}
 
-    return $retval;
-  }
+	protected function signString($string = NULL)
+	{
+		$retval = FALSE;
+		switch ($this->signatureMethod)
+		{
+			case 'HMAC-SHA1':
+				$key = $this->encode_rfc3986($this->consumerSecret).'&'.$this->encode_rfc3986($this->tokenSecret);
+				$retval = base64_encode(hash_hmac('sha1', $string, $key, TRUE));
+				break;
+		}
 
-  public function __construct($consumerKey, $consumerSecret, $signatureMethod='HMAC-SHA1')
-  {
-    $this->consumerKey = $consumerKey;
-    $this->consumerSecret = $consumerSecret;
-    $this->signatureMethod = $signatureMethod;
-    $this->curl = EpiCurl::getInstance();
-  }
+		return $retval;
+	}
+
+	public function __construct($consumerKey, $consumerSecret, $signatureMethod = 'HMAC-SHA1')
+	{
+		$this->consumerKey = $consumerKey;
+		$this->consumerSecret = $consumerSecret;
+		$this->signatureMethod = $signatureMethod;
+		$this->curl = EpiCurl::getInstance();
+	}
 }
 
-class EpiOAuthResponse
-{
-  private $__resp;
-  protected $debug = false;
+class EpiOAuthResponse {
+	private $__resp;
+	protected $debug = FALSE;
 
-  public function __construct($resp)
-  {
-    $this->__resp = $resp;
-  }
+	public function __construct($resp)
+	{
+		$this->__resp = $resp;
+	}
 
-  public function __get($name)
-  {
-    if($this->__resp->code != 200)
-      EpiOAuthException::raise($this->__resp, $this->debug);
+	public function __get($name)
+	{
+		if ($this->__resp->code != 200) EpiOAuthException::raise($this->__resp, $this->debug);
 
-    parse_str($this->__resp->data, $result);
-    foreach($result as $k => $v)
-    {
-      $this->$k = $v;
-    }
+		parse_str($this->__resp->data, $result);
+		foreach ($result as $k => $v)
+		{
+			$this->$k = $v;
+		}
 
-    return isset($result[$name]) ? $result[$name] : null;
-  }
+		return isset($result[$name]) ? $result[$name] : NULL;
+	}
 
-  public function __toString()
-  {
-    return $this->__resp->data;
-  }
+	public function __toString()
+	{
+		return $this->__resp->data;
+	}
 }
 
-class EpiOAuthException extends Exception
-{
-  public static function raise($response, $debug)
-  {
-    $message = $response->responseText;
+class EpiOAuthException extends Exception {
+	public static function raise($response, $debug)
+	{
+		$message = $response->responseText;
 
-    switch($response->code)
-    {
-      case 400:
-        throw new EpiOAuthBadRequestException($message, $response->code);
-      case 401:
-        throw new EpiOAuthUnauthorizedException($message, $response->code);
-      default:
-        throw new EpiOAuthException($message, $response->code);
-    }
-  }
+		switch ($response->code)
+		{
+			case 400:
+				throw new EpiOAuthBadRequestException($message, $response->code);
+			case 401:
+				throw new EpiOAuthUnauthorizedException($message, $response->code);
+			default:
+				throw new EpiOAuthException($message, $response->code);
+		}
+	}
 }
-class EpiOAuthBadRequestException extends EpiOAuthException{}
-class EpiOAuthUnauthorizedException extends EpiOAuthException{}
+
+class EpiOAuthBadRequestException extends EpiOAuthException {
+}
+
+class EpiOAuthUnauthorizedException extends EpiOAuthException {
+}
