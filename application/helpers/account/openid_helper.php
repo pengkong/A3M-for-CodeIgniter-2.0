@@ -7,7 +7,7 @@ session_start();
 if (PHP_OS == "WIN32" || PHP_OS == "WINNT") define('Auth_OpenID_RAND_SOURCE', NULL);
 
 // Include the necessary RP (Relying Party) libraries
-set_include_path(APPPATH.'helpers/account/php-openid-php5.3/'.PATH_SEPARATOR.get_include_path());
+set_include_path(APPPATH . 'helpers/account/php-openid-php5.3/' . PATH_SEPARATOR . get_include_path());
 require_once "Auth/OpenID/Consumer.php";
 require_once "Auth/OpenID/FileStore.php";
 require_once "Auth/OpenID/SReg.php";

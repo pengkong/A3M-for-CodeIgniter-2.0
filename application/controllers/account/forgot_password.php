@@ -3,22 +3,22 @@
  * Forgot_password Controller
  */
 class Forgot_password extends CI_Controller {
-	
+
 	/**
 	 * Constructor
 	 */
-    function __construct()
-    {
-        parent::__construct();
-		
+	function __construct()
+	{
+		parent::__construct();
+
 		// Load the necessary stuff...
 		$this->load->config('account/account');
 		$this->load->helper(array('language', 'account/ssl', 'url'));
-        $this->load->library(array('account/authentication', 'account/recaptcha', 'form_validation'));
+		$this->load->library(array('account/authentication', 'account/recaptcha', 'form_validation'));
 		$this->load->model(array('account/account_model'));
 		$this->load->language(array('general', 'account/forgot_password'));
 	}
-	
+
 	/**
 	 * Forgot password
 	 */
@@ -26,22 +26,20 @@ class Forgot_password extends CI_Controller {
 	{
 		// Enable SSL?
 		maintain_ssl($this->config->item("ssl_enabled"));
-		
+
 		// Redirect signed in users to homepage
 		if ($this->authentication->is_signed_in()) redirect('');
-		
+
 		// Check recaptcha
 		$recaptcha_result = $this->recaptcha->check();
-		
+
 		// Store recaptcha pass in session so that users only needs to complete captcha once
 		if ($recaptcha_result === TRUE) $this->session->set_userdata('forget_password_recaptcha_pass', TRUE);
-		
+
 		// Setup form validation
 		$this->form_validation->set_error_delimiters('<span class="field_error">', '</span>');
-		$this->form_validation->set_rules(array(
-			array('field'=>'forgot_password_username_email', 'label'=>'lang:forgot_password_username_email', 'rules'=>'trim|required')
-		));
-		
+		$this->form_validation->set_rules(array(array('field' => 'forgot_password_username_email', 'label' => 'lang:forgot_password_username_email', 'rules' => 'trim|required')));
+
 		// Run form validation
 		if ($this->form_validation->run())
 		{
@@ -54,7 +52,7 @@ class Forgot_password extends CI_Controller {
 			{
 				// Remove recaptcha pass
 				$this->session->unset_userdata('forget_password_recaptcha_pass');
-				
+
 				// Username does not exist
 				if ( ! $account = $this->account_model->get_by_username_email($this->input->post('forgot_password_username_email')))
 				{
@@ -69,41 +67,40 @@ class Forgot_password extends CI_Controller {
 				{
 					// Set reset datetime
 					$time = $this->account_model->update_reset_sent_datetime($account->id);
-					
+
 					// Load email library
 					$this->load->library('email');
-					
+
 					// Set up email preferences
 					$config['mailtype'] = 'html';
-					
+
 					// Initialise email lib
 					$this->email->initialize($config);
-					
+
 					// Generate reset password url
-					$password_reset_url = site_url('account/reset_password?id='.$account->id.'&token='.sha1($account->id.$time.$this->config->item('password_reset_secret')));
-					
+					$password_reset_url = site_url('account/reset_password?id=' . $account->id . '&token=' . sha1($account->id . $time . $this->config->item('password_reset_secret')));
+
 					// Send reset password email
 					$this->email->from($this->config->item('password_reset_email'), lang('reset_password_email_sender'));
 					$this->email->to($account->email);
 					$this->email->subject(lang('reset_password_email_subject'));
 					$this->email->message($this->load->view('account/reset_password_email', array('username' => $account->username, 'password_reset_url' => anchor($password_reset_url, $password_reset_url)), TRUE));
 					@$this->email->send();
-					
+
 					// Load reset password sent view
 					$this->load->view('account/reset_password_sent', isset($data) ? $data : NULL);
 					return;
 				}
 			}
 		}
-		
+
 		// Load recaptcha code
-		if ($this->session->userdata('forget_password_recaptcha_pass') != TRUE) 
-			$data['recaptcha'] = $this->recaptcha->load($recaptcha_result, $this->config->item("ssl_enabled"));
+		if ($this->session->userdata('forget_password_recaptcha_pass') != TRUE) $data['recaptcha'] = $this->recaptcha->load($recaptcha_result, $this->config->item("ssl_enabled"));
 
 		// Load forgot password view
 		$this->load->view('account/forgot_password', isset($data) ? $data : NULL);
 	}
-	
+
 }
 
 /* End of file forgot_password.php */

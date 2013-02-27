@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Ref_language_model extends CI_Model {
-	
+
 	/**
 	 * Get ref language
 	 *
@@ -15,11 +15,11 @@ class Ref_language_model extends CI_Model {
 		$this->db->or_where('two', $country);
 		$this->db->or_where('language', $country);
 		$query = $this->db->get('ref_language');
-		if ($query->num_rows())	return $query->row();
+		if ($query->num_rows()) return $query->row();
 	}
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Get all ref language
 	 *
@@ -31,9 +31,9 @@ class Ref_language_model extends CI_Model {
 		$this->db->order_by('language', 'asc');
 		return $this->db->get('ref_language')->result();
 	}
-	
+
 }
 
 
 /* End of file ref_language_model.php */
-/* Location: ./application/modules/account/models/ref_language_model.php */
+/* Location: ./application/account/models/ref_language_model.php */

@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Ref_zoneinfo_model extends CI_Model {
-	
+
 	/**
 	 * Get by zoneinfo
 	 *
@@ -13,11 +13,11 @@ class Ref_zoneinfo_model extends CI_Model {
 	{
 		$this->db->where('zoneinfo', $zoneinfo);
 		$query = $this->db->get('ref_zoneinfo');
-		if ($query->num_rows())	return $query->row();
+		if ($query->num_rows()) return $query->row();
 	}
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Get by country
 	 *
@@ -29,11 +29,11 @@ class Ref_zoneinfo_model extends CI_Model {
 	{
 		$this->db->where('country', $country);
 		$query = $this->db->get('ref_zoneinfo');
-		if ($query->num_rows())	return $query->result();
+		if ($query->num_rows()) return $query->result();
 	}
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Get all ref zoneinfo
 	 *
@@ -45,9 +45,9 @@ class Ref_zoneinfo_model extends CI_Model {
 		$this->db->order_by('zoneinfo', 'asc');
 		return $this->db->get('ref_zoneinfo')->result();
 	}
-	
+
 }
 
 
 /* End of file ref_zoneinfo_model.php */
-/* Location: ./application/modules/account/models/ref_zoneinfo_model.php */
+/* Location: ./application/account/models/ref_zoneinfo_model.php */
