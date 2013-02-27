@@ -41,7 +41,7 @@
 
         <div class="span4">
 			<?php echo form_input(array('name' => 'connect_openid_url', 'id' => 'connect_openid_url', 'class' => 'openid', 'value' => set_value('connect_openid_url'))); ?>
-			<?php echo "<BR>" . "<span style=\"color:#B94A48;\">" . form_error('connect_openid_url') . "</span>"; ?>
+			<?php echo "<BR>"."<span style=\"color:#B94A48;\">".form_error('connect_openid_url')."</span>"; ?>
         </div>
 
         <div class="span2">

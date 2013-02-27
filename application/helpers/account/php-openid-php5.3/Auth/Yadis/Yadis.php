@@ -327,7 +327,7 @@ class Auth_Yadis_Yadis {
 		$result = new Auth_Yadis_DiscoveryResult($uri);
 
 		$request_uri = $uri;
-		$headers = array("Accept: " . Auth_Yadis_CONTENT_TYPE . ', text/html; q=0.3, application/xhtml+xml; q=0.5');
+		$headers = array("Accept: ".Auth_Yadis_CONTENT_TYPE.', text/html; q=0.3, application/xhtml+xml; q=0.5');
 
 		if ($fetcher === NULL)
 		{

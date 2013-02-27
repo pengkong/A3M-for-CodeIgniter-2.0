@@ -115,12 +115,12 @@ class FacebookApiException extends Exception {
 	 */
 	public function __toString()
 	{
-		$str = $this->getType() . ': ';
+		$str = $this->getType().': ';
 		if ($this->code != 0)
 		{
-			$str .= $this->code . ': ';
+			$str .= $this->code.': ';
 		}
-		return $str . $this->message;
+		return $str.$this->message;
 	}
 }
 
@@ -682,7 +682,7 @@ abstract class BaseFacebook {
 	 */
 	protected function getSignedRequestCookieName()
 	{
-		return 'fbsr_' . $this->getAppId();
+		return 'fbsr_'.$this->getAppId();
 	}
 
 	/**
@@ -694,7 +694,7 @@ abstract class BaseFacebook {
 	 */
 	protected function getMetadataCookieName()
 	{
-		return 'fbm_' . $this->getAppId();
+		return 'fbm_'.$this->getAppId();
 	}
 
 	/**
@@ -758,7 +758,7 @@ abstract class BaseFacebook {
 	 */
 	protected function getApplicationAccessToken()
 	{
-		return $this->appId . '|' . $this->appSecret;
+		return $this->appId.'|'.$this->appSecret;
 	}
 
 	/**
@@ -992,8 +992,8 @@ abstract class BaseFacebook {
 
 		if (curl_errno($ch) == 60)
 		{ // CURLE_SSL_CACERT
-			self::errorLog('Invalid or no certificate authority found, ' . 'using bundled information');
-			curl_setopt($ch, CURLOPT_CAINFO, dirname(__FILE__) . '/fb_ca_chain_bundle.crt');
+			self::errorLog('Invalid or no certificate authority found, '.'using bundled information');
+			curl_setopt($ch, CURLOPT_CAINFO, dirname(__FILE__).'/fb_ca_chain_bundle.crt');
 			$result = curl_exec($ch);
 		}
 
@@ -1010,7 +1010,7 @@ abstract class BaseFacebook {
 			{
 				if (strlen(@inet_pton($matches[1])) === 16)
 				{
-					self::errorLog('Invalid IPv6 configuration on server, ' . 'Please disable or get native IPv6 on your server.');
+					self::errorLog('Invalid IPv6 configuration on server, '.'Please disable or get native IPv6 on your server.');
 					self::$CURL_OPTS[CURLOPT_IPRESOLVE] = CURL_IPRESOLVE_V4;
 					curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
 					$result = curl_exec($ch);
@@ -1044,7 +1044,7 @@ abstract class BaseFacebook {
 
 		if (strtoupper($data['algorithm']) !== self::SIGNED_REQUEST_ALGORITHM)
 		{
-			self::errorLog('Unknown algorithm. Expected ' . self::SIGNED_REQUEST_ALGORITHM);
+			self::errorLog('Unknown algorithm. Expected '.self::SIGNED_REQUEST_ALGORITHM);
 			return NULL;
 		}
 
@@ -1069,7 +1069,7 @@ abstract class BaseFacebook {
 	{
 		if ( ! is_array($data))
 		{
-			throw new InvalidArgumentException('makeSignedRequest expects an array. Got: ' . print_r($data, TRUE));
+			throw new InvalidArgumentException('makeSignedRequest expects an array. Got: '.print_r($data, TRUE));
 		}
 		$data['algorithm'] = self::SIGNED_REQUEST_ALGORITHM;
 		$data['issued_at'] = time();
@@ -1077,7 +1077,7 @@ abstract class BaseFacebook {
 		$b64 = self::base64UrlEncode($json);
 		$raw_sig = hash_hmac('sha256', $b64, $this->getAppSecret(), $raw = TRUE);
 		$sig = self::base64UrlEncode($raw_sig);
-		return $sig . '.' . $b64;
+		return $sig.'.'.$b64;
 	}
 
 	/**
@@ -1123,7 +1123,7 @@ abstract class BaseFacebook {
 		}
 		if ($params)
 		{
-			$url .= '?' . http_build_query($params, NULL, '&');
+			$url .= '?'.http_build_query($params, NULL, '&');
 		}
 
 		return $url;
@@ -1186,9 +1186,9 @@ abstract class BaseFacebook {
 	 */
 	protected function getCurrentUrl()
 	{
-		$protocol = $this->getHttpProtocol() . '://';
+		$protocol = $this->getHttpProtocol().'://';
 		$host = $this->getHttpHost();
-		$currentUrl = $protocol . $host . $_SERVER['REQUEST_URI'];
+		$currentUrl = $protocol.$host.$_SERVER['REQUEST_URI'];
 		$parts = parse_url($currentUrl);
 
 		$query = '';
@@ -1207,15 +1207,15 @@ abstract class BaseFacebook {
 
 			if ( ! empty($retained_params))
 			{
-				$query = '?' . implode($retained_params, '&');
+				$query = '?'.implode($retained_params, '&');
 			}
 		}
 
 		// use port if non default
-		$port = isset($parts['port']) && (($protocol === 'http://' && $parts['port'] !== 80) || ($protocol === 'https://' && $parts['port'] !== 443)) ? ':' . $parts['port'] : '';
+		$port = isset($parts['port']) && (($protocol === 'http://' && $parts['port'] !== 80) || ($protocol === 'https://' && $parts['port'] !== 443)) ? ':'.$parts['port'] : '';
 
 		// rebuild
-		return $protocol . $parts['host'] . $port . $parts['path'] . $query;
+		return $protocol.$parts['host'].$port.$parts['path'].$query;
 	}
 
 	/**
@@ -1233,7 +1233,7 @@ abstract class BaseFacebook {
 	{
 		foreach (self::$DROP_QUERY_PARAMS as $drop_query_param)
 		{
-			if (strpos($param, $drop_query_param . '=') === 0)
+			if (strpos($param, $drop_query_param.'=') === 0)
 			{
 				return FALSE;
 			}
@@ -1342,12 +1342,12 @@ abstract class BaseFacebook {
 			if ( ! headers_sent())
 			{
 				$base_domain = $this->getBaseDomain();
-				setcookie($cookie_name, '', 1, '/', '.' . $base_domain);
+				setcookie($cookie_name, '', 1, '/', '.'.$base_domain);
 			}
 			else
 			{
 				// @codeCoverageIgnoreStart
-				self::errorLog('There exists a cookie that we wanted to clear that we couldn\'t ' . 'clear because headers was already sent. Make sure to do the first ' . 'API call before outputing anything.');
+				self::errorLog('There exists a cookie that we wanted to clear that we couldn\'t '.'clear because headers was already sent. Make sure to do the first '.'API call before outputing anything.');
 				// @codeCoverageIgnoreEnd
 			}
 		}
@@ -1394,7 +1394,7 @@ abstract class BaseFacebook {
 		{
 			return TRUE;
 		}
-		return self::endsWith($big, '.' . $small);
+		return self::endsWith($big, '.'.$small);
 	}
 
 	protected static function endsWith($big, $small)

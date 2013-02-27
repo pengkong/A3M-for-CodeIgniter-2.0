@@ -128,7 +128,7 @@ class Connect_openid extends CI_Controller {
 				if ($sreg_request = Auth_OpenID_SRegRequest::build(array('nickname', 'email', 'fullname', 'gender', 'dob', 'postcode', 'country', 'language', 'timezone'))) $auth_request->addExtension($sreg_request);
 
 				// Redirect to authorizate URL
-				header("Location: " . $auth_request->redirectURL(base_url(), site_url('account/connect_openid')));
+				header("Location: ".$auth_request->redirectURL(base_url(), site_url('account/connect_openid')));
 			}
 		}
 

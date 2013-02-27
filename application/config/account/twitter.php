@@ -8,8 +8,8 @@
 | Twitter Applications - http://dev.twitter.com/apps
 |
 */
-$config['twitter_consumer_key'] = "";
-$config['twitter_consumer_secret'] = "";
+$config['twitter_consumer_key'] 	= "";
+$config['twitter_consumer_secret'] 	= "";
 
 
 /* End of file twitter.php */

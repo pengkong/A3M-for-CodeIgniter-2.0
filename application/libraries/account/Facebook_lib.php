@@ -18,7 +18,7 @@ class Facebook_lib {
 		// Require Facebook app keys to be configured
 		if ( ! $this->CI->config->item('facebook_app_id') || ! $this->CI->config->item('facebook_secret'))
 		{
-			echo 'Visit ' . anchor('http://www.facebook.com/developers/createapp.php', 'http://www.facebook.com/developers/createapp.php') . ' to create your app.' . '<br />The config file is located at "/application/config/account/facebook.php"';
+			echo 'Visit '.anchor('http://www.facebook.com/developers/createapp.php', 'http://www.facebook.com/developers/createapp.php').' to create your app.'.'<br />The config file is located at "/application/config/account/facebook.php"';
 			die;
 		}
 

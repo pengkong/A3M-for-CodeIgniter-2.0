@@ -407,7 +407,7 @@ class Auth_Yadis_Discovery {
 		}
 
 		$this->session_key_suffix = $session_key_suffix;
-		$this->session_key = $this->PREFIX . $this->session_key_suffix;
+		$this->session_key = $this->PREFIX.$this->session_key_suffix;
 	}
 
 	/**
@@ -470,7 +470,7 @@ class Auth_Yadis_Discovery {
 	function getSessionKey()
 	{
 		// Get the session key for this starting URL and suffix
-		return $this->PREFIX . $this->session_key_suffix;
+		return $this->PREFIX.$this->session_key_suffix;
 	}
 
 	/**

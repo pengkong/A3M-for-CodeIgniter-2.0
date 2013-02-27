@@ -12,7 +12,7 @@
     <div class="row">
         <div class="span6">
 
-			<?php echo form_open(uri_string() . ($this->input->get('continue') ? '/?continue=' . urlencode($this->input->get('continue')) : ''), 'class="form-horizontal"'); ?>
+			<?php echo form_open(uri_string().($this->input->get('continue') ? '/?continue='.urlencode($this->input->get('continue')) : ''), 'class="form-horizontal"'); ?>
 			<?php echo form_fieldset(); ?>
 
             <h3><?php echo lang('sign_in_heading'); ?></h3>
@@ -66,7 +66,7 @@
                 </div>
 
                 <div>
-					<?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-large pull-right', 'content' => '<i class="icon-lock"></i> ' . lang('sign_in_sign_in'))); ?>
+					<?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-large pull-right', 'content' => '<i class="icon-lock"></i> '.lang('sign_in_sign_in'))); ?>
                 </div>
 
                 <p><?php echo anchor('account/forgot_password', lang('sign_in_forgot_your_password')); ?><br/>
@@ -84,7 +84,7 @@
             <h3><?php echo sprintf(lang('sign_in_third_party_heading')); ?></h3>
             <ul>
 				<?php foreach ($this->config->item('third_party_auth_providers') as $provider) : ?>
-                <li class="third_party <?php echo $provider; ?>"><?php echo anchor('account/connect_' . $provider, lang('connect_' . $provider), array('title' => sprintf(lang('sign_in_with'), lang('connect_' . $provider)))); ?></li>
+                <li class="third_party <?php echo $provider; ?>"><?php echo anchor('account/connect_'.$provider, lang('connect_'.$provider), array('title' => sprintf(lang('sign_in_with'), lang('connect_'.$provider)))); ?></li>
 				<?php endforeach; ?>
             </ul>
 			<?php endif; ?>

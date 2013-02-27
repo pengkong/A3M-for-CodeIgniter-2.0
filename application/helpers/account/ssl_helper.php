@@ -33,9 +33,9 @@ if ( ! function_exists('maintain_ssl'))
 			// remove port number
 			$domain = explode(':', $segments[0]);
 			// form temp base url
-			$temp_base_url = 'https://' . $domain[0] . ':' . $port . '/';
+			$temp_base_url = 'https://'.$domain[0].':'.$port.'/';
 			// replace segments
-			for ($i = 1; $i < sizeof($segments); $i ++) if ($segments[$i]) $temp_base_url .= $segments[$i] . '/';
+			for ($i = 1; $i < sizeof($segments); $i ++) if ($segments[$i]) $temp_base_url .= $segments[$i].'/';
 			// Temporarily overwrite base url
 			$CI->config->config['base_url'] = $temp_base_url;
 		}
@@ -49,7 +49,7 @@ if ( ! function_exists('maintain_ssl'))
 
 			// Correct by redirect
 			$CI->load->helper('url');
-			header('Location: ' . current_url() . (empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING']));
+			header('Location: '.current_url().(empty($_SERVER['QUERY_STRING']) ? '' : '?'.$_SERVER['QUERY_STRING']));
 		}
 	}
 }

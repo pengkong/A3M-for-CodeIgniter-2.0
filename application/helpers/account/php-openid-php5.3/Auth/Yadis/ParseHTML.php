@@ -121,11 +121,11 @@ class Auth_Yadis_ParseHTML {
 	{
 		if (is_array($tag_names))
 		{
-			$tag_names = '(?:' . implode('|', $tag_names) . ')';
+			$tag_names = '(?:'.implode('|', $tag_names).')';
 		}
 		if ($close)
 		{
-			$close = '\/' . (($close == 1) ? '' : '?');
+			$close = '\/'.(($close == 1) ? '' : '?');
 		}
 		else
 		{
@@ -133,7 +133,7 @@ class Auth_Yadis_ParseHTML {
 		}
 		if ($self_close)
 		{
-			$self_close = '(?:\/\s*)' . (($self_close == 1) ? '' : '?');
+			$self_close = '(?:\/\s*)'.(($self_close == 1) ? '' : '?');
 		}
 		else
 		{

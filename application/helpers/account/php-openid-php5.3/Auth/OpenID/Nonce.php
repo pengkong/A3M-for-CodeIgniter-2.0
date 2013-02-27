@@ -14,7 +14,7 @@ require_once 'Auth/OpenID/CryptUtil.php';
 /**
  * This is the characters that the nonces are made from.
  */
-define('Auth_OpenID_Nonce_CHRS', "abcdefghijklmnopqrstuvwxyz" . "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
+define('Auth_OpenID_Nonce_CHRS', "abcdefghijklmnopqrstuvwxyz"."ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
 
 // Keep nonces for five hours (allow five hours for the combination of
 // request time and clock skew). This is probably way more than is
@@ -95,7 +95,7 @@ function Auth_OpenID_mkNonce($when = NULL)
 		$when = time();
 	}
 	$time_str = gmstrftime(Auth_OpenID_Nonce_TIME_FMT, $when);
-	return $time_str . $salt;
+	return $time_str.$salt;
 }
 
 ?>

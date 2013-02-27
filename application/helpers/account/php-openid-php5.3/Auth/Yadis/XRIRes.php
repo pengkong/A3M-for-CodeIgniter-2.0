@@ -22,7 +22,7 @@ class Auth_Yadis_ProxyResolver {
 	{
 		// trim off the xri:// prefix
 		$qxri = substr(Auth_Yadis_toURINormal($xri), 6);
-		$hxri = $this->proxy_url . $qxri;
+		$hxri = $this->proxy_url.$qxri;
 		$args = array('_xrd_r' => 'application/xrds+xml');
 
 		if ($service_type)

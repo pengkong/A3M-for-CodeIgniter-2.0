@@ -47,7 +47,7 @@ class Auth_OpenID_MathLibrary {
 		$cmp = $this->cmp($long, 0);
 		if ($cmp < 0)
 		{
-			$msg = __FUNCTION__ . " takes only positive integers.";
+			$msg = __FUNCTION__." takes only positive integers.";
 			trigger_error($msg, E_USER_ERROR);
 			return NULL;
 		}
@@ -185,7 +185,7 @@ class Auth_OpenID_MathLibrary {
 
 		do
 		{
-			$bytes = "\x00" . Auth_OpenID_CryptUtil::getBytes($nbytes);
+			$bytes = "\x00".Auth_OpenID_CryptUtil::getBytes($nbytes);
 			$n = $this->binaryToLong($bytes);
 			// Keep looping if this value is in the low duplicated range
 		} while ($this->cmp($n, $duplicate) < 0);
@@ -400,7 +400,7 @@ function Auth_OpenID_detectMathLibrary($exts)
 		{
 			foreach ($extension['modules'] as $module)
 			{
-				if (@dl($module . "." . PHP_SHLIB_SUFFIX))
+				if (@dl($module.".".PHP_SHLIB_SUFFIX))
 				{
 					$loaded = TRUE;
 					break;

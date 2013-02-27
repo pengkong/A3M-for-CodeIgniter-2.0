@@ -206,7 +206,7 @@ class Auth_OpenID_Association {
 
 		if ($keys != $class_assoc_keys)
 		{
-			trigger_error('Unexpected key values: ' . var_export($keys, TRUE), E_USER_WARNING);
+			trigger_error('Unexpected key values: '.var_export($keys, TRUE), E_USER_WARNING);
 			return NULL;
 		}
 
@@ -219,7 +219,7 @@ class Auth_OpenID_Association {
 
 		if ($version != '2')
 		{
-			trigger_error('Unknown version: ' . $version, E_USER_WARNING);
+			trigger_error('Unknown version: '.$version, E_USER_WARNING);
 			return NULL;
 		}
 
@@ -320,7 +320,7 @@ class Auth_OpenID_Association {
 		$data = $message->toPostArgs();
 		foreach ($signed_list as $field)
 		{
-			$pairs[] = array($field, Auth_OpenID::arrayGet($data, 'openid.' . $field, ''));
+			$pairs[] = array($field, Auth_OpenID::arrayGet($data, 'openid.'.$field, ''));
 		}
 		return $pairs;
 	}

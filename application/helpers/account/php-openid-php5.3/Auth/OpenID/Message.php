@@ -354,7 +354,7 @@ class Auth_OpenID_NamespaceMap {
 
 		if (($alias !== NULL) && ($alias != $desired_alias))
 		{
-			Auth_OpenID::log('Cannot map %s to alias %s. ' . 'It is already mapped to alias %s', $namespace_uri, $desired_alias, $alias);
+			Auth_OpenID::log('Cannot map %s to alias %s. '.'It is already mapped to alias %s', $namespace_uri, $desired_alias, $alias);
 			return NULL;
 		}
 
@@ -387,7 +387,7 @@ class Auth_OpenID_NamespaceMap {
 		$i = 0;
 		while (1)
 		{
-			$alias = 'ext' . strval($i);
+			$alias = 'ext'.strval($i);
 			if ($this->addAlias($namespace_uri, $alias) === NULL)
 			{
 				$i += 1;
@@ -665,7 +665,7 @@ class Auth_OpenID_Message {
 			}
 			else
 			{
-				$ns_key = 'openid.ns.' . $alias;
+				$ns_key = 'openid.ns.'.$alias;
 			}
 			$args[$ns_key] = $ns_uri;
 		}
@@ -707,7 +707,7 @@ class Auth_OpenID_Message {
 
 	function toFormMarkup($action_url, $form_tag_attrs = NULL, $submit_text = "Continue")
 	{
-		$form = "<form accept-charset=\"UTF-8\" " . "enctype=\"application/x-www-form-urlencoded\"";
+		$form = "<form accept-charset=\"UTF-8\" "."enctype=\"application/x-www-form-urlencoded\"";
 
 		if ( ! $form_tag_attrs)
 		{
@@ -794,7 +794,7 @@ class Auth_OpenID_Message {
 		if (($namespace != Auth_OpenID_BARE_NS) && ( ! is_string($namespace)))
 		{
 			//TypeError
-			$err_msg = sprintf("Namespace must be Auth_OpenID_BARE_NS, " . "Auth_OpenID_OPENID_NS or a string. got %s", print_r($namespace, TRUE));
+			$err_msg = sprintf("Namespace must be Auth_OpenID_BARE_NS, "."Auth_OpenID_OPENID_NS or a string. got %s", print_r($namespace, TRUE));
 			return new Auth_OpenID_FailureResponse(NULL, $err_msg);
 		}
 
@@ -858,7 +858,7 @@ class Auth_OpenID_Message {
 			$tail = sprintf('%s.%s', $ns_alias, $ns_key);
 		}
 
-		return 'openid.' . $tail;
+		return 'openid.'.$tail;
 	}
 
 	function getArg($namespace, $key, $default = NULL)

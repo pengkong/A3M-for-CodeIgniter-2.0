@@ -80,12 +80,12 @@ class Auth_Yadis_PlainHTTPFetcher extends Auth_Yadis_HTTPFetcher {
 
 			if ($parts['scheme'] == 'https')
 			{
-				$host = 'ssl://' . $host;
+				$host = 'ssl://'.$host;
 			}
 
 			$user_agent = Auth_OpenID_USER_AGENT;
 
-			$headers = array("GET " . $parts['path'] . (array_key_exists('query', $parts) ? "?" . $parts['query'] : "") . " HTTP/1.0", "User-Agent: $user_agent", "Host: " . $parts['host'] . ($specify_port ? ":" . $parts['port'] : ""), "Port: " . $parts['port']);
+			$headers = array("GET ".$parts['path'].(array_key_exists('query', $parts) ? "?".$parts['query'] : "")." HTTP/1.0", "User-Agent: $user_agent", "Host: ".$parts['host'].($specify_port ? ":".$parts['port'] : ""), "Port: ".$parts['port']);
 
 			$errno = 0;
 			$errstr = '';
@@ -106,7 +106,7 @@ class Auth_Yadis_PlainHTTPFetcher extends Auth_Yadis_HTTPFetcher {
 
 			stream_set_timeout($sock, $this->timeout);
 
-			fputs($sock, implode("\r\n", $headers) . "\r\n\r\n");
+			fputs($sock, implode("\r\n", $headers)."\r\n\r\n");
 
 			$data = "";
 			$kilobytes = 0;
@@ -172,13 +172,13 @@ class Auth_Yadis_PlainHTTPFetcher extends Auth_Yadis_HTTPFetcher {
 		$post_path = $parts['path'];
 		if (isset($parts['query']))
 		{
-			$post_path .= '?' . $parts['query'];
+			$post_path .= '?'.$parts['query'];
 		}
 
-		$headers[] = "POST " . $post_path . " HTTP/1.0";
-		$headers[] = "Host: " . $parts['host'];
+		$headers[] = "POST ".$post_path." HTTP/1.0";
+		$headers[] = "Host: ".$parts['host'];
 		$headers[] = "Content-type: application/x-www-form-urlencoded";
-		$headers[] = "Content-length: " . strval(strlen($body));
+		$headers[] = "Content-length: ".strval(strlen($body));
 
 		if ($extra_headers && is_array($extra_headers))
 		{
@@ -189,7 +189,7 @@ class Auth_Yadis_PlainHTTPFetcher extends Auth_Yadis_HTTPFetcher {
 		$all_headers = implode("\r\n", $headers);
 
 		// Add headers, two newlines, and request body.
-		$request = $all_headers . "\r\n\r\n" . $body;
+		$request = $all_headers."\r\n\r\n".$body;
 
 		// Set a default port.
 		if ( ! array_key_exists('port', $parts))

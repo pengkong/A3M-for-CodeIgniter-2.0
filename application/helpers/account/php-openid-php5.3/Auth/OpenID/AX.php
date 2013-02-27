@@ -343,10 +343,10 @@ class Auth_OpenID_AX_FetchRequest extends Auth_OpenID_AX_Message {
 
 			if ($attribute->count != 1)
 			{
-				$ax_args['count.' . $alias] = strval($attribute->count);
+				$ax_args['count.'.$alias] = strval($attribute->count);
 			}
 
-			$ax_args['type.' . $alias] = $type_uri;
+			$ax_args['type.'.$alias] = $type_uri;
 		}
 
 		if ($required)
@@ -414,7 +414,7 @@ class Auth_OpenID_AX_FetchRequest extends Auth_OpenID_AX_Message {
 
 			if ( ! $realm)
 			{
-				$obj = new Auth_OpenID_AX_Error(sprintf("Cannot validate update_url %s " . "against absent realm", $obj->update_url));
+				$obj = new Auth_OpenID_AX_Error(sprintf("Cannot validate update_url %s "."against absent realm", $obj->update_url));
 			}
 			else if ( ! Auth_OpenID_TrustRoot::match($realm, $obj->update_url))
 			{
@@ -457,7 +457,7 @@ class Auth_OpenID_AX_FetchRequest extends Auth_OpenID_AX_Message {
 					return new Auth_OpenID_AX_Error(sprintf("Could not add alias %s for URI %s", $alias, $type_uri));
 				}
 
-				$count_s = Auth_OpenID::arrayGet($ax_args, 'count.' . $alias);
+				$count_s = Auth_OpenID::arrayGet($ax_args, 'count.'.$alias);
 				if ($count_s)
 				{
 					$count = Auth_OpenID::intval($count_s);
@@ -473,7 +473,7 @@ class Auth_OpenID_AX_FetchRequest extends Auth_OpenID_AX_Message {
 
 				if ($count === FALSE)
 				{
-					return new Auth_OpenID_AX_Error(sprintf("Integer value expected for %s, got %s", 'count.' . $alias, $count_s));
+					return new Auth_OpenID_AX_Error(sprintf("Integer value expected for %s, got %s", 'count.'.$alias, $count_s));
 				}
 
 				$attrinfo = Auth_OpenID_AX_AttrInfo::make($type_uri, $count, FALSE, $alias);
@@ -503,7 +503,7 @@ class Auth_OpenID_AX_FetchRequest extends Auth_OpenID_AX_Message {
 		{
 			if ( ! in_array($type_uri, $all_type_uris))
 			{
-				return new Auth_OpenID_AX_Error(sprintf('Type URI %s was in the request but not ' . 'present in "required" or "if_available"', $type_uri));
+				return new Auth_OpenID_AX_Error(sprintf('Type URI %s was in the request but not '.'present in "required" or "if_available"', $type_uri));
 
 			}
 		}
@@ -606,8 +606,8 @@ class Auth_OpenID_AX_KeyValueMessage extends Auth_OpenID_AX_Message {
 		{
 			$alias = $aliases->add($type_uri);
 
-			$ax_args['type.' . $alias] = $type_uri;
-			$ax_args['count.' . $alias] = strval(count($values));
+			$ax_args['type.'.$alias] = $type_uri;
+			$ax_args['count.'.$alias] = strval(count($values));
 
 			foreach ($values as $i => $value)
 			{
@@ -664,17 +664,17 @@ class Auth_OpenID_AX_KeyValueMessage extends Auth_OpenID_AX_Message {
 		{
 			list($type_uri, $alias) = $pair;
 
-			if (array_key_exists('count.' . $alias, $ax_args))
+			if (array_key_exists('count.'.$alias, $ax_args))
 			{
 
-				$count_key = 'count.' . $alias;
+				$count_key = 'count.'.$alias;
 				$count_s = $ax_args[$count_key];
 
 				$count = Auth_OpenID::intval($count_s);
 
 				if ($count === FALSE)
 				{
-					return new Auth_OpenID_AX_Error(sprintf("Integer value expected for %s, got %s", 'count. %s' . $alias, $count_s, Auth_OpenID_AX_UNLIMITED_VALUES));
+					return new Auth_OpenID_AX_Error(sprintf("Integer value expected for %s, got %s", 'count. %s'.$alias, $count_s, Auth_OpenID_AX_UNLIMITED_VALUES));
 				}
 
 				$values = array();
@@ -693,14 +693,14 @@ class Auth_OpenID_AX_KeyValueMessage extends Auth_OpenID_AX_Message {
 			}
 			else
 			{
-				$key = 'value.' . $alias;
+				$key = 'value.'.$alias;
 
 				if ( ! array_key_exists($key, $ax_args))
 				{
 					return new Auth_OpenID_AX_Error(sprintf("No value found for key %s", $key));
 				}
 
-				$value = $ax_args['value.' . $alias];
+				$value = $ax_args['value.'.$alias];
 
 				if ($value == '')
 				{
@@ -872,7 +872,7 @@ class Auth_OpenID_AX_FetchResponse extends Auth_OpenID_AX_KeyValueMessage {
 
 				if (($attr_info->count != Auth_OpenID_AX_UNLIMITED_VALUES) && ($attr_info->count < count($values)))
 				{
-					return new Auth_OpenID_AX_Error(sprintf("More than the number of requested values " . "were specified for %s", $attr_info->type_uri));
+					return new Auth_OpenID_AX_Error(sprintf("More than the number of requested values "."were specified for %s", $attr_info->type_uri));
 				}
 			}
 		}
@@ -888,8 +888,8 @@ class Auth_OpenID_AX_FetchResponse extends Auth_OpenID_AX_KeyValueMessage {
 		foreach ($zero_value_types as $attr_info)
 		{
 			$alias = $aliases->getAlias($attr_info->type_uri);
-			$kv_args['type.' . $alias] = $attr_info->type_uri;
-			$kv_args['count.' . $alias] = '0';
+			$kv_args['type.'.$alias] = $attr_info->type_uri;
+			$kv_args['count.'.$alias] = '0';
 		}
 
 		$update_url = NULL;
@@ -1008,7 +1008,7 @@ class Auth_OpenID_AX_StoreResponse extends Auth_OpenID_AX_Message {
 	{
 		if (($succeeded) && ($error_message !== NULL))
 		{
-			return new Auth_OpenID_AX_Error('An error message may only be ' . 'included in a failing fetch response');
+			return new Auth_OpenID_AX_Error('An error message may only be '.'included in a failing fetch response');
 		}
 
 		return new Auth_OpenID_AX_StoreResponse($succeeded, $error_message);

@@ -56,7 +56,7 @@ function Auth_Yadis_toIRINormal($xri)
 {
 	if ( ! Auth_Yadis_startswith($xri, 'xri://'))
 	{
-		$xri = 'xri://' . $xri;
+		$xri = 'xri://'.$xri;
 	}
 
 	return Auth_Yadis_escapeForIRI($xri);
@@ -141,7 +141,7 @@ function Auth_Yadis_XRIAppendArgs($url, $args)
 		$sep = '?';
 	}
 
-	return $url . $sep . Auth_OpenID::httpBuildQuery($args);
+	return $url.$sep.Auth_OpenID::httpBuildQuery($args);
 }
 
 function Auth_Yadis_providerIsAuthoritative($providerID, $canonicalID)
@@ -197,7 +197,7 @@ function Auth_Yadis_XRI($xri)
 {
 	if ( ! Auth_Yadis_startswith($xri, 'xri://'))
 	{
-		$xri = 'xri://' . $xri;
+		$xri = 'xri://'.$xri;
 	}
 	return $xri;
 }

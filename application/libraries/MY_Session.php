@@ -23,9 +23,9 @@ class MY_Session extends CI_Session {
 	 */
 	function cookie_monster($asleep)
 	{
-		$asleep ? setcookie($this->sess_cookie_name . '_cm', 'true', 0, $this->cookie_path, $this->cookie_domain, 0) : setcookie($this->sess_cookie_name . '_cm', 'false', 0, $this->cookie_path, $this->cookie_domain, 0);
+		$asleep ? setcookie($this->sess_cookie_name.'_cm', 'true', 0, $this->cookie_path, $this->cookie_domain, 0) : setcookie($this->sess_cookie_name.'_cm', 'false', 0, $this->cookie_path, $this->cookie_domain, 0);
 
-		$_COOKIE[$this->sess_cookie_name . '_cm'] = $asleep ? 'true' : 'false';
+		$_COOKIE[$this->sess_cookie_name.'_cm'] = $asleep ? 'true' : 'false';
 
 		$this->sess_time_to_update = - 1;
 		$this->sess_update();
@@ -56,12 +56,12 @@ class MY_Session extends CI_Session {
 		else
 		{
 			// if encryption is not used, we provide an md5 hash to prevent userside tampering
-			$cookie_data = $cookie_data . md5($cookie_data . $this->encryption_key);
+			$cookie_data = $cookie_data.md5($cookie_data.$this->encryption_key);
 		}
 
 		// Set the cookie
 		setcookie($this->sess_cookie_name, $cookie_data, // if cookie monster exist and is awake, generate a session cookie that expires on browser close
-			isset($_COOKIE[$this->sess_cookie_name . '_cm']) && $_COOKIE[$this->sess_cookie_name . '_cm'] == 'false' ? 0 : $this->sess_expiration + time(), $this->cookie_path, $this->cookie_domain, 0);
+			isset($_COOKIE[$this->sess_cookie_name.'_cm']) && $_COOKIE[$this->sess_cookie_name.'_cm'] == 'false' ? 0 : $this->sess_expiration + time(), $this->cookie_path, $this->cookie_domain, 0);
 	}
 
 	// ------------------------------------------------------------------------
@@ -106,7 +106,7 @@ class MY_Session extends CI_Session {
 				$parts = explode(':old:', $name);
 				if (is_array($parts) && count($parts) === 2)
 				{
-					$new_name = $this->flashdata_key . ':new:' . $parts[1];
+					$new_name = $this->flashdata_key.':new:'.$parts[1];
 					$this->set_userdata($new_name, $value);
 					$this->unset_userdata($name);
 				}

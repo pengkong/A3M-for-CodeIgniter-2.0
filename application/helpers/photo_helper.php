@@ -21,9 +21,9 @@ function showPhoto($picture = NULL, $param = NULL)
 		{
 			if ($nocache)
 			{
-				$picture = $picture . '?t=' . md5(time());
+				$picture = $picture.'?t='.md5(time());
 			} // only if $nocache is TRUE
-			$path = site_url(RES_DIR . '/user/profile/' . $picture); // . 		-- disabled time attachment, no need to break cache
+			$path = site_url(RES_DIR.'/user/profile/'.$picture); //.		-- disabled time attachment, no need to break cache
 		}
 		else
 		{
@@ -33,7 +33,7 @@ function showPhoto($picture = NULL, $param = NULL)
 			// request proper cropped size from facebook for this photo
 			if (stripos($path, 'graph.facebook.com'))
 			{
-				$path .= '?width=' . $width . '&amp;height=' . $height; // this appends size requirements to facebook image
+				$path .= '?width='.$width.'&amp;height='.$height; // this appends size requirements to facebook image
 			}
 
 			// request bigger photo from twitter
@@ -57,18 +57,18 @@ function showPhoto($picture = NULL, $param = NULL)
 			if ( ! fileExists($path))
 			{
 				$title = "Photo not found! ";
-				$path = site_url(RES_DIR . '/img/default-person.png');
+				$path = site_url(RES_DIR.'/img/default-person.png');
 			}
 		}
 
 	}
 	else
 	{
-		$path = site_url(RES_DIR . '/img/default-person.png');
+		$path = site_url(RES_DIR.'/img/default-person.png');
 	}
 
 
-	return '<img ' . (($id) ? 'id="' . $id . '"' : '') . ' src="' . $path . '" height="' . $height . '" width="' . $width . '" title="' . $title . '" alt="' . $title . '" class="' . $class . '">';
+	return '<img '.(($id) ? 'id="'.$id.'"' : '').' src="'.$path.'" height="'.$height.'" width="'.$width.'" title="'.$title.'" alt="'.$title.'" class="'.$class.'">';
 
 }
 

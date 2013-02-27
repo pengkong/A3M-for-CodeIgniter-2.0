@@ -56,7 +56,7 @@ class Reset_password extends CI_Controller {
 			if (now() < (strtotime($account->resetsenton) + $this->config->item("password_reset_expiration")))
 			{
 				// Check if token is valid
-				if ($this->input->get('token') == sha1($account->id . strtotime($account->resetsenton) . $this->config->item('password_reset_secret')))
+				if ($this->input->get('token') == sha1($account->id.strtotime($account->resetsenton).$this->config->item('password_reset_secret')))
 				{
 					// Remove reset sent on datetime
 					$this->account_model->remove_reset_sent_datetime($account->id);

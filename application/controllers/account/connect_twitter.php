@@ -75,7 +75,7 @@ class Connect_twitter extends CI_Controller {
 		}
 
 		// Redirect to authorize url
-		header("Location: " . $this->twitter_lib->etw->getAuthenticateUrl());
+		header("Location: ".$this->twitter_lib->etw->getAuthenticateUrl());
 	}
 
 }

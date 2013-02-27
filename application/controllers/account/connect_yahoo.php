@@ -114,7 +114,7 @@ class Connect_yahoo extends CI_Controller {
 		$auth_request->addExtension($ax_request);
 
 		// Redirect to authorizate URL
-		header("Location: " . $auth_request->redirectURL(base_url(), site_url('account/connect_yahoo')));
+		header("Location: ".$auth_request->redirectURL(base_url(), site_url('account/connect_yahoo')));
 	}
 
 }

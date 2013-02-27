@@ -164,7 +164,7 @@ class Auth_OpenID_MemcachedStore extends Auth_OpenID_OpenIDStore {
 
 		// returns false when nonce already exists
 		// otherwise adds nonce
-		return $this->connection->add('openid_nonce_' . sha1($server_url) . '_' . sha1($salt), 1, // any value here
+		return $this->connection->add('openid_nonce_'.sha1($server_url).'_'.sha1($salt), 1, // any value here
 			$this->compress, $Auth_OpenID_SKEW);
 	}
 
@@ -173,7 +173,7 @@ class Auth_OpenID_MemcachedStore extends Auth_OpenID_OpenIDStore {
 	 */
 	function associationKey($server_url, $handle = NULL)
 	{
-		return 'openid_association_' . sha1($server_url) . '_' . sha1($handle);
+		return 'openid_association_'.sha1($server_url).'_'.sha1($handle);
 	}
 
 	/**
@@ -181,7 +181,7 @@ class Auth_OpenID_MemcachedStore extends Auth_OpenID_OpenIDStore {
 	 */
 	function associationServerKey($server_url)
 	{
-		return 'openid_association_server_' . sha1($server_url);
+		return 'openid_association_server_'.sha1($server_url);
 	}
 
 	/**

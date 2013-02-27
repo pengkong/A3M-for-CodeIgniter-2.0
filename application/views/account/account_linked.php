@@ -52,14 +52,14 @@
                         </div>
                         <div class="span7">
 							<?php echo lang('connect_facebook'); ?><br/>
-							<?php echo anchor('http://facebook.com/profile.php?id=' . $facebook_link->facebook_id, substr('http://facebook.com/profile.php?id=' . $facebook_link->facebook_id, 0, 30) . (strlen('http://facebook.com/profile.php?id=' . $facebook_link->facebook_id) > 30 ? '...' : ''), array('target' => '_blank', 'title' => 'http://facebook.com/profile.php?id=' . $facebook_link->facebook_id)); ?>
+							<?php echo anchor('http://facebook.com/profile.php?id='.$facebook_link->facebook_id, substr('http://facebook.com/profile.php?id='.$facebook_link->facebook_id, 0, 30).(strlen('http://facebook.com/profile.php?id='.$facebook_link->facebook_id) > 30 ? '...' : ''), array('target' => '_blank', 'title' => 'http://facebook.com/profile.php?id='.$facebook_link->facebook_id)); ?>
                         </div>
                         <div class="span2">
 							<?php if ($num_of_linked_accounts != 1) : ?>
 							<?php echo form_open(uri_string()); ?>
 							<?php echo form_fieldset(); ?>
 							<?php echo form_hidden('facebook_id', $facebook_link->facebook_id); ?>
-							<?php echo form_button(array('type' => 'submit', 'class' => 'btn', 'content' => '<i class="icon-trash"></i> ' . lang('linked_remove'))); ?>
+							<?php echo form_button(array('type' => 'submit', 'class' => 'btn', 'content' => '<i class="icon-trash"></i> '.lang('linked_remove'))); ?>
 							<?php echo form_fieldset_close(); ?>
 							<?php echo form_close(); ?>
 							<?php endif; ?>
@@ -80,14 +80,14 @@
                         </div>
                         <div class="span7">
 							<?php echo lang('connect_twitter'); ?><br/>
-							<?php echo anchor('http://twitter.com/' . $twitter_link->twitter->screen_name, substr('http://twitter.com/' . $twitter_link->twitter->screen_name, 0, 30) . (strlen('http://twitter.com/' . $twitter_link->twitter->screen_name) > 30 ? '...' : ''), array('target' => '_blank', 'title' => 'http://twitter.com/' . $twitter_link->twitter->screen_name)); ?>
+							<?php echo anchor('http://twitter.com/'.$twitter_link->twitter->screen_name, substr('http://twitter.com/'.$twitter_link->twitter->screen_name, 0, 30).(strlen('http://twitter.com/'.$twitter_link->twitter->screen_name) > 30 ? '...' : ''), array('target' => '_blank', 'title' => 'http://twitter.com/'.$twitter_link->twitter->screen_name)); ?>
                         </div>
                         <div class="span2">
 							<?php if ($num_of_linked_accounts >= 1 && ! isset($account->password)) : ?>
 							<?php echo form_open(uri_string()); ?>
 							<?php echo form_fieldset(); ?>
 							<?php echo form_hidden('twitter_id', $twitter_link->twitter_id); ?>
-							<?php echo form_button(array('type' => 'submit', 'class' => 'btn', 'content' => '<i class="icon-trash"></i> ' . lang('linked_remove'))); ?>
+							<?php echo form_button(array('type' => 'submit', 'class' => 'btn', 'content' => '<i class="icon-trash"></i> '.lang('linked_remove'))); ?>
 							<?php echo form_fieldset_close(); ?>
 							<?php echo form_close(); ?>
 							<?php endif; ?>
@@ -101,19 +101,19 @@
 
                     <div class="row">
                         <div class="span1">
-                            <img src="<?php echo RES_DIR?>/img/auth_icons/<?php echo $openid_link->provider; ?>.png" alt="<?php echo lang('connect_' . $openid_link->provider); ?>"
+                            <img src="<?php echo RES_DIR?>/img/auth_icons/<?php echo $openid_link->provider; ?>.png" alt="<?php echo lang('connect_'.$openid_link->provider); ?>"
                                  width="40"/>
                         </div>
                         <div class="span7">
-                            <strong><?php echo lang('connect_' . $openid_link->provider); ?></strong><br/>
-							<?php echo anchor($openid_link->openid, substr($openid_link->openid, 0, 30) . (strlen($openid_link->openid) > 30 ? '...' : ''), array('target' => '_blank', 'title' => $openid_link->openid)); ?>
+                            <strong><?php echo lang('connect_'.$openid_link->provider); ?></strong><br/>
+							<?php echo anchor($openid_link->openid, substr($openid_link->openid, 0, 30).(strlen($openid_link->openid) > 30 ? '...' : ''), array('target' => '_blank', 'title' => $openid_link->openid)); ?>
                         </div>
                         <div class="span2">
 							<?php if ($num_of_linked_accounts >= 1 && isset($account->password)) : ?>
 							<?php echo form_open(uri_string()); ?>
 							<?php echo form_fieldset(); ?>
 							<?php echo form_hidden('openid', $openid_link->openid); ?>
-							<?php echo form_button(array('type' => 'submit', 'class' => 'btn', 'content' => '<i class="icon-trash"></i> ' . lang('linked_remove'))); ?>
+							<?php echo form_button(array('type' => 'submit', 'class' => 'btn', 'content' => '<i class="icon-trash"></i> '.lang('linked_remove'))); ?>
 							<?php echo form_fieldset_close(); ?>
 							<?php echo form_close(); ?>
 							<?php endif; ?>
@@ -129,7 +129,7 @@
             <h3><?php echo lang('linked_link_with_your_account_from'); ?></h3>
             <ul class="third_party">
 				<?php foreach ($this->config->item('third_party_auth_providers') as $provider) : ?>
-                <li class="third_party <?php echo $provider; ?>"><?php echo anchor('account/connect_' . $provider, lang('connect_' . $provider), array('title' => sprintf(lang('connect_with_x'), lang('connect_' . $provider)))); ?></li>
+                <li class="third_party <?php echo $provider; ?>"><?php echo anchor('account/connect_'.$provider, lang('connect_'.$provider), array('title' => sprintf(lang('connect_with_x'), lang('connect_'.$provider)))); ?></li>
 				<?php endforeach; ?>
             </ul>
 

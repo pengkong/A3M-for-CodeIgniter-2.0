@@ -103,7 +103,7 @@ class Auth_Yadis_ParanoidHTTPFetcher extends Auth_Yadis_HTTPFetcher {
 
 			if ($c === FALSE)
 			{
-				Auth_OpenID::log("curl_init returned false; could not " . "initialize for URL '%s'", $url);
+				Auth_OpenID::log("curl_init returned false; could not "."initialize for URL '%s'", $url);
 				return NULL;
 			}
 
@@ -129,13 +129,13 @@ class Auth_Yadis_ParanoidHTTPFetcher extends Auth_Yadis_HTTPFetcher {
 			$cv = curl_version();
 			if (is_array($cv))
 			{
-				$curl_user_agent = 'curl/' . $cv['version'];
+				$curl_user_agent = 'curl/'.$cv['version'];
 			}
 			else
 			{
 				$curl_user_agent = $cv;
 			}
-			curl_setopt($c, CURLOPT_USERAGENT, Auth_OpenID_USER_AGENT . ' ' . $curl_user_agent);
+			curl_setopt($c, CURLOPT_USERAGENT, Auth_OpenID_USER_AGENT.' '.$curl_user_agent);
 			curl_setopt($c, CURLOPT_TIMEOUT, $off);
 			curl_setopt($c, CURLOPT_URL, $url);
 

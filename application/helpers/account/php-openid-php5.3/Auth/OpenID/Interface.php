@@ -43,7 +43,7 @@ class Auth_OpenID_OpenIDStore {
 	 */
 	function storeAssociation($server_url, $association)
 	{
-		trigger_error("Auth_OpenID_OpenIDStore::storeAssociation " . "not implemented", E_USER_ERROR);
+		trigger_error("Auth_OpenID_OpenIDStore::storeAssociation "."not implemented", E_USER_ERROR);
 	}
 
 	/*
@@ -60,7 +60,7 @@ class Auth_OpenID_OpenIDStore {
 	 */
 	function cleanupNonces()
 	{
-		trigger_error("Auth_OpenID_OpenIDStore::cleanupNonces " . "not implemented", E_USER_ERROR);
+		trigger_error("Auth_OpenID_OpenIDStore::cleanupNonces "."not implemented", E_USER_ERROR);
 	}
 
 	/*
@@ -74,7 +74,7 @@ class Auth_OpenID_OpenIDStore {
 	 */
 	function cleanupAssociations()
 	{
-		trigger_error("Auth_OpenID_OpenIDStore::cleanupAssociations " . "not implemented", E_USER_ERROR);
+		trigger_error("Auth_OpenID_OpenIDStore::cleanupAssociations "."not implemented", E_USER_ERROR);
 	}
 
 	/*
@@ -129,7 +129,7 @@ class Auth_OpenID_OpenIDStore {
 	 */
 	function getAssociation($server_url, $handle = NULL)
 	{
-		trigger_error("Auth_OpenID_OpenIDStore::getAssociation " . "not implemented", E_USER_ERROR);
+		trigger_error("Auth_OpenID_OpenIDStore::getAssociation "."not implemented", E_USER_ERROR);
 	}
 
 	/**
@@ -152,7 +152,7 @@ class Auth_OpenID_OpenIDStore {
 	 */
 	function removeAssociation($server_url, $handle)
 	{
-		trigger_error("Auth_OpenID_OpenIDStore::removeAssociation " . "not implemented", E_USER_ERROR);
+		trigger_error("Auth_OpenID_OpenIDStore::removeAssociation "."not implemented", E_USER_ERROR);
 	}
 
 	/**
@@ -176,7 +176,7 @@ class Auth_OpenID_OpenIDStore {
 	 */
 	function useNonce($server_url, $timestamp, $salt)
 	{
-		trigger_error("Auth_OpenID_OpenIDStore::useNonce " . "not implemented", E_USER_ERROR);
+		trigger_error("Auth_OpenID_OpenIDStore::useNonce "."not implemented", E_USER_ERROR);
 	}
 
 	/**

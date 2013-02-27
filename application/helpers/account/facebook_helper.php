@@ -80,12 +80,12 @@ class Facebook extends BaseFacebook {
 		if ( ! headers_sent())
 		{
 			$expire = time() + self::FBSS_COOKIE_EXPIRE;
-			setcookie($cookie_name, $cookie_value, $expire, '/', '.' . $base_domain);
+			setcookie($cookie_name, $cookie_value, $expire, '/', '.'.$base_domain);
 		}
 		else
 		{
 			// @codeCoverageIgnoreStart
-			self::errorLog('Shared session ID cookie could not be set! You must ensure you ' . 'create the Facebook instance before headers have been sent. This ' . 'will cause authentication issues after the first request.');
+			self::errorLog('Shared session ID cookie could not be set! You must ensure you '.'create the Facebook instance before headers have been sent. This '.'will cause authentication issues after the first request.');
 			// @codeCoverageIgnoreEnd
 		}
 	}
@@ -149,12 +149,12 @@ class Facebook extends BaseFacebook {
 		$cookie_name = $this->getSharedSessionCookieName();
 		unset($_COOKIE[$cookie_name]);
 		$base_domain = $this->getBaseDomain();
-		setcookie($cookie_name, '', 1, '/', '.' . $base_domain);
+		setcookie($cookie_name, '', 1, '/', '.'.$base_domain);
 	}
 
 	protected function getSharedSessionCookieName()
 	{
-		return self::FBSS_COOKIE_NAME . '_' . $this->getAppId();
+		return self::FBSS_COOKIE_NAME.'_'.$this->getAppId();
 	}
 
 	protected function constructSessionVariableName($key)

@@ -285,7 +285,7 @@ class Auth_OpenID_ServerError {
 		}
 		else
 		{
-			return get_class($this) . " error";
+			return get_class($this)." error";
 		}
 	}
 }
@@ -487,7 +487,7 @@ class Auth_OpenID_DiffieHellmanSHA1ServerSession {
 				$missing = 'generator';
 			}
 
-			return new Auth_OpenID_ServerError($message, 'If non-default modulus or generator is ' . 'supplied, both must be supplied.  Missing ' . $missing);
+			return new Auth_OpenID_ServerError($message, 'If non-default modulus or generator is '.'supplied, both must be supplied.  Missing '.$missing);
 		}
 
 		$lib =& Auth_OpenID_getMathLib();
@@ -510,7 +510,7 @@ class Auth_OpenID_DiffieHellmanSHA1ServerSession {
 		$consumer_pubkey = $message->getArg(Auth_OpenID_OPENID_NS, 'dh_consumer_public');
 		if ($consumer_pubkey === NULL)
 		{
-			return new Auth_OpenID_ServerError($message, 'Public key for DH-SHA1 session ' . 'not found in query');
+			return new Auth_OpenID_ServerError($message, 'Public key for DH-SHA1 session '.'not found in query');
 		}
 
 		$consumer_pubkey = $lib->base64ToLong($consumer_pubkey);
@@ -622,7 +622,7 @@ class Auth_OpenID_AssociateRequest extends Auth_OpenID_Request {
 
 		if ($session_class === NULL)
 		{
-			return new Auth_OpenID_ServerError($message, "Unknown session type " . $session_type);
+			return new Auth_OpenID_ServerError($message, "Unknown session type ".$session_type);
 		}
 
 		$session = call_user_func(array($session_class, 'fromMessage'), $message);
@@ -836,12 +836,12 @@ class Auth_OpenID_CheckIDRequest extends Auth_OpenID_Request {
 		{
 			if ($identity && ! $claimed_id)
 			{
-				$s = "OpenID 2.0 message contained openid.identity but not " . "claimed_id";
+				$s = "OpenID 2.0 message contained openid.identity but not "."claimed_id";
 				return new Auth_OpenID_ServerError($message, $s);
 			}
 			else if ($claimed_id && ! $identity)
 			{
-				$s = "OpenID 2.0 message contained openid.claimed_id " . "but not identity";
+				$s = "OpenID 2.0 message contained openid.claimed_id "."but not identity";
 				return new Auth_OpenID_ServerError($message, $s);
 			}
 		}
@@ -962,7 +962,7 @@ class Auth_OpenID_CheckIDRequest extends Auth_OpenID_Request {
 		{
 			if (( ! $this->message->isOpenID1()) && ( ! $this->server->op_endpoint))
 			{
-				return new Auth_OpenID_ServerError(NULL, "server should be constructed with op_endpoint to " . "respond to OpenID 2.0 messages.");
+				return new Auth_OpenID_ServerError(NULL, "server should be constructed with op_endpoint to "."respond to OpenID 2.0 messages.");
 			}
 
 			$server_url = $this->server->op_endpoint;
@@ -1004,7 +1004,7 @@ class Auth_OpenID_CheckIDRequest extends Auth_OpenID_Request {
 
 		if ($claimed_id && ($this->message->isOpenID1()))
 		{
-			return new Auth_OpenID_ServerError(NULL, "claimed_id is new in OpenID 2.0 and not " . "available for " . $this->namespace);
+			return new Auth_OpenID_ServerError(NULL, "claimed_id is new in OpenID 2.0 and not "."available for ".$this->namespace);
 		}
 
 		if ($identity && ! $claimed_id)
@@ -1019,7 +1019,7 @@ class Auth_OpenID_CheckIDRequest extends Auth_OpenID_Request {
 			{
 				if ( ! $identity)
 				{
-					return new Auth_OpenID_ServerError(NULL, "This request uses IdP-driven identifier selection.  " . "You must supply an identifier in the response.");
+					return new Auth_OpenID_ServerError(NULL, "This request uses IdP-driven identifier selection.  "."You must supply an identifier in the response.");
 				}
 
 				$response_identity = $identity;
@@ -1041,7 +1041,7 @@ class Auth_OpenID_CheckIDRequest extends Auth_OpenID_Request {
 			{
 				if ($identity)
 				{
-					return new Auth_OpenID_ServerError(NULL, "This request specified no identity and " . "you supplied " . $identity);
+					return new Auth_OpenID_ServerError(NULL, "This request specified no identity and "."you supplied ".$identity);
 				}
 
 				$response_identity = NULL;
@@ -1049,7 +1049,7 @@ class Auth_OpenID_CheckIDRequest extends Auth_OpenID_Request {
 
 			if (($this->message->isOpenID1()) && ($response_identity === NULL))
 			{
-				return new Auth_OpenID_ServerError(NULL, "Request was an OpenID 1 request, so response must " . "include an identifier.");
+				return new Auth_OpenID_ServerError(NULL, "Request was an OpenID 1 request, so response must "."include an identifier.");
 			}
 
 			$response->fields->updateArgs(Auth_OpenID_OPENID_NS, array('mode' => $mode, 'return_to' => $this->return_to, 'response_nonce' => Auth_OpenID_mkNonce()));
@@ -1694,9 +1694,9 @@ class Auth_OpenID_Server {
 	 */
 	function handleRequest($request)
 	{
-		if (method_exists($this, "openid_" . $request->mode))
+		if (method_exists($this, "openid_".$request->mode))
 		{
-			$handler = array($this, "openid_" . $request->mode);
+			$handler = array($this, "openid_".$request->mode);
 			return call_user_func($handler, $request);
 		}
 		return NULL;
@@ -1724,7 +1724,7 @@ class Auth_OpenID_Server {
 		}
 		else
 		{
-			$message = sprintf('Association type %s is not supported with ' . 'session type %s', $assoc_type, $session_type);
+			$message = sprintf('Association type %s is not supported with '.'session type %s', $assoc_type, $session_type);
 			list($preferred_assoc_type, $preferred_session_type) = $this->negotiator->getAllowedType();
 			return $request->answerUnsupported($message, $preferred_assoc_type, $preferred_session_type);
 		}

@@ -259,7 +259,7 @@ function Auth_OpenID_urinorm($uri)
 		$port = '';
 	}
 
-	$authority = $userinfo . $host . $port;
+	$authority = $userinfo.$host.$port;
 
 	$path = $uri_matches[5];
 	$path = preg_replace_callback(Auth_OpenID_getEncodedPattern(), 'Auth_OpenID_pct_encoded_replace_unreserved', $path);
@@ -282,7 +282,7 @@ function Auth_OpenID_urinorm($uri)
 		$fragment = '';
 	}
 
-	return $scheme . '://' . $authority . $path . $query . $fragment;
+	return $scheme.'://'.$authority.$path.$query.$fragment;
 }
 
 ?>

@@ -40,15 +40,15 @@ class EpiOAuth {
 	{
 		$token = $token ? $token : $this->getRequestToken($params);
 		if (is_object($token)) $token = $token->oauth_token;
-		$addlParams = empty($params) ? '' : '&' . http_build_query($params, '', '&');
-		return $this->getUrl($this->authenticateUrl) . '?oauth_token=' . $token . $addlParams;
+		$addlParams = empty($params) ? '' : '&'.http_build_query($params, '', '&');
+		return $this->getUrl($this->authenticateUrl).'?oauth_token='.$token.$addlParams;
 	}
 
 	public function getAuthorizeUrl($token = NULL, $params = NULL)
 	{
 		$token = $token ? $token : $this->getRequestToken($params);
 		if (is_object($token)) $token = $token->oauth_token;
-		return $this->getUrl($this->authorizeUrl) . '?oauth_token=' . $token;
+		return $this->getUrl($this->authorizeUrl).'?oauth_token='.$token;
 	}
 
 	// DEPRECATED in favor of getAuthorizeUrl()
@@ -131,7 +131,7 @@ class EpiOAuth {
 	{
 		$_h = array('Expect:');
 		$urlParts = parse_url($url);
-		$oauth = 'Authorization: OAuth realm="' . $urlParts['scheme'] . '://' . $urlParts['host'] . $urlParts['path'] . '",';
+		$oauth = 'Authorization: OAuth realm="'.$urlParts['scheme'].'://'.$urlParts['host'].$urlParts['path'].'",';
 		foreach ($oauthHeaders as $name => $value)
 		{
 			$oauth .= "{$name}=\"{$value}\",";
@@ -161,7 +161,7 @@ class EpiOAuth {
 		if (isset($_SERVER ['SERVER_ADDR']) && ! empty($_SERVER['SERVER_ADDR']) && $_SERVER['SERVER_ADDR'] != '127.0.0.1') curl_setopt($ch, CURLOPT_INTERFACE, $_SERVER ['SERVER_ADDR']);
 
 		// if the certificate exists then use it, else bypass ssl checks
-		if (file_exists($cert = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'ca-bundle.crt'))
+		if (file_exists($cert = dirname(__FILE__).DIRECTORY_SEPARATOR.'ca-bundle.crt'))
 		{
 			curl_setopt($ch, CURLOPT_CAINFO, $cert);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, TRUE);
@@ -270,7 +270,7 @@ class EpiOAuth {
 		$host = strtolower($urlParts['host']);
 		$port = isset($urlParts['port']) ? intval($urlParts['port']) : 0;
 
-		$retval = strtolower($scheme) . '://' . strtolower($host);
+		$retval = strtolower($scheme).'://'.strtolower($host);
 
 		if ( ! empty($port) && (($scheme === 'http' && $port != 80) || ($scheme === 'https' && $port != 443))) $retval .= ":{$port}";
 
@@ -353,7 +353,7 @@ class EpiOAuth {
 		switch ($this->signatureMethod)
 		{
 			case 'HMAC-SHA1':
-				$key = $this->encode_rfc3986($this->consumerSecret) . '&' . $this->encode_rfc3986($this->tokenSecret);
+				$key = $this->encode_rfc3986($this->consumerSecret).'&'.$this->encode_rfc3986($this->tokenSecret);
 				$retval = base64_encode(hash_hmac('sha1', $string, $key, TRUE));
 				break;
 		}

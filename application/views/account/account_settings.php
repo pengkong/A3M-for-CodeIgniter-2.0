@@ -189,7 +189,7 @@
             <option value=""><?php echo lang('settings_select'); ?></option>
 			<?php foreach ($languages as $language) : ?>
             <option value="<?php echo $language->one; ?>"<?php if ($account_language == $language->one) echo ' selected="selected"'; ?>>
-				<?php echo $language->language; ?><?php if ($language->native && $language->native != $language->language) echo ' (' . $language->native . ')'; ?>
+				<?php echo $language->language; ?><?php if ($language->native && $language->native != $language->language) echo ' ('.$language->native.')'; ?>
             </option>
 			<?php endforeach; ?>
         </select>
@@ -205,7 +205,7 @@
             <option value=""><?php echo lang('settings_select'); ?></option>
 			<?php foreach ($zoneinfos as $zoneinfo) : ?>
             <option value="<?php echo $zoneinfo->zoneinfo; ?>"<?php if ($account_timezone == $zoneinfo->zoneinfo) echo ' selected="selected"'; ?>>
-				<?php echo $zoneinfo->zoneinfo; ?><?php if ($zoneinfo->offset) echo ' (' . $zoneinfo->offset . ')'; ?>
+				<?php echo $zoneinfo->zoneinfo; ?><?php if ($zoneinfo->offset) echo ' ('.$zoneinfo->offset.')'; ?>
             </option>
 			<?php endforeach; ?>
         </select>

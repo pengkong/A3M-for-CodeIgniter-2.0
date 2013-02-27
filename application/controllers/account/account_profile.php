@@ -30,7 +30,7 @@ class Account_profile extends CI_Controller {
 		// Redirect unauthenticated users to signin page
 		if ( ! $this->authentication->is_signed_in())
 		{
-			redirect('account/sign_in/?continue=' . urlencode(base_url() . 'account/account_profile'));
+			redirect('account/sign_in/?continue='.urlencode(base_url().'account/account_profile'));
 		}
 
 		// Retrieve sign in user
@@ -40,7 +40,7 @@ class Account_profile extends CI_Controller {
 		// Delete profile picture
 		if ($action == 'delete')
 		{
-			unlink(FCPATH . RES_DIR . '/user/profile/' . $data['account_details']->picture); // delete previous picture
+			unlink(FCPATH.RES_DIR.'/user/profile/'.$data['account_details']->picture); // delete previous picture
 			$this->account_details_model->update($data['account']->id, array('picture' => NULL));
 			redirect('account/account_profile');
 		}
@@ -68,7 +68,7 @@ class Account_profile extends CI_Controller {
 			if (isset($_FILES['account_picture_upload']) && $_FILES['account_picture_upload']['error'] != 4)
 			{
 				// Load file uploading library - http://codeigniter.com/user_guide/libraries/file_uploading.html
-				$this->load->library('upload', array('overwrite' => TRUE, 'upload_path' => FCPATH . RES_DIR . '/user/profile', 'allowed_types' => 'jpg|png|gif', 'max_size' => '800' // kilobytes
+				$this->load->library('upload', array('overwrite' => TRUE, 'upload_path' => FCPATH.RES_DIR.'/user/profile', 'allowed_types' => 'jpg|png|gif', 'max_size' => '800' // kilobytes
 				));
 
 				/// Try to upload the file
@@ -85,7 +85,7 @@ class Account_profile extends CI_Controller {
 					// Create picture thumbnail - http://codeigniter.com/user_guide/libraries/image_lib.html
 					$this->load->library('image_lib');
 					$this->image_lib->clear();
-					$this->image_lib->initialize(array('image_library' => 'gd2', 'source_image' => FCPATH . RES_DIR . '/user/profile/' . $picture['file_name'], 'new_image' => FCPATH . RES_DIR . '/user/profile/pic_' . md5($data['account']->id) . $picture['file_ext'], 'maintain_ratio' => FALSE, 'quality' => '100%', 'width' => 100, 'height' => 100));
+					$this->image_lib->initialize(array('image_library' => 'gd2', 'source_image' => FCPATH.RES_DIR.'/user/profile/'.$picture['file_name'], 'new_image' => FCPATH.RES_DIR.'/user/profile/pic_'.md5($data['account']->id).$picture['file_ext'], 'maintain_ratio' => FALSE, 'quality' => '100%', 'width' => 100, 'height' => 100));
 
 					// Try resizing the picture
 					if ( ! $this->image_lib->resize())
@@ -95,12 +95,12 @@ class Account_profile extends CI_Controller {
 					}
 					else
 					{
-						$data['account_details']->picture = 'pic_' . md5($data['account']->id) . $picture['file_ext'];
+						$data['account_details']->picture = 'pic_'.md5($data['account']->id).$picture['file_ext'];
 						$this->account_details_model->update($data['account']->id, array('picture' => $data['account_details']->picture));
 					}
 
 					// Delete original uploaded file
-					unlink(FCPATH . RES_DIR . '/user/profile/' . $picture['file_name']);
+					unlink(FCPATH.RES_DIR.'/user/profile/'.$picture['file_name']);
 				}
 			}
 

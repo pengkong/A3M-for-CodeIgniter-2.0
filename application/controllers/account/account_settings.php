@@ -30,7 +30,7 @@ class Account_settings extends CI_Controller {
 		// Redirect unauthenticated users to signin page
 		if ( ! $this->authentication->is_signed_in())
 		{
-			redirect('account/sign_in/?continue=' . urlencode(base_url() . 'account/account_settings'));
+			redirect('account/sign_in/?continue='.urlencode(base_url().'account/account_settings'));
 		}
 
 		// Retrieve sign in user
@@ -74,7 +74,7 @@ class Account_settings extends CI_Controller {
 				$this->account_model->update_email($data['account']->id, $this->input->post('settings_email') ? $this->input->post('settings_email') : NULL);
 
 				// Update account details
-				if ($this->input->post('settings_dob_month') && $this->input->post('settings_dob_day') && $this->input->post('settings_dob_year')) $attributes['dateofbirth'] = mdate('%Y-%m-%d', strtotime($this->input->post('settings_dob_day') . '-' . $this->input->post('settings_dob_month') . '-' . $this->input->post('settings_dob_year')));
+				if ($this->input->post('settings_dob_month') && $this->input->post('settings_dob_day') && $this->input->post('settings_dob_year')) $attributes['dateofbirth'] = mdate('%Y-%m-%d', strtotime($this->input->post('settings_dob_day').'-'.$this->input->post('settings_dob_month').'-'.$this->input->post('settings_dob_year')));
 				$attributes['fullname'] = $this->input->post('settings_fullname') ? $this->input->post('settings_fullname') : NULL;
 				$attributes['firstname'] = $this->input->post('settings_firstname') ? $this->input->post('settings_firstname') : NULL;
 				$attributes['lastname'] = $this->input->post('settings_lastname') ? $this->input->post('settings_lastname') : NULL;

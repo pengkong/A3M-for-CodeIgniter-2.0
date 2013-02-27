@@ -48,7 +48,7 @@ class Connect_facebook extends CI_Controller {
 				{
 					// Store user's facebook data in session
 					$this->session->set_userdata('connect_create', array(array('provider' => 'facebook', 'provider_id' => $this->facebook_lib->user['id']), array('fullname' => $this->facebook_lib->user['name'], 'firstname' => $this->facebook_lib->user['first_name'], 'lastname' => $this->facebook_lib->user['last_name'], 'gender' => $this->facebook_lib->user['gender'], //'dateofbirth' => $this->facebook_lib->user['birthday'],	// not a required field, not all users have it set
-						'picture' => 'http://graph.facebook.com/' . $this->facebook_lib->user['id'] . '/picture/?type=large' // $this->facebook_lib->user['link']
+						'picture' => 'http://graph.facebook.com/'.$this->facebook_lib->user['id'].'/picture/?type=large' // $this->facebook_lib->user['link']
 						// $this->facebook_lib->user['bio']
 						// $this->facebook_lib->user['timezone']
 						// $this->facebook_lib->user['locale']

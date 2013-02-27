@@ -8,7 +8,7 @@
 <div class="container">
     <div class="container_12">
         <div class="grid_12">
-			<?php echo form_open(uri_string() . (empty($_SERVER['QUERY_STRING']) ? '' : '?' . $_SERVER['QUERY_STRING'])); ?>
+			<?php echo form_open(uri_string().(empty($_SERVER['QUERY_STRING']) ? '' : '?'.$_SERVER['QUERY_STRING'])); ?>
 			<?php echo form_fieldset(); ?>
             <div class="grid_12 alpha omega">
                 <h2><?php echo anchor(current_url(), lang('reset_password_page_name')); ?></h2>

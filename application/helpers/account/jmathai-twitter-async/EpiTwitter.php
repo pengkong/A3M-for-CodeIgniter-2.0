@@ -77,7 +77,7 @@ class EpiTwitter extends EpiOAuth {
 		$parts = explode('_', $name);
 		$method = strtoupper(array_shift($parts));
 		$parts = implode('_', $parts);
-		$endpoint = '/' . preg_replace('/[A-Z]|[0-9]+/e', "'/'.strtolower('\\0')", $parts) . '.json';
+		$endpoint = '/'.preg_replace('/[A-Z]|[0-9]+/e', "'/'.strtolower('\\0')", $parts).'.json';
 		/* HACK: this is required for list support that starts with a user id */
 		$endpoint = str_replace('//', '/', $endpoint);
 		$args = ! empty($params) ? array_shift($params) : NULL;
@@ -120,7 +120,7 @@ class EpiTwitter extends EpiOAuth {
 	private function request_basic($method, $endpoint, $params = NULL, $username = NULL, $password = NULL)
 	{
 		$url = $this->getApiUrl($endpoint);
-		if ($method === 'GET') $url .= is_null($params) ? '' : '?' . http_build_query($params, '', '&');
+		if ($method === 'GET') $url .= is_null($params) ? '' : '?'.http_build_query($params, '', '&');
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:'));
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);

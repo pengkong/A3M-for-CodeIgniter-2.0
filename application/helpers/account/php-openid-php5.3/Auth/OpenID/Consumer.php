@@ -276,7 +276,7 @@ class Auth_OpenID_Consumer {
 			$this->consumer = new Auth_OpenID_GenericConsumer($store);
 		}
 
-		$this->_token_key = $this->session_key_prefix . $this->_token_suffix;
+		$this->_token_key = $this->session_key_prefix.$this->_token_suffix;
 	}
 
 	/**
@@ -380,7 +380,7 @@ class Auth_OpenID_Consumer {
 		$this->session->set($this->_token_key, $loader->toSession($auth_req->endpoint));
 		if ( ! $auth_req->setAnonymous($anonymous))
 		{
-			return new Auth_OpenID_FailureResponse(NULL, "OpenID 1 requests MUST include the identifier " . "in the request.");
+			return new Auth_OpenID_FailureResponse(NULL, "OpenID 1 requests MUST include the identifier "."in the request.");
 		}
 		return $auth_req;
 	}
@@ -414,7 +414,7 @@ class Auth_OpenID_Consumer {
 		{
 			// This is ugly, but we need to complain loudly when
 			// someone uses the API incorrectly.
-			trigger_error("current_url must be a string; see NEWS file " . "for upgrading notes.", E_USER_ERROR);
+			trigger_error("current_url must be a string; see NEWS file "."for upgrading notes.", E_USER_ERROR);
 		}
 
 		if ($query === NULL)
@@ -898,7 +898,7 @@ class Auth_OpenID_GenericConsumer {
 				$value = $query[$rt_key];
 				if ($rt_value != $value)
 				{
-					return new Auth_OpenID_FailureResponse(NULL, sprintf("parameter %s value %s does not match " . "return_to value %s", $rt_key, $value, $rt_value));
+					return new Auth_OpenID_FailureResponse(NULL, sprintf("parameter %s value %s does not match "."return_to value %s", $rt_key, $value, $rt_value));
 				}
 			}
 		}
@@ -940,7 +940,7 @@ class Auth_OpenID_GenericConsumer {
 				// denial-of-service by a server that just returns
 				// expired associations (or really short-lived
 				// associations)
-				return new Auth_OpenID_FailureResponse(NULL, 'Association with ' . $server_url . ' expired');
+				return new Auth_OpenID_FailureResponse(NULL, 'Association with '.$server_url.' expired');
 			}
 
 			if ( ! $assoc->checkMessageSignature($message))
@@ -987,7 +987,7 @@ class Auth_OpenID_GenericConsumer {
 
 		if (($endpoint === NULL) && ($claimed_id === NULL))
 		{
-			return new Auth_OpenID_FailureResponse($endpoint, 'When using OpenID 1, the claimed ID must be supplied, ' . 'either by passing it through as a return_to parameter ' . 'or by using a session, and supplied to the GenericConsumer ' . 'as the argument to complete()');
+			return new Auth_OpenID_FailureResponse($endpoint, 'When using OpenID 1, the claimed ID must be supplied, '.'either by passing it through as a return_to parameter '.'or by using a session, and supplied to the GenericConsumer '.'as the argument to complete()');
 		}
 		else if (($endpoint !== NULL) && ($claimed_id === NULL))
 		{
@@ -1046,7 +1046,7 @@ class Auth_OpenID_GenericConsumer {
 		{
 			if ( ! $endpoint->usesExtension($type_uri))
 			{
-				return new Auth_OpenID_TypeURIMismatch($endpoint, "Required type " . $type_uri . " not present");
+				return new Auth_OpenID_TypeURIMismatch($endpoint, "Required type ".$type_uri." not present");
 			}
 		}
 
@@ -1057,7 +1057,7 @@ class Auth_OpenID_GenericConsumer {
 
 		if ($defragged_claimed_id != $endpoint->claimed_id)
 		{
-			return new Auth_OpenID_FailureResponse($endpoint, sprintf('Claimed ID does not match (different subjects!), ' . 'Expected %s, got %s', $defragged_claimed_id, $endpoint->claimed_id));
+			return new Auth_OpenID_FailureResponse($endpoint, sprintf('Claimed ID does not match (different subjects!), '.'Expected %s, got %s', $defragged_claimed_id, $endpoint->claimed_id));
 		}
 
 		if ($to_match->getLocalID() != $endpoint->getLocalID())
@@ -1276,7 +1276,7 @@ class Auth_OpenID_GenericConsumer {
 		{
 			if ( ! $message->hasKey(Auth_OpenID_OPENID_NS, $field))
 			{
-				return new Auth_OpenID_FailureResponse(NULL, "Missing required field '" . $field . "'");
+				return new Auth_OpenID_FailureResponse(NULL, "Missing required field '".$field."'");
 			}
 		}
 
@@ -1292,7 +1292,7 @@ class Auth_OpenID_GenericConsumer {
 			// Field is present and not in signed list
 			if ($message->hasKey(Auth_OpenID_OPENID_NS, $field) && ( ! in_array($field, $signed_list)))
 			{
-				return new Auth_OpenID_FailureResponse(NULL, "'" . $field . "' not signed");
+				return new Auth_OpenID_FailureResponse(NULL, "'".$field."' not signed");
 			}
 		}
 
@@ -1585,7 +1585,7 @@ class Auth_OpenID_GenericConsumer {
 		if ($expires_in === FALSE)
 		{
 
-			$err = sprintf("Could not parse expires_in from association " . "response %s", print_r($assoc_response, TRUE));
+			$err = sprintf("Could not parse expires_in from association "."response %s", print_r($assoc_response, TRUE));
 			return new Auth_OpenID_FailureResponse(NULL, $err);
 		}
 
@@ -1853,7 +1853,7 @@ class Auth_OpenID_AuthRequest {
 		{
 			// raise ValueError('extra "return_to" arguments
 			// were specified, but no return_to was specified')
-			return new Auth_OpenID_FailureResponse(NULL, "extra 'return_to' arguments where specified, " . "but no return_to was specified");
+			return new Auth_OpenID_FailureResponse(NULL, "extra 'return_to' arguments where specified, "."but no return_to was specified");
 		}
 
 		if ($immediate)

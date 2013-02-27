@@ -53,7 +53,7 @@ class Auth_OpenID_CryptUtil {
 				$f = @fopen(Auth_OpenID_RAND_SOURCE, "r");
 				if ($f === FALSE)
 				{
-					$msg = 'Define Auth_OpenID_RAND_SOURCE as null to ' . ' continue with an insecure random number generator.';
+					$msg = 'Define Auth_OpenID_RAND_SOURCE as null to '.' continue with an insecure random number generator.';
 					trigger_error($msg, E_USER_ERROR);
 				}
 			}
@@ -97,7 +97,7 @@ class Auth_OpenID_CryptUtil {
 
 		if ($popsize > 256)
 		{
-			$msg = 'More than 256 characters supplied to ' . __FUNCTION__;
+			$msg = 'More than 256 characters supplied to '.__FUNCTION__;
 			trigger_error($msg, E_USER_ERROR);
 		}
 

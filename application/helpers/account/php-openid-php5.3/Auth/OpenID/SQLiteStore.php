@@ -19,15 +19,15 @@ require_once "Auth/OpenID/SQLStore.php";
 class Auth_OpenID_SQLiteStore extends Auth_OpenID_SQLStore {
 	function setSQL()
 	{
-		$this->sql['nonce_table'] = "CREATE TABLE %s (server_url VARCHAR(2047), timestamp INTEGER, " . "salt CHAR(40), UNIQUE (server_url, timestamp, salt))";
+		$this->sql['nonce_table'] = "CREATE TABLE %s (server_url VARCHAR(2047), timestamp INTEGER, "."salt CHAR(40), UNIQUE (server_url, timestamp, salt))";
 
-		$this->sql['assoc_table'] = "CREATE TABLE %s (server_url VARCHAR(2047), handle VARCHAR(255), " . "secret BLOB(128), issued INTEGER, lifetime INTEGER, " . "assoc_type VARCHAR(64), PRIMARY KEY (server_url, handle))";
+		$this->sql['assoc_table'] = "CREATE TABLE %s (server_url VARCHAR(2047), handle VARCHAR(255), "."secret BLOB(128), issued INTEGER, lifetime INTEGER, "."assoc_type VARCHAR(64), PRIMARY KEY (server_url, handle))";
 
 		$this->sql['set_assoc'] = "INSERT OR REPLACE INTO %s VALUES (?, ?, ?, ?, ?, ?)";
 
-		$this->sql['get_assocs'] = "SELECT handle, secret, issued, lifetime, assoc_type FROM %s " . "WHERE server_url = ?";
+		$this->sql['get_assocs'] = "SELECT handle, secret, issued, lifetime, assoc_type FROM %s "."WHERE server_url = ?";
 
-		$this->sql['get_assoc'] = "SELECT handle, secret, issued, lifetime, assoc_type FROM %s " . "WHERE server_url = ? AND handle = ?";
+		$this->sql['get_assoc'] = "SELECT handle, secret, issued, lifetime, assoc_type FROM %s "."WHERE server_url = ? AND handle = ?";
 
 		$this->sql['remove_assoc'] = "DELETE FROM %s WHERE server_url = ? AND handle = ?";
 
@@ -50,7 +50,7 @@ class Auth_OpenID_SQLiteStore extends Auth_OpenID_SQLStore {
 		// keeps them unique and avoids this bug. The nonce table is
 		// write-only, so we don't have to worry about updating other
 		// functions with this same bad hack.
-		return parent::_add_nonce('x' . $server_url, $timestamp, $salt);
+		return parent::_add_nonce('x'.$server_url, $timestamp, $salt);
 	}
 }
 

@@ -55,7 +55,7 @@ class Recaptcha {
 	function load($error, $ssl = FALSE)
 	{
 		$recaptcha_public_key = $this->CI->config->item('recaptcha_public_key');
-		$captcha = '<script type="text/javascript">var RecaptchaOptions = { theme : "' . $this->CI->config->item('recaptcha_theme') . '" };</script>';
+		$captcha = '<script type="text/javascript">var RecaptchaOptions = { theme : "'.$this->CI->config->item('recaptcha_theme').'" };</script>';
 		$captcha .= recaptcha_get_html($recaptcha_public_key, $error, $ssl);
 
 		return $captcha;

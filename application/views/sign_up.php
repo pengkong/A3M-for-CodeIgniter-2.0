@@ -83,7 +83,7 @@
 					<?php endif; ?>
 
 					<div>
-						<?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-large pull-right', 'content' => '<i class="icon-pencil"></i> ' . lang('sign_up_create_my_account'))); ?>
+						<?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-large pull-right', 'content' => '<i class="icon-pencil"></i> '.lang('sign_up_create_my_account'))); ?>
 					</div>
 					<br/>
 
@@ -100,7 +100,7 @@
 					<h3><?php echo sprintf(lang('sign_up_third_party_heading')); ?></h3>
 					<ul>
 						<?php foreach ($this->config->item('third_party_auth_providers') as $provider) : ?>
-						<li class="third_party <?php echo $provider; ?>"><?php echo anchor('account/connect_' . $provider, lang('connect_' . $provider), array('title' => sprintf(lang('sign_up_with'), lang('connect_' . $provider)))); ?></li>
+						<li class="third_party <?php echo $provider; ?>"><?php echo anchor('account/connect_'.$provider, lang('connect_'.$provider), array('title' => sprintf(lang('sign_up_with'), lang('connect_'.$provider)))); ?></li>
 						<?php endforeach; ?>
 					</ul>
 				<?php endif; ?>

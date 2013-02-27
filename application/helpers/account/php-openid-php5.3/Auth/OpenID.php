@@ -244,7 +244,7 @@ class Auth_OpenID {
 		$new_values = array();
 		foreach ($values as $s)
 		{
-			$new_values[] = $prefix . $s;
+			$new_values[] = $prefix.$s;
 		}
 		return $new_values;
 	}
@@ -271,7 +271,7 @@ class Auth_OpenID {
 		}
 		else
 		{
-			trigger_error("Auth_OpenID::arrayGet (key = " . $key . ") expected " . "array as first parameter, got " . gettype($arr), E_USER_WARNING);
+			trigger_error("Auth_OpenID::arrayGet (key = ".$key.") expected "."array as first parameter, got ".gettype($arr), E_USER_WARNING);
 
 			return FALSE;
 		}
@@ -324,11 +324,11 @@ class Auth_OpenID {
 		{
 			if (is_array($value))
 			{
-				$pairs[] = urlencode($value[0]) . "=" . urlencode($value[1]);
+				$pairs[] = urlencode($value[0])."=".urlencode($value[1]);
 			}
 			else
 			{
-				$pairs[] = urlencode($key) . "=" . urlencode($value);
+				$pairs[] = urlencode($key)."=".urlencode($value);
 			}
 		}
 		return implode("&", $pairs);
@@ -380,7 +380,7 @@ class Auth_OpenID {
 			$sep = '&';
 		}
 
-		return $url . $sep . Auth_OpenID::httpBuildQuery($args);
+		return $url.$sep.Auth_OpenID::httpBuildQuery($args);
 	}
 
 	/**
@@ -416,23 +416,23 @@ class Auth_OpenID {
 			$path = '';
 		}
 
-		$result = $scheme . "://" . $host;
+		$result = $scheme."://".$host;
 
 		if ($port)
 		{
-			$result .= ":" . $port;
+			$result .= ":".$port;
 		}
 
 		$result .= $path;
 
 		if ($query)
 		{
-			$result .= "?" . $query;
+			$result .= "?".$query;
 		}
 
 		if ($fragment)
 		{
-			$result .= "#" . $fragment;
+			$result .= "#".$fragment;
 		}
 
 		return $result;
@@ -467,7 +467,7 @@ class Auth_OpenID {
 		}
 		else
 		{
-			$url = 'http://' . $url;
+			$url = 'http://'.$url;
 		}
 
 		$normalized = Auth_OpenID_urinorm($url);
@@ -583,7 +583,7 @@ class Auth_OpenID {
 
 	function autoSubmitHTML($form, $title = "OpenId transaction in progress")
 	{
-		return ("<html>" . "<head><title>" . $title . "</title></head>" . "<body onload='document.forms[0].submit();'>" . $form . "<script>" . "var elements = document.forms[0].elements;" . "for (var i = 0; i < elements.length; i++) {" . "  elements[i].style.display = \"none\";" . "}" . "</script>" . "</body>" . "</html>");
+		return ("<html>"."<head><title>".$title."</title></head>"."<body onload='document.forms[0].submit();'>".$form."<script>"."var elements = document.forms[0].elements;"."for (var i = 0; i < elements.length; i++) {"."  elements[i].style.display = \"none\";"."}"."</script>"."</body>"."</html>");
 	}
 }
 

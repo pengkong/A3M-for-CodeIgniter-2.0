@@ -56,7 +56,7 @@
                 <p>
 					<?php if (isset($account_details->picture) && strlen(trim($account_details->picture)) > 0) : ?>
 					<?php echo showPhoto($account_details->picture); ?> &nbsp;
-					<?php echo anchor('account/account_profile/index/delete', '<i class="icon-trash"></i> ' . lang('profile_delete_picture'), 'class="btn"'); ?>
+					<?php echo anchor('account/account_profile/index/delete', '<i class="icon-trash"></i> '.lang('profile_delete_picture'), 'class="btn"'); ?>
 					<?php else : ?>
 					<?php echo showPhoto(); ?>
 					<?php echo form_upload(array('name' => 'account_picture_upload', 'id' => 'account_picture_upload')); ?>

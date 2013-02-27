@@ -96,7 +96,7 @@ class Auth_OpenID_SQLStore extends Auth_OpenID_OpenIDStore {
 		// database connection.
 		if ( ! (is_object($connection) && (is_subclass_of($connection, 'db_common') || is_subclass_of($connection, 'auth_openid_databaseconnection'))))
 		{
-			trigger_error("Auth_OpenID_SQLStore expected PEAR connection " . "object (got " . get_class($connection) . ")", E_USER_ERROR);
+			trigger_error("Auth_OpenID_SQLStore expected PEAR connection "."object (got ".get_class($connection).")", E_USER_ERROR);
 			return;
 		}
 
@@ -145,13 +145,13 @@ class Auth_OpenID_SQLStore extends Auth_OpenID_OpenIDStore {
 
 		if ($missing)
 		{
-			trigger_error("Expected keys in SQL query list: " . implode(", ", $missing), E_USER_ERROR);
+			trigger_error("Expected keys in SQL query list: ".implode(", ", $missing), E_USER_ERROR);
 			return;
 		}
 
 		if ($empty)
 		{
-			trigger_error("SQL list keys have no SQL strings: " . implode(", ", $empty), E_USER_ERROR);
+			trigger_error("SQL list keys have no SQL strings: ".implode(", ", $empty), E_USER_ERROR);
 			return;
 		}
 
@@ -500,7 +500,7 @@ class Auth_OpenID_SQLStore extends Auth_OpenID_OpenIDStore {
 			}
 			else
 			{
-				$result .= "\\" . strval(decoct(ord($ch)));
+				$result .= "\\".strval(decoct(ord($ch)));
 			}
 		}
 		return $result;

@@ -18,7 +18,7 @@ class Twitter_lib {
 		// Require Facebook app keys to be configured
 		if ( ! $this->CI->config->item('twitter_consumer_key') || ! $this->CI->config->item('twitter_consumer_secret'))
 		{
-			echo 'Visit ' . anchor('http://dev.twitter.com/apps', 'http://dev.twitter.com/apps') . ' to register your app.' . '<br />The config file is located at "/application/config/account/twitter.php"';
+			echo 'Visit '.anchor('http://dev.twitter.com/apps', 'http://dev.twitter.com/apps').' to register your app.'.'<br />The config file is located at "/application/config/account/twitter.php"';
 			die;
 		}
 
