@@ -124,6 +124,25 @@ CREATE TABLE IF NOT EXISTS `a3m_acl_permission` (
   KEY `key` (`key`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
+--
+-- Dumping data for table `a3m_acl_permission`
+--
+
+INSERT INTO `a3m_acl_permission` (`key`, `description`) VALUES
+('create_roles', 'Create new roles'),
+('retrieve_roles', 'View existing roles'),
+('update_roles', 'Update existing roles'),
+('delete_roles', 'Delete existing roles'),
+('create_permissions', 'Create new permissions'),
+('retrieve_permissions', 'View existing permissions'),
+('update_permissions', 'Update existing permissions'),
+('delete_permissions', 'Delete existing permissions'),
+('create_users', 'Create new users'),
+('retrieve_users', 'View existing users'),
+('update_users', 'Update existing users'),
+('delete_users', 'Delete existing users'),
+('ban_users', 'Ban and Unban existing users');
+
 -- --------------------------------------------------------
 
 --
@@ -134,10 +153,18 @@ CREATE TABLE IF NOT EXISTS `a3m_acl_role` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(80) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(160) COLLATE utf8_unicode_ci NOT NULL,
-  `suspendedon` datetime NOT NULL,
+  `suspendedon` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `role_name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `a3m_acl_role`
+--
+
+INSERT INTO `a3m_acl_role` (`name`, `description`) VALUES
+('Admin', 'Website Administrator'),
+('User', 'Website user');
 
 -- --------------------------------------------------------
 
@@ -175,6 +202,13 @@ CREATE TABLE IF NOT EXISTS `a3m_rel_role_permission` (
   `permission_id` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`role_id`,`permission_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Giving the Admin role (1) all permissions
+--
+
+INSERT INTO `a3m_rel_role_permission` (`role_id`, `permission_id`) 
+SELECT 1, `id` FROM `a3m_acl_permission`;
 
 
 -- --------------------------------------------------------
