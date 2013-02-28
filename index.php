@@ -74,6 +74,22 @@ if (defined('ENVIRONMENT'))
  */
 	$application_folder = 'application';
 
+
+/*
+ *---------------------------------------------------------------
+ * DEFAULT TIMEZONE
+ *---------------------------------------------------------------
+ *
+ * Set the default timezone when the page application loads.
+ * This will stop the pesky PHP warning message regarding the
+ * use of mktime without setting the default timeone.
+ *
+ */
+	if( ! ini_get('date.timezone') )
+	{
+	   date_default_timezone_set('GMT');
+	} 
+
 /*
  * --------------------------------------------------------------------
  * DEFAULT CONTROLLER
