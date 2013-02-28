@@ -67,7 +67,7 @@ class Sign_up extends CI_Controller {
 				$this->session->unset_userdata('sign_up_recaptcha_pass');
 
 				// Create user
-				$user_id = $this->account_model->create($this->input->post('sign_up_username'), $this->input->post('sign_up_email'), $this->input->post('sign_up_password'));
+				$user_id = $this->account_model->create($this->input->post('sign_up_username', TRUE), $this->input->post('sign_up_email', TRUE), $this->input->post('sign_up_password', TRUE));
 
 				// Add user details (auto detected country, language, timezone)
 				$this->account_details_model->update($user_id);

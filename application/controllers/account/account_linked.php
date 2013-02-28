@@ -39,9 +39,9 @@ class Account_linked extends CI_Controller {
 		// Delete a linked account
 		if ($this->input->post('facebook_id') || $this->input->post('twitter_id') || $this->input->post('openid'))
 		{
-			if ($this->input->post('facebook_id')) $this->account_facebook_model->delete($this->input->post('facebook_id'));
-			elseif ($this->input->post('twitter_id')) $this->account_twitter_model->delete($this->input->post('twitter_id'));
-			elseif ($this->input->post('openid')) $this->account_openid_model->delete($this->input->post('openid'));
+			if ($this->input->post('facebook_id')) $this->account_facebook_model->delete($this->input->post('facebook_id', TRUE));
+			elseif ($this->input->post('twitter_id')) $this->account_twitter_model->delete($this->input->post('twitter_id', TRUE));
+			elseif ($this->input->post('openid')) $this->account_openid_model->delete($this->input->post('openid', TRUE));
 			$this->session->set_flashdata('linked_info', lang('linked_linked_account_deleted'));
 			redirect('account/account_linked');
 		}
