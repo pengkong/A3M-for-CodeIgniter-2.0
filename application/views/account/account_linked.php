@@ -83,7 +83,7 @@
 							<?php echo anchor('http://twitter.com/'.$twitter_link->twitter->screen_name, substr('http://twitter.com/'.$twitter_link->twitter->screen_name, 0, 30).(strlen('http://twitter.com/'.$twitter_link->twitter->screen_name) > 30 ? '...' : ''), array('target' => '_blank', 'title' => 'http://twitter.com/'.$twitter_link->twitter->screen_name)); ?>
                         </div>
                         <div class="span2">
-							<?php if ($num_of_linked_accounts >= 1 && ! isset($account->password)) : ?>
+							<?php if ($num_of_linked_accounts >= 1 && isset($account->password)) : ?>
 							<?php echo form_open(uri_string()); ?>
 							<?php echo form_fieldset(); ?>
 							<?php echo form_hidden('twitter_id', $twitter_link->twitter_id); ?>
