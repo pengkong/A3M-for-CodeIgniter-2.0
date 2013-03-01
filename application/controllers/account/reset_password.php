@@ -22,7 +22,7 @@ class Reset_password extends CI_Controller {
 	/**
 	 * Reset password
 	 */
-	function index()
+	function index($id=null)
 	{
 		// Enable SSL?
 		maintain_ssl($this->config->item("ssl_enabled"));

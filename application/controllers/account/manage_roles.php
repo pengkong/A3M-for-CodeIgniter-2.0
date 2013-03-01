@@ -45,6 +45,34 @@ class Manage_roles extends CI_Controller {
     // Load manage roles view
     $this->load->view('account/manage_roles', $data);
   }
+
+
+  /**
+   * Manage Roles
+   */
+  function save($id=null)
+  {
+    // Enable SSL?
+    maintain_ssl($this->config->item("ssl_enabled"));
+
+    // Redirect unauthenticated users to signin page
+    if ( ! $this->authentication->is_signed_in())
+    {
+      redirect('account/sign_in/?continue='.urlencode(base_url().'account/manage_roles'));
+    }
+
+    // Redirect unauthorized users to account profile page
+    if ( ! $this->authorization->is_permitted('retrieve_roles'))
+    {
+      redirect('account/account_profile');
+    }
+
+    // Retrieve sign in user
+    $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
+
+    // Load manage roles view
+    $this->load->view('account/manage_roles_save', $data);
+  }
 }
 
 /* End of file manage_roles.php */

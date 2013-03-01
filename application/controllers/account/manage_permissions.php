@@ -45,6 +45,34 @@ class Manage_permissions extends CI_Controller {
     // Load manage permissions view
     $this->load->view('account/manage_permissions', $data);
   }
+
+
+  /**
+   * Manage Permissions
+   */
+  function save($id=null)
+  {
+    // Enable SSL?
+    maintain_ssl($this->config->item("ssl_enabled"));
+
+    // Redirect unauthenticated users to signin page
+    if ( ! $this->authentication->is_signed_in())
+    {
+      redirect('account/sign_in/?continue='.urlencode(base_url().'account/manage_permissions'));
+    }
+
+    // Redirect unauthorized users to account profile page
+    if ( ! $this->authorization->is_permitted('retrieve_permissions'))
+    {
+      redirect('account/account_profile');
+    }
+
+    // Retrieve sign in user
+    $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
+
+    // Load manage permissions view
+    $this->load->view('account/manage_permissions_save', $data);
+  }
 }
 
 /* End of file manage_permissions.php */
