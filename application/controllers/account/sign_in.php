@@ -47,7 +47,7 @@ class Sign_in extends CI_Controller {
 		if ($this->form_validation->run() === TRUE)
 		{
 			// Get user by username / email
-			if ( ! $user = $this->account_model->get_by_username_email($this->input->post('sign_in_username_email')))
+			if ( ! $user = $this->account_model->get_by_username_email($this->input->post('sign_in_username_email', TRUE)))
 			{
 				// Username / email doesn't exist
 				$data['sign_in_username_email_error'] = lang('sign_in_username_email_does_not_exist');
@@ -62,7 +62,7 @@ class Sign_in extends CI_Controller {
 				else
 				{
 					// Check password
-					if ( ! $this->authentication->check_password($user->password, $this->input->post('sign_in_password')))
+					if ( ! $this->authentication->check_password($user->password, $this->input->post('sign_in_password', TRUE)))
 					{
 						// Increment sign in failed attempts
 						$this->session->set_userdata('sign_in_failed_attempts', (int)$this->session->userdata('sign_in_failed_attempts') + 1);
@@ -75,7 +75,7 @@ class Sign_in extends CI_Controller {
 						$this->session->unset_userdata('sign_in_failed_attempts');
 
 						// Run sign in routine
-						$this->authentication->sign_in($user->id, $this->input->post('sign_in_remember'));
+						$this->authentication->sign_in($user->id, $this->input->post('sign_in_remember', TRUE));
 					}
 				}
 			}

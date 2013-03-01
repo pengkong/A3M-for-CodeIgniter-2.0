@@ -59,7 +59,7 @@ class Account_settings extends CI_Controller {
 		if ($this->form_validation->run())
 		{
 			// If user is changing email and new email is already taken
-			if (strtolower($this->input->post('settings_email')) != strtolower($data['account']->email) && $this->email_check($this->input->post('settings_email')) === TRUE)
+			if (strtolower($this->input->post('settings_email', TRUE)) != strtolower($data['account']->email) && $this->email_check($this->input->post('settings_email', TRUE)) === TRUE)
 			{
 				$data['settings_email_error'] = lang('settings_email_exist');
 			}
@@ -71,18 +71,21 @@ class Account_settings extends CI_Controller {
 			else
 			{
 				// Update account email
-				$this->account_model->update_email($data['account']->id, $this->input->post('settings_email') ? $this->input->post('settings_email') : NULL);
+				$this->account_model->update_email($data['account']->id, $this->input->post('settings_email', TRUE) ? $this->input->post('settings_email', TRUE) : NULL);
 
 				// Update account details
-				if ($this->input->post('settings_dob_month') && $this->input->post('settings_dob_day') && $this->input->post('settings_dob_year')) $attributes['dateofbirth'] = mdate('%Y-%m-%d', strtotime($this->input->post('settings_dob_day').'-'.$this->input->post('settings_dob_month').'-'.$this->input->post('settings_dob_year')));
-				$attributes['fullname'] = $this->input->post('settings_fullname') ? $this->input->post('settings_fullname') : NULL;
-				$attributes['firstname'] = $this->input->post('settings_firstname') ? $this->input->post('settings_firstname') : NULL;
-				$attributes['lastname'] = $this->input->post('settings_lastname') ? $this->input->post('settings_lastname') : NULL;
-				$attributes['gender'] = $this->input->post('settings_gender') ? $this->input->post('settings_gender') : NULL;
-				$attributes['postalcode'] = $this->input->post('settings_postalcode') ? $this->input->post('settings_postalcode') : NULL;
-				$attributes['country'] = $this->input->post('settings_country') ? $this->input->post('settings_country') : NULL;
-				$attributes['language'] = $this->input->post('settings_language') ? $this->input->post('settings_language') : NULL;
-				$attributes['timezone'] = $this->input->post('settings_timezone') ? $this->input->post('settings_timezone') : NULL;
+				if ($this->input->post('settings_dob_month', TRUE) && 
+					$this->input->post('settings_dob_day', TRUE) && 
+					$this->input->post('settings_dob_year', TRUE)) $attributes['dateofbirth'] = mdate('%Y-%m-%d', strtotime($this->input->post('settings_dob_day', TRUE).'-'.$this->input->post('settings_dob_month', TRUE).'-'.$this->input->post('settings_dob_year', TRUE)));
+					
+				$attributes['fullname'] = $this->input->post('settings_fullname', TRUE) ? $this->input->post('settings_fullname', TRUE) : NULL;
+				$attributes['firstname'] = $this->input->post('settings_firstname', TRUE) ? $this->input->post('settings_firstname', TRUE) : NULL;
+				$attributes['lastname'] = $this->input->post('settings_lastname', TRUE) ? $this->input->post('settings_lastname', TRUE) : NULL;
+				$attributes['gender'] = $this->input->post('settings_gender', TRUE) ? $this->input->post('settings_gender', TRUE) : NULL;
+				$attributes['postalcode'] = $this->input->post('settings_postalcode', TRUE) ? $this->input->post('settings_postalcode', TRUE) : NULL;
+				$attributes['country'] = $this->input->post('settings_country', TRUE) ? $this->input->post('settings_country', TRUE) : NULL;
+				$attributes['language'] = $this->input->post('settings_language', TRUE) ? $this->input->post('settings_language', TRUE) : NULL;
+				$attributes['timezone'] = $this->input->post('settings_timezone', TRUE) ? $this->input->post('settings_timezone', TRUE) : NULL;
 				$this->account_details_model->update($data['account']->id, $attributes);
 
 				$data['settings_info'] = lang('settings_details_updated');
