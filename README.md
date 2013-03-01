@@ -38,7 +38,7 @@ See our **[app task board on Trello](https://trello.com/board/a3m/512c08b874b855
 ## 3rd Party Libraries & Plugins
 
 * [recaptcha_pi.php](http://code.google.com/p/recaptcha/) - recaptcha-php-1.11
-* [facebook_pi.php](https://github.com/facebook/php-sdk/) - v.3.2.2 
+* [facebook_pi.php](https://github.com/facebook/facebook-php-sdk/) - v.3.2.2 
 * [twitter_pi.php](https://github.com/jmathai/twitter-async) - Updated to latest release - [Jun 11, 2011](https://github.com/jmathai/twitter-async/commits/master)  
 * [phpass_pi.php](http://www.openwall.com/phpass/) - Version 0.3 / genuine _(latest)_ 
 * [openid_pi.php](http://sourcecookbook.com/en/recipes/60/janrain-s-php-openid-library-fixed-for-php-5-3-and-how-i-did-it) - php-openid-php5.3  

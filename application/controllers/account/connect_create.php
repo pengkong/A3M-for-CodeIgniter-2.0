@@ -46,12 +46,12 @@ class Connect_create extends CI_Controller {
 		if ($this->form_validation->run())
 		{
 			// Check if username already exist
-			if ($this->username_check($this->input->post('connect_create_username')) === TRUE)
+			if ($this->username_check($this->input->post('connect_create_username', TRUE)) === TRUE)
 			{
 				$data['connect_create_username_error'] = lang('connect_create_username_taken');
 			}
 			// Check if email already exist
-			elseif ($this->email_check($this->input->post('connect_create_email')) === TRUE)
+			elseif ($this->email_check($this->input->post('connect_create_email'), TRUE) === TRUE)
 			{
 				$data['connect_create_email_error'] = lang('connect_create_email_exist');
 			}
@@ -61,7 +61,7 @@ class Connect_create extends CI_Controller {
 				$this->session->unset_userdata('connect_create');
 
 				// Create user
-				$user_id = $this->account_model->create($this->input->post('connect_create_username'), $this->input->post('connect_create_email'));
+				$user_id = $this->account_model->create($this->input->post('connect_create_username', TRUE), $this->input->post('connect_create_email', TRUE));
 
 				// Add user details
 				$this->account_details_model->update($user_id, $data['connect_create'][1]);

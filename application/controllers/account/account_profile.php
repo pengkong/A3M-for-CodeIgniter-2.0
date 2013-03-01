@@ -53,15 +53,15 @@ class Account_profile extends CI_Controller {
 		if ($this->form_validation->run())
 		{
 			// If user is changing username and new username is already taken
-			if (strtolower($this->input->post('profile_username')) != strtolower($data['account']->username) && $this->username_check($this->input->post('profile_username')) === TRUE)
+			if (strtolower($this->input->post('profile_username', TRUE)) != strtolower($data['account']->username) && $this->username_check($this->input->post('profile_username', TRUE)) === TRUE)
 			{
 				$data['profile_username_error'] = lang('profile_username_taken');
 				$error = TRUE;
 			}
 			else
 			{
-				$data['account']->username = $this->input->post('profile_username');
-				$this->account_model->update_username($data['account']->id, $this->input->post('profile_username'));
+				$data['account']->username = $this->input->post('profile_username', TRUE);
+				$this->account_model->update_username($data['account']->id, $this->input->post('profile_username', TRUE));
 			}
 
 			// If user has uploaded a file
