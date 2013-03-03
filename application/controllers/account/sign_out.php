@@ -15,7 +15,7 @@ class Sign_out extends CI_Controller {
 		$this->load->helper(array('language', 'url'));
 		$this->load->config('account/account');
 		$this->load->language(array('general', 'account/sign_out'));
-		$this->load->library(array('account/authentication'));
+		$this->load->library(array('account/authentication', 'account/authorization'));
 	}
 
 	// --------------------------------------------------------------------
