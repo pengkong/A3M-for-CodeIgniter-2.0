@@ -17,13 +17,17 @@
 
             <div class="well"><?php echo lang('forgot_password_instructions'); ?></div>
 
-            <div class="control-group <?php echo (form_error('forgot_password_username_email') || isset($forgot_password_username_email_error)) ? 'error' : ''; ?>">
+            <div class="control-group <?php echo (form_error('forgot_password_username_email') OR isset($forgot_password_username_email_error)) ? 'error' : ''; ?>">
                 <label class="control-label" for="forgot_password_username_email"><?php echo lang('forgot_password_username_email'); ?></label>
 
                 <div class="controls">
-					<?php echo form_input(array(
+					<?php
+					$value = set_value('forgot_password_username_email') ? set_value('forgot_password_username_email') : (isset($account) ? $account->username : '');
+					$value = str_replace(array('\'', '"'), ' ', $value);
+					echo form_input(array(
 					'name' => 'forgot_password_username_email',
 					'id' => 'forgot_password_username_email',
+					'value' => $value,
 					'maxlength' => '80'
 				)); ?>
 					<?php if (form_error('forgot_password_username_email') || isset($forgot_password_username_email_error))
