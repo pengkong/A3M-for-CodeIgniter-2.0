@@ -13,10 +13,10 @@ class Sign_in extends CI_Controller {
 
 		// Load the necessary stuff...
 		$this->load->config('account/account');
-		$this->load->helper(array('language','account/ssl','url'));
-		$this->load->library(array('account/authentication','account/recaptcha','form_validation'));
+		$this->load->helper(array('language', 'account/ssl', 'url'));
+		$this->load->library(array('account/authentication', 'account/recaptcha', 'form_validation'));
 		$this->load->model(array('account/account_model'));
-		$this->load->language(array('account/sign_in','account/connect_third_party'));
+		$this->load->language(array('account/sign_in', 'account/connect_third_party'));
 	}
 
 	/**
@@ -58,7 +58,7 @@ class Sign_in extends CI_Controller {
 		if ($this->form_validation->run() === TRUE)
 		{
 			// Get user by username / email
-			if (! $user = $this->account_model->get_by_username_email($this->input->post('sign_in_username_email', TRUE)))
+			if ( ! $user = $this->account_model->get_by_username_email($this->input->post('sign_in_username_email', TRUE)))
 			{
 				// Username / email doesn't exist
 				$data['sign_in_username_email_error'] = lang('sign_in_username_email_does_not_exist');
@@ -66,14 +66,14 @@ class Sign_in extends CI_Controller {
 			else
 			{
 				// Either don't need to pass recaptcha or just passed recaptcha
-				if (! ($recaptcha_pass === TRUE || $recaptcha_result === TRUE) && $this->config->item("sign_in_recaptcha_enabled") === TRUE)
+				if ( ! ($recaptcha_pass === TRUE || $recaptcha_result === TRUE) && $this->config->item("sign_in_recaptcha_enabled") === TRUE)
 				{
 					$data['sign_in_recaptcha_error'] = $this->input->post('recaptcha_response_field') ? lang('sign_in_recaptcha_incorrect') : lang('sign_in_recaptcha_required');
 				}
 				else
 				{
 					// Check password
-					if (! $this->authentication->check_password($user->password, $this->input->post('sign_in_password', TRUE)))
+					if ( ! $this->authentication->check_password($user->password, $this->input->post('sign_in_password', TRUE)))
 					{
 						// Increment sign in failed attempts
 						$this->session->set_userdata('sign_in_failed_attempts', (int)$this->session->userdata('sign_in_failed_attempts') + 1);
