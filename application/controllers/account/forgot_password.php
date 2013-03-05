@@ -84,7 +84,10 @@ class Forgot_password extends CI_Controller {
 					$this->email->from($this->config->item('password_reset_email'), lang('reset_password_email_sender'));
 					$this->email->to($account->email);
 					$this->email->subject(lang('reset_password_email_subject'));
-					$this->email->message($this->load->view('account/reset_password_email', array('username' => $account->username, 'password_reset_url' => anchor($password_reset_url, $password_reset_url)), TRUE));
+					$this->email->message($this->load->view('account/reset_password_email', array(
+							'username' => $account->username,
+							'password_reset_url' => anchor($password_reset_url, $password_reset_url)
+						), TRUE));
 					@$this->email->send();
 
 					// Load reset password sent view
@@ -94,8 +97,10 @@ class Forgot_password extends CI_Controller {
 			}
 		}
 
-		// Load recaptcha code
-		if ($this->session->userdata('forget_password_recaptcha_pass') != TRUE) $data['recaptcha'] = $this->recaptcha->load($recaptcha_result, $this->config->item("ssl_enabled"));
+		// Load recaptcha code if recaptcha is enabled
+		if ($this->config->item("forgot_password_recaptcha_enabled") === TRUE)
+			if ($this->session->userdata('forget_password_recaptcha_pass') != TRUE)
+				$data['recaptcha'] = $this->recaptcha->load($recaptcha_result, $this->config->item("ssl_enabled"));
 
 		// Load forgot password view
 		$this->load->view('account/forgot_password', isset($data) ? $data : NULL);
