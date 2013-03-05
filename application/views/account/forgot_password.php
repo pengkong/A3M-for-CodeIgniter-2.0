@@ -21,8 +21,12 @@
                 <label class="control-label" for="forgot_password_username_email"><?php echo lang('forgot_password_username_email'); ?></label>
 
                 <div class="controls">
-					<?php echo form_input(array('name' => 'forgot_password_username_email', 'id' => 'forgot_password_username_email', 'value' => set_value('forgot_password_username_email') ? set_value('forgot_password_username_email') : (isset($account) ? $account->username : ''), 'maxlength' => '80')); ?>
-					<?php if (form_error('settings_email') || isset($forgot_password_username_email_error))
+					<?php echo form_input(array(
+					'name' => 'forgot_password_username_email',
+					'id' => 'forgot_password_username_email',
+					'maxlength' => '80'
+				)); ?>
+					<?php if (form_error('forgot_password_username_email') || isset($forgot_password_username_email_error))
 				{
 					?>
                     <span class="help-inline">
@@ -43,7 +47,11 @@
 			<?php endif; ?>
 
             <div class="clearfix">
-				<?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-large pull-right', 'content' => lang('forgot_password_send_instructions'))); ?>
+				<?php echo form_button(array(
+				'type' => 'submit',
+				'class' => 'btn btn-large pull-right',
+				'content' => lang('forgot_password_send_instructions')
+			)); ?>
             </div>
             <div class="clear"></div>
 			<?php echo form_close(); ?>
