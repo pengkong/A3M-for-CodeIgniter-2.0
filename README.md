@@ -59,22 +59,28 @@ See our **[app task board on Trello](https://trello.com/board/a3m/512c08b874b855
 + Configure `/applicaion/config/account/*` files to reflect your setup (reCAPTCHA, twitter, facebook, openid providers, etc;)
 
 ### Twitter configuration:
-#### Twitter site (`https://dev.twitter.com/apps`)
+##### Twitter site (`https://dev.twitter.com/apps`)
 + Create an App and note down the "Consumer key" and "Consumer secret" values
 + Callback URL: `https://www.yoursite.com/account/connect_twitter/`
 + Allow this application to be used to Sign in with Twitter [X]
 
-#### A3M
+##### A3M
 + Edit `application/config/account/twitter.php` and insert your consumer key and consumer secret.
 
+##### Testing on localhost
++ localhost and 127.0.0.1 will not work. Use your internal IP (eg. 192.168.1.10)
+
 ### Facebook configuration:
-#### Facebook Developers site (`https://developers.facebook.com/apps`)
+##### Facebook Developers site (`https://developers.facebook.com/apps`)
 + Create new App
 + Note down "App ID" and "App Secret" values
 + Tick "Website with Facebook Login" URL: `http://www.yoursite.com`
 
-#### A3M
+##### A3M
 + Edit `application/config/account/twitter.php` and insert your consumer key and consumer secret.
+
+##### Testing on localhost
++ Facebook login seems to only work on a live environment (see https://github.com/donjakobo/A3M/issues/3)
 
 ## Note
 + The current codebase is _unstable_ due to a large re-write effort of the original application. Some controllers/views may need to be updated to work correctly. Please fork and help out!
