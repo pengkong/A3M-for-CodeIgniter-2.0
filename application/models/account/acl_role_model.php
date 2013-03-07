@@ -26,6 +26,18 @@ class Acl_role_model extends CI_Model {
   }
 
   /**
+   * Get role by name
+   * @param string $role_name
+   * @access public
+   * 
+   * @return object role details
+   */
+  function get_by_name($role_name)
+  {
+    return $this->db->get_where('a3m_acl_role', array('name' => $role_name))->row();
+  }
+
+  /**
    * Get roles by account_id
    *
    * @access public
