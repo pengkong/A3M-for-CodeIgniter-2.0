@@ -42,6 +42,46 @@ class Manage_users extends CI_Controller {
     // Retrieve sign in user
     $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
 
+    // Get all user information
+    $all_accounts = $this->account_model->get();
+    $all_account_details = $this->account_details_model->get();
+    $all_account_roles = $this->rel_account_role_model->get();
+    $admin_role = $this->acl_role_model->get_by_name('Admin');
+
+    // Compile an array for the view to use
+    $data['all_accounts'] = array();
+    foreach ( $all_accounts as $acc )
+    {
+      $current_user = array();
+      $current_user['id'] = $acc->id;
+      $current_user['username'] = $acc->username;
+      $current_user['email'] = $acc->email;
+      $current_user['firstname'] = '';
+      $current_user['lastname'] = '';
+      $current_user['is_admin'] = FALSE;
+
+      foreach( $all_account_details as $det ) 
+      {
+        if( $det->account_id == $acc->id ) 
+        {
+          $current_user['firstname'] = $det->firstname;
+          $current_user['lastname'] = $det->lastname;
+        }
+      }
+
+      foreach( $all_account_roles as $acrole ) 
+      {
+        if( $acrole->account_id == $acc->id && $acrole->role_id == $admin_role->id ) 
+        {
+          $current_user['is_admin'] = TRUE;
+          break;
+        }
+      }
+
+      // Append to the array
+      $data['all_accounts'][] = $current_user;
+    }
+
     // Load manage users view
     $this->load->view('account/manage_users', $data);
   }

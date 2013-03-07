@@ -22,61 +22,45 @@
         <?php echo lang('users_description'); ?>
       </div>
 
-      <table class="table table-condensed table-hover">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>
-              <?php if( $this->authorization->is_permitted('create_users') ): ?>
-                <a href="account/manage_users/save" class="btn btn-primary btn-small">Create<a>
-              <?php endif; ?>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>jdoe</td>
-            <td>jdoe@email.com</td>
-            <td>John</td>
-            <td>Doresel</td>
-            <td>
-              <?php if( $this->authorization->is_permitted('update_users') ): ?>
-                <a href="account/manage_users/save/1" class="btn btn-small">Update<a>
-              <?php endif; ?>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>jrabbt <span class="label label-info">Admin</span></td>
-            <td>jrabbt@email.com</td>
-            <td>Jumpy</td>
-            <td>Rabbit</td>
-            <td>
-              <?php if( $this->authorization->is_permitted('update_users') ): ?>
-                <a href="account/manage_users/save/1" class="btn btn-small">Update<a>
-              <?php endif; ?>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>btable</td>
-            <td>btable@email.com</td>
-            <td>Bobby</td>
-            <td>Tables</td>
-            <td>
-              <?php if( $this->authorization->is_permitted('update_users') ): ?>
-                <a href="account/manage_users/save/1" class="btn btn-small">Update<a>
-              <?php endif; ?>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <?php if( count($all_accounts) > 0 ) : ?>
+        <table class="table table-condensed table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th><?php echo lang('users_username'); ?></th>
+              <th><?php echo lang('settings_email'); ?></th>
+              <th><?php echo lang('settings_firstname'); ?></th>
+              <th><?php echo lang('settings_lastname'); ?></th>
+              <th>
+                <?php if( $this->authorization->is_permitted('create_users') ): ?>
+                  <a href="account/manage_users/save" class="btn btn-primary btn-small"><?php echo lang('website_create'); ?><a>
+                <?php endif; ?>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
 
+            <?php foreach( $all_accounts as $acc ) : ?>
+              <tr>
+                <td><?php echo $acc['id']; ?></td>
+                <td>
+                  <?php echo $acc['username']; ?>
+                  <?php if($acc['is_admin']): ?><span class="label label-info">Admin</span><?php endif; ?>
+                </td>
+                <td><?php echo $acc['email']; ?></td>
+                <td><?php echo $acc['firstname']; ?></td>
+                <td><?php echo $acc['lastname']; ?></td>
+                <td>
+                  <?php if( $this->authorization->is_permitted('update_users') ): ?>
+                    <a href="account/manage_users/save/<?php echo $acc['id']; ?>" class="btn btn-small"><?php echo lang('website_update'); ?><a>
+                  <?php endif; ?>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+
+          </tbody>
+        </table>
+      <?php endif; ?>
     </div>
   </div>
 </div>

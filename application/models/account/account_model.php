@@ -1,6 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Account_model extends CI_Model {
+class Account_model extends CI_Model {	
+	
+	/**
+	 * Get all accounts
+	 *
+	 * @access public
+	 * @return object all accounts
+	 */
+	function get()
+	{
+		return $this->db->get('a3m_account')->result();
+	}
 
 	/**
 	 * Get account by id
