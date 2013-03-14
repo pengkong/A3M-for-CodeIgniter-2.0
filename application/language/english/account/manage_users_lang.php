@@ -14,6 +14,8 @@ $lang['users_create_page_name'] = 'Create New User';
 $lang['users_create_description'] = 'Create a new account';
 $lang['users_create_description'] = 'Create a new account';
 $lang['users_username'] = 'Username';
+$lang['users_roles'] = 'Roles';
+$lang['users_cancel'] = 'Cancel';
 
 /* End of file manage_users.php */
 /* Location: ./application/language/english/account/manage_users.php */
