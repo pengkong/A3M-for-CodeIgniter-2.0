@@ -59,6 +59,7 @@ class Manage_users extends CI_Controller {
       $current_user['firstname'] = '';
       $current_user['lastname'] = '';
       $current_user['is_admin'] = FALSE;
+      $current_user['is_banned'] = isset( $acc->suspendedon );
 
       foreach( $all_account_details as $det ) 
       {
@@ -212,6 +213,19 @@ class Manage_users extends CI_Controller {
           {
             $this->account_model->update_password($id, $pass);
           }
+
+          // Check if the user should be suspended
+          if( $this->authorization->is_permitted('ban_users') ) 
+          {
+            if( $this->input->post('manage_user_ban', TRUE) !== FALSE ) 
+            {
+              $this->account_model->update_suspended_datetime($id);
+            }
+            elseif( $this->input->post('manage_user_unban', TRUE) !== FALSE )
+            {
+              $this->account_model->remove_suspended_datetime($id);
+            }
+          }
         }
 
         // Update account details
@@ -239,7 +253,9 @@ class Manage_users extends CI_Controller {
         }
         else
         {
-          // Get the updated roles
+          // User information may have been updated, re-get
+          $data['update_account'] = $this->account_model->get_by_id($id);
+          $data['update_account_details'] = $this->account_details_model->get_by_account_id($id);
           $data['update_account_roles'] = $this->acl_role_model->get_by_account_id($id); 
         }
       }

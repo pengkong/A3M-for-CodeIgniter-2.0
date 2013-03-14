@@ -45,7 +45,11 @@
                 <td><?php echo $acc['id']; ?></td>
                 <td>
                   <?php echo $acc['username']; ?>
-                  <?php if($acc['is_admin']): ?><span class="label label-info">Admin</span><?php endif; ?>
+                  <?php if( $acc['is_banned'] ): ?>
+                    <span class="label label-important"><?php echo lang('users_banned'); ?></span>
+                  <?php elseif( $acc['is_admin'] ): ?>
+                    <span class="label label-info"><?php echo lang('users_admin'); ?></span>
+                  <?php endif; ?>
                 </td>
                 <td><?php echo $acc['email']; ?></td>
                 <td><?php echo $acc['firstname']; ?></td>

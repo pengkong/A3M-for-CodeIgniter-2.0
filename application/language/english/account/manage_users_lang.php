@@ -16,6 +16,11 @@ $lang['users_create_description'] = 'Create a new account';
 $lang['users_username'] = 'Username';
 $lang['users_roles'] = 'Roles';
 $lang['users_cancel'] = 'Cancel';
+$lang['users_ban'] = 'Ban User';
+$lang['users_unban'] = 'UnBan User';
+$lang['users_admin'] = 'Admin';
+$lang['users_banned'] = 'Banned';
+
 
 /* End of file manage_users.php */
 /* Location: ./application/language/english/account/manage_users.php */
