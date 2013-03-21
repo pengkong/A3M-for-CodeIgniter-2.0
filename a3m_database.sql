@@ -129,20 +129,20 @@ CREATE TABLE IF NOT EXISTS `a3m_acl_permission` (
 -- Dumping data for table `a3m_acl_permission`
 --
 
-INSERT INTO `a3m_acl_permission` (`key`, `description`) VALUES
-('create_roles', 'Create new roles'),
-('retrieve_roles', 'View existing roles'),
-('update_roles', 'Update existing roles'),
-('delete_roles', 'Delete existing roles'),
-('create_permissions', 'Create new permissions'),
-('retrieve_permissions', 'View existing permissions'),
-('update_permissions', 'Update existing permissions'),
-('delete_permissions', 'Delete existing permissions'),
-('create_users', 'Create new users'),
-('retrieve_users', 'View existing users'),
-('update_users', 'Update existing users'),
-('delete_users', 'Delete existing users'),
-('ban_users', 'Ban and Unban existing users');
+INSERT INTO `a3m_acl_permission` (`key`, `description`, `is_system`) VALUES
+('create_roles', 'Create new roles', 1),
+('retrieve_roles', 'View existing roles', 1),
+('update_roles', 'Update existing roles', 1),
+('delete_roles', 'Delete existing roles', 1),
+('create_permissions', 'Create new permissions', 1),
+('retrieve_permissions', 'View existing permissions', 1),
+('update_permissions', 'Update existing permissions', 1),
+('delete_permissions', 'Delete existing permissions', 1),
+('create_users', 'Create new users', 1),
+('retrieve_users', 'View existing users', 1),
+('update_users', 'Update existing users', 1),
+('delete_users', 'Delete existing users', 1),
+('ban_users', 'Ban and Unban existing users', 1);
 
 -- --------------------------------------------------------
 
@@ -164,9 +164,9 @@ CREATE TABLE IF NOT EXISTS `a3m_acl_role` (
 -- Dumping data for table `a3m_acl_role`
 --
 
-INSERT INTO `a3m_acl_role` (`name`, `description`) VALUES
-('Admin', 'Website Administrator'),
-('User', 'Website user');
+INSERT INTO `a3m_acl_role` (`name`, `description`, `is_system`) VALUES
+('Admin', 'Website Administrator', 1),
+('User', 'Website user', 0);
 
 -- --------------------------------------------------------
 
