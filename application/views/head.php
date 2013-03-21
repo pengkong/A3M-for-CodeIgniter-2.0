@@ -14,7 +14,7 @@
 
 <link href="<?php echo base_url().RES_DIR; ?>/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 
-<script src="<?php echo base_url().RES_DIR; ?>jquery.min.js"></script>
+<script src="<?php echo base_url().RES_DIR; ?>/js/jquery.min.js"></script>
 <script src="<?php echo base_url().RES_DIR; ?>/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->

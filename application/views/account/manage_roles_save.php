@@ -16,44 +16,91 @@
 
     <div class="span10">
 
-      <h2>Create Role</h2>
+      <h2><?php echo lang("roles_{$action}_page_name"); ?></h2>
 
       <div class="well">
-        Information about creating roles here...
+        <?php echo lang("roles_{$action}_description"); ?>
       </div>
 
       <?php echo form_open(uri_string(), 'class="form-horizontal"'); ?>
 
-      <div class="control-group">
-          <label class="control-label" for="role_name">Name</label>
+      <div class="control-group <?php echo (form_error('role_name') || isset($role_name_error)) ? 'error' : ''; ?>">
+          <label class="control-label" for="role_name"><?php echo lang('roles_name'); ?></label>
 
           <div class="controls">
-          <?php echo form_input(array('name' => 'role_name', 'id' => 'role_name', 'value' => '')); ?>
+            <?php if( $is_admin ) : ?>
+              <?php echo form_hidden('role_name', set_value('role_name') ? set_value('role_name') : (isset($role->name) ? $role->name : '')); ?>
+
+              <span class="input uneditable-input"><?php echo $role->name; ?></span><span class="help-block"><?php echo lang('roles_admin_name_disabled'); ?></span>
+            <?php else : ?>
+              <?php echo form_input(array('name' => 'role_name', 'id' => 'role_name', 'value' => set_value('role_name') ? set_value('role_name') : (isset($role->name) ? $role->name : ''), 'maxlength' => 80)); ?>
+
+              <?php if (form_error('role_name') || isset($role_name_error)) : ?>
+                <span class="help-inline">
+                <?php
+                  echo form_error('role_name');
+                  echo isset($role_name_error) ? $role_name_error : '';
+                ?>
+                </span>
+              <?php endif; ?>
+            <?php endif; ?>
+          </div>
+      </div>
+
+      <div class="control-group <?php echo form_error('role_description') ? 'error' : ''; ?>">
+          <label class="control-label" for="role_description"><?php echo lang('roles_description'); ?></label>
+
+          <div class="controls">
+            <?php echo form_textarea(array('name' => 'role_description', 'id' => 'role_description', 'value' => set_value('role_description') ? set_value('role_description') : (isset($role->description) ? $role->description : ''), 'maxlength' => 160, 'rows'=>'4')); ?>
+
+            <?php if (form_error('role_description') || isset($role_name_error)) : ?>
+              <span class="help-inline">
+              <?php
+                echo form_error('role_description');
+              ?>
+              </span>
+            <?php endif; ?>
           </div>
       </div>
 
       <div class="control-group">
-          <label class="control-label" for="settings_lastname">Permissions</label>
+          <label class="control-label" for="settings_lastname"><?php echo lang('roles_permission'); ?></label>
 
           <div class="controls">
-            <label class="checkbox">
-              <input type="checkbox" id="inlineCheckbox1" value="option1"> <span class="tip" data-toggle="tooltip" title="View existing roles">retrieve_roles</span>
-            </label>
-            <label class="checkbox">
-              <input type="checkbox" id="inlineCheckbox2" value="option2"> <span class="tip" data-toggle="tooltip" title="Create new roles">create_roles</span>
-            </label>
-            <label class="checkbox">
-              <input type="checkbox" id="inlineCheckbox2" value="option2"> <span class="tip" data-toggle="tooltip" title="Update existing permissions">update_permissions</span>
-            </label>
+            <?php foreach( $permissions as $perm ) : ?>
+              <?php
+                $check_it = FALSE;
+
+                if( isset($role_permissions) )
+                {
+                  foreach( $role_permissions as $rperm )
+                  {
+                    if( $rperm->id == $perm->id )
+                    {
+                      $check_it = TRUE; break;
+                    }
+                  }
+                }
+              ?>
+              <label class="checkbox">
+                <?php echo form_checkbox("role_permission_{$perm->id}", 'apply', $check_it); ?>
+                <?php echo $perm->key; ?>
+              </label>
+            <?php endforeach; ?>
           </div>
-          <script>
-            $('.tip').tooltip();
-          </script>
       </div>
 
       <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Save changes</button>
-        <a href="/account/manage_roles" class="btn">Cancel</a>
+        <?php echo form_submit('manage_role_submit', lang('settings_save'), 'class="btn btn-primary"'); ?>
+        <?php echo anchor('account/manage_roles', lang('website_cancel'), 'class="btn"'); ?>
+        <?php if( $this->authorization->is_permitted('delete_roles') && $action == 'update' && ! $is_admin ): ?>
+          <span>&nbsp;or&nbsp;</span>
+          <?php if( isset($role->suspendedon) ): ?>
+            <?php echo form_submit('manage_role_unban', lang('roles_unban'), 'class="btn btn-danger"'); ?>
+          <?php else: ?>
+            <?php echo form_submit('manage_role_ban', lang('roles_ban'), 'class="btn btn-danger"'); ?>
+          <?php endif; ?>
+        <?php endif; ?>
       </div>
 
       <?php echo form_close(); ?>

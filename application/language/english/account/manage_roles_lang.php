@@ -7,7 +7,19 @@
 */
 
 $lang['roles_page_name'] = 'Manage Roles';
-$lang['roles_description'] = 'This is placeholder text to talk about this page - manage-roles';
+$lang['roles_page_description'] = 'Place to manage your user roles.';
+$lang['roles_update_page_name'] = 'Update Role';
+$lang['roles_update_description'] = 'Update the details for this role';
+$lang['roles_create_page_name'] = 'Create New Role';
+$lang['roles_create_description'] = 'Create a new role';
+$lang['roles_name'] = 'Name';
+$lang['roles_description'] = 'Description';
+$lang['roles_permission'] = 'Permissions';
+$lang['roles_name_taken'] = 'This Name is already taken.';
+$lang['roles_ban'] = 'Disable Role';
+$lang['roles_unban'] = 'Enable Role';
+$lang['roles_banned'] = 'Disabled';
+$lang['roles_admin_name_disabled'] = 'Unable to update the Admin role name.';
 
 /* End of file manage_roles.php */
 /* Location: ./application/language/english/account/manage_roles.php */
