@@ -120,6 +120,7 @@ CREATE TABLE IF NOT EXISTS `a3m_acl_permission` (
   `key` varchar(80) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(160) COLLATE utf8_unicode_ci DEFAULT NULL,
   `suspendedon` datetime DEFAULT NULL,
+  `is_system` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `key` (`key`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
@@ -154,6 +155,7 @@ CREATE TABLE IF NOT EXISTS `a3m_acl_role` (
   `name` varchar(80) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(160) COLLATE utf8_unicode_ci NOT NULL,
   `suspendedon` datetime DEFAULT NULL,
+  `is_system` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `role_name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
