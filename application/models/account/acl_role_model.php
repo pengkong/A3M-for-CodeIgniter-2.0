@@ -108,7 +108,7 @@ class Acl_role_model extends CI_Model {
    * @access public
    * @param int $role_id
    * @param array $attributes
-   * @return void
+   * @return integer role id
    */
   function update($role_id, $attributes = array())
   {
@@ -122,7 +122,10 @@ class Acl_role_model extends CI_Model {
     else
     {
       $this->db->insert('a3m_acl_role', $attributes);
+      $role_id = $this->db->insert_id();
     }
+
+    return $role_id;
   }
 
   // --------------------------------------------------------------------

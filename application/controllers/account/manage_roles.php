@@ -121,7 +121,7 @@ class Manage_roles extends CI_Controller {
     if( ! $is_new )
     {
       $data['role'] = $this->acl_role_model->get_by_id($id);
-      $data['role_permissions'] = $this->rel_role_permission_model->get_by_role_id($id);
+      $data['role_permissions'] = $this->rel_role_permission_model->get_by_permission_id($id);
       $data['action'] = 'update';
       $data['is_admin'] = ($data['role']->name == 'Admin');
     }

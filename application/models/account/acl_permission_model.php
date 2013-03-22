@@ -13,6 +13,8 @@ class Acl_permission_model extends CI_Model {
     return $this->db->get('a3m_acl_permission')->result();
   }
 
+  // --------------------------------------------------------------------
+
   /**
    * Get a single permission by id
    *
@@ -23,6 +25,8 @@ class Acl_permission_model extends CI_Model {
   {
     return $this->db->get_where('a3m_acl_permission', array('id' => $id))->row();
   }
+
+  // --------------------------------------------------------------------
 
   /**
    * Get active permissions associated with an account
@@ -42,7 +46,21 @@ class Acl_permission_model extends CI_Model {
     return $this->db->get()->result();
   }
 
+  // --------------------------------------------------------------------
 
+  /**
+   * Get permission by name
+   * @param string $permission_name
+   * @access public
+   * 
+   * @return object permission details
+   */
+  function get_by_name($permission_name)
+  {
+    return $this->db->get_where('a3m_acl_permission', array('key' => $permission_name))->row();
+  }
+
+  // --------------------------------------------------------------------
 
   /**
    * Check if the account has a specific permission
@@ -71,7 +89,7 @@ class Acl_permission_model extends CI_Model {
    * @access public
    * @param int $permission_id
    * @param array $attributes
-   * @return void
+   * @return integer permission id
    */
   function update($permission_id, $attributes = array())
   {
@@ -85,8 +103,43 @@ class Acl_permission_model extends CI_Model {
     else
     {
       $this->db->insert('a3m_acl_permission', $attributes);
+      $permission_id = $this->db->insert_id();
     }
+
+    return $permission_id;
   }
+
+  // --------------------------------------------------------------------
+
+  /**
+   * Update permission suspended datetime
+   *
+   * @access public
+   * @param int $permission_id
+   * @return void
+   */
+  function update_suspended_datetime($permission_id)
+  {
+    $this->load->helper('date');
+
+    $this->db->update('a3m_acl_permission', array('suspendedon' => mdate('%Y-%m-%d %H:%i:%s', now())), array('id' => $permission_id));
+  }
+
+  // --------------------------------------------------------------------
+  
+  /**
+   * Remove permission suspended datetime
+   *
+   * @access public
+   * @param int $permission_id
+   * @return void
+   */
+  function remove_suspended_datetime($permission_id)
+  {
+    $this->db->update('a3m_acl_permission', array('suspendedon' => NULL), array('id' => $permission_id));
+  }
+
+  // --------------------------------------------------------------------
 
   /**
    * Delete permission details
