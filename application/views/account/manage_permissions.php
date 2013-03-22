@@ -26,9 +26,9 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>Permission</th>
-            <th>Description</th>
-            <th>In Roles</th>
+            <th><?php echo lang('permissions_column_permission'); ?></th>
+            <th><?php echo lang('permissions_description'); ?></th>
+            <th><?php echo lang('permissions_column_inroles'); ?></th>
             <th>
               <?php if( $this->authorization->is_permitted('create_users') ): ?>
                 <a href="account/manage_permissions/save" class="btn btn-primary btn-small">Create<a>

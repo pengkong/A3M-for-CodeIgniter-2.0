@@ -26,9 +26,9 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>Role</th>
-            <th>Users</th>
-            <th>Permissions</th>
+            <th><?php echo lang('roles_column_role'); ?></th>
+            <th><?php echo lang('roles_column_users'); ?></th>
+            <th><?php echo lang('roles_permission'); ?></th>
             <th>
               <?php if( $this->authorization->is_permitted('create_roles') ): ?>
                 <?php echo anchor('account/manage_roles/save', lang('website_create'), 'class="btn btn-primary btn-small"'); ?>

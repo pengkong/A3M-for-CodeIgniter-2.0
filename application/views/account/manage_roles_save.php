@@ -28,10 +28,10 @@
           <label class="control-label" for="role_name"><?php echo lang('roles_name'); ?></label>
 
           <div class="controls">
-            <?php if( $is_admin ) : ?>
+            <?php if( $is_system ) : ?>
               <?php echo form_hidden('role_name', set_value('role_name') ? set_value('role_name') : (isset($role->name) ? $role->name : '')); ?>
 
-              <span class="input uneditable-input"><?php echo $role->name; ?></span><span class="help-block"><?php echo lang('roles_admin_name_disabled'); ?></span>
+              <span class="input uneditable-input"><?php echo $role->name; ?></span><span class="help-block"><?php echo lang('roles_system_name'); ?></span>
             <?php else : ?>
               <?php echo form_input(array('name' => 'role_name', 'id' => 'role_name', 'value' => set_value('role_name') ? set_value('role_name') : (isset($role->name) ? $role->name : ''), 'maxlength' => 80)); ?>
 
@@ -93,7 +93,7 @@
       <div class="form-actions">
         <?php echo form_submit('manage_role_submit', lang('settings_save'), 'class="btn btn-primary"'); ?>
         <?php echo anchor('account/manage_roles', lang('website_cancel'), 'class="btn"'); ?>
-        <?php if( $this->authorization->is_permitted('delete_roles') && $action == 'update' && ! $is_admin ): ?>
+        <?php if( $this->authorization->is_permitted('delete_roles') && $action == 'update' && ! $is_system ): ?>
           <span>&nbsp;or&nbsp;</span>
           <?php if( isset($role->suspendedon) ): ?>
             <?php echo form_submit('manage_role_unban', lang('roles_unban'), 'class="btn btn-danger"'); ?>

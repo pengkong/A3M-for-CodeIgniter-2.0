@@ -64,7 +64,7 @@
       </div>
 
       <div class="control-group">
-          <label class="control-label" for="settings_lastname"><?php echo lang('permissions_permission'); ?></label>
+          <label class="control-label" for="settings_lastname"><?php echo lang('permissions_role'); ?></label>
 
           <div class="controls">
             <?php foreach( $roles as $role ) : ?>
