@@ -114,8 +114,8 @@ class Manage_roles extends CI_Controller {
     // Get all the permissions
     $data['permissions'] = $this->acl_permission_model->get();
 
-    // Is this the Admin Role?
-    $data['is_admin'] = FALSE;
+    // Is this a System Role?
+    $data['is_system'] = FALSE;
 
     //Get the role
     if( ! $is_new )
@@ -123,7 +123,7 @@ class Manage_roles extends CI_Controller {
       $data['role'] = $this->acl_role_model->get_by_id($id);
       $data['role_permissions'] = $this->rel_role_permission_model->get_by_permission_id($id);
       $data['action'] = 'update';
-      $data['is_admin'] = ($data['role']->name == 'Admin');
+      $data['is_system'] = ($data['role']->is_system == 1);
     }
 
     // Retrieve sign in user
@@ -164,7 +164,7 @@ class Manage_roles extends CI_Controller {
         }
 
         $attributes['description'] = $this->input->post('role_description', TRUE) ? $this->input->post('role_description', TRUE) : NULL;
-        $this->acl_role_model->update($id, $attributes);
+        $id = $this->acl_role_model->update($id, $attributes);
 
         // Check if the user should be suspended
         if( $this->authorization->is_permitted('delete_roles') ) 
