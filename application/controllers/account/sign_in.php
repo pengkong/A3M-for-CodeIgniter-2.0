@@ -41,7 +41,18 @@ class Sign_in extends CI_Controller {
 
 		// Setup form validation
 		$this->form_validation->set_error_delimiters('<span class="field_error">', '</span>');
-		$this->form_validation->set_rules(array(array('field' => 'sign_in_username_email', 'label' => 'lang:sign_in_username_email', 'rules' => 'trim|required'), array('field' => 'sign_in_password', 'label' => 'lang:sign_in_password', 'rules' => 'trim|required')));
+		$this->form_validation->set_rules(array(
+			array(
+				'field' => 'sign_in_username_email',
+				'label' => 'lang:sign_in_username_email',
+				'rules' => 'trim|required'
+			),
+			array(
+				'field' => 'sign_in_password',
+				'label' => 'lang:sign_in_password',
+				'rules' => 'trim|required'
+			)
+		));
 
 		// Run form validation
 		if ($this->form_validation->run() === TRUE)
@@ -82,7 +93,9 @@ class Sign_in extends CI_Controller {
 		}
 
 		// Load recaptcha code
-		if ($this->config->item("sign_in_recaptcha_enabled") === TRUE) if ($this->config->item('sign_in_recaptcha_offset') <= $this->session->userdata('sign_in_failed_attempts')) $data['recaptcha'] = $this->recaptcha->load($recaptcha_result, $this->config->item("ssl_enabled"));
+		if ($this->config->item("sign_in_recaptcha_enabled") === TRUE)
+			if ($this->config->item('sign_in_recaptcha_offset') <= $this->session->userdata('sign_in_failed_attempts'))
+				$data['recaptcha'] = $this->recaptcha->load($recaptcha_result, $this->config->item("ssl_enabled"));
 
 		// Load sign in view
 		$this->load->view('sign_in', isset($data) ? $data : NULL);
