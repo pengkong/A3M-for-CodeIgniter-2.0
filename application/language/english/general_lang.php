@@ -19,6 +19,9 @@ $lang['website_sign_in'] = 'Sign in';
 $lang['website_sign_up'] = 'Sign up';
 $lang['website_connect_with_facebook'] = 'Connect with Facebook';
 $lang['website_page_rendered_in_x_seconds'] = 'Rendered in %s seconds';
+$lang['website_create'] = 'Create';
+$lang['website_update'] = 'Update';
+$lang['website_cancel'] = 'Cancel';
 
 
 /* End of file general_lang.php */

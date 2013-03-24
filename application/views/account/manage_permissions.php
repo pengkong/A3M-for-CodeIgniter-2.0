@@ -19,16 +19,16 @@
       <h2><?php echo lang('permissions_page_name'); ?></h2>
 
       <div class="well">
-        <?php echo lang('permissions_description'); ?>
+        <?php echo lang('permissions_page_description'); ?>
       </div>
 
       <table class="table table-condensed table-hover">
         <thead>
           <tr>
             <th>#</th>
-            <th>Permission</th>
-            <th>Description</th>
-            <th>In Roles</th>
+            <th><?php echo lang('permissions_column_permission'); ?></th>
+            <th><?php echo lang('permissions_description'); ?></th>
+            <th><?php echo lang('permissions_column_inroles'); ?></th>
             <th>
               <?php if( $this->authorization->is_permitted('create_users') ): ?>
                 <a href="account/manage_permissions/save" class="btn btn-primary btn-small">Create<a>
@@ -37,149 +37,34 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>create_roles</td>
-            <td>Create new roles</td>
-            <td>Admin</td>
-            <td>
-              <?php if( $this->authorization->is_permitted('update_users') ): ?>
-                <a href="account/manage_permissions/save/1" class="btn btn-small">Update<a>
-              <?php endif; ?>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>retrieve_roles</td>
-            <td>View existing roles</td>
-            <td>Admin</td>
-            <td>
-              <?php if( $this->authorization->is_permitted('update_users') ): ?>
-                <a href="account/manage_permissions/save/1" class="btn btn-small">Update<a>
-              <?php endif; ?>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>update_roles</td>
-            <td>Update existing roles</td>
-            <td>Admin</td>
-            <td>
-              <?php if( $this->authorization->is_permitted('update_users') ): ?>
-                <a href="account/manage_permissions/save/1" class="btn btn-small">Update<a>
-              <?php endif; ?>
-            </td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>delete_roles</td>
-            <td>Delete existing roles</td>
-            <td>Admin</td>
-            <td>
-              <?php if( $this->authorization->is_permitted('update_users') ): ?>
-                <a href="account/manage_permissions/save/1" class="btn btn-small">Update<a>
-              <?php endif; ?>
-            </td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>create_permissions</td>
-            <td>Create new permissions</td>
-            <td>Admin</td>
-            <td>
-              <?php if( $this->authorization->is_permitted('update_users') ): ?>
-                <a href="account/manage_permissions/save/1" class="btn btn-small">Update<a>
-              <?php endif; ?>
-            </td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>retrieve_permissions</td>
-            <td>View existing permissions</td>
-            <td>Admin</td>
-            <td>
-              <?php if( $this->authorization->is_permitted('update_users') ): ?>
-                <a href="account/manage_permissions/save/1" class="btn btn-small">Update<a>
-              <?php endif; ?>
-            </td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>update_permissions</td>
-            <td>Update existing permissions</td>
-            <td>Admin</td>
-            <td>
-              <?php if( $this->authorization->is_permitted('update_users') ): ?>
-                <a href="account/manage_permissions/save/1" class="btn btn-small">Update<a>
-              <?php endif; ?>
-            </td>
-          </tr>
-          <tr>
-            <td>8</td>
-            <td>delete_permissions</td>
-            <td>Delete existing permissions</td>
-            <td>Admin</td>
-            <td>
-              <?php if( $this->authorization->is_permitted('update_users') ): ?>
-                <a href="account/manage_permissions/save/1" class="btn btn-small">Update<a>
-              <?php endif; ?>
-            </td>
-          </tr>
-          <tr>
-            <td>9</td>
-            <td>create_users</td>
-            <td>Create new users</td>
-            <td>Admin</td>
-            <td>
-              <?php if( $this->authorization->is_permitted('update_users') ): ?>
-                <a href="account/manage_permissions/save/1" class="btn btn-small">Update<a>
-              <?php endif; ?>
-            </td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td>retrieve_users</td>
-            <td>View existing users</td>
-            <td>Admin</td>
-            <td>
-              <?php if( $this->authorization->is_permitted('update_users') ): ?>
-                <a href="account/manage_permissions/save/1" class="btn btn-small">Update<a>
-              <?php endif; ?>
-            </td>
-          </tr>
-          <tr>
-            <td>11</td>
-            <td>update_users</td>
-            <td>Update existing users</td>
-            <td>Admin</td>
-            <td>
-              <?php if( $this->authorization->is_permitted('update_users') ): ?>
-                <a href="account/manage_permissions/save/1" class="btn btn-small">Update<a>
-              <?php endif; ?>
-            </td>
-          </tr>
-          <tr>
-            <td>12</td>
-            <td>delete_users</td>
-            <td>Delete existing users</td>
-            <td>Admin</td>
-            <td>
-              <?php if( $this->authorization->is_permitted('update_users') ): ?>
-                <a href="account/manage_permissions/save/1" class="btn btn-small">Update<a>
-              <?php endif; ?>
-            </td>
-          </tr>
-          <tr>
-            <td>13</td>
-            <td>ban_users</td>
-            <td>Ban and Unban existing users</td>
-            <td>Admin</td>
-            <td>
-              <?php if( $this->authorization->is_permitted('update_users') ): ?>
-                <a href="account/manage_permissions/save/1" class="btn btn-small">Update<a>
-              <?php endif; ?>
-            </td>
-          </tr>
+          <?php foreach( $permissions as $perm ) : ?>
+            <tr>
+              <td><?php echo $perm['id']; ?></td>
+              <td>
+                <?php echo $perm['key']; ?>
+                <?php if( $perm['is_disabled'] ): ?>
+                  <span class="label label-important"><?php echo lang('permissions_banned'); ?></span>
+                <?php endif; ?>
+              </td>
+              <td><?php echo $perm['description']; ?></td>
+              <td>
+                <?php if( count($perm['role_list']) == 0 ) : ?>
+                  <span class="label">None</span>
+                <?php else : ?>
+                  <ul class="inline">
+                    <?php foreach( $perm['role_list'] as $itm ) : ?>
+                      <li><?php echo anchor('account/manage_roles/save/'.$itm['id'], $itm['name'], 'title="'.$itm['title'].'"'); ?></li>
+                    <?php endforeach; ?>
+                  </ul>
+                <?php endif; ?>
+              </td>
+              <td>
+                <?php if( $this->authorization->is_permitted('update_permissions') ): ?>
+                  <?php echo anchor('account/manage_permissions/save/'.$perm['id'], lang('website_update'), 'class="btn btn-small"'); ?>
+                <?php endif; ?>
+              </td>
+            </tr>
+          <?php endforeach; ?>
         </tbody>
       </table>
 

@@ -67,6 +67,51 @@ class Rel_account_role_model extends CI_Model {
   }
 
   /**
+   * Batch update account roles.
+   *
+   * @access public
+   * @param int $account_id
+   * @param array $role_ids
+   * @return void
+   */
+  function update_batch($account_id, $role_ids)
+  {
+    // Blank array, then no insert for you
+    if( count($role_ids) > 0)
+    {
+      // Create a new batch
+      $batch = array();
+      foreach($role_ids as $role_id)
+      {
+        $batch[] = array(
+          'account_id' => $account_id,
+          'role_id' => $role_id
+          );
+      }
+
+      // Insert all the new roles
+      $this->db->insert_batch('a3m_rel_account_role', $batch);
+    }
+  }
+
+  /**
+   * Delete all current roles and replace with array of roles passed in.
+   *
+   * @access public
+   * @param int $account_id
+   * @param array $role_ids
+   * @return void
+   */
+  function delete_update_batch($account_id, $role_ids)
+  {
+    // Delete all current roles
+    $this->delete_by_account($account_id);
+
+    // Batch update the account roles
+    $this->update_batch($account_id, $role_ids);
+  }
+
+  /**
    * Delete single instance by account/role
    *
    * @access public

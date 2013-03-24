@@ -3,6 +3,17 @@
 class Account_details_model extends CI_Model {
 
 	/**
+	 * Get details for all account
+	 *
+	 * @access public
+	 * @return object details for all accounts
+	 */
+	function get()
+	{
+		return $this->db->get('a3m_account_details')->result();
+	}
+
+	/**
 	 * Get account details by account_id
 	 *
 	 * @access public
