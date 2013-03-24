@@ -158,7 +158,7 @@ class Manage_roles extends CI_Controller {
         $attributes = array();
 
         // Now allowed to update the Admin role name
-        if( ! $data['is_admin'] )
+        if( ! $data['is_system'] )
         {
           $attributes['name'] = $this->input->post('role_name', TRUE) ? $this->input->post('role_name', TRUE) : NULL;
         }
