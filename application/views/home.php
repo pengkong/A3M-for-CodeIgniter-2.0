@@ -15,17 +15,17 @@
             <!-- Main hero unit for a primary marketing message or call to action -->
             <div class="hero-unit" style="position: relative;">
                 <div class="ribbon-wrapper-green">
-                    <div class="ribbon-green">v2.0</div>
+                    <div class="ribbon-green">v2.0.1</div>
                 </div>
 
                 <h1>Welcome to <?php echo lang('website_title'); ?></h1>
 
                 <p>This is the homepage for your web-app. You can use this as a starting point for creating with A3M and building the rest of your site.
 
-                    If you like this project, please help contribute with <b>bug fixes &amp; enhancements</b> on <a href="https://github.com/pengkong/A3M-for-CodeIgniter-2.0">GitHub</a>.
+                    If you like this project, please help contribute with <b>bug fixes &amp; enhancements</b> on <a href="https://github.com/donjakobo/A3M">GitHub</a>.
                 </p>
 
-                <p><a class="btn btn-primary btn-large pull-right" href="https://github.com/pengkong/A3M-for-CodeIgniter-2.0"><i class="icon-wrench icon-white"></i> Fork it &raquo;
+                <p><a class="btn btn-primary btn-large pull-right" href="https://github.com/donjakobo/A3M"><i class="icon-wrench icon-white"></i> Fork it &raquo;
                 </a><br/></p>
             </div>
 
