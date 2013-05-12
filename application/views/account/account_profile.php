@@ -58,11 +58,32 @@
 					<?php echo showPhoto($account_details->picture); ?> &nbsp;
 					<?php echo anchor('account/account_profile/index/delete', '<i class="icon-trash"></i> '.lang('profile_delete_picture'), 'class="btn"'); ?>
 					<?php else : ?>
-					<?php echo showPhoto(); ?>
-					<?php echo form_upload(array('name' => 'account_picture_upload', 'id' => 'account_picture_upload')); ?>
-                    <p>
-                        <small><?php echo lang('profile_picture_guidelines'); ?></small>
-                    </p>
+						
+						<div class="accountPicSelect clearfix">
+							<div class="pull-left">
+								<input type="radio" name="pic_selection" value="custom" checked="true" />
+								<?php echo showPhoto(); ?>
+							</div>
+							<div class="pull-left">
+								<p><?php echo lang('profile_custom_upload_picture'); ?><br>
+									<?php echo form_upload(array('name' => 'account_picture_upload', 'id' => 'account_picture_upload')); ?><br>
+									<small>(<?php echo lang('profile_picture_guidelines'); ?>)</small>
+								</p>
+							</div>
+						</div>
+
+						<div class="accountPicSelect clearfix">
+							<div class="pull-left">
+								<input type="radio" name="pic_selection" value="gravatar" />
+								<?php echo showPhoto( $gravatar ); ?>
+							</div>
+							<div class="pull-left">
+								<p>
+									<small><a href="http://gravatar.com/" target="_blank">Gravatar</a></small>
+								</p>
+							</div>
+						</div>
+					
 					<?php endif; ?>
                     </p>
 					<?php if ( ! isset($account_details->picture)) : ?>

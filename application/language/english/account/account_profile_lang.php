@@ -12,7 +12,8 @@ $lang['profile_picture'] = 'Picture';
 $lang['profile_save'] = 'Save changes';
 $lang['profile_updated'] = 'Your profile has been updated.';
 $lang['profile_username_taken'] = 'This Username is already taken.';
-$lang['profile_delete_picture'] = 'Delete this image';
+$lang['profile_custom_upload_picture'] = 'Custom Upload';
+$lang['profile_delete_picture'] = 'Change your image';
 $lang['profile_picture_guidelines'] = 'Maximum file size of 800 kb. JPG, GIF, PNG.';
 
 
