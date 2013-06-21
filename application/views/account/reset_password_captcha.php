@@ -1,23 +1,23 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
 	<?php echo $this->load->view('head', array('title' => lang('forgot_password_page_name'))); ?>
 </head>
 <body>
 <?php echo $this->load->view('header'); ?>
 <div class="container">
-    <div class="container_12">
-        <div class="grid_12">
+    <div class="row">
+        <div class="span12">
 			<?php echo form_open(uri_string().(empty($_SERVER['QUERY_STRING']) ? '' : '?'.$_SERVER['QUERY_STRING'])); ?>
 			<?php echo form_fieldset(); ?>
-            <div class="grid_12 alpha omega">
+            <div class="span12">
                 <h2><?php echo anchor(current_url(), lang('reset_password_page_name')); ?></h2>
 
                 <p><?php echo lang('reset_password_captcha'); ?></p>
             </div>
             <div class="clear"></div>
 			<?php if (isset($recaptcha)) : ?>
-            <div class="grid_6 alpha omega">
+            <div class="span6">
 				<?php echo $recaptcha; ?>
             </div>
             <div class="clear"></div>
@@ -28,7 +28,7 @@
                 <div class="clear"></div>
 				<?php endif; ?>
 			<?php endif; ?>
-            <div class="grid_6 alpha omega">
+            <div class="span6">
 				<?php echo form_button(array('type' => 'submit', 'class' => 'button', 'content' => lang('reset_password_captcha_submit'))); ?>
             </div>
 			<?php echo form_fieldset_close(); ?>
