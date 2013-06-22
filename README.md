@@ -96,13 +96,13 @@ See our **[app task board on Trello](https://trello.com/board/a3m/512c08b874b855
 	**WARNING: DO NOT DO THIS ON YOUR PRODUCTION/LIVE WEB SERVER AS THIS LEAVES YOUR SERVER VURNERABLE TO MITM ATACKS**
 
 ### Yahoo! configuration:
-+ No further configuration needed.
++ Those should work out of the box. No further configuration needed.
 
 ##### Testing on localhost
 + Testing on localhost works without any changes.
 
 ## Note
-+ The current codebase is _unstable_ due to a large re-write effort of the original application. Some controllers/views may need to be updated to work correctly. Please fork and help out!
++ Please fork and help out! Only with your help will this keep growing and getting better.
 + Note that twitter doesn't work if your base url is `localhost` and facebook won't work if your base url is `127.0.0.1`. Therefore ensure that your base url is something like `yoursite.com`. One way to do that is to simply [map the hostname](http://en.wikipedia.org/wiki/Hosts_%28file%29) your want to `127.0.0.1` on your development machine.
 Your twitter callback URL should take into account whether or not you have enabled SSL in your a3m config   
  + `https://domain.com/account/connect_twitter` (SSL **Enabled**) 
