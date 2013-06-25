@@ -12,7 +12,7 @@ class Authentication {
 		// Obtain a reference to the ci super object
 		$this->CI =& get_instance();
 
-		$this->CI->load->library('session');
+		$this->CI->load->driver('session');
 	}
 
 	// --------------------------------------------------------------------
