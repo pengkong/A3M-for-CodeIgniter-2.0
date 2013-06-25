@@ -16,7 +16,7 @@
 				<h3><?php echo lang('sign_up_heading'); ?></h3>
 
 				<div class="alert">
-					<strong>NOTICE: </strong> New account registrations are currently disabled.
+					<strong><?php echo lang('sign_up_notice'); ?> </strong> <?php echo lang('sign_up_registration_disabled'); ?>
 				</div>
 			</div>
 		<?php endif;?>

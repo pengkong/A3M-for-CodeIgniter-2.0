@@ -105,6 +105,22 @@ input.openid {
   right: 0;
 }
 
+/* Account Styles */
+
+.accountPicSelect {
+	margin: 5px 0 5px 5px;
+}
+
+.accountPicSelect p {
+	margin: 10px 0 0 15px;
+}
+
+.accountPicSelect input[type="radio"] {
+	margin: 0 10px 0 0;
+}
+
+
+
 /* Positioning */
 
 .right {

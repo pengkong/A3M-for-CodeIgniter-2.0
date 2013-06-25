@@ -23,6 +23,8 @@ $lang['sign_up_username_taken'] = 'This Username is already taken.';
 $lang['sign_up_email_exist'] = 'This Email is already registered.';
 $lang['sign_up_forgot_your_password'] = 'Forgot your password?';
 
+$lang['sign_up_notice'] = 'NOTICE:';
+$lang['sign_up_registration_disabled'] = 'New account registrations are currently disabled.';
 
 /* End of file sign_up_lang.php */
 /* Location: ./application/account/language/english/sign_up_lang.php */
