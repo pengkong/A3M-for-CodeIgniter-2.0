@@ -15,7 +15,13 @@ class Manage_roles extends CI_Controller {
     $this->load->config('account/account');
     $this->load->helper(array('date', 'language', 'account/ssl', 'url'));
     $this->load->library(array('account/authentication', 'account/authorization', 'form_validation'));
-    $this->load->model(array('account/account_model', 'account/account_details_model', 'account/acl_permission_model', 'account/acl_role_model', 'account/rel_account_permission_model', 'account/rel_account_role_model', 'account/rel_role_permission_model'));
+    $this->load->model('account/account_model');
+    $this->load->model('account/account_details_model');
+    $this->load->model('account/acl_permission_model');
+    $this->load->model('account/acl_role_model');
+    $this->load->model('account/rel_account_permission_model');
+    $this->load->model('account/rel_account_role_model');
+    $this->load->model('account/rel_role_permission_model');
     $this->load->language(array('general', 'account/manage_roles', 'account/account_settings', 'account/account_profile', 'account/sign_up', 'account/account_password'));
   }
 

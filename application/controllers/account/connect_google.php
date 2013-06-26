@@ -15,7 +15,8 @@ class Connect_google extends CI_Controller {
 		$this->load->config('account/account');
 		$this->load->helper(array('language', 'account/ssl', 'url', 'account/openid'));
 		$this->load->library(array('account/authentication', 'account/authorization'));
-		$this->load->model(array('account/account_model', 'account/account_openid_model'));
+		$this->load->model('account/account_model');
+		$this->load->model('account/account_openid_model');
 		$this->load->language(array('general', 'account/sign_in', 'account/account_linked', 'account/connect_third_party'));
 	}
 

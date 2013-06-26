@@ -15,7 +15,7 @@ class Account_password extends CI_Controller {
 		$this->load->config('account/account');
 		$this->load->helper(array('date', 'language', 'account/ssl', 'url'));
 		$this->load->library(array('account/authentication', 'account/authorization', 'form_validation'));
-		$this->load->model(array('account/account_model'));
+		$this->load->model('account/account_model');
 		$this->load->language(array('general', 'account/account_password'));
 	}
 

@@ -12,7 +12,15 @@ class Authorization {
     // Obtain a reference to the ci super object
     $this->CI =& get_instance();
 
-    $this->CI->load->driver('session');
+    //Load the session, if CI2 load it as library, if it is CI3 load as a driver
+    if (substr(CI_VERSION, 0, 1) == '2')
+    {
+      $this->CI->load->library('session');
+    }
+    else
+    {
+      $this->CI->load->driver('session');
+    }
   }
 
   /**
