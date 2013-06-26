@@ -22,6 +22,8 @@ $lang['website_page_rendered_in_x_seconds'] = 'Rendered in %s seconds';
 $lang['website_create'] = 'Create';
 $lang['website_update'] = 'Update';
 $lang['website_cancel'] = 'Cancel';
+$lang['website_account_info'] = 'Account Info';
+$lang['website_admin_panel'] = 'Admin Panel';
 
 
 /* End of file general_lang.php */

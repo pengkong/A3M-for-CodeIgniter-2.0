@@ -64,8 +64,15 @@
 |
 */
 
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'home';
 $route['404_override'] = '';
+
+$route['sign_up'] = "account/sign_up";
+$route['sign_in'] = "account/sign_in";
+$route['sign_out'] = "account/sign_out";
+$route['login'] = "account/sign_in";
+$route['logout'] = "account/sign_out";
+$route['register'] = "account/sign_up";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

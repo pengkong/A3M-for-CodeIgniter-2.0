@@ -64,7 +64,7 @@ class Account_model extends CI_Model {
 	 */
 	function get_by_username_email($username_email)
 	{
-		return $this->db->from('a3m_account')->where('username', $username_email)->or_where('email', $username_email)->get()->row();
+		return $this->db->get('a3m_account')->where('username', $username_email)->or_where('email', $username_email)->row();
 	}
 
 	// --------------------------------------------------------------------
