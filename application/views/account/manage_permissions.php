@@ -30,9 +30,9 @@
             <th><?php echo lang('permissions_description'); ?></th>
             <th><?php echo lang('permissions_column_inroles'); ?></th>
             <th>
-              <?php if( $this->authorization->is_permitted('create_users') ): ?>
-                <a href="account/manage_permissions/save" class="btn btn-primary btn-small">Create<a>
-              <?php endif; ?>
+              <?php if( $this->authorization->is_permitted('create_users') ):
+                echo anchor('account/manage_permissions/save', lang('website_create'), array('class'=>'btn btn-primary btn-small'));
+              endif; ?>
             </th>
           </tr>
         </thead>
@@ -59,9 +59,9 @@
                 <?php endif; ?>
               </td>
               <td>
-                <?php if( $this->authorization->is_permitted('update_permissions') ): ?>
-                  <?php echo anchor('account/manage_permissions/save/'.$perm['id'], lang('website_update'), 'class="btn btn-small"'); ?>
-                <?php endif; ?>
+                <?php if( $this->authorization->is_permitted('update_permissions') ):
+                echo anchor('account/manage_permissions/save/'.$perm['id'], lang('website_update'), 'class="btn btn-small"');
+              endif; ?>
               </td>
             </tr>
           <?php endforeach; ?>
