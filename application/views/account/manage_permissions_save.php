@@ -91,16 +91,17 @@
       </div>
 
       <div class="form-actions">
-        <?php echo form_submit('manage_permission_submit', lang('settings_save'), 'class="btn btn-primary"'); ?>
-        <?php echo anchor('account/manage_permissions', lang('website_cancel'), 'class="btn"'); ?>
-        <?php if( $this->authorization->is_permitted('delete_permissions') && $action == 'update' && ! $is_system ): ?>
-          <span>&nbsp;or&nbsp;</span>
-          <?php if( $is_disabled ): ?>
-            <?php echo form_submit('manage_permission_unban', lang('permissions_unban'), 'class="btn btn-danger"'); ?>
-          <?php else: ?>
-            <?php echo form_submit('manage_permission_ban', lang('permissions_ban'), 'class="btn btn-danger"'); ?>
-          <?php endif; ?>
-        <?php endif; ?>
+        <?php echo form_submit('manage_permission_submit', lang('settings_save'), 'class="btn btn-primary"');
+        echo anchor('account/manage_permissions', lang('website_cancel'), 'class="btn"');
+        if( $this->authorization->is_permitted('delete_permissions') && $action == 'update' && ! $is_system )
+        {
+          echo '<span>' . lang('permissions_or') . '</span>';
+          if( $is_disabled ){
+            echo form_submit('manage_permission_unban', lang('permissions_unban'), 'class="btn btn-danger"');
+          } else {
+            echo form_submit('manage_permission_ban', lang('permissions_ban'), 'class="btn btn-danger"');
+          }
+        }?>
       </div>
 
       <?php echo form_close(); ?>
