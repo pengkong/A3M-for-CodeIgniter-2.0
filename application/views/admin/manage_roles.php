@@ -31,7 +31,7 @@
             <th><?php echo lang('roles_permission'); ?></th>
             <th>
               <?php if( $this->authorization->is_permitted('create_roles') ):
-                echo anchor('account/manage_roles/save', lang('website_create'), 'class="btn btn-primary btn-small"');
+                echo anchor('admin/manage_roles/save', lang('website_create'), 'class="btn btn-primary btn-small"');
               endif; ?>
             </th>
           </tr>
@@ -48,7 +48,7 @@
               </td>
               <td>
                 <?php if( $role['user_count'] > 0 ) :
-                  echo anchor('account/manage_users/filter/role/'.$role['id'], $role['user_count'], 'class="badge badge-info"');
+                  echo anchor('admin/manage_users/filter/role/'.$role['id'], $role['user_count'], 'class="badge badge-info"');
                 else : ?>
                   <span class="badge">0</span>
                 <?php endif; ?>
@@ -59,14 +59,14 @@
                 <?php else : ?>
                   <ul class="inline">
                     <?php foreach( $role['perm_list'] as $itm ) : ?>
-                      <li><?php echo anchor('account/manage_permissions/save/'.$itm['id'], $itm['key'], 'title="'.$itm['title'].'"'); ?></li>
+                      <li><?php echo anchor('admin/manage_permissions/save/'.$itm['id'], $itm['key'], 'title="'.$itm['title'].'"'); ?></li>
                     <?php endforeach; ?>
                   </ul>
                 <?php endif; ?>
               </td>
               <td>
                 <?php if( $this->authorization->is_permitted('update_roles') ):
-                  echo anchor('account/manage_roles/save/'.$role['id'], lang('website_update'), 'class="btn btn-small"');
+                  echo anchor('admin/manage_roles/save/'.$role['id'], lang('website_update'), 'class="btn btn-small"');
                 endif; ?>
               </td>
             </tr>

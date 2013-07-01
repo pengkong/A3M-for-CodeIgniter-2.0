@@ -155,7 +155,7 @@
 
       <div class="form-actions">
         <?php echo form_submit('manage_user_submit', lang('settings_save'), 'class="btn btn-primary"');
-          echo anchor('account/manage_users', lang('website_cancel'), 'class="btn"');
+          echo anchor('admin/manage_users', lang('website_cancel'), 'class="btn"');
         if( $this->authorization->is_permitted('ban_users') && $action == 'update' ):
           echo '<span>' . lang('admin_or') . '</span>';
           if( isset($update_account->suspendedon) ){

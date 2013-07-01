@@ -33,7 +33,7 @@
               <th><?php echo lang('settings_lastname'); ?></th>
               <th>
                 <?php if( $this->authorization->is_permitted('create_users') ):
-                echo anchor('account/manage_users/save', lang('website_create'), array('class' => 'btn btn-primary btn-small'));
+                echo anchor('admin/manage_users/save', lang('website_create'), array('class' => 'btn btn-primary btn-small'));
               endif; ?>
               </th>
             </tr>
@@ -56,7 +56,7 @@
                 <td><?php echo $acc['lastname']; ?></td>
                 <td>
                   <?php if( $this->authorization->is_permitted('update_users') ):
-                  echo anchor('account/manage_users/save/'.$acc['id'], lang('website_update'), array('class' => 'btn btn-small'));
+                  echo anchor('admin/manage_users/save/'.$acc['id'], lang('website_update'), array('class' => 'btn btn-small'));
                 endif; ?>
                 </td>
               </tr>

@@ -22,7 +22,7 @@ class Manage_users extends CI_Controller {
     $this->load->model('account/rel_account_permission_model');
     $this->load->model('account/rel_account_role_model');
     $this->load->model('account/rel_role_permission_model');
-    $this->load->language(array('general', 'account/manage_users', 'account/account_settings', 'account/account_profile', 'account/sign_up', 'account/account_password'));
+    $this->load->language(array('general', 'admin/manage_users', 'account/account_settings', 'account/account_profile', 'account/sign_up', 'account/account_password'));
   }
 
   /**
@@ -36,7 +36,7 @@ class Manage_users extends CI_Controller {
     // Redirect unauthenticated users to signin page
     if ( ! $this->authentication->is_signed_in())
     {
-      redirect('account/sign_in/?continue='.urlencode(base_url().'account/manage_users'));
+      redirect('account/sign_in/?continue='.urlencode(base_url().'admin/manage_users'));
     }
 
     // Redirect unauthorized users to account profile page
@@ -90,7 +90,7 @@ class Manage_users extends CI_Controller {
     }
 
     // Load manage users view
-    $this->load->view('account/manage_users', $data);
+    $this->load->view('admin/manage_users', $data);
   }
 
   /**
@@ -107,19 +107,19 @@ class Manage_users extends CI_Controller {
     // Redirect unauthenticated users to signin page
     if ( ! $this->authentication->is_signed_in())
     {
-      redirect('account/sign_in/?continue='.urlencode(base_url().'account/manage_users'));
+      redirect('account/sign_in/?continue='.urlencode(base_url().'admin/manage_users'));
     }
 
     // Check if they are allowed to Update Users
     if ( ! $this->authorization->is_permitted('update_users') && ! empty($id) )
     {
-      redirect('account/manage_users');
+      redirect('admin/manage_users');
     }
 
     // Check if they are allowed to Create Users
     if ( ! $this->authorization->is_permitted('create_users') && empty($id) )
     {
-      redirect('account/manage_users');
+      redirect('admin/manage_users');
     }
 
     // Retrieve sign in user
@@ -256,7 +256,7 @@ class Manage_users extends CI_Controller {
         if( $is_new )
         {
           // Redirect to view the newly created user
-          redirect("account/manage_users/save/{$id}");
+          redirect("admin/manage_users/save/{$id}");
         }
         else
         {
@@ -269,7 +269,7 @@ class Manage_users extends CI_Controller {
     }
 
     // Load manage users view
-    $this->load->view('account/manage_users_save', $data);
+    $this->load->view('admin/manage_users_save', $data);
   }
 
   /**
@@ -311,4 +311,4 @@ class Manage_users extends CI_Controller {
 }
 
 /* End of file manage_users.php */
-/* Location: ./application/account/controllers/manage_users.php */
+/* Location: ./application/controllers/admin/manage_users.php */

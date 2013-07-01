@@ -31,7 +31,7 @@
             <th><?php echo lang('permissions_column_inroles'); ?></th>
             <th>
               <?php if( $this->authorization->is_permitted('create_users') ):
-                echo anchor('account/manage_permissions/save', lang('website_create'), array('class'=>'btn btn-primary btn-small'));
+                echo anchor('admin/manage_permissions/save', lang('website_create'), array('class'=>'btn btn-primary btn-small'));
               endif; ?>
             </th>
           </tr>
@@ -53,14 +53,14 @@
                 <?php else : ?>
                   <ul class="inline">
                     <?php foreach( $perm['role_list'] as $itm ) : ?>
-                      <li><?php echo anchor('account/manage_roles/save/'.$itm['id'], $itm['name'], 'title="'.$itm['title'].'"'); ?></li>
+                      <li><?php echo anchor('admin/manage_roles/save/'.$itm['id'], $itm['name'], 'title="'.$itm['title'].'"'); ?></li>
                     <?php endforeach; ?>
                   </ul>
                 <?php endif; ?>
               </td>
               <td>
                 <?php if( $this->authorization->is_permitted('update_permissions') ):
-                echo anchor('account/manage_permissions/save/'.$perm['id'], lang('website_update'), 'class="btn btn-small"');
+                echo anchor('admin/manage_permissions/save/'.$perm['id'], lang('website_update'), 'class="btn btn-small"');
               endif; ?>
               </td>
             </tr>

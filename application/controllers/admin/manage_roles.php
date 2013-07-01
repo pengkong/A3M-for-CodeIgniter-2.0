@@ -22,7 +22,7 @@ class Manage_roles extends CI_Controller {
     $this->load->model('account/rel_account_permission_model');
     $this->load->model('account/rel_account_role_model');
     $this->load->model('account/rel_role_permission_model');
-    $this->load->language(array('general', 'account/manage_roles', 'account/account_settings', 'account/account_profile', 'account/sign_up', 'account/account_password'));
+    $this->load->language(array('general', 'admin/manage_roles', 'account/account_settings', 'account/account_profile', 'account/sign_up', 'account/account_password'));
   }
 
   /**
@@ -36,7 +36,7 @@ class Manage_roles extends CI_Controller {
     // Redirect unauthenticated users to signin page
     if ( ! $this->authentication->is_signed_in())
     {
-      redirect('account/sign_in/?continue='.urlencode(base_url().'account/manage_roles'));
+      redirect('account/sign_in/?continue='.urlencode(base_url().'admin/manage_roles'));
     }
 
     // Redirect unauthorized users to account profile page
@@ -87,7 +87,7 @@ class Manage_roles extends CI_Controller {
 
 
     // Load manage roles view
-    $this->load->view('account/manage_roles', $data);
+    $this->load->view('admin/manage_roles', $data);
   }
 
 
@@ -105,7 +105,7 @@ class Manage_roles extends CI_Controller {
     // Redirect unauthenticated users to signin page
     if ( ! $this->authentication->is_signed_in())
     {
-      redirect('account/sign_in/?continue='.urlencode(base_url().'account/manage_roles'));
+      redirect('account/sign_in/?continue='.urlencode(base_url().'admin/manage_roles'));
     }
 
     // Redirect unauthorized users to account profile page
@@ -200,7 +200,7 @@ class Manage_roles extends CI_Controller {
         if( $is_new )
         {
           // Redirect to view the newly created role
-          redirect("account/manage_roles/save/{$id}");
+          redirect("admin/manage_roles/save/{$id}");
         }
         else
         {
@@ -212,7 +212,7 @@ class Manage_roles extends CI_Controller {
     }
 
     // Load manage roles view
-    $this->load->view('account/manage_roles_save', $data);
+    $this->load->view('admin/manage_roles_save', $data);
   }
 
   /**
@@ -230,4 +230,4 @@ class Manage_roles extends CI_Controller {
 
 
 /* End of file manage_roles.php */
-/* Location: ./application/account/controllers/manage_roles.php */
+/* Location: ./application/controllers/admin/manage_roles.php */
