@@ -146,7 +146,7 @@ class Manage_roles extends CI_Controller {
         array(
           'field' => 'role_description',
           'label' => 'lang:roles_description',
-          'rules' => 'trim|optional|max_length[160]')
+          'rules' => 'trim|max_length[160]')
       ));
 
     // Run form validation

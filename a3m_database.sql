@@ -153,7 +153,7 @@ INSERT INTO `a3m_acl_permission` (`key`, `description`, `is_system`) VALUES
 CREATE TABLE IF NOT EXISTS `a3m_acl_role` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(80) COLLATE utf8_unicode_ci NOT NULL,
-  `description` varchar(160) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(160) COLLATE utf8_unicode_ci DEFAULT NULL,
   `suspendedon` datetime DEFAULT NULL,
   `is_system` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
