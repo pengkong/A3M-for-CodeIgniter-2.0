@@ -154,16 +154,16 @@
       </div>
 
       <div class="form-actions">
-        <?php echo form_submit('manage_user_submit', lang('settings_save'), 'class="btn btn-primary"'); ?>
-        <?php echo anchor('account/manage_users', lang('website_cancel'), 'class="btn"'); ?>
-        <?php if( $this->authorization->is_permitted('ban_users') && $action == 'update' ): ?>
-          <span>&nbsp;or&nbsp;</span>
-          <?php if( isset($update_account->suspendedon) ): ?>
-            <?php echo form_submit('manage_user_unban', lang('users_unban'), 'class="btn btn-danger"'); ?>
-          <?php else: ?>
-            <?php echo form_submit('manage_user_ban', lang('users_ban'), 'class="btn btn-danger"'); ?>
-          <?php endif; ?>
-        <?php endif; ?>
+        <?php echo form_submit('manage_user_submit', lang('settings_save'), 'class="btn btn-primary"');
+          echo anchor('account/manage_users', lang('website_cancel'), 'class="btn"');
+        if( $this->authorization->is_permitted('ban_users') && $action == 'update' ):
+          echo '<span>' . lang('admin_or') . '</span>';
+          if( isset($update_account->suspendedon) ){
+            echo form_submit('manage_user_unban', lang('users_unban'), 'class="btn btn-danger"');
+          }else{
+            echo form_submit('manage_user_ban', lang('users_ban'), 'class="btn btn-danger"'); 
+          }
+        endif; ?>
       </div>
 
       <?php echo form_close(); ?>

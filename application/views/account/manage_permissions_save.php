@@ -95,7 +95,7 @@
         echo anchor('account/manage_permissions', lang('website_cancel'), 'class="btn"');
         if( $this->authorization->is_permitted('delete_permissions') && $action == 'update' && ! $is_system )
         {
-          echo '<span>' . lang('permissions_or') . '</span>';
+          echo '<span>' . lang('admin_or') . '</span>';
           if( $is_disabled ){
             echo form_submit('manage_permission_unban', lang('permissions_unban'), 'class="btn btn-danger"');
           } else {

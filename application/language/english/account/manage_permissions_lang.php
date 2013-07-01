@@ -22,7 +22,6 @@ $lang['permissions_ban'] = 'Disable Permission';
 $lang['permissions_unban'] = 'Enable Permission';
 $lang['permissions_banned'] = 'Disabled';
 $lang['permissions_system_name'] = 'Unable to modify names of system permissions.';
-$lang['permissions_or'] = '&nbsp;or&nbsp;';
 
 /* End of file manage_permissions.php */
 /* Location: ./application/language/english/account/manage_permissions.php */

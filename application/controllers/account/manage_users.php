@@ -223,11 +223,12 @@ class Manage_users extends CI_Controller {
           // Check if the user should be suspended
           if( $this->authorization->is_permitted('ban_users') ) 
           {
-            if( $this->input->post('manage_user_ban', TRUE) !== FALSE ) 
+            $ban = $this->input->post('manage_user_ban', TRUE);
+            if( isset($ban) ) 
             {
               $this->account_model->update_suspended_datetime($id);
             }
-            elseif( $this->input->post('manage_user_unban', TRUE) !== FALSE )
+            else
             {
               $this->account_model->remove_suspended_datetime($id);
             }
