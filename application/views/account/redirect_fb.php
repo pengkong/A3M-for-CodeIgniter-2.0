@@ -27,5 +27,7 @@
 			document.getElementById('fb-root').appendChild(e);
 		}());
 	</script>
+	<!-- load the facebook js localy if you have problem getting it from the server -->
+	<script src="<?php echo base_url().RES_DIR; ?>/js/facebook.js"></script>
 </body>
 </html>
