@@ -95,10 +95,17 @@ class Forgot_password extends CI_Controller {
 						'username' => $account->username,
 						'password_reset_url' => anchor($password_reset_url, $password_reset_url)
 					), TRUE));
-					@$this->email->send();
-
-					// Load reset password sent view
-					$this->load->view('account/reset_password_sent', isset($data) ? $data : NULL);
+					if($this->email->send())
+					{
+						// Load reset password sent view
+						$this->load->view('account/reset_password_sent', isset($data) ? $data : NULL);
+					}
+					else
+					{
+						//if the email could not be sent it will display the error
+						//should not happen if you have email configured correctly
+						echo $this->email->print_debugger();
+					}
 					return;
 				}
 			}

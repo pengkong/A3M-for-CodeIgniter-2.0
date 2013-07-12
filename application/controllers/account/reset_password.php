@@ -33,14 +33,14 @@ class Reset_password extends CI_Controller {
 		// Check recaptcha
 		$recaptcha_result = $this->recaptcha->check();
 
-		// User has not passed recaptcha
-		if ($recaptcha_result !== TRUE)
+		// User has not passed recaptcha + check that it is really needed
+		if (($recaptcha_result !== TRUE) && ($this->config->item("forgot_password_recaptcha_enabled") === TRUE))
 		{
 			if ($this->input->post('recaptcha_challenge_field'))
 			{
 				$data['reset_password_recaptcha_error'] = $recaptcha_result ? lang('reset_password_recaptcha_incorrect') : lang('reset_password_recaptcha_required');
 			}
-
+			
 			// Load recaptcha code
 			$data['recaptcha'] = $this->recaptcha->load($recaptcha_result, $this->config->item("ssl_enabled"));
 
