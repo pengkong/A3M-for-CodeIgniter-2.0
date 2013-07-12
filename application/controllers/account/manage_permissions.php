@@ -171,11 +171,12 @@ class Manage_permissions extends CI_Controller {
         // Check if the permission should be disabled
         if( $this->authorization->is_permitted('delete_permissions') ) 
         {
-          if( $this->input->post('manage_permission_ban', TRUE) !== FALSE ) 
+          $permission_ban = $this->input->post('manage_permission_ban', TRUE);
+          if( isset($permission_ban) ) 
           {
             $this->acl_permission_model->update_suspended_datetime($id);
           }
-          elseif( $this->input->post('manage_permission_unban', TRUE) !== FALSE )
+          else
           {
             $this->acl_permission_model->remove_suspended_datetime($id);
           }

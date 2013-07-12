@@ -94,7 +94,7 @@
         <?php echo form_submit('manage_permission_submit', lang('settings_save'), 'class="btn btn-primary"'); ?>
         <?php echo anchor('account/manage_permissions', lang('website_cancel'), 'class="btn"'); ?>
         <?php if( $this->authorization->is_permitted('delete_permissions') && $action == 'update' && ! $is_system ): ?>
-          <span>&nbsp;or&nbsp;</span>
+          <span><?php echo lang('admin_or');?></span>
           <?php if( $is_disabled ): ?>
             <?php echo form_submit('manage_permission_unban', lang('permissions_unban'), 'class="btn btn-danger"'); ?>
           <?php else: ?>

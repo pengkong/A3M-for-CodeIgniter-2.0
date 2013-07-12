@@ -94,7 +94,7 @@
         <?php echo form_submit('manage_role_submit', lang('settings_save'), 'class="btn btn-primary"'); ?>
         <?php echo anchor('account/manage_roles', lang('website_cancel'), 'class="btn"'); ?>
         <?php if( $this->authorization->is_permitted('delete_roles') && $action == 'update' && ! $is_system ): ?>
-          <span>&nbsp;or&nbsp;</span>
+          <span><?php echo lang('admin_or');?></span>
           <?php if( isset($role->suspendedon) ): ?>
             <?php echo form_submit('manage_role_unban', lang('roles_unban'), 'class="btn btn-danger"'); ?>
           <?php else: ?>

@@ -140,7 +140,7 @@ class Manage_roles extends CI_Controller {
         array(
           'field' => 'role_description',
           'label' => 'lang:roles_description',
-          'rules' => 'trim|optional|max_length[160]')
+          'rules' => 'trim|max_length[160]')
       ));
 
     // Run form validation
@@ -169,11 +169,12 @@ class Manage_roles extends CI_Controller {
         // Check if the user should be suspended
         if( $this->authorization->is_permitted('delete_roles') ) 
         {
-          if( $this->input->post('manage_role_ban', TRUE) !== FALSE ) 
+          $permission_ban = $this->input->post('manage_role_ban', TRUE);
+          if( isset($permission_ban) )
           {
             $this->acl_role_model->update_suspended_datetime($id);
           }
-          elseif( $this->input->post('manage_role_unban', TRUE) !== FALSE )
+          else
           {
             $this->acl_role_model->remove_suspended_datetime($id);
           }
