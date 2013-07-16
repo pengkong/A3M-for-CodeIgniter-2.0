@@ -739,7 +739,7 @@ class CI_Email {
 	 */
 	public function set_header($header, $value)
 	{
-		$this->_headers[$header] = $value;
+		$this->_headers[$header] = str_replace(array("\n", "\r"), '', $value);
 	}
 
 	// --------------------------------------------------------------------
@@ -1275,7 +1275,7 @@ class CI_Email {
 				if ($this->send_multipart === FALSE)
 				{
 					$hdr .= 'Content-Type: text/html; charset='.$this->charset.$this->newline
-						.'Content-Transfer-Encoding: quoted-printable';
+						.'Content-Transfer-Encoding: quoted-printable'.$this->newline.$this->newline;
 				}
 				else
 				{
@@ -2140,7 +2140,7 @@ class CI_Email {
 
 		if (in_array('headers', $include, TRUE))
 		{
-			$raw_data = $this->_header_str."\n";
+			$raw_data = htmlspecialchars($this->_header_str)."\n";
 		}
 
 		if (in_array('subject', $include, TRUE))
