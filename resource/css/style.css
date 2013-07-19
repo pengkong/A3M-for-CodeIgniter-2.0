@@ -8,15 +8,15 @@ li.third_party {
     list-style: none;
     padding: 0;
     margin: 0;
-    width: 64px;
-    height: 64px;
+    width: 76px;
+    height: 76px;
     float: left;
     padding: 0 10px 10px 0;
 }
 li.third_party a {
     display: block;
-    width: 64px;
-    height: 64px;
+    width: 76px;
+    height: 76px;
     font-size: 10px;
     text-align: center;
     text-decoration: none;
