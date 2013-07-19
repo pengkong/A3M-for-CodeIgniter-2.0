@@ -55,7 +55,7 @@
 							<?php echo anchor('http://facebook.com/profile.php?id='.$facebook_link->facebook_id, substr('http://facebook.com/profile.php?id='.$facebook_link->facebook_id, 0, 30).(strlen('http://facebook.com/profile.php?id='.$facebook_link->facebook_id) > 30 ? '...' : ''), array('target' => '_blank', 'title' => 'http://facebook.com/profile.php?id='.$facebook_link->facebook_id)); ?>
                         </div>
                         <div class="span2">
-							<?php if ($num_of_linked_accounts != 1) : ?>
+							<?php if ($num_of_linked_accounts >= 1 && isset($account->password)) : ?>
 							<?php echo form_open(uri_string()); ?>
 							<?php echo form_fieldset(); ?>
 							<?php echo form_hidden('facebook_id', $facebook_link->facebook_id); ?>
