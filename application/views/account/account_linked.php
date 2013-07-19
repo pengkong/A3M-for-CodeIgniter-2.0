@@ -129,7 +129,7 @@
             <h3><?php echo lang('linked_link_with_your_account_from'); ?></h3>
             <ul class="third_party">
 				<?php foreach ($this->config->item('third_party_auth_providers') as $provider) : ?>
-                <li class="third_party <?php echo $provider; ?>"><?php echo anchor('account/connect_'.$provider, lang('connect_'.$provider), array('title' => sprintf(lang('connect_with_x'), lang('connect_'.$provider)))); ?></li>
+                <li class="third_party <?php echo $provider; ?>"><?php echo anchor('account/connect_'.$provider, ' ', array('title' => sprintf(lang('connect_with_x'), lang('connect_'.$provider)))); ?></li>
 				<?php endforeach; ?>
             </ul>
 
