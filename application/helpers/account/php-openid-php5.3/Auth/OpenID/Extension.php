@@ -18,43 +18,49 @@ require_once 'Auth/OpenID/Message.php';
  * @package OpenID
  */
 class Auth_OpenID_Extension {
-	/**
-	 * ns_uri: The namespace to which to add the arguments for this
-	 * extension
-	 */
-	var $ns_uri = NULL;
-	var $ns_alias = NULL;
+    /**
+     * ns_uri: The namespace to which to add the arguments for this
+     * extension
+     */
+    var $ns_uri = null;
+    var $ns_alias = null;
 
-	/**
-	 * Get the string arguments that should be added to an OpenID
-	 * message for this extension.
-	 */
-	function getExtensionArgs()
-	{
-		return NULL;
-	}
+    /**
+     * Get the string arguments that should be added to an OpenID
+     * message for this extension.
+     */
+    function getExtensionArgs()
+    {
+        return null;
+    }
 
-	/**
-	 * Add the arguments from this extension to the provided message.
-	 *
-	 * Returns the message with the extension arguments added.
-	 */
-	function toMessage(&$message)
-	{
-		$implicit = $message->isOpenID1();
-		$added = $message->namespaces->addAlias($this->ns_uri, $this->ns_alias, $implicit);
+    /**
+     * Add the arguments from this extension to the provided message.
+     *
+     * Returns the message with the extension arguments added.
+     */
+    function toMessage($message, $request = null)
+    {
+        $implicit = $message->isOpenID1();
+        $added = $message->namespaces->addAlias($this->ns_uri,
+                                                $this->ns_alias,
+                                                $implicit);
 
-		if ($added === NULL)
-		{
-			if ($message->namespaces->getAlias($this->ns_uri) != $this->ns_alias)
-			{
-				return NULL;
-			}
-		}
+        if ($added === null) {
+            if ($message->namespaces->getAlias($this->ns_uri) !=
+                $this->ns_alias) {
+                return null;
+            }
+        }
 
-		$message->updateArgs($this->ns_uri, $this->getExtensionArgs());
-		return $message;
-	}
+        if ($request !== null) {
+            $message->updateArgs($this->ns_uri,
+                                 $this->getExtensionArgs($request));
+        } else {
+            $message->updateArgs($this->ns_uri,
+                                 $this->getExtensionArgs());
+        }
+        return $message;
+    }
 }
 
-?>
