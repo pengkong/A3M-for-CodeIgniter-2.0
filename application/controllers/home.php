@@ -1,4 +1,4 @@
-<?php
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
 
@@ -8,8 +8,8 @@ class Home extends CI_Controller {
 
 		// Load the necessary stuff...
 		$this->load->helper(array('language', 'url', 'form', 'account/ssl'));
-		$this->load->library(array('account/authentication'));
-		$this->load->model(array('account/account_model'));
+		$this->load->library(array('account/authentication', 'account/authorization'));
+		$this->load->model('account/account_model');
 	}
 
 	function index()

@@ -1,6 +1,8 @@
 # [A3M (Account Authentication & Authorization)] (https://github.com/donjakobo/A3M/)
+_2/25/2013 - Currently some code is semi-stable, please fork and help squash bugs/update views_
+_6/25/2013 - Started working on integrating the main code with admin panel and the development version of CodeIgniter 3_
 
-A CodeIgniter 2.x package that leverages bleeding edge web technologies like OpenID and OAuth to create a user-friendly user experience. It gives you the CRUD to get working right away without too much fuss! A3M is a full package meant for building websites from scratch without all that tiresome login / logout / admin stuff thats always required.
+A CodeIgniter 3.x package that leverages bleeding edge web technologies like OpenID and OAuth to create a user-friendly user experience. It gives you the CRUD to get working right away without too much fuss! A3M is a full package meant for building websites from scratch without all that tiresome login / logout / admin stuff thats always required.
 
 ## Authors
 
@@ -10,7 +12,7 @@ A CodeIgniter 2.x package that leverages bleeding edge web technologies like Ope
 	
 **PengKong**   
 + [@pengkong](https://github.com/pengkong) on Github   
-		
+        
 ## Key Features & Design Goals
 
 See our **[app task board on Trello](https://trello.com/board/a3m/512c08b874b855f26200e690)** to get a glimps of to-do items
@@ -100,6 +102,26 @@ See our **[app task board on Trello](https://trello.com/board/a3m/512c08b874b855
 
 ##### Testing on localhost
 + Testing on localhost works without any changes.
+
+## Authorization, Roles, and Permissions:
+
++ Connect to your database and insert a new row into the "a3m_rel_account_role" with the Role ID for Admin (by default this is "1") and the Account ID you want to give Admin Rights to.
++ After you login to the website you should see a few new options under your account for Manage Users, Manage Roles, and Manage Permissions.
+
+### Example: Create an Authors Role with permissions to "Post New Articles".
+
++ Go to "Manage Roles" and create the new "Authors" role. 
+  + Name: Authors
+  + Description: Website Authors that are allowed to post new articles.
+  + Permissions: None
++ Jump to "Manage Permissions" and create the "Post New Articles" permission: 
+  + Key: post_articles
+  + Description: Post New Articles
+  + Roles: Check the "Authors" Role
++ Now you can check if the currently logged in user has access to certain features in your Controllers. You simply pass in the "Key" of the permission you created, in this case that is "post_articles".
+    
+  `$this->authorization->is_permitted('post_articles'); //returns boolean value`
+
 
 ## Note
 + Please fork and help out! Only with your help will this keep growing and getting better.

@@ -11,8 +11,16 @@ class Authentication {
 	{
 		// Obtain a reference to the ci super object
 		$this->CI =& get_instance();
-
-		$this->CI->load->library('session');
+		
+		//Load the session, if CI2 load it as library, if it is CI3 load as a driver
+		if (substr(CI_VERSION, 0, 1) == '2')
+		{
+			$this->CI->load->library('session');
+		}
+		else
+		{
+			$this->CI->load->driver('session');
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -40,7 +48,8 @@ class Authentication {
 	 */
 	function sign_in($account_id, $remember = FALSE)
 	{
-		$remember ? $this->CI->session->cookie_monster(TRUE) : $this->CI->session->cookie_monster(FALSE);
+		//Due to new functionality in CI3 remember me feature is temporarily disabled
+		//$remember ? $this->CI->session->cookie_monster(TRUE) : $this->CI->session->cookie_monster(FALSE);
 
 		$this->CI->session->set_userdata('account_id', $account_id);
 

@@ -1,6 +1,22 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Account_model extends CI_Model {
+	
+	function __construct()
+	{
+		parent::__construct();
+	}
+	
+	/**
+	 * Get all accounts
+	 *
+	 * @access public
+	 * @return object all accounts
+	 */
+	function get()
+	{
+		return $this->db->get('a3m_account')->result();
+	}
 
 	/**
 	 * Get account by id
@@ -53,7 +69,7 @@ class Account_model extends CI_Model {
 	 */
 	function get_by_username_email($username_email)
 	{
-		return $this->db->from('a3m_account')->where('username', $username_email)->or_where('email', $username_email)->get()->row();
+		return $this->db->where('username', $username_email)->or_where('email', $username_email)->get('a3m_account')->row();
 	}
 
 	// --------------------------------------------------------------------

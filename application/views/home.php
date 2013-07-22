@@ -15,7 +15,7 @@
             <!-- Main hero unit for a primary marketing message or call to action -->
             <div class="hero-unit" style="position: relative;">
                 <div class="ribbon-wrapper-green">
-                    <div class="ribbon-green">v2.0.1</div>
+                    <div class="ribbon-green">CI 3 dev</div>
                 </div>
 
                 <h1>Welcome to <?php echo lang('website_title'); ?></h1>

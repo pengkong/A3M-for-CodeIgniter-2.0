@@ -3,6 +3,17 @@
 class Account_details_model extends CI_Model {
 
 	/**
+	 * Get details for all account
+	 *
+	 * @access public
+	 * @return object details for all accounts
+	 */
+	function get()
+	{
+		return $this->db->get('a3m_account_details')->result();
+	}
+
+	/**
 	 * Get account details by account_id
 	 *
 	 * @access public
@@ -74,6 +85,7 @@ class Account_details_model extends CI_Model {
 			$this->load->model('account/ref_zoneinfo_model');
 			$timezone = $this->ref_zoneinfo_model->get_by_zoneinfo($attributes['timezone']);
 			$timezone ? $attributes['timezone'] = $timezone->zoneinfo : NULL;
+			$timezone ? $attributes['citimezone'] = $timezone->cicode : NULL;
 
 			// Try to guess country based on timezone
 			if ( ! isset($attributes['country']))

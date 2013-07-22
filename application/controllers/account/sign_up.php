@@ -1,4 +1,4 @@
-<?php
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 /*
  * Sign_up Controller
  */
@@ -14,8 +14,9 @@ class Sign_up extends CI_Controller {
 		// Load the necessary stuff...
 		$this->load->config('account/account');
 		$this->load->helper(array('language', 'account/ssl', 'url'));
-		$this->load->library(array('account/authentication', 'account/recaptcha', 'form_validation'));
-		$this->load->model(array('account/account_model', 'account/account_details_model'));
+		$this->load->library(array('account/authentication', 'account/authorization', 'account/recaptcha', 'form_validation'));
+		$this->load->model('account/account_details_model');
+		$this->load->model('account/account_model');
 		$this->load->language(array('general', 'account/sign_up', 'account/connect_third_party'));
 	}
 
