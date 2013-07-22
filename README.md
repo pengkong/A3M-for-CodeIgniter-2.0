@@ -101,6 +101,26 @@ See our **[app task board on Trello](https://trello.com/board/a3m/512c08b874b855
 ##### Testing on localhost
 + Testing on localhost works without any changes.
 
+## Authorization, Roles, and Permissions:
+
++ Connect to your database and insert a new row into the "a3m_rel_account_role" with the Role ID for Admin (by default this is "1") and the Account ID you want to give Admin Rights to.
++ After you login to the website you should see a few new options under your account for Manage Users, Manage Roles, and Manage Permissions.
+
+### Example: Create an Authors Role with permissions to "Post New Articles".
+
++ Go to "Manage Roles" and create the new "Authors" role. 
+  + Name: Authors
+  + Description: Website Authors that are allowed to post new articles.
+  + Permissions: None
++ Jump to "Manage Permissions" and create the "Post New Articles" permission: 
+  + Key: post_articles
+  + Description: Post New Articles
+  + Roles: Check the "Authors" Role
++ Now you can check if the currently logged in user has access to certain features in your Controllers. You simply pass in the "Key" of the permission you created, in this case that is "post_articles".
+    
+  `$this->authorization->is_permitted('post_articles'); //returns boolean value`
+
+
 ## Note
 + Please fork and help out! Only with your help will this keep growing and getting better.
 + Note that twitter doesn't work if your base url is `localhost` and facebook won't work if your base url is `127.0.0.1`. Therefore ensure that your base url is something like `yoursite.com`. One way to do that is to simply [map the hostname](http://en.wikipedia.org/wiki/Hosts_%28file%29) your want to `127.0.0.1` on your development machine.

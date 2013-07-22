@@ -8,15 +8,15 @@ li.third_party {
     list-style: none;
     padding: 0;
     margin: 0;
-    width: 64px;
-    height: 64px;
+    width: 76px;
+    height: 76px;
     float: left;
     padding: 0 10px 10px 0;
 }
 li.third_party a {
     display: block;
-    width: 64px;
-    height: 64px;
+    width: 76px;
+    height: 76px;
     font-size: 10px;
     text-align: center;
     text-decoration: none;
@@ -27,10 +27,10 @@ li.google { background: url(../img/auth_icons/google.png) no-repeat }
 li.microsoft { background: url(../img/auth_icons/microsoft.png) no-repeat }
 li.aol { background: url(../img/auth_icons/aol.png) no-repeat }
 li.yahoo { background: url(../img/auth_icons/yahoo.png) no-repeat }
-li.twitter { background: url(../img/auth_icons/twitter.png) no-repeat }
+li.twitter { background: url(../img/auth_icons/twitter.png) no-repeat; border-radius: 5px;}
 li.facebook { background: url(../img/auth_icons/facebook.png) no-repeat }
 li.myspace { background: url(../img/auth_icons/myspace.png) no-repeat }
-li.openid { background: url(../img/auth_icons/openid.png) no-repeat }
+li.openid { background: url(../img/auth_icons/openid.png) no-repeat; border: solid 1px #fff; border-radius: 5px; }
 input.openid {
     background: #fff url(../img/auth_icons/openid-icon.png) no-repeat left center;
     border: 1px solid #999;

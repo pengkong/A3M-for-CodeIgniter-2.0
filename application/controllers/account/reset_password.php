@@ -14,7 +14,7 @@ class Reset_password extends CI_Controller {
 		// Load the necessary stuff...
 		$this->load->config('account/account');
 		$this->load->helper(array('date', 'language', 'account/ssl', 'url'));
-		$this->load->library(array('account/authentication', 'account/recaptcha', 'form_validation'));
+		$this->load->library(array('account/authentication', 'account/authorization', 'account/recaptcha', 'form_validation'));
 		$this->load->model(array('account/account_model'));
 		$this->load->language(array('general', 'account/reset_password'));
 	}
@@ -22,7 +22,7 @@ class Reset_password extends CI_Controller {
 	/**
 	 * Reset password
 	 */
-	function index()
+	function index($id=null)
 	{
 		// Enable SSL?
 		maintain_ssl($this->config->item("ssl_enabled"));
@@ -33,14 +33,14 @@ class Reset_password extends CI_Controller {
 		// Check recaptcha
 		$recaptcha_result = $this->recaptcha->check();
 
-		// User has not passed recaptcha
-		if ($recaptcha_result !== TRUE)
+		// User has not passed recaptcha + check that it is really needed
+		if (($recaptcha_result !== TRUE) && ($this->config->item("forgot_password_recaptcha_enabled") === TRUE))
 		{
 			if ($this->input->post('recaptcha_challenge_field'))
 			{
 				$data['reset_password_recaptcha_error'] = $recaptcha_result ? lang('reset_password_recaptcha_incorrect') : lang('reset_password_recaptcha_required');
 			}
-
+			
 			// Load recaptcha code
 			$data['recaptcha'] = $this->recaptcha->load($recaptcha_result, $this->config->item("ssl_enabled"));
 
