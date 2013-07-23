@@ -28,7 +28,7 @@ class Loader_test extends CI_TestCase {
 		$this->ci_vfs_create(ucfirst($lib), '<?php class '.$class.' { }', $this->ci_base_root, 'libraries');
 
 		// Test is_loaded fail
-		$this->assertFalse($this->load->is_loaded($lib));
+		$this->assertFalse($this->load->is_loaded(ucfirst($lib)));
 
 		// Test loading as an array.
 		$this->assertNull($this->load->library(array($lib)));
@@ -123,7 +123,7 @@ class Loader_test extends CI_TestCase {
 		$this->assertEquals($cfg, $this->ci_obj->$obj->config);
 
 		// Test is_loaded
-		$this->assertEquals($obj, $this->load->is_loaded($lib));
+		$this->assertEquals($obj, $this->load->is_loaded(ucfirst($lib)));
 	}
 
 	// --------------------------------------------------------------------
@@ -181,16 +181,16 @@ class Loader_test extends CI_TestCase {
 		$this->ci_set_core_class('model', 'CI_Model');
 
 		// Create model in VFS
-		$model = 'unit_test_model';
-		$class = ucfirst($model);
-		$content = '<?php class '.$class.' extends CI_Model {} ';
+		$model = 'Unit_test_model';
+		$content = '<?php class '.$model.' extends CI_Model {} ';
 		$this->ci_vfs_create($model, $content, $this->ci_app_root, 'models');
 
 		// Load model
 		$this->assertNull($this->load->model($model));
 
 		// Was the model class instantiated.
-		$this->assertTrue(class_exists($class));
+		$this->assertTrue(class_exists($model));
+		$this->assertObjectHasAttribute($model, $this->ci_obj);
 
 		// Test no model given
 		$this->assertNull($this->load->model(''));
@@ -204,11 +204,10 @@ class Loader_test extends CI_TestCase {
 		$this->ci_core_class('model');
 
 		// Create modelin VFS
-		$model = 'test_sub_model';
+		$model = 'Test_sub_model';
 		$base = 'CI_Model';
-		$class = ucfirst($model);
 		$subdir = 'cars';
-		$this->ci_vfs_create($model, '<?php class '.$class.' extends '.$base.' { }', $this->ci_app_root,
+		$this->ci_vfs_create($model, '<?php class '.$model.' extends '.$base.' { }', $this->ci_app_root,
 			array('models', $subdir));
 
 		// Load model
@@ -216,10 +215,10 @@ class Loader_test extends CI_TestCase {
 		$this->assertNull($this->load->model($subdir.'/'.$model, $name));
 
 		// Was the model class instantiated?
-		$this->assertTrue(class_exists($class));
+		$this->assertTrue(class_exists($model));
 		$this->assertObjectHasAttribute($name, $this->ci_obj);
 		$this->assertAttributeInstanceOf($base, $name, $this->ci_obj);
-		$this->assertAttributeInstanceOf($class, $name, $this->ci_obj);
+		$this->assertAttributeInstanceOf($model, $name, $this->ci_obj);
 
 		// Test name conflict
 		$obj = 'conflict';
@@ -237,7 +236,7 @@ class Loader_test extends CI_TestCase {
 	{
 		$this->setExpectedException(
 			'RuntimeException',
-			'CI Error: Unable to locate the model you have specified: ci_test_nonexistent_model.php'
+			'CI Error: Unable to locate the model you have specified: Ci_test_nonexistent_model.php'
 		);
 
 		$this->load->model('ci_test_nonexistent_model.php');
@@ -481,9 +480,8 @@ class Loader_test extends CI_TestCase {
 		// Create model in VFS package path
 		$dir = 'testdir';
 		$path = APPPATH.$dir.'/';
-		$model = 'automod';
-		$mod_class = ucfirst($model);
-		$this->ci_vfs_create($model, '<?php class '.$mod_class.' { }', $this->ci_app_root, array($dir, 'models'));
+		$model = 'Automod';
+		$this->ci_vfs_create($model, '<?php class '.$model.' { }', $this->ci_app_root, array($dir, 'models'));
 
 		// Create autoloader config
 		$cfg = array(
@@ -513,8 +511,8 @@ class Loader_test extends CI_TestCase {
 		$this->assertAttributeInstanceOf($drv_class, $drv, $this->ci_obj);
 
 		// Verify model
-		$this->assertTrue(class_exists($mod_class), $mod_class.' does not exist');
-		$this->assertAttributeInstanceOf($mod_class, $model, $this->ci_obj);
+		$this->assertTrue(class_exists($model), $model.' does not exist');
+		$this->assertAttributeInstanceOf($model, $model, $this->ci_obj);
 
 		// Verify config calls
 		$this->assertEquals($cfg['config'], $this->ci_obj->config->loaded);
