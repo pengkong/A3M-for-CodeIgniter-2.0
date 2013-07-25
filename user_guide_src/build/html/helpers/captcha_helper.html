@@ -29,7 +29,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x2c8b140>
+			<function <lambda> at 0x245fd70>
 			</div>
 		</div>
 
@@ -147,7 +147,15 @@ supplied to the function, will be a random string.</p>
         <span class="s1">&#39;img_height&#39;</span>    <span class="o">=&gt;</span> <span class="mi">30</span><span class="p">,</span>
         <span class="s1">&#39;expiration&#39;</span>    <span class="o">=&gt;</span> <span class="mi">7200</span><span class="p">,</span>
         <span class="s1">&#39;word_length&#39;</span>   <span class="o">=&gt;</span> <span class="mi">8</span><span class="p">,</span>
-        <span class="s1">&#39;pool&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;</span>
+        <span class="s1">&#39;pool&#39;</span>          <span class="o">=&gt;</span> <span class="s1">&#39;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;</span><span class="p">,</span>
+
+        <span class="c1">// White background and border, black text and red grid</span>
+        <span class="s1">&#39;colors&#39;</span>        <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;background&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
+                <span class="s1">&#39;border&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
+                <span class="s1">&#39;text&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+                <span class="s1">&#39;grid&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+        <span class="p">)</span>
 <span class="p">);</span>
 
 <span class="nv">$cap</span> <span class="o">=</span> <span class="nx">create_captcha</span><span class="p">(</span><span class="nv">$vals</span><span class="p">);</span>
@@ -167,6 +175,7 @@ font will be used.</li>
 in the captcha folder before it will be deleted. The default is two
 hours.</li>
 <li><strong>word_length</strong> defaults to 8, <strong>pool</strong> defaults to &#8216;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&#8217;</li>
+<li>If any of the <strong>colors</strong> values is missing, it will be replaced by the default.</li>
 </ul>
 </div>
 <div class="section" id="adding-a-database">

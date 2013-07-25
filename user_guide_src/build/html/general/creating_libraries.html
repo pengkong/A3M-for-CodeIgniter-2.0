@@ -29,7 +29,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x22e4c80>
+			<function <lambda> at 0x3537d70>
 			</div>
 		</div>
 
@@ -107,8 +107,7 @@ initialized.</p>
 </div>
 <div class="section" id="the-class-file">
 <h2>The Class File<a class="headerlink" href="#the-class-file" title="Permalink to this headline">¶</a></h2>
-<p>Classes should have this basic prototype (Note: We are using the name
-Someclass purely as an example):</p>
+<p>Classes should have this basic prototype:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span> <span class="k">if</span> <span class="p">(</span> <span class="o">!</span> <span class="nb">defined</span><span class="p">(</span><span class="s1">&#39;BASEPATH&#39;</span><span class="p">))</span> <span class="k">exit</span><span class="p">(</span><span class="s1">&#39;No direct script access allowed&#39;</span><span class="p">);</span>
 
 <span class="k">class</span> <span class="nc">Someclass</span> <span class="p">{</span>
@@ -120,6 +119,10 @@ Someclass purely as an example):</p>
 
 <span class="cm">/* End of file Someclass.php */</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We are using the name Someclass purely as an example.</p>
 </div>
 </div>
 <div class="section" id="using-your-class">
@@ -143,7 +146,7 @@ array via the second parameter and it will be passed to your class
 constructor:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$params</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;large&#39;</span><span class="p">,</span> <span class="s1">&#39;color&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;red&#39;</span><span class="p">);</span>
 
-<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">library</span><span class="p">(</span><span class="s1">&#39;Someclass&#39;</span><span class="p">,</span> <span class="nv">$params</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">library</span><span class="p">(</span><span class="s1">&#39;someclass&#39;</span><span class="p">,</span> <span class="nv">$params</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>If you use this feature you must set up your class constructor to expect

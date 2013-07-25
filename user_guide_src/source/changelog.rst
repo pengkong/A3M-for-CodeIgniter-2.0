@@ -19,6 +19,7 @@ Release Date: Not Released
 -  General Changes
 
    -  PHP 5.1.6 is no longer supported. CodeIgniter now requires PHP 5.2.4.
+   -  Changed filenaming convention (class file names now must be Ucfirst and everything else in lowercase).
    -  ``$_SERVER['CI_ENV']`` can now be set to control the ``ENVIRONMENT`` constant.
    -  Added an optional backtrace to php-error template.
    -  Added Android to the list of user agents.
@@ -76,6 +77,7 @@ Release Date: Not Released
       - Added support (auto-detection) for HTTP/1.1 response code 303 in :php:func:`redirect()`.
       - Changed :php:func:`redirect()` to only choose the **refresh** method only on IIS servers, instead of all servers on Windows (when **auto** is used).
       - Changed :php:func:`anchor()`, :php:func:`anchor_popup()`, and :php:func:`redirect()` to support protocol-relative URLs (e.g. *//ellislab.com/codeigniter*).
+      - Added an optional second parameter to both :php:func:`base_url()` and :php:func:`site_url()` that allows enforcing of a protocol different than the one in the *base_url* configuration setting.
 
    -  :doc:`HTML Helper <helpers/html_helper>` changes include:
 
@@ -122,10 +124,14 @@ Release Date: Not Released
       - Deprecated function ``trim_slashes()`` - it's just an alias for PHP's native ``trim()`` (with a slash as its second argument).
       - Deprecated randomization type options **unique** and **encrypt** for funcion :php:func:`random_string()` (they are only aliases for **md5** and **sha1** respectively).
 
+   -  :doc:`CAPTCHA Helper <helpers/captcha_helper>` changes include:
+
+      - Added *word_length* and *pool* options to allow customization of the generated word.
+      - Added *colors* configuration to allow customization for the *background*, *border*, *text* and *grid* colors.
+
    -  :doc:`Directory Helper <helpers/directory_helper>` :php:func:`directory_map()` will now append ``DIRECTORY_SEPARATOR`` to directory names in the returned array.
    -  :doc:`Language Helper <helpers/language_helper>` :php:func:`lang()` now accepts an optional list of additional HTML attributes.
    -  Deprecated the :doc:`Email Helper <helpers/email_helper>` as its ``valid_email()``, ``send_email()`` functions are now only aliases for PHP native functions ``filter_var()`` and ``mail()`` respectively.
-   -  :doc:`CAPTCHA Helper <helpers/captcha_helper>` :php:func:`create_captcha` added word_length and pool options for setting length of randomly generated captcha word, and what characters to select from.
 
 -  Database
 
@@ -255,6 +261,7 @@ Release Date: Not Released
       -  Added ``has_userdata()`` method to verify existence of userdata item.
       -  Added ``tempdata()``, ``set_tempdata()``, and ``unset_tempdata()`` methods for manipulating tempdata.
       -  ``keep_flashdata()`` now accepts an array of keys.
+      -  Added *debug* level log messages for key events in the session validation process.
 
    -  :doc:`File Uploading Library <libraries/file_uploading>` changes include:
 
@@ -368,6 +375,8 @@ Release Date: Not Released
       -  ``$config['rewrite_short_tags']`` now has no effect when using PHP 5.4 as ``<?=`` will always be available.
       -  Changed method ``config()`` to return whatever ``CI_Config::load()`` returns instead of always being void.
       -  Added support for model aliasing on autoload.
+      -  Changed method ``is_loaded()`` to ask for the (case sensitive) library name instead of its instance name.
+      -  Removed ``$_base_classes`` property and unified all class data in ``$_ci_classes`` instead.
 
    -  :doc:`Input Library <libraries/input>` changes include:
 
@@ -408,7 +417,7 @@ Release Date: Not Released
    -  :doc:`URI Routing <general/routing>` changes include:
 
       -  Added possibility to route requests using callbacks.
-      -  Added possibility to use dashes in the controller and method URI segments (translated to underscores).
+      -  Added a new reserved route (*translate_uri_dashes*) to allow usage of dashes in the controller and method URI segments.
       -  Deprecated methods ``fetch_directory()``, ``fetch_class()`` and ``fetch_method()`` in favor of their respective public properties.
 
    -  :doc:`Language Library <libraries/language>` changes include:
@@ -477,7 +486,7 @@ Bug fixes for 3.0
 -  Fixed a bug (#23, #1238) - delete_all() in the `Database Caching Library <database/caching>` used to delete .htaccess and index.html files, which is a potential security risk.
 -  Fixed a bug in :doc:`Trackback Library <libraries/trackback>` method validate_url() where it didn't actually do anything, due to input not being passed by reference.
 -  Fixed a bug (#11, #183, #863) - CI_Form_validation::_execute() silently continued to the next rule, if a rule method/function is not found.
--  Fixed a bug (#122) Where routed uri string was being reported incorrectly in sub-directories.
+-  Fixed a bug (#122) - routed URI string was being reported incorrectly in sub-directories.
 -  Fixed a bug (#1242) - read_dir() in the :doc:`Zip Library <libraries/zip>` wasn't compatible with Windows.
 -  Fixed a bug (#306) - ODBC driver didn't have an _insert_batch() method, which resulted in fatal error being triggered when insert_batch() is used with it.
 -  Fixed a bug in MSSQL and SQLSrv's _truncate() where the TABLE keyword was missing.
@@ -585,6 +594,11 @@ Bug fixes for 3.0
 -  Fixed a bug (#2380) - :doc:`URI Routing <general/routing>` method ``fetch_method()`` returned 'index' if the requested method name matches its controller name.
 -  Fixed a bug (#2388) - :doc:`Email Library <libraries/email>` used to ignore attachment errors, resulting in broken emails being sent.
 -  Fixed a bug (#2498) - :doc:`Form Validation Library <libraries/form_validation>` rule **valid_base64** only checked characters instead of actual validity.
+-  Fixed a bug (#2425) - OCI8 :doc:`database <database>` driver's method ``stored_procedure()`` didn't log an error unless **db_debug** was set to TRUE.
+-  Fixed a bug (#2490) - :doc:`Database Class <database/queries>` method ``query()`` returning boolean instead of a result object for PostgreSQL-specific *INSERT INTO ... RETURNING* statements.
+-  Fixed a bug (#249) - :doc:`Cache Library <libraries/caching>` didn't properly handle Memcache(d) configurations with missing options.
+-  Fixed a bug (#180) - :php:func:`config_item()` didn't take into account run-time configuration changes.
+-  Fixed a bug (#2551) - :doc:`Loader Library <libraries/loader>` method ``library()`` didn't properly check if a class that is being loaded already exits.
 
 Version 2.1.4
 =============

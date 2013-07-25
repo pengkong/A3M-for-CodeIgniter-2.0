@@ -28,7 +28,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x49509b0>
+			<function <lambda> at 0x2af2d70>
 			</div>
 		</div>
 
@@ -83,6 +83,7 @@ all licensing authority over your own application code.</li>
 </li>
 <li>General Changes<ul>
 <li>PHP 5.1.6 is no longer supported. CodeIgniter now requires PHP 5.2.4.</li>
+<li>Changed filenaming convention (class file names now must be Ucfirst and everything else in lowercase).</li>
 <li><tt class="docutils literal"><span class="pre">$_SERVER['CI_ENV']</span></tt> can now be set to control the <tt class="docutils literal"><span class="pre">ENVIRONMENT</span></tt> constant.</li>
 <li>Added an optional backtrace to php-error template.</li>
 <li>Added Android to the list of user agents.</li>
@@ -139,6 +140,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Added support (auto-detection) for HTTP/1.1 response code 303 in <tt class="xref php php-func docutils literal"><span class="pre">redirect()</span></tt>.</li>
 <li>Changed <tt class="xref php php-func docutils literal"><span class="pre">redirect()</span></tt> to only choose the <strong>refresh</strong> method only on IIS servers, instead of all servers on Windows (when <strong>auto</strong> is used).</li>
 <li>Changed <tt class="xref php php-func docutils literal"><span class="pre">anchor()</span></tt>, <a class="reference internal" href="helpers/url_helper.html#anchor_popup" title="anchor_popup"><tt class="xref php php-func docutils literal"><span class="pre">anchor_popup()</span></tt></a>, and <tt class="xref php php-func docutils literal"><span class="pre">redirect()</span></tt> to support protocol-relative URLs (e.g. <em>//ellislab.com/codeigniter</em>).</li>
+<li>Added an optional second parameter to both <a class="reference internal" href="helpers/url_helper.html#base_url" title="base_url"><tt class="xref php php-func docutils literal"><span class="pre">base_url()</span></tt></a> and <a class="reference internal" href="helpers/url_helper.html#site_url" title="site_url"><tt class="xref php php-func docutils literal"><span class="pre">site_url()</span></tt></a> that allows enforcing of a protocol different than the one in the <em>base_url</em> configuration setting.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="helpers/html_helper.html"><em>HTML Helper</em></a> changes include:<ul>
@@ -186,10 +188,14 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Deprecated randomization type options <strong>unique</strong> and <strong>encrypt</strong> for funcion <a class="reference internal" href="helpers/string_helper.html#random_string" title="random_string"><tt class="xref php php-func docutils literal"><span class="pre">random_string()</span></tt></a> (they are only aliases for <strong>md5</strong> and <strong>sha1</strong> respectively).</li>
 </ul>
 </li>
+<li><a class="reference internal" href="helpers/captcha_helper.html"><em>CAPTCHA Helper</em></a> changes include:<ul>
+<li>Added <em>word_length</em> and <em>pool</em> options to allow customization of the generated word.</li>
+<li>Added <em>colors</em> configuration to allow customization for the <em>background</em>, <em>border</em>, <em>text</em> and <em>grid</em> colors.</li>
+</ul>
+</li>
 <li><a class="reference internal" href="helpers/directory_helper.html"><em>Directory Helper</em></a> <a class="reference internal" href="helpers/directory_helper.html#directory_map" title="directory_map"><tt class="xref php php-func docutils literal"><span class="pre">directory_map()</span></tt></a> will now append <tt class="docutils literal"><span class="pre">DIRECTORY_SEPARATOR</span></tt> to directory names in the returned array.</li>
 <li><a class="reference internal" href="helpers/language_helper.html"><em>Language Helper</em></a> <tt class="xref php php-func docutils literal"><span class="pre">lang()</span></tt> now accepts an optional list of additional HTML attributes.</li>
 <li>Deprecated the <a class="reference internal" href="helpers/email_helper.html"><em>Email Helper</em></a> as its <tt class="docutils literal"><span class="pre">valid_email()</span></tt>, <tt class="docutils literal"><span class="pre">send_email()</span></tt> functions are now only aliases for PHP native functions <tt class="docutils literal"><span class="pre">filter_var()</span></tt> and <tt class="docutils literal"><span class="pre">mail()</span></tt> respectively.</li>
-<li><a class="reference internal" href="helpers/captcha_helper.html"><em>CAPTCHA Helper</em></a> <tt class="xref php php-func docutils literal"><span class="pre">create_captcha</span></tt> added word_length and pool options for setting length of randomly generated captcha word, and what characters to select from.</li>
 </ul>
 </li>
 <li>Database<ul>
@@ -318,6 +324,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Added <tt class="docutils literal"><span class="pre">has_userdata()</span></tt> method to verify existence of userdata item.</li>
 <li>Added <tt class="docutils literal"><span class="pre">tempdata()</span></tt>, <tt class="docutils literal"><span class="pre">set_tempdata()</span></tt>, and <tt class="docutils literal"><span class="pre">unset_tempdata()</span></tt> methods for manipulating tempdata.</li>
 <li><tt class="docutils literal"><span class="pre">keep_flashdata()</span></tt> now accepts an array of keys.</li>
+<li>Added <em>debug</em> level log messages for key events in the session validation process.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="libraries/file_uploading.html"><em>File Uploading Library</em></a> changes include:<ul>
@@ -431,6 +438,8 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li><tt class="docutils literal"><span class="pre">$config['rewrite_short_tags']</span></tt> now has no effect when using PHP 5.4 as <tt class="docutils literal"><span class="pre">&lt;?=</span></tt> will always be available.</li>
 <li>Changed method <tt class="docutils literal"><span class="pre">config()</span></tt> to return whatever <tt class="docutils literal"><span class="pre">CI_Config::load()</span></tt> returns instead of always being void.</li>
 <li>Added support for model aliasing on autoload.</li>
+<li>Changed method <tt class="docutils literal"><span class="pre">is_loaded()</span></tt> to ask for the (case sensitive) library name instead of its instance name.</li>
+<li>Removed <tt class="docutils literal"><span class="pre">$_base_classes</span></tt> property and unified all class data in <tt class="docutils literal"><span class="pre">$_ci_classes</span></tt> instead.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="libraries/input.html"><em>Input Library</em></a> changes include:<ul>
@@ -471,7 +480,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 </li>
 <li><a class="reference internal" href="general/routing.html"><em>URI Routing</em></a> changes include:<ul>
 <li>Added possibility to route requests using callbacks.</li>
-<li>Added possibility to use dashes in the controller and method URI segments (translated to underscores).</li>
+<li>Added a new reserved route (<em>translate_uri_dashes</em>) to allow usage of dashes in the controller and method URI segments.</li>
 <li>Deprecated methods <tt class="docutils literal"><span class="pre">fetch_directory()</span></tt>, <tt class="docutils literal"><span class="pre">fetch_class()</span></tt> and <tt class="docutils literal"><span class="pre">fetch_method()</span></tt> in favor of their respective public properties.</li>
 </ul>
 </li>
@@ -542,7 +551,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Fixed a bug (#23, #1238) - delete_all() in the <cite>Database Caching Library &lt;database/caching&gt;</cite> used to delete .htaccess and index.html files, which is a potential security risk.</li>
 <li>Fixed a bug in <a class="reference internal" href="libraries/trackback.html"><em>Trackback Library</em></a> method validate_url() where it didn&#8217;t actually do anything, due to input not being passed by reference.</li>
 <li>Fixed a bug (#11, #183, #863) - CI_Form_validation::_execute() silently continued to the next rule, if a rule method/function is not found.</li>
-<li>Fixed a bug (#122) Where routed uri string was being reported incorrectly in sub-directories.</li>
+<li>Fixed a bug (#122) - routed URI string was being reported incorrectly in sub-directories.</li>
 <li>Fixed a bug (#1242) - read_dir() in the <a class="reference internal" href="libraries/zip.html"><em>Zip Library</em></a> wasn&#8217;t compatible with Windows.</li>
 <li>Fixed a bug (#306) - ODBC driver didn&#8217;t have an _insert_batch() method, which resulted in fatal error being triggered when insert_batch() is used with it.</li>
 <li>Fixed a bug in MSSQL and SQLSrv&#8217;s _truncate() where the TABLE keyword was missing.</li>
@@ -650,6 +659,11 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Fixed a bug (#2380) - <a class="reference internal" href="general/routing.html"><em>URI Routing</em></a> method <tt class="docutils literal"><span class="pre">fetch_method()</span></tt> returned &#8216;index&#8217; if the requested method name matches its controller name.</li>
 <li>Fixed a bug (#2388) - <a class="reference internal" href="libraries/email.html"><em>Email Library</em></a> used to ignore attachment errors, resulting in broken emails being sent.</li>
 <li>Fixed a bug (#2498) - <a class="reference internal" href="libraries/form_validation.html"><em>Form Validation Library</em></a> rule <strong>valid_base64</strong> only checked characters instead of actual validity.</li>
+<li>Fixed a bug (#2425) - OCI8 <tt class="xref doc docutils literal"><span class="pre">database</span></tt> driver&#8217;s method <tt class="docutils literal"><span class="pre">stored_procedure()</span></tt> didn&#8217;t log an error unless <strong>db_debug</strong> was set to TRUE.</li>
+<li>Fixed a bug (#2490) - <a class="reference internal" href="database/queries.html"><em>Database Class</em></a> method <tt class="docutils literal"><span class="pre">query()</span></tt> returning boolean instead of a result object for PostgreSQL-specific <em>INSERT INTO ... RETURNING</em> statements.</li>
+<li>Fixed a bug (#249) - <a class="reference internal" href="libraries/caching.html"><em>Cache Library</em></a> didn&#8217;t properly handle Memcache(d) configurations with missing options.</li>
+<li>Fixed a bug (#180) - <a class="reference internal" href="general/common_functions.html#config_item" title="config_item"><tt class="xref php php-func docutils literal"><span class="pre">config_item()</span></tt></a> didn&#8217;t take into account run-time configuration changes.</li>
+<li>Fixed a bug (#2551) - <a class="reference internal" href="libraries/loader.html"><em>Loader Library</em></a> method <tt class="docutils literal"><span class="pre">library()</span></tt> didn&#8217;t properly check if a class that is being loaded already exits.</li>
 </ul>
 </div>
 </div>
