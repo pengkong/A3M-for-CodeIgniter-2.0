@@ -5,7 +5,7 @@
 	<head>
 		<meta charset="utf-8">
 	    
-	    <title>Upgrading from 2.1.3 to 3.0.0 &mdash; CodeIgniter 3.0-dev documentation</title>
+	    <title>Upgrading from 2.1.4 to 3.0.0 &mdash; CodeIgniter 3.0-dev documentation</title>
 
 	    <link rel="stylesheet" href="../_static/asset/css/common.css" type="text/css" />
 	    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -24,12 +24,12 @@
 	    <link rel="top" title="CodeIgniter 3.0-dev documentation" href="../index.html" />
 	    <link rel="up" title="Installation Instructions" href="index.html" />
 	    <link rel="next" title="Upgrading From Beta 1.0 to Beta 1.1" href="upgrade_b11.html" />
-	    <link rel="prev" title="Upgrading from 2.1.2 to 2.1.3" href="upgrade_213.html" /> 
+	    <link rel="prev" title="Upgrading from 2.1.3 to 2.1.4" href="upgrade_214.html" /> 
 	</head>
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x295fc08>
+			<function <lambda> at 0x2af2578>
 			</div>
 		</div>
 
@@ -62,13 +62,13 @@
 			<ul>
 				<li><a href="../index.html">User Guide Home</a>&nbsp;&nbsp; &rsaquo;</li>
 				<li><a href="index.html" accesskey="U">Installation Instructions</a>&nbsp;&nbsp;  &rsaquo;</li>
-				<li><strong>Upgrading from 2.1.3 to 3.0.0</strong></li>
+				<li><strong>Upgrading from 2.1.4 to 3.0.0</strong></li>
 			</ul>
 		</div><!-- /#header -->
 
 		<div class="section body" id="content">
-  <div class="section" id="upgrading-from-2-1-3-to-3-0-0">
-<h1>Upgrading from 2.1.3 to 3.0.0<a class="headerlink" href="#upgrading-from-2-1-3-to-3-0-0" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="upgrading-from-2-1-4-to-3-0-0">
+<h1>Upgrading from 2.1.4 to 3.0.0<a class="headerlink" href="#upgrading-from-2-1-4-to-3-0-0" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">These upgrade notes are for a version that is yet to be released.</p>
@@ -85,28 +85,59 @@ they will need to be made fresh in this new one.</p>
 make copies of them first.</p>
 </div>
 </div>
-<div class="section" id="step-2-replace-config-mimes-php">
-<h2>Step 2: Replace config/mimes.php<a class="headerlink" href="#step-2-replace-config-mimes-php" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-2-update-your-classes-file-names">
+<h2>Step 2: Update your classes file names<a class="headerlink" href="#step-2-update-your-classes-file-names" title="Permalink to this headline">¶</a></h2>
+<p>Starting with CodeIgniter 3.0, all class filenames (libraries, drivers, controllers
+and models) must be named in a Ucfirst-like manner or in other words - they must
+start with a capital letter.</p>
+<p>For example, if you have the following library file:</p>
+<blockquote>
+<div>application/libraries/mylibrary.php</div></blockquote>
+<p>... then you&#8217;ll have to rename it to:</p>
+<blockquote>
+<div>application/libraries/Mylibrary.php</div></blockquote>
+<p>The same goes for driver libraries and extensions and/or overrides of CodeIgniter&#8217;s
+own libraries and core classes.</p>
+<blockquote>
+<div>application/libraries/MY_email.php
+application/core/MY_log.php</div></blockquote>
+<p>The above files should respectively be renamed to the following:</p>
+<blockquote>
+<div>application/libraries/MY_Email.php
+application/core/MY_Log.php</div></blockquote>
+<p>Controllers:</p>
+<blockquote>
+<div>application/controllers/welcome.php     -&gt;      application/controllers/Welcome.php</div></blockquote>
+<p>Models:</p>
+<blockquote>
+<div>application/models/misc_model.php       -&gt;      application/models/Misc_model.php</div></blockquote>
+<p>Please note that this DOES NOT affect directories, configuration files, views,
+helpers, hooks and anything else - it is only applied to classes.</p>
+<p>You must now follow just one simple rule - class names in Ucfirst and everything else
+in lowercase.</p>
+</div>
+<div class="section" id="step-3-replace-config-mimes-php">
+<h2>Step 3: Replace config/mimes.php<a class="headerlink" href="#step-3-replace-config-mimes-php" title="Permalink to this headline">¶</a></h2>
 <p>This config file has been updated to contain more user mime-types, please copy
 it to _application/config/mimes.php*.</p>
 </div>
-<div class="section" id="step-3-remove-autoload-core-from-your-config-autoload-php">
-<h2>Step 3: Remove $autoload[&#8216;core&#8217;] from your config/autoload.php<a class="headerlink" href="#step-3-remove-autoload-core-from-your-config-autoload-php" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-4-remove-autoload-core-from-your-config-autoload-php">
+<h2>Step 4: Remove $autoload[&#8216;core&#8217;] from your config/autoload.php<a class="headerlink" href="#step-4-remove-autoload-core-from-your-config-autoload-php" title="Permalink to this headline">¶</a></h2>
 <p>Use of the <tt class="docutils literal"><span class="pre">$autoload['core']</span></tt> config array has been deprecated as of CodeIgniter 1.4.1 and is now removed.
 Move any entries that you might have listed there to <tt class="docutils literal"><span class="pre">$autoload['libraries']</span></tt> instead.</p>
 </div>
-<div class="section" id="step-4-move-your-log-class-overrides-or-extensions">
-<h2>Step 4: Move your Log class overrides or extensions<a class="headerlink" href="#step-4-move-your-log-class-overrides-or-extensions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-5-move-your-log-class-overrides-or-extensions">
+<h2>Step 5: Move your Log class overrides or extensions<a class="headerlink" href="#step-5-move-your-log-class-overrides-or-extensions" title="Permalink to this headline">¶</a></h2>
 <p>The Log Class is considered as a &#8220;core&#8221; class and is now located in the
 <strong>system/core/</strong> directory. Therefore, in order for your Log class overrides
 or extensions to work, you need to move them to <strong>application/core/</strong>:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nx">application</span><span class="o">/</span><span class="nx">libraries</span><span class="o">/</span><span class="nx">Log</span><span class="o">.</span><span class="nx">php</span> <span class="o">-&gt;</span> <span class="na">application</span><span class="o">/</span><span class="nx">core</span><span class="o">/</span><span class="nx">Log</span><span class="o">.</span><span class="nx">php</span>
-<span class="nx">application</span><span class="o">/</span><span class="nx">libraries</span><span class="o">/</span><span class="nx">MY_Log</span><span class="o">.</span><span class="nx">php</span> <span class="o">-&gt;</span> <span class="na">application</span><span class="o">/</span><span class="nx">core</span><span class="o">/</span><span class="nx">MY_log</span><span class="o">.</span><span class="nx">php</span>
+<span class="nx">application</span><span class="o">/</span><span class="nx">libraries</span><span class="o">/</span><span class="nx">MY_Log</span><span class="o">.</span><span class="nx">php</span> <span class="o">-&gt;</span> <span class="na">application</span><span class="o">/</span><span class="nx">core</span><span class="o">/</span><span class="nx">MY_Log</span><span class="o">.</span><span class="nx">php</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="step-5-convert-your-session-usage-from-library-to-driver">
-<h2>Step 5: Convert your Session usage from library to driver<a class="headerlink" href="#step-5-convert-your-session-usage-from-library-to-driver" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-6-convert-your-session-usage-from-library-to-driver">
+<h2>Step 6: Convert your Session usage from library to driver<a class="headerlink" href="#step-6-convert-your-session-usage-from-library-to-driver" title="Permalink to this headline">¶</a></h2>
 <p>When you load (or autoload) the Session library, you must now load it as a driver instead of a library. This means
 calling <tt class="docutils literal"><span class="pre">$this-&gt;load-&gt;driver('session')</span></tt> instead of <tt class="docutils literal"><span class="pre">$this-&gt;load-&gt;library('session')</span></tt> and/or listing &#8216;session&#8217;
 in <tt class="docutils literal"><span class="pre">$autoload['drivers']</span></tt> instead of <tt class="docutils literal"><span class="pre">$autoload['libraries']</span></tt>.</p>
@@ -134,8 +165,8 @@ add them for clarity and ease of configuration in the future.</p>
 standard for Drivers. Also beware that some functions which are not part of the external Session API have moved into
 the drivers, so your extension may have to be broken down into separate library and driver class extensions.</p>
 </div>
-<div class="section" id="step-6-update-your-config-database-php">
-<h2>Step 6: Update your config/database.php<a class="headerlink" href="#step-6-update-your-config-database-php" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-7-update-your-config-database-php">
+<h2>Step 7: Update your config/database.php<a class="headerlink" href="#step-7-update-your-config-database-php" title="Permalink to this headline">¶</a></h2>
 <p>Due to 3.0.0&#8217;s renaming of Active Record to Query Builder, inside your <cite>config/database.php</cite>, you will
 need to rename the <cite>$active_record</cite> variable to <cite>$query_builder</cite></p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$active_group</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span><span class="p">;</span>
@@ -144,12 +175,12 @@ need to rename the <cite>$active_record</cite> variable to <cite>$query_builder<
 </pre></div>
 </div>
 </div>
-<div class="section" id="step-7-move-your-errors-folder">
-<h2>Step 7: Move your errors folder<a class="headerlink" href="#step-7-move-your-errors-folder" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-8-move-your-error-templates-directory">
+<h2>Step 8: Move your error templates directory<a class="headerlink" href="#step-8-move-your-error-templates-directory" title="Permalink to this headline">¶</a></h2>
 <p>In version 3.0.0, the errors folder has been moved from _application/errors* to _application/views/errors*.</p>
 </div>
-<div class="section" id="step-8-update-your-config-routes-php-containing-any">
-<h2>Step 8: Update your config/routes.php containing (:any)<a class="headerlink" href="#step-8-update-your-config-routes-php-containing-any" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-9-update-your-config-routes-php-containing-any">
+<h2>Step 9: Update your config/routes.php containing (:any)<a class="headerlink" href="#step-9-update-your-config-routes-php-containing-any" title="Permalink to this headline">¶</a></h2>
 <p>Historically, CodeIgniter has always provided the <strong>:any</strong> wildcard in routing,
 with the intention of providing a way to match any character <strong>within</strong> an URI segment.</p>
 <p>However, the <strong>:any</strong> wildcard is actually just an alias for a regular expression
@@ -164,26 +195,6 @@ regular expression:</p>
 <span class="p">(</span><span class="o">:</span><span class="nx">any</span><span class="p">)</span>  <span class="c1">// matches any character, except for &#39;/&#39;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="step-9-update-your-libraries-file-names">
-<h2>Step 9: Update your libraries&#8217; file names<a class="headerlink" href="#step-9-update-your-libraries-file-names" title="Permalink to this headline">¶</a></h2>
-<p>CodeIgniter 3.0 only allows library file names to be named in a <em>ucfirst</em> manner
-(meaning that the first letter of the class name must be a capital). For example,
-if you have the following library file:</p>
-<blockquote>
-<div>application/libraries/mylibrary.php</div></blockquote>
-<p>... then you&#8217;ll have to rename it to:</p>
-<blockquote>
-<div>application/libraries/Mylibrary.php</div></blockquote>
-<p>The same goes for driver libraries and extensions and/or overrides of CodeIgniter&#8217;s
-own libraries and core classes.</p>
-<blockquote>
-<div>application/libraries/MY_email.php
-application/core/MY_log.php</div></blockquote>
-<p>The above files should respectively be renamed to the following:</p>
-<blockquote>
-<div>application/libraries/MY_Email.php
-application/core/MY_Log.php</div></blockquote>
 </div>
 <div class="section" id="step-10-check-the-calls-to-array-helper-s-element-and-elements-functions">
 <h2>Step 10: Check the calls to Array Helper&#8217;s element() and elements() functions<a class="headerlink" href="#step-10-check-the-calls-to-array-helper-s-element-and-elements-functions" title="Permalink to this headline">¶</a></h2>
