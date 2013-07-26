@@ -165,7 +165,10 @@ $this->authentication->sign_in($this->input->post('sign_in_username_email', TRUE
 
 If the password and username are correct it will login the user and will redirect to the home page, or it will redirect the user to the page that has been passed via `GET` `continue` or via session session `sign_in_redirect`.
 
-If the login attempt fails for any reason, it will return boolean value of FALSE and increase the session counter of failed attempts, which you can access under `sign_in_failed_attempts`. To make a check that the user didn't pass over the limit you can call this in an if statement `$this->session->userdata('sign_in_failed_attempts') < $this->config->item('sign_in_recaptcha_offset')`.
+If the login attempt fails for any reason, it will return boolean value of FALSE and increase the session counter of failed attempts, which you can access under `sign_in_failed_attempts`. To make a check that the user didn't pass over the limit you can call this in an if statement:
+```php
+$this->session->userdata('sign_in_failed_attempts') < $this->config->item('sign_in_recaptcha_offset')
+```
 
 Lastly "Remember me?" is a booblean variable which will keep the user signed in for a longer period of time.
 

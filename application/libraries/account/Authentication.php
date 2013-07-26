@@ -71,11 +71,11 @@ class Authentication {
 				//Due to new functionality in CI3 remember me feature is temporarily disabled
 				//$remember ? $this->CI->session->cookie_monster(TRUE) : $this->CI->session->cookie_monster(FALSE);
 				
-				$this->CI->session->set_userdata('account_id', $account_id);
+				$this->CI->session->set_userdata('account_id', $user->id);
 				
 				$this->CI->load->model('account/account_model');
 				
-				$this->CI->account_model->update_last_signed_in_datetime($account_id);
+				$this->CI->account_model->update_last_signed_in_datetime($user->id);
 				
 				// Redirect signed in user with session redirect
 				if ($redirect = $this->CI->session->userdata('sign_in_redirect'))

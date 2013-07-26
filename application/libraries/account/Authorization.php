@@ -95,10 +95,9 @@ class Authorization {
   // --------------------------------------------------------------------
   
   /**
-   * Check if user has permission
+   * Check if user is admin
    *
    * @access public
-   * @param string $permission_key
    * @return bool
    */
   function is_admin()
@@ -109,6 +108,8 @@ class Authorization {
 
     return $this->CI->acl_role_model->has_role('Admin', $account_id);
   }
+  
+  // --------------------------------------------------------------------
   
   /**
    * Check if user is a specific role
