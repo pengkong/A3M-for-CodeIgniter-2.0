@@ -46,30 +46,52 @@ class Authentication {
 	 * @param bool $remember
 	 * @return void
 	 */
-	function sign_in($account_id, $remember = FALSE)
+	function sign_in($username, $password, $remember = FALSE)
 	{
-		//Due to new functionality in CI3 remember me feature is temporarily disabled
-		//$remember ? $this->CI->session->cookie_monster(TRUE) : $this->CI->session->cookie_monster(FALSE);
-
-		$this->CI->session->set_userdata('account_id', $account_id);
-
-		$this->CI->load->model('account/account_model');
-
-		$this->CI->account_model->update_last_signed_in_datetime($account_id);
-
-		// Redirect signed in user with session redirect
-		if ($redirect = $this->CI->session->userdata('sign_in_redirect'))
+		// Get user by username / email
+		if ( ! $user = $this->CI->account_model->get_by_username_email($username))
 		{
-			$this->CI->session->unset_userdata('sign_in_redirect');
-			redirect($redirect);
+			return FALSE;
 		}
-		// Redirect signed in user with GET continue
-		elseif ($this->CI->input->get('continue'))
+		else
 		{
-			redirect($this->CI->input->get('continue'));
+			// Check password
+			if ( ! $this->check_password($user->password, $password))
+			{
+				// Increment sign in failed attempts
+				$this->CI->session->set_userdata('sign_in_failed_attempts', (int)$this->CI->session->userdata('sign_in_failed_attempts') + 1);
+				
+				return FALSE;
+			}
+			else
+			{
+				// Clear sign in fail counter
+				$this->CI->session->unset_userdata('sign_in_failed_attempts');
+				
+				//Due to new functionality in CI3 remember me feature is temporarily disabled
+				//$remember ? $this->CI->session->cookie_monster(TRUE) : $this->CI->session->cookie_monster(FALSE);
+				
+				$this->CI->session->set_userdata('account_id', $account_id);
+				
+				$this->CI->load->model('account/account_model');
+				
+				$this->CI->account_model->update_last_signed_in_datetime($account_id);
+				
+				// Redirect signed in user with session redirect
+				if ($redirect = $this->CI->session->userdata('sign_in_redirect'))
+				{
+					$this->CI->session->unset_userdata('sign_in_redirect');
+					redirect($redirect);
+				}
+				// Redirect signed in user with GET continue
+				elseif ($this->CI->input->get('continue'))
+				{
+					redirect($this->CI->input->get('continue'));
+				}
+				
+				redirect('');
+			}
 		}
-
-		redirect('');
 	}
 
 	// --------------------------------------------------------------------
@@ -83,6 +105,8 @@ class Authentication {
 	function sign_out()
 	{
 		$this->CI->session->unset_userdata('account_id');
+		
+		redirect('');
 	}
 
 	// --------------------------------------------------------------------
@@ -95,7 +119,7 @@ class Authentication {
 	 * @param string $password
 	 * @return bool
 	 */
-	function check_password($password_hash, $password)
+	private function check_password($password_hash, $password)
 	{
 		$this->CI->load->helper('account/phpass');
 

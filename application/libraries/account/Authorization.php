@@ -109,13 +109,25 @@ class Authorization {
 
     return $this->CI->acl_role_model->has_role('Admin', $account_id);
   }
+  
+  /**
+   * Check if user is a specific role
+   *
+   * @access public
+   * @param string $role
+   * @return bool
+   */
+  function is_role($role)
+  {
+    $account_id = $this->CI->session->userdata('account_id');
+    
+    $this->CI->load->model('account/acl_role_model');
+    
+    return $this->CI->acl_role_model->has_role($role, $account_id);
+  }
 
 }
 
 
 /* End of file Authorization.php */
 /* Location: ./application/account/libraries/Authorization.php */
-
-// --------------------------------------------------------------------
-  
-  
