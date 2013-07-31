@@ -67,5 +67,5 @@ class Account_facebook_model extends CI_Model {
 }
 
 
-/* End of file account_facebook_model.php */
-/* Location: ./application/account/models/account_facebook_model.php */
+/* End of file Account_facebook_model.php */
+/* Location: ./application/models/account/Account_facebook_model.php */

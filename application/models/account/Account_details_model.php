@@ -134,5 +134,5 @@ class Account_details_model extends CI_Model {
 
 }
 
-/* End of file account_details_model.php */
-/* Location: ./application/account/models/account_details_model.php */
+/* End of file Account_details_model.php */
+/* Location: ./application/models/account/Account_details_model.php */

@@ -167,11 +167,11 @@ class Manage_users extends CI_Controller {
         array(
           'field' => 'users_new_password', 
           'label' => 'lang:password_new_password', 
-          'rules' => 'trim|'.($is_new?'required':'optional').'|min_length[6]'),
+          'rules' => 'trim|'.($is_new?'required|':NULL).'min_length[6]'),
         array(
           'field' => 'users_retype_new_password', 
           'label' => 'lang:password_retype_new_password', 
-          'rules' => 'trim|'.($is_new?'required':'optional').'|matches[users_new_password]')
+          'rules' => 'trim|'.($is_new?'required|':NULL).'matches[users_new_password]')
       ));
 
     // Run form validation
@@ -310,5 +310,5 @@ class Manage_users extends CI_Controller {
   }
 }
 
-/* End of file manage_users.php */
-/* Location: ./application/controllers/admin/manage_users.php */
+/* End of file Manage_users.php */
+/* Location: ./application/controllers/admin/Manage_users.php */

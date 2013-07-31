@@ -26,5 +26,5 @@ class Ref_iptocountry_model extends CI_Model {
 }
 
 
-/* End of file ref_iptocountry_model.php */
-/* Location: ./application/account/models/ref_iptocountry_model.php */
+/* End of file Ref_iptocountry_model.php */
+/* Location: ./application/models/account/Ref_iptocountry_model.php */

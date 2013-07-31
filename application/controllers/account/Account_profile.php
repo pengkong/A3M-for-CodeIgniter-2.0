@@ -146,5 +146,5 @@ class Account_profile extends CI_Controller {
 }
 
 
-/* End of file account_profile.php */
-/* Location: ./application/account/controllers/account_profile.php */
+/* End of file Account_profile.php */
+/* Location: ./application/controllers/account/Account_profile.php */

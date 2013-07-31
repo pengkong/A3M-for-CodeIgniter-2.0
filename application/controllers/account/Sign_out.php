@@ -44,5 +44,5 @@ class Sign_out extends CI_Controller {
 }
 
 
-/* End of file sign_out.php */
-/* Location: ./application/account/controllers/sign_out.php */
+/* End of file Sign_out.php */
+/* Location: ./application/controllers/account/Sign_out.php */

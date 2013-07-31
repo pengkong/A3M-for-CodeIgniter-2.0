@@ -233,5 +233,5 @@ class Manage_permissions extends CI_Controller {
   }
 }
 
-/* End of file manage_permissions.php */
-/* Location: ./application/controllers/admin/manage_permissions.php */
+/* End of file Manage_permissions.php */
+/* Location: ./application/controllers/admin/Manage_permissions.php */

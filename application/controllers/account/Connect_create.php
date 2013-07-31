@@ -118,5 +118,5 @@ class Connect_create extends CI_Controller {
 
 }
 
-/* End of file connect_create.php */
-/* Location: ./application/account/controllers/connect_create.php */
+/* End of file Connect_create.php */
+/* Location: ./application/controllers/account/Connect_create.php */

@@ -49,5 +49,5 @@ class Ref_zoneinfo_model extends CI_Model {
 }
 
 
-/* End of file ref_zoneinfo_model.php */
-/* Location: ./application/account/models/ref_zoneinfo_model.php */
+/* End of file Ref_zoneinfo_model.php */
+/* Location: ./application/models/account/Ref_zoneinfo_model.php */

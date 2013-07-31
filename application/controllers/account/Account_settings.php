@@ -114,5 +114,5 @@ class Account_settings extends CI_Controller {
 }
 
 
-/* End of file account_settings.php */
-/* Location: ./application/account/controllers/account_settings.php */
+/* End of file Account_settings.php */
+/* Location: ./application/controllers/account/Account_settings.php */

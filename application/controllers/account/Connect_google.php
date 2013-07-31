@@ -123,5 +123,5 @@ class Connect_google extends CI_Controller {
 }
 
 
-/* End of file connect_google.php */
-/* Location: ./application/account/controllers/connect_google.php */
+/* End of file Connect_google.php */
+/* Location: ./application/controllers/account/Connect_google.php */

@@ -121,5 +121,5 @@ class Connect_yahoo extends CI_Controller {
 }
 
 
-/* End of file connect_yahoo.php */
-/* Location: ./application/account/controllers/connect_yahoo.php */
+/* End of file Connect_yahoo.php */
+/* Location: ./application/controllers/account/Connect_yahoo.php */

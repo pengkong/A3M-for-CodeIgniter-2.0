@@ -172,3 +172,6 @@ class Acl_role_model extends CI_Model {
     $this->db->delete('a3m_acl_role', array('id' => $role_id));
   }
 }
+
+/* End of file Acl_role_model.php */
+/* Location: ./application/models/account/Acl_role_model.php */

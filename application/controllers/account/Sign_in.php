@@ -85,4 +85,4 @@ class Sign_in extends CI_Controller {
 
 
 /* End of file Sign_in.php */
-/* Location: ./application/account/controllers/Sign_in.php */
+/* Location: ./application/controllers/account/Sign_in.php */

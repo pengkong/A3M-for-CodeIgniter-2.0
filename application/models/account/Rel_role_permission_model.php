@@ -172,3 +172,6 @@ class Rel_role_permission_model extends CI_Model {
     $this->db->delete('a3m_rel_role_permission', array('permission_id' => $permission_id));
   }
 }
+
+/* End of file Rel_role_permission_model.php */
+/* Location: ./application/models/account/Rel_role_permission_model.php */

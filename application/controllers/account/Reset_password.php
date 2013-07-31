@@ -77,5 +77,5 @@ class Reset_password extends CI_Controller {
 }
 
 
-/* End of file reset_password.php */
-/* Location: ./application/account/controllers/reset_password.php */
+/* End of file Reset_password.php */
+/* Location: ./application/controllers/account/Reset_password.php */

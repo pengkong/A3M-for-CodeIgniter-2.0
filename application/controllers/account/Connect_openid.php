@@ -139,5 +139,5 @@ class Connect_openid extends CI_Controller {
 }
 
 
-/* End of file connect_openid.php */
-/* Location: ./application/controllers/account/connect_openid.php */
+/* End of file Connect_openid.php */
+/* Location: ./application/controllers/account/Connect_openid.php */

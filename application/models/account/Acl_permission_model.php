@@ -153,3 +153,6 @@ class Acl_permission_model extends CI_Model {
     $this->db->delete('a3m_acl_permission', array('id' => $permission_id));
   }
 }
+
+/* End of file Acl_permission_model.php */
+/* Location: ./application/models/account/Acl_permission_model.php */

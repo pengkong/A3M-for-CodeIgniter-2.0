@@ -95,5 +95,5 @@ class Account_linked extends CI_Controller {
 }
 
 
-/* End of file account_linked.php */
-/* Location: ./application/account/controllers/account_linked.php */
+/* End of file Account_linked.php */
+/* Location: ./application/controllers/account/Account_linked.php */

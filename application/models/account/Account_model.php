@@ -254,5 +254,5 @@ class Account_model extends CI_Model {
 }
 
 
-/* End of file account_model.php */
-/* Location: ./application/account/models/account_model.php */
+/* End of file Account_model.php */
+/* Location: ./application/models/account/Account_model.php */

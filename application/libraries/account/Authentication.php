@@ -68,8 +68,8 @@ class Authentication {
 				// Clear sign in fail counter
 				$this->CI->session->unset_userdata('sign_in_failed_attempts');
 				
-				//Due to new functionality in CI3 remember me feature is temporarily disabled
-				//$remember ? $this->CI->session->cookie_monster(TRUE) : $this->CI->session->cookie_monster(FALSE);
+				//This needs more testing to make sure that is works properly as many changes were made to this due to CI3 upgrade
+				$remember ? $this->CI->session->cookie->cookie_monster(TRUE) : $this->CI->session->cookie->cookie_monster(FALSE);
 				
 				$this->CI->session->set_userdata('account_id', $user->id);
 				

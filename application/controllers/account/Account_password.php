@@ -58,5 +58,5 @@ class Account_password extends CI_Controller {
 }
 
 
-/* End of file account_password.php */
-/* Location: ./application/account/controllers/account_password.php */
+/* End of file Account_password.php */
+/* Location: ./application/controllers/account/Account_password.php */
