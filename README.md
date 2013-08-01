@@ -58,9 +58,9 @@ See our **[app task board on Trello](https://trello.com/board/a3m/512c08b874b855
 + Download the latest version of [A3M](https://github.com/donjakobo/A3M/)
 + Extract to a folder accessible on your webserver (`/` or something like `/a3m/` )  
 + Create a database by importing `a3m_database.sql` script found it root folder of package  
-+ Configure `/applicaion/config/config.php` & `database.php` to match your CI setup (domain + database credentials)  
++ Configure `/application/config/config.php` & `database.php` to match your CI setup (domain + database credentials)  
 + Modify `.htaccess` file if your app location is different than `/` (example: `domain.com/a3m/`)  
-+ Configure `/applicaion/config/account/*` files to reflect your setup (reCAPTCHA, twitter, facebook, openid providers, etc;)
++ Configure `/application/config/account/*` files to reflect your setup (reCAPTCHA, twitter, facebook, openid providers, etc;)
 
 ### Twitter configuration:
 ##### Twitter site (`https://dev.twitter.com/apps`)
