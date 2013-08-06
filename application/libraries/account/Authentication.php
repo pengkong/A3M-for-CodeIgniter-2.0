@@ -42,7 +42,8 @@ class Authentication {
 	 * Sign user in
 	 *
 	 * @access public
-	 * @param int  $account_id
+	 * @param string  $username
+	 * @param string  $password
 	 * @param bool $remember
 	 * @return void
 	 */
@@ -65,33 +66,48 @@ class Authentication {
 			}
 			else
 			{
-				// Clear sign in fail counter
-				$this->CI->session->unset_userdata('sign_in_failed_attempts');
-				
-				//This needs more testing to make sure that is works properly as many changes were made to this due to CI3 upgrade
-				$remember ? $this->CI->session->cookie->cookie_monster(TRUE) : $this->CI->session->cookie->cookie_monster(FALSE);
-				
-				$this->CI->session->set_userdata('account_id', $user->id);
-				
-				$this->CI->load->model('account/account_model');
-				
-				$this->CI->account_model->update_last_signed_in_datetime($user->id);
-				
-				// Redirect signed in user with session redirect
-				if ($redirect = $this->CI->session->userdata('sign_in_redirect'))
-				{
-					$this->CI->session->unset_userdata('sign_in_redirect');
-					redirect($redirect);
-				}
-				// Redirect signed in user with GET continue
-				elseif ($this->CI->input->get('continue'))
-				{
-					redirect($this->CI->input->get('continue'));
-				}
-				
-				redirect('');
+				$this->sign_in_by_id($user->id, $remember);
 			}
 		}
+	}
+	
+	/**
+	 * Sign user in by id
+	 * Used for things like forgotten password, otherwise it should not be used
+	 * as it doesn't do any checks on validity of the sign in.
+	 *
+	 * @access public
+	 * @param int  $account_id
+	 * @param bool $remember
+	 * @return void
+	 */
+	function sign_in_by_id($account_id, $remember = FALSE)
+	{
+		// Clear sign in fail counter
+		$this->CI->session->unset_userdata('sign_in_failed_attempts');
+		
+		//This needs more testing to make sure that is works properly as many changes were made to this due to CI3 upgrade
+		$remember ? $this->CI->session->cookie->cookie_monster(TRUE) : $this->CI->session->cookie->cookie_monster(FALSE);
+		
+		$this->CI->session->set_userdata('account_id', $account_id);
+		
+		$this->CI->load->model('account/account_model');
+		
+		$this->CI->account_model->update_last_signed_in_datetime($account_id);
+		
+		// Redirect signed in user with session redirect
+		if ($redirect = $this->CI->session->userdata('sign_in_redirect'))
+		{
+			$this->CI->session->unset_userdata('sign_in_redirect');
+			redirect($redirect);
+		}
+		// Redirect signed in user with GET continue
+		elseif ($this->CI->input->get('continue'))
+		{
+			redirect($this->CI->input->get('continue'));
+		}
+		
+		redirect('');
 	}
 
 	// --------------------------------------------------------------------
