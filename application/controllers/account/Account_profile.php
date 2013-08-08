@@ -44,7 +44,13 @@ class Account_profile extends CI_Controller {
 		// Delete profile picture
 		if ($action == 'delete')
 		{
-			unlink(FCPATH.RES_DIR.'/user/profile/'.$data['account_details']->picture); // delete previous picture
+			//check that the picture isn't from gravatar
+			if(!isset($data['gravatar']))
+			{
+				// delete previous picture
+				unlink(FCPATH.RES_DIR.'/user/profile/'.$data['account_details']->picture);
+			}
+			
 			$this->account_details_model->update($data['account']->id, array('picture' => NULL));
 			redirect('account/account_profile');
 		}
