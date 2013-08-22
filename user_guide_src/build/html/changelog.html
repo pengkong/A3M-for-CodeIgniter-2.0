@@ -28,7 +28,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x5cc39b0>
+			<function <lambda> at 0x3a97578>
 			</div>
 		</div>
 
@@ -451,6 +451,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Changed method <tt class="docutils literal"><span class="pre">valid_ip()</span></tt> to use PHP&#8217;s native <tt class="docutils literal"><span class="pre">filter_var()</span></tt> function.</li>
 <li>Changed internal method <tt class="docutils literal"><span class="pre">_sanitize_globals()</span></tt> to skip enforcing reversal of <em>register_globals</em> in PHP 5.4+, where this functionality no longer exists.</li>
 <li>Changed methods <tt class="docutils literal"><span class="pre">get()</span></tt>, <tt class="docutils literal"><span class="pre">post()</span></tt>, <tt class="docutils literal"><span class="pre">get_post()</span></tt>, <tt class="docutils literal"><span class="pre">cookie()</span></tt>, <tt class="docutils literal"><span class="pre">server()</span></tt>, <tt class="docutils literal"><span class="pre">user_agent()</span></tt> to return NULL instead of FALSE when no value is found.</li>
+<li>Added method <tt class="docutils literal"><span class="pre">post_get()</span></tt> and changed <tt class="docutils literal"><span class="pre">get_post()</span></tt> to search in GET data first. Both methods&#8217; names now properly match their GET/POST data search priorities.</li>
 <li>Changed method <tt class="docutils literal"><span class="pre">_fetch_from_array()</span></tt> to parse array notation in field name.</li>
 </ul>
 </li>
