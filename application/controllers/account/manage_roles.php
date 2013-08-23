@@ -169,12 +169,11 @@ class Manage_roles extends CI_Controller {
         // Check if the user should be suspended
         if( $this->authorization->is_permitted('delete_roles') ) 
         {
-          $permission_ban = $this->input->post('manage_role_ban', TRUE);
-          if( isset($permission_ban) )
+          if( $this->input->post('manage_role_ban', TRUE) )
           {
             $this->acl_role_model->update_suspended_datetime($id);
           }
-          else
+          elseif( $this->input->post('manage_role_unban', TRUE))
           {
             $this->acl_role_model->remove_suspended_datetime($id);
           }
@@ -191,17 +190,7 @@ class Manage_roles extends CI_Controller {
         }
         $this->rel_role_permission_model->delete_update_batch($id, $perms);
 
-        if( $is_new )
-        {
-          // Redirect to view the newly created role
-          redirect("account/manage_roles/save/{$id}");
-        }
-        else
-        {
-          // Role information may have been updated, re-get
-          $data['role'] = $this->acl_role_model->get_by_id($id);
-          $data['role_permissions'] = $this->rel_role_permission_model->get_by_role_id($id);
-        }
+        redirect('account/manage_roles');
       }
     }
 

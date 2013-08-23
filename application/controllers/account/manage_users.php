@@ -59,7 +59,13 @@ class Manage_users extends CI_Controller {
       $current_user['firstname'] = '';
       $current_user['lastname'] = '';
       $current_user['is_admin'] = FALSE;
+      $current_user['is_teacher'] = false;
       $current_user['is_banned'] = isset( $acc->suspendedon );
+
+      if( $this->acl_role_model->has_role('Teacher', $acc->id) ) 
+      {
+        $current_user['is_teacher'] = true;
+      }
 
       foreach( $all_account_details as $det ) 
       {
@@ -84,6 +90,7 @@ class Manage_users extends CI_Controller {
     }
 
     // Load manage users view
+    $this->JavascriptFiles[] = base_url().'resources/account/js/manage_users.js';
     $this->load->view('account/manage_users', $data);
   }
 
@@ -217,12 +224,11 @@ class Manage_users extends CI_Controller {
           // Check if the user should be suspended
           if( $this->authorization->is_permitted('ban_users') ) 
           {
-            $ban = $this->input->post('manage_user_ban', TRUE); 
-            if( isset($ban) )
+            if( $this->input->post('manage_user_ban', true) )
             {
               $this->account_model->update_suspended_datetime($id);
             }
-            else
+            elseif( $this->input->post('manage_user_unban', true) )
             {
               $this->account_model->remove_suspended_datetime($id);
             }
@@ -247,18 +253,7 @@ class Manage_users extends CI_Controller {
         }
         $this->rel_account_role_model->delete_update_batch($id, $roles);
 
-        if( $is_new )
-        {
-          // Redirect to view the newly created user
-          redirect("account/manage_users/save/{$id}");
-        }
-        else
-        {
-          // User information may have been updated, re-get
-          $data['update_account'] = $this->account_model->get_by_id($id);
-          $data['update_account_details'] = $this->account_details_model->get_by_account_id($id);
-          $data['update_account_roles'] = $this->acl_role_model->get_by_account_id($id); 
-        }
+        redirect("account/manage_users");
       }
     }
 
