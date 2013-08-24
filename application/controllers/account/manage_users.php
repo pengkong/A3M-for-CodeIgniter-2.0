@@ -59,13 +59,7 @@ class Manage_users extends CI_Controller {
       $current_user['firstname'] = '';
       $current_user['lastname'] = '';
       $current_user['is_admin'] = FALSE;
-      $current_user['is_teacher'] = false;
       $current_user['is_banned'] = isset( $acc->suspendedon );
-
-      if( $this->acl_role_model->has_role('Teacher', $acc->id) ) 
-      {
-        $current_user['is_teacher'] = true;
-      }
 
       foreach( $all_account_details as $det ) 
       {
@@ -90,7 +84,6 @@ class Manage_users extends CI_Controller {
     }
 
     // Load manage users view
-    $this->JavascriptFiles[] = base_url().'resources/account/js/manage_users.js';
     $this->load->view('account/manage_users', $data);
   }
 
