@@ -77,7 +77,7 @@ class Sign_up extends CI_Controller {
 				if ($this->config->item("sign_up_auto_sign_in"))
 				{
 					// Run sign in routine
-					$this->authentication->sign_in($user_id);
+					$this->authentication->sign_in($this->input->post('sign_in_username_email', TRUE), $this->input->post('sign_in_password', TRUE), $this->input->post('sign_in_remember', TRUE));
 				}
 				redirect('account/sign_in');
 			}
@@ -117,5 +117,5 @@ class Sign_up extends CI_Controller {
 }
 
 
-/* End of file sign_up.php */
-/* Location: ./application/controllers/account/sign_up.php */
+/* End of file Sign_up.php */
+/* Location: ./application/controllers/account/Sign_up.php */

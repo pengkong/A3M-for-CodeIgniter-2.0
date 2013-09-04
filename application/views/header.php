@@ -36,15 +36,15 @@
                                     <li class="divider"></li>
                                     <li class="nav-header"><?php echo lang('website_admin_panel'); ?></li>
                                     <?php if ($this->authorization->is_permitted('retrieve_users')) : ?>
-                                        <li><?php echo anchor('account/manage_users', lang('website_manage_users')); ?></li>
+                                        <li><?php echo anchor('admin/manage_users', lang('website_manage_users')); ?></li>
                                     <?php endif; ?>
 
                                     <?php if ($this->authorization->is_permitted('retrieve_roles')) : ?>
-                                        <li><?php echo anchor('account/manage_roles', lang('website_manage_roles')); ?></li>
+                                        <li><?php echo anchor('admin/manage_roles', lang('website_manage_roles')); ?></li>
                                     <?php endif; ?>
 
                                     <?php if ($this->authorization->is_permitted('retrieve_permissions')) : ?>
-                                        <li><?php echo anchor('account/manage_permissions', lang('website_manage_permissions')); ?></li>
+                                        <li><?php echo anchor('admin/manage_permissions', lang('website_manage_permissions')); ?></li>
                                     <?php endif; ?>
                                 <?php endif; ?>
 

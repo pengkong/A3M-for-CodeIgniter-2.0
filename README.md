@@ -1,5 +1,6 @@
 # [A3M (Account Authentication & Authorization)] (https://github.com/donjakobo/A3M/)
 _2/25/2013 - Currently some code is semi-stable, please fork and help squash bugs/update views_
+
 _6/25/2013 - Started working on integrating the main code with admin panel and the development version of CodeIgniter 3_
 
 A CodeIgniter 3.x package that leverages bleeding edge web technologies like OpenID and OAuth to create a user-friendly user experience. It gives you the CRUD to get working right away without too much fuss! A3M is a full package meant for building websites from scratch without all that tiresome login / logout / admin stuff thats always required.
@@ -57,9 +58,9 @@ See our **[app task board on Trello](https://trello.com/board/a3m/512c08b874b855
 + Download the latest version of [A3M](https://github.com/donjakobo/A3M/)
 + Extract to a folder accessible on your webserver (`/` or something like `/a3m/` )  
 + Create a database by importing `a3m_database.sql` script found it root folder of package  
-+ Configure `/applicaion/config/config.php` & `database.php` to match your CI setup (domain + database credentials)  
++ Configure `/application/config/config.php` & `database.php` to match your CI setup (domain + database credentials)  
 + Modify `.htaccess` file if your app location is different than `/` (example: `domain.com/a3m/`)  
-+ Configure `/applicaion/config/account/*` files to reflect your setup (reCAPTCHA, twitter, facebook, openid providers, etc;)
++ Configure `/application/config/account/*` files to reflect your setup (reCAPTCHA, twitter, facebook, openid providers, etc;)
 
 ### Twitter configuration:
 ##### Twitter site (`https://dev.twitter.com/apps`)
@@ -124,7 +125,11 @@ See our **[app task board on Trello](https://trello.com/board/a3m/512c08b874b855
 
 
 ## Note
+<<<<<<< HEAD
 + Please fork and help out! Only with your help will this keep growing and getting better.
+=======
++ The current codebase is _semi-stable_ due to a large re-write effort of the original application and this branch attempt to bring it to CodeIgniter 3. Please fork and help out!
+>>>>>>> pr/60
 + Note that twitter doesn't work if your base url is `localhost` and facebook won't work if your base url is `127.0.0.1`. Therefore ensure that your base url is something like `yoursite.com`. One way to do that is to simply [map the hostname](http://en.wikipedia.org/wiki/Hosts_%28file%29) your want to `127.0.0.1` on your development machine.
 Your twitter callback URL should take into account whether or not you have enabled SSL in your a3m config   
  + `https://domain.com/account/connect_twitter` (SSL **Enabled**) 
@@ -132,3 +137,66 @@ Your twitter callback URL should take into account whether or not you have enabl
 
 Configuring this wrongly will result in an `EpiOAuthUnauthorizedException` exception being thrown.
 
+## Guide
+
+Bellow you'll find guide to the different A3M libraries. This guide assumes, that you have all the corresponding models and helpers as well.
++ This guide was created by [@AdwinTrave](https://github.com/AdwinTrave) on GitHub.
+
+For starters you should always include `maintain_ssl();` on your pages. In order to maintain your ssl if you have it enabled.
+
+### Authentication
+
+This library makes all the user authentications.
+
+#### is_signed_in()
+
+Returns a boolean value after it checks the session data, that the user is signed in.
+
+#### sign_in()
+
+Signes in user and redirects to given page, either via session data or GET.
+
+Three variables are needed to be passed in:
++ Username/email
++ Password
++ Remember me?
+
+So the code to call to this method will look something like this:
+
+```php
+$this->authentication->sign_in($this->input->post('sign_in_username_email', TRUE), $this->input->post('sign_in_password', TRUE), $this->input->post('sign_in_remember', TRUE))
+```
+
+If the password and username are correct it will login the user and will redirect to the home page, or it will redirect the user to the page that has been passed via `GET` `continue` or via session session `sign_in_redirect`.
+
+If the login attempt fails for any reason, it will return boolean value of FALSE and increase the session counter of failed attempts, which you can access under `sign_in_failed_attempts`. To make a check that the user didn't pass over the limit you can call this in an if statement:
+```php
+$this->session->userdata('sign_in_failed_attempts') < $this->config->item('sign_in_recaptcha_offset')
+```
+
+Lastly "Remember me?" is a booblean variable which will keep the user signed in for a longer period of time.
+
+#### sign_out()
+
+As name suggests this method signs out the user and destroyes any session data related to that user and redirects to the homepage.
+
+### Authorization
+
+#### is_permitted()
+
+This method has two input variables:
+
++ Permission key
++ Require all
+
+Permission key can be either one permission value or array of values. If you use an array of values then use the second boolean variable to determine if the user needs to have permission to use all of those keys in order to get access.
+
+Will return boolean value based on if the user has permission for the given key.
+
+#### is_admin()
+
+This method will check if the user is admin.
+
+#### is_role()
+
+You pass in the name of the role and the function will determine if the user has that role.

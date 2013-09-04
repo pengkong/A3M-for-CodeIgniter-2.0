@@ -82,5 +82,5 @@ class Connect_twitter extends CI_Controller {
 }
 
 
-/* End of file connect_twitter.php */
-/* Location: ./application/controllers/account/connect_twitter.php */
+/* End of file Connect_twitter.php */
+/* Location: ./application/controllers/account/Connect_twitter.php */

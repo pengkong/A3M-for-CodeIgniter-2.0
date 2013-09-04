@@ -67,5 +67,5 @@ class Account_openid_model extends CI_Model {
 }
 
 
-/* End of file account_openid_model.php */
-/* Location: ./application/account/models/account_openid_model.php */
+/* End of file Account_openid_model.php */
+/* Location: ./application/models/account/Account_openid_model.php */

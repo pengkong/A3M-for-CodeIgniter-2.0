@@ -28,7 +28,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x2af2d70>
+			<function <lambda> at 0x3a97578>
 			</div>
 		</div>
 
@@ -138,7 +138,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li><a class="reference internal" href="helpers/url_helper.html#anchor_popup" title="anchor_popup"><tt class="xref php php-func docutils literal"><span class="pre">anchor_popup()</span></tt></a> will now fill the <em>href</em> attribute with the URL and its JS code will return FALSE instead.</li>
 <li>Added JS window name support to the <a class="reference internal" href="helpers/url_helper.html#anchor_popup" title="anchor_popup"><tt class="xref php php-func docutils literal"><span class="pre">anchor_popup()</span></tt></a> function.</li>
 <li>Added support (auto-detection) for HTTP/1.1 response code 303 in <tt class="xref php php-func docutils literal"><span class="pre">redirect()</span></tt>.</li>
-<li>Changed <tt class="xref php php-func docutils literal"><span class="pre">redirect()</span></tt> to only choose the <strong>refresh</strong> method only on IIS servers, instead of all servers on Windows (when <strong>auto</strong> is used).</li>
+<li>Changed <tt class="xref php php-func docutils literal"><span class="pre">redirect()</span></tt> to choose the <strong>refresh</strong> method only on IIS servers, instead of all servers on Windows (when <strong>auto</strong> is used).</li>
 <li>Changed <tt class="xref php php-func docutils literal"><span class="pre">anchor()</span></tt>, <a class="reference internal" href="helpers/url_helper.html#anchor_popup" title="anchor_popup"><tt class="xref php php-func docutils literal"><span class="pre">anchor_popup()</span></tt></a>, and <tt class="xref php php-func docutils literal"><span class="pre">redirect()</span></tt> to support protocol-relative URLs (e.g. <em>//ellislab.com/codeigniter</em>).</li>
 <li>Added an optional second parameter to both <a class="reference internal" href="helpers/url_helper.html#base_url" title="base_url"><tt class="xref php php-func docutils literal"><span class="pre">base_url()</span></tt></a> and <a class="reference internal" href="helpers/url_helper.html#site_url" title="site_url"><tt class="xref php php-func docutils literal"><span class="pre">site_url()</span></tt></a> that allows enforcing of a protocol different than the one in the <em>base_url</em> configuration setting.</li>
 </ul>
@@ -194,6 +194,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 </ul>
 </li>
 <li><a class="reference internal" href="helpers/directory_helper.html"><em>Directory Helper</em></a> <a class="reference internal" href="helpers/directory_helper.html#directory_map" title="directory_map"><tt class="xref php php-func docutils literal"><span class="pre">directory_map()</span></tt></a> will now append <tt class="docutils literal"><span class="pre">DIRECTORY_SEPARATOR</span></tt> to directory names in the returned array.</li>
+<li><a class="reference internal" href="helpers/array_helper.html"><em>Array Helper</em></a> <tt class="xref php php-func docutils literal"><span class="pre">element()</span></tt> and <tt class="xref php php-func docutils literal"><span class="pre">elements()</span></tt> now return NULL instead of FALSE when the required elements don&#8217;t exist.</li>
 <li><a class="reference internal" href="helpers/language_helper.html"><em>Language Helper</em></a> <tt class="xref php php-func docutils literal"><span class="pre">lang()</span></tt> now accepts an optional list of additional HTML attributes.</li>
 <li>Deprecated the <a class="reference internal" href="helpers/email_helper.html"><em>Email Helper</em></a> as its <tt class="docutils literal"><span class="pre">valid_email()</span></tt>, <tt class="docutils literal"><span class="pre">send_email()</span></tt> functions are now only aliases for PHP native functions <tt class="docutils literal"><span class="pre">filter_var()</span></tt> and <tt class="docutils literal"><span class="pre">mail()</span></tt> respectively.</li>
 </ul>
@@ -373,6 +374,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Added Wincache driver.</li>
 <li>Added Redis driver.</li>
 <li>Added a <em>key_prefix</em> option for cache IDs.</li>
+<li>Updated driver <tt class="docutils literal"><span class="pre">is_supported()</span></tt> methods to log at the &#8220;debug&#8221; level.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="libraries/email.html"><em>Email library</em></a> changes include:<ul>
@@ -449,6 +451,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Changed method <tt class="docutils literal"><span class="pre">valid_ip()</span></tt> to use PHP&#8217;s native <tt class="docutils literal"><span class="pre">filter_var()</span></tt> function.</li>
 <li>Changed internal method <tt class="docutils literal"><span class="pre">_sanitize_globals()</span></tt> to skip enforcing reversal of <em>register_globals</em> in PHP 5.4+, where this functionality no longer exists.</li>
 <li>Changed methods <tt class="docutils literal"><span class="pre">get()</span></tt>, <tt class="docutils literal"><span class="pre">post()</span></tt>, <tt class="docutils literal"><span class="pre">get_post()</span></tt>, <tt class="docutils literal"><span class="pre">cookie()</span></tt>, <tt class="docutils literal"><span class="pre">server()</span></tt>, <tt class="docutils literal"><span class="pre">user_agent()</span></tt> to return NULL instead of FALSE when no value is found.</li>
+<li>Added method <tt class="docutils literal"><span class="pre">post_get()</span></tt> and changed <tt class="docutils literal"><span class="pre">get_post()</span></tt> to search in GET data first. Both methods&#8217; names now properly match their GET/POST data search priorities.</li>
 <li>Changed method <tt class="docutils literal"><span class="pre">_fetch_from_array()</span></tt> to parse array notation in field name.</li>
 </ul>
 </li>
@@ -469,13 +472,15 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 </li>
 <li><a class="reference internal" href="libraries/config.html"><em>Config Library</em></a> changes include:<ul>
 <li>Changed <tt class="docutils literal"><span class="pre">site_url()</span></tt> method  to accept an array as well.</li>
-<li>Removed internal method <tt class="docutils literal"><span class="pre">_assign_to_config()</span></tt> and moved it&#8217;s implementation in <em>CodeIgniter.php</em> instead.</li>
+<li>Removed internal method <tt class="docutils literal"><span class="pre">_assign_to_config()</span></tt> and moved its implementation to <em>CodeIgniter.php</em> instead.</li>
+<li><tt class="docutils literal"><span class="pre">item()</span></tt> now returns NULL instead of FALSE when the required config item doesn&#8217;t exist.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="libraries/security.html"><em>Security Library</em></a> changes include:<ul>
 <li>Added method <tt class="docutils literal"><span class="pre">strip_image_tags()</span></tt>.</li>
 <li>Added <tt class="docutils literal"><span class="pre">$config['csrf_regeneration']</span></tt>, which makes token regeneration optional.</li>
 <li>Added <tt class="docutils literal"><span class="pre">$config['csrf_exclude_uris']</span></tt>, which allows you list URIs which will not have the CSRF validation methods run.</li>
+<li>Modified method <tt class="docutils literal"><span class="pre">sanitize_filename()</span></tt> to read a public <tt class="docutils literal"><span class="pre">$filename_bad_chars</span></tt> property for getting the invalid characters list.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="general/routing.html"><em>URI Routing</em></a> changes include:<ul>
@@ -576,7 +581,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Fixed a bug (#784, #861) - <a class="reference internal" href="database/forge.html"><em>Database Forge</em></a> method <tt class="docutils literal"><span class="pre">create_table()</span></tt> used to accept constraints for MSSQL/SQLSRV integer-type columns.</li>
 <li>Fixed a bug (#706) - SQLSRV/MSSSQL didn&#8217;t escape field names.</li>
 <li>Fixed a bug (#1452) - <tt class="docutils literal"><span class="pre">protect_identifiers()</span></tt> didn&#8217;t properly detect identifiers with spaces in their names.</li>
-<li>Fixed a bug where <tt class="docutils literal"><span class="pre">protect_identifiers()</span></tt> ignored it&#8217;s extra arguments when the value passed to it is an array.</li>
+<li>Fixed a bug where <tt class="docutils literal"><span class="pre">protect_identifiers()</span></tt> ignored its extra arguments when the value passed to it is an array.</li>
 <li>Fixed a bug where <tt class="docutils literal"><span class="pre">_has_operator()</span></tt> didn&#8217;t detect BETWEEN.</li>
 <li>Fixed a bug in <a class="reference internal" href="database/query_builder.html"><em>Query Builder</em></a>&#8216;s <tt class="docutils literal"><span class="pre">join()</span></tt> method where it failed with identifiers containing dashes.</li>
 <li>Fixed a bug (#1264) - <a class="reference internal" href="database/forge.html"><em>Database Forge</em></a> and <a class="reference internal" href="database/utilities.html"><em>Database Utilities</em></a> didn&#8217;t update/reset the databases and tables list cache when a table or a database is created, dropped or renamed.</li>
@@ -616,7 +621,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Fixed a bug where the <a class="reference internal" href="libraries/sessions.html"><em>Session Library</em></a> accepted cookies with <em>last_activity</em> values being in the future.</li>
 <li>Fixed a bug (#1897) - <a class="reference internal" href="libraries/email.html"><em>Email Library</em></a> triggered PHP E_WARNING errors when <em>mail</em> protocol used and <tt class="docutils literal"><span class="pre">to()</span></tt> is never called.</li>
 <li>Fixed a bug (#1409) - <a class="reference internal" href="libraries/email.html"><em>Email Library</em></a> didn&#8217;t properly handle multibyte characters when applying Q-encoding to headers.</li>
-<li>Fixed a bug where <a class="reference internal" href="libraries/email.html"><em>Email Library</em></a> didn&#8217;t honor it&#8217;s <em>wordwrap</em> setting while handling alternative messages.</li>
+<li>Fixed a bug where <a class="reference internal" href="libraries/email.html"><em>Email Library</em></a> didn&#8217;t honor its <em>wordwrap</em> setting while handling alternative messages.</li>
 <li>Fixed a bug (#1476, #1909) - <a class="reference internal" href="libraries/pagination.html"><em>Pagination Library</em></a> didn&#8217;t take into account actual routing when determining the current page.</li>
 <li>Fixed a bug (#1766) - <a class="reference internal" href="database/query_builder.html"><em>Query Builder</em></a> didn&#8217;t always take into account the <em>dbprefix</em> setting.</li>
 <li>Fixed a bug (#779) - <a class="reference internal" href="libraries/uri.html"><em>URI Class</em></a> didn&#8217;t always trim slashes from the <em>uri_string</em> as shown in the documentation.</li>
@@ -663,7 +668,11 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Fixed a bug (#2490) - <a class="reference internal" href="database/queries.html"><em>Database Class</em></a> method <tt class="docutils literal"><span class="pre">query()</span></tt> returning boolean instead of a result object for PostgreSQL-specific <em>INSERT INTO ... RETURNING</em> statements.</li>
 <li>Fixed a bug (#249) - <a class="reference internal" href="libraries/caching.html"><em>Cache Library</em></a> didn&#8217;t properly handle Memcache(d) configurations with missing options.</li>
 <li>Fixed a bug (#180) - <a class="reference internal" href="general/common_functions.html#config_item" title="config_item"><tt class="xref php php-func docutils literal"><span class="pre">config_item()</span></tt></a> didn&#8217;t take into account run-time configuration changes.</li>
-<li>Fixed a bug (#2551) - <a class="reference internal" href="libraries/loader.html"><em>Loader Library</em></a> method <tt class="docutils literal"><span class="pre">library()</span></tt> didn&#8217;t properly check if a class that is being loaded already exits.</li>
+<li>Fixed a bug (#2551) - <a class="reference internal" href="libraries/loader.html"><em>Loader Library</em></a> method <tt class="docutils literal"><span class="pre">library()</span></tt> didn&#8217;t properly check if a class that is being loaded already exists.</li>
+<li>Fixed a bug (#2560) - <a class="reference internal" href="helpers/form_helper.html"><em>Form Helper</em></a> function <a class="reference internal" href="helpers/form_helper.html#form_open" title="form_open"><tt class="xref php php-func docutils literal"><span class="pre">form_open()</span></tt></a> set the &#8216;method=&#8221;post&#8221;&#8217; attribute only if the passed attributes equaled an empty string.</li>
+<li>Fixed a bug (#2585) - <a class="reference internal" href="database/query_builder.html"><em>Query Builder</em></a> methods <tt class="docutils literal"><span class="pre">min()</span></tt>, <tt class="docutils literal"><span class="pre">max()</span></tt>, <tt class="docutils literal"><span class="pre">avg()</span></tt>, <tt class="docutils literal"><span class="pre">sum()</span></tt> didn&#8217;t escape field names.</li>
+<li>Fixed an edge case (#2583) in the <a class="reference internal" href="libraries/email.html"><em>Email Library</em></a> where <cite>Suhosin &lt;http://www.hardened-php.net/suhosin/&gt;</cite> blocked messages sent via <tt class="docutils literal"><span class="pre">mail()</span></tt> due to trailing newspaces in headers.</li>
+<li>Fixed a bug (#2590) - <a class="reference internal" href="general/common_functions.html#log_message" title="log_message"><tt class="xref php php-func docutils literal"><span class="pre">log_message()</span></tt></a> didn&#8217;t actually cache the <tt class="docutils literal"><span class="pre">CI_Log</span></tt> class instance.</li>
 </ul>
 </div>
 </div>
@@ -750,7 +759,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Fixed a bug (#538) - Windows paths were ignored when using the <a class="reference internal" href="libraries/image_lib.html"><em>Image Manipulation Library</em></a> to create a new file.</li>
 <li>Fixed a bug - When database caching was enabled, $this-&gt;db-&gt;query() checked the cache before binding variables which resulted in cached queries never being found.</li>
 <li>Fixed a bug - CSRF cookie value was allowed to be any (non-empty) string before being written to the output, making code injection a risk.</li>
-<li>Fixed a bug (#726) - PDO put a &#8216;dbname&#8217; argument in it&#8217;s connection string regardless of the database platform in use, which made it impossible to use SQLite.</li>
+<li>Fixed a bug (#726) - PDO put a &#8216;dbname&#8217; argument in its connection string regardless of the database platform in use, which made it impossible to use SQLite.</li>
 <li>Fixed a bug - <tt class="docutils literal"><span class="pre">CI_DB_pdo_driver::num_rows()</span></tt> was not returning properly value with SELECT queries, cause it was relying on <tt class="docutils literal"><span class="pre">PDOStatement::rowCount()</span></tt>.</li>
 <li>Fixed a bug (#1059) - <tt class="docutils literal"><span class="pre">CI_Image_lib::clear()</span></tt> was not correctly clearing all necessary object properties, namely width and height.</li>
 </ul>

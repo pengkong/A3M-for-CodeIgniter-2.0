@@ -36,5 +36,5 @@ class Ref_country_model extends CI_Model {
 }
 
 
-/* End of file ref_country_model.php */
-/* Location: ./application/account/models/ref_country_model.php */
+/* End of file Ref_country_model.php */
+/* Location: ./application/models/account/Ref_country_model.php */

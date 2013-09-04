@@ -29,7 +29,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x2af2578>
+			<function <lambda> at 0x3b6dc08>
 			</div>
 		</div>
 
@@ -196,18 +196,59 @@ regular expression:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="step-10-check-the-calls-to-array-helper-s-element-and-elements-functions">
-<h2>Step 10: Check the calls to Array Helper&#8217;s element() and elements() functions<a class="headerlink" href="#step-10-check-the-calls-to-array-helper-s-element-and-elements-functions" title="Permalink to this headline">¶</a></h2>
-<p>The default return value of these functions, when the required elements
-don&#8217;t exist, has been changed from FALSE to NULL.</p>
+<div class="section" id="step-10-many-functions-now-return-null-instead-of-false-on-missing-items">
+<h2>Step 10: Many functions now return NULL instead of FALSE on missing items<a class="headerlink" href="#step-10-many-functions-now-return-null-instead-of-false-on-missing-items" title="Permalink to this headline">¶</a></h2>
+<p>Many methods and functions now return NULL instead of FALSE when the required items don&#8217;t exist:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="../libraries/config.html"><em>Config Class</em></a><ul>
+<li>config-&gt;item()</li>
+<li>config-&gt;slash_item()</li>
+</ul>
+</li>
+<li><a class="reference internal" href="../libraries/input.html"><em>Input Class</em></a><ul>
+<li>input-&gt;get()</li>
+<li>input-&gt;post()</li>
+<li>input-&gt;get_post()</li>
+<li>input-&gt;cookie()</li>
+<li>input-&gt;server()</li>
+<li>input-&gt;input_stream()</li>
+<li>input-&gt;get_request_header()</li>
+</ul>
+</li>
+<li><a class="reference internal" href="../libraries/sessions.html"><em>Session Class</em></a><ul>
+<li>session-&gt;userdata()</li>
+<li>session-&gt;flashdata()</li>
+</ul>
+</li>
+<li><a class="reference internal" href="../libraries/uri.html"><em>URI Class</em></a><ul>
+<li>uri-&gt;segment()</li>
+<li>uri-&gt;rsegment()</li>
+</ul>
+</li>
+<li><a class="reference internal" href="../helpers/array_helper.html"><em>Array Helper</em></a><ul>
+<li>element()</li>
+<li>elements()</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
 </div>
-<div class="section" id="step-11-check-the-calls-to-directory-helper-s-directory-map-function">
-<h2>Step 11: Check the calls to Directory Helper&#8217;s directory_map() function<a class="headerlink" href="#step-11-check-the-calls-to-directory-helper-s-directory-map-function" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-11-update-usage-of-input-class-s-get-post-method">
+<h2>Step 11: Update usage of Input Class&#8217;s get_post() method<a class="headerlink" href="#step-11-update-usage-of-input-class-s-get-post-method" title="Permalink to this headline">¶</a></h2>
+<p>Previously, the <a class="reference internal" href="../libraries/input.html"><em>Input Class</em></a> method <tt class="docutils literal"><span class="pre">get_post()</span></tt>
+was searching first in POST data, then in GET data. This method has been
+modified so that it searches in GET then in POST, as its name suggests.</p>
+<p>A method has been added, <tt class="docutils literal"><span class="pre">post_get()</span></tt>, which searches in POST then in GET, as
+<tt class="docutils literal"><span class="pre">get_post()</span></tt> was doing before.</p>
+</div>
+<div class="section" id="step-12-update-usage-of-directory-helper-s-directory-map-function">
+<h2>Step 12: Update usage of Directory Helper&#8217;s directory_map() function<a class="headerlink" href="#step-12-update-usage-of-directory-helper-s-directory-map-function" title="Permalink to this headline">¶</a></h2>
 <p>In the resulting array, directories now end with a trailing directory
 separator (i.e. a slash, usually).</p>
 </div>
-<div class="section" id="step-12-update-usage-of-database-forge-s-drop-table-method">
-<h2>Step 12: Update usage of Database Forge&#8217;s drop_table() method<a class="headerlink" href="#step-12-update-usage-of-database-forge-s-drop-table-method" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-13-update-usage-of-database-forge-s-drop-table-method">
+<h2>Step 13: Update usage of Database Forge&#8217;s drop_table() method<a class="headerlink" href="#step-13-update-usage-of-database-forge-s-drop-table-method" title="Permalink to this headline">¶</a></h2>
 <p>Up until now, <tt class="docutils literal"><span class="pre">drop_table()</span></tt> added an IF EXISTS clause by default or it didn&#8217;t work
 at all with some drivers. In CodeIgniter 3.0, the IF EXISTS condition is no longer added
 by default and has an optional second parameter that allows that instead and is set to
@@ -222,12 +263,12 @@ FALSE by default.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The given example users MySQL-specific syntax, but it should work across
+<p class="last">The given example uses MySQL-specific syntax, but it should work across
 all drivers with the exception of ODBC.</p>
 </div>
 </div>
-<div class="section" id="step-13-change-usage-of-email-library-with-multiple-emails">
-<h2>Step 13: Change usage of Email library with multiple emails<a class="headerlink" href="#step-13-change-usage-of-email-library-with-multiple-emails" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-14-change-usage-of-email-library-with-multiple-emails">
+<h2>Step 14: Change usage of Email library with multiple emails<a class="headerlink" href="#step-14-change-usage-of-email-library-with-multiple-emails" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="../libraries/email.html"><em>Email Library</em></a> will automatically clear the
 set parameters after successfully sending emails. To override this behaviour,
 pass FALSE as the first parameter in the <tt class="docutils literal"><span class="pre">send()</span></tt> method:</p>
@@ -238,8 +279,8 @@ pass FALSE as the first parameter in the <tt class="docutils literal"><span clas
 </pre></div>
 </div>
 </div>
-<div class="section" id="step-14-update-your-form-validation-language-lines">
-<h2>Step 14: Update your Form_validation language lines<a class="headerlink" href="#step-14-update-your-form-validation-language-lines" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-15-update-your-form-validation-language-lines">
+<h2>Step 15: Update your Form_validation language lines<a class="headerlink" href="#step-15-update-your-form-validation-language-lines" title="Permalink to this headline">¶</a></h2>
 <p>Two improvements have been made to the <a class="reference internal" href="../libraries/form_validation.html"><em>Form Validation Library</em></a>&#8216;s <a class="reference internal" href="../libraries/language.html"><em>language</em></a>
 files and error messages format:</p>
 <blockquote>
@@ -274,8 +315,8 @@ Therefore you&#8217;re encouraged to update its usage sooner rather than
 later.</p>
 </div>
 </div>
-<div class="section" id="step-15-remove-usage-of-previously-deprecated-functionalities">
-<h2>Step 15: Remove usage of (previously) deprecated functionalities<a class="headerlink" href="#step-15-remove-usage-of-previously-deprecated-functionalities" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-16-remove-usage-of-previously-deprecated-functionalities">
+<h2>Step 16: Remove usage of (previously) deprecated functionalities<a class="headerlink" href="#step-16-remove-usage-of-previously-deprecated-functionalities" title="Permalink to this headline">¶</a></h2>
 <p>In addition to the <tt class="docutils literal"><span class="pre">$autoload['core']</span></tt> configuration setting, there&#8217;s a
 number of other functionalities that have been removed in CodeIgniter 3.0.0:</p>
 <div class="section" id="the-sha1-library">

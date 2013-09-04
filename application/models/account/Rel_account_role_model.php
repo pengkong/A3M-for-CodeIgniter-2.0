@@ -152,3 +152,6 @@ class Rel_account_role_model extends CI_Model {
     $this->db->delete('a3m_rel_account_role', array('role_id' => $role_id));
   }
 }
+
+/* End of file Rel_account_role_model.php */
+/* Location: ./application/models/account/Rel_account_role_model.php */

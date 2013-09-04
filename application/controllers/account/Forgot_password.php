@@ -144,5 +144,5 @@ class Forgot_password extends CI_Controller {
 
 }
 
-/* End of file forgot_password.php */
-/* Location: ./application/account/controllers/forgot_password.php */
+/* End of file Forgot_password.php */
+/* Location: ./application/controllers/account/Forgot_password.php */

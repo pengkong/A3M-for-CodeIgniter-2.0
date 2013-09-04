@@ -55,39 +55,19 @@ class Sign_in extends CI_Controller {
 		));
 
 		// Run form validation
-		if ($this->form_validation->run() === TRUE)
+		if ($this->form_validation->run())
 		{
-			// Get user by username / email
-			if ( ! $user = $this->account_model->get_by_username_email($this->input->post('sign_in_username_email', TRUE)))
+			// Either don't need to pass recaptcha or just passed recaptcha
+			if ( ! ($recaptcha_pass === TRUE || $recaptcha_result === TRUE) && $this->config->item("sign_in_recaptcha_enabled") === TRUE)
 			{
-				// Username / email doesn't exist
-				$data['sign_in_username_email_error'] = lang('sign_in_username_email_does_not_exist');
+				$data['sign_in_recaptcha_error'] = $this->input->post('recaptcha_response_field') ? lang('sign_in_recaptcha_incorrect') : lang('sign_in_recaptcha_required');
 			}
 			else
 			{
-				// Either don't need to pass recaptcha or just passed recaptcha
-				if ( ! ($recaptcha_pass === TRUE || $recaptcha_result === TRUE) && $this->config->item("sign_in_recaptcha_enabled") === TRUE)
+				// Authenticate
+				if ( ! $this->authentication->sign_in($this->input->post('sign_in_username_email', TRUE), $this->input->post('sign_in_password', TRUE), $this->input->post('sign_in_remember', TRUE)))
 				{
-					$data['sign_in_recaptcha_error'] = $this->input->post('recaptcha_response_field') ? lang('sign_in_recaptcha_incorrect') : lang('sign_in_recaptcha_required');
-				}
-				else
-				{
-					// Check password
-					if ( ! $this->authentication->check_password($user->password, $this->input->post('sign_in_password', TRUE)))
-					{
-						// Increment sign in failed attempts
-						$this->session->set_userdata('sign_in_failed_attempts', (int)$this->session->userdata('sign_in_failed_attempts') + 1);
-
-						$data['sign_in_error'] = lang('sign_in_combination_incorrect');
-					}
-					else
-					{
-						// Clear sign in fail counter
-						$this->session->unset_userdata('sign_in_failed_attempts');
-
-						// Run sign in routine
-						$this->authentication->sign_in($user->id, $this->input->post('sign_in_remember', TRUE));
-					}
+					$data['sign_in_error'] = lang('sign_in_combination_incorrect');
 				}
 			}
 		}
@@ -104,5 +84,5 @@ class Sign_in extends CI_Controller {
 }
 
 
-/* End of file sign_in.php */
-/* Location: ./application/account/controllers/sign_in.php */
+/* End of file Sign_in.php */
+/* Location: ./application/controllers/account/Sign_in.php */

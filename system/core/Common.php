@@ -224,56 +224,51 @@ if ( ! function_exists('get_config'))
 	 * @param	array
 	 * @return	array
 	 */
-	function &get_config($replace = array())
+	function &get_config(Array $replace = array())
 	{
 		static $_config;
 
-		if (isset($_config))
+		if (empty($_config))
 		{
-			return $_config[0];
-		}
-
-		$file_path = APPPATH.'config/config.php';
-		$found = FALSE;
-		if (file_exists($file_path))
-		{
-			$found = TRUE;
-			require($file_path);
-		}
-
-		// Is the config file in the environment folder?
-		if (file_exists($file_path = APPPATH.'config/'.ENVIRONMENT.'/config.php'))
-		{
-			require($file_path);
-		}
-		elseif ( ! $found)
-		{
-			set_status_header(503);
-			echo 'The configuration file does not exist.';
-			exit(EXIT_CONFIG);
-		}
-
-		// Does the $config array exist in the file?
-		if ( ! isset($config) OR ! is_array($config))
-		{
-			set_status_header(503);
-			echo 'Your config file does not appear to be formatted correctly.';
-			exit(EXIT_CONFIG);
-		}
-
-		// Are any values being dynamically replaced?
-		if (count($replace) > 0)
-		{
-			foreach ($replace as $key => $val)
+			$file_path = APPPATH.'config/config.php';
+			$found = FALSE;
+			if (file_exists($file_path))
 			{
-				if (isset($config[$key]))
-				{
-					$config[$key] = $val;
-				}
+				$found = TRUE;
+				require($file_path);
 			}
+
+			// Is the config file in the environment folder?
+			if (file_exists($file_path = APPPATH.'config/'.ENVIRONMENT.'/config.php'))
+			{
+				require($file_path);
+			}
+			elseif ( ! $found)
+			{
+				set_status_header(503);
+				echo 'The configuration file does not exist.';
+				exit(EXIT_CONFIG);
+			}
+
+			// Does the $config array exist in the file?
+			if ( ! isset($config) OR ! is_array($config))
+			{
+				set_status_header(503);
+				echo 'Your config file does not appear to be formatted correctly.';
+				exit(EXIT_CONFIG);
+			}
+
+			// references cannot be directly assigned to static variables, so we use an array
+			$_config[0] =& $config;
 		}
 
-		return $_config[0] =& $config;
+		// Are any values being dynamically added or replaced?
+		foreach ($replace as $key => $val)
+		{
+			$_config[0][$key] = $val;
+		}
+
+		return $_config[0];
 	}
 }
 
@@ -439,24 +434,15 @@ if ( ! function_exists('log_message'))
 	 */
 	function log_message($level, $message, $php_error = FALSE)
 	{
-		static $_log, $_log_threshold;
-
-		if ($_log_threshold === NULL)
-		{
-			$_log_threshold = config_item('log_threshold');
-		}
-
-		if ($_log_threshold === 0)
-		{
-			return;
-		}
+		static $_log;
 
 		if ($_log === NULL)
 		{
-			$_log =& load_class('Log', 'core');
+			// references cannot be directly assigned to static variables, so we use an array
+			$_log[0] =& load_class('Log', 'core');
 		}
 
-		$_log->write_log($level, $message, $php_error);
+		$_log[0]->write_log($level, $message, $php_error);
 	}
 }
 
@@ -538,7 +524,7 @@ if ( ! function_exists('set_status_header'))
 
 		$server_protocol = isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : FALSE;
 
-		if (strpos(php_sapi_name(), 'cgi') === 0)
+		if (strpos(PHP_SAPI, 'cgi') === 0)
 		{
 			header('Status: '.$code.' '.$text, TRUE);
 		}
@@ -556,8 +542,8 @@ if ( ! function_exists('_exception_handler'))
 	/**
 	 * Exception Handler
 	 *
-	 * This is the custom exception handler that is declaired at the top
-	 * of Codeigniter.php. The main reason we use this is to permit
+	 * This is the custom exception handler that is declared at the top
+	 * of CodeIgniter.php. The main reason we use this is to permit
 	 * PHP errors to be logged in our own log files since the user may
 	 * not have access to server logs. Since this function
 	 * effectively intercepts PHP errors, however, we also need

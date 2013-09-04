@@ -229,5 +229,5 @@ class Manage_roles extends CI_Controller {
 }
 
 
-/* End of file manage_roles.php */
-/* Location: ./application/controllers/admin/manage_roles.php */
+/* End of file Manage_roles.php */
+/* Location: ./application/controllers/admin/Manage_roles.php */

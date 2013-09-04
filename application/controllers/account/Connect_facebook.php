@@ -76,5 +76,5 @@ class Connect_facebook extends CI_Controller {
 
 }
 
-/* End of file connect_facebook.php */
-/* Location: ./application/account/controllers/connect_facebook.php */
+/* End of file Connect_facebook.php */
+/* Location: ./application/controllers/account/Connect_facebook.php */

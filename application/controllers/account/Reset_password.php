@@ -65,7 +65,7 @@ class Reset_password extends CI_Controller {
 					$this->session->set_userdata('sign_in_redirect', 'account/account_password');
 
 					// Run sign in routine
-					$this->authentication->sign_in($account->id);
+					$this->authentication->sign_in_by_id($account->id);
 				}
 			}
 		}
@@ -77,5 +77,5 @@ class Reset_password extends CI_Controller {
 }
 
 
-/* End of file reset_password.php */
-/* Location: ./application/account/controllers/reset_password.php */
+/* End of file Reset_password.php */
+/* Location: ./application/controllers/account/Reset_password.php */
