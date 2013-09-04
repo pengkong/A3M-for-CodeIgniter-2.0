@@ -28,7 +28,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x3a97578>
+			<function <lambda> at 0x4b4c140>
 			</div>
 		</div>
 
@@ -673,6 +673,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Fixed a bug (#2585) - <a class="reference internal" href="database/query_builder.html"><em>Query Builder</em></a> methods <tt class="docutils literal"><span class="pre">min()</span></tt>, <tt class="docutils literal"><span class="pre">max()</span></tt>, <tt class="docutils literal"><span class="pre">avg()</span></tt>, <tt class="docutils literal"><span class="pre">sum()</span></tt> didn&#8217;t escape field names.</li>
 <li>Fixed an edge case (#2583) in the <a class="reference internal" href="libraries/email.html"><em>Email Library</em></a> where <cite>Suhosin &lt;http://www.hardened-php.net/suhosin/&gt;</cite> blocked messages sent via <tt class="docutils literal"><span class="pre">mail()</span></tt> due to trailing newspaces in headers.</li>
 <li>Fixed a bug (#2590) - <a class="reference internal" href="general/common_functions.html#log_message" title="log_message"><tt class="xref php php-func docutils literal"><span class="pre">log_message()</span></tt></a> didn&#8217;t actually cache the <tt class="docutils literal"><span class="pre">CI_Log</span></tt> class instance.</li>
+<li>Fixed a bug (#2609) - <tt class="xref php php-func docutils literal"><span class="pre">get_config()</span></tt> optional argument was only effective on first function call. Also, it can now add items, in addition to updating existing items.</li>
 </ul>
 </div>
 </div>

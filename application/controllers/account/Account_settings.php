@@ -57,7 +57,7 @@ class Account_settings extends CI_Controller {
 
 		// Setup form validation
 		$this->form_validation->set_error_delimiters('<div class="field_error">', '</div>');
-		$this->form_validation->set_rules(array(array('field' => 'settings_email', 'label' => 'lang:settings_email', 'rules' => 'trim|required|valid_email|max_length[160]'), array('field' => 'settings_fullname', 'label' => 'lang:settings_fullname', 'rules' => 'trim|max_length[160]'), array('field' => 'settings_firstname', 'label' => 'lang:settings_firstname', 'rules' => 'trim|max_length[80]'), array('field' => 'settings_lastname', 'label' => 'lang:settings_lastname', 'rules' => 'trim|max_length[80]'), array('field' => 'settings_postalcode', 'label' => 'lang:settings_postalcode', 'rules' => 'trim|max_length[40]')));
+		$this->form_validation->set_rules(array(array('field' => 'settings_email', 'label' => 'lang:settings_email', 'rules' => 'trim|required|valid_email|max_length[160]'), array('field' => 'settings_firstname', 'label' => 'lang:settings_firstname', 'rules' => 'trim|max_length[80]'), array('field' => 'settings_lastname', 'label' => 'lang:settings_lastname', 'rules' => 'trim|max_length[80]')));
 
 		// Run form validation
 		if ($this->form_validation->run())
@@ -82,7 +82,6 @@ class Account_settings extends CI_Controller {
 					$this->input->post('settings_dob_day', TRUE) && 
 					$this->input->post('settings_dob_year', TRUE)) $attributes['dateofbirth'] = mdate('%Y-%m-%d', strtotime($this->input->post('settings_dob_day', TRUE).'-'.$this->input->post('settings_dob_month', TRUE).'-'.$this->input->post('settings_dob_year', TRUE)));
 					
-				$attributes['fullname'] = $this->input->post('settings_fullname', TRUE) ? $this->input->post('settings_fullname', TRUE) : NULL;
 				$attributes['firstname'] = $this->input->post('settings_firstname', TRUE) ? $this->input->post('settings_firstname', TRUE) : NULL;
 				$attributes['lastname'] = $this->input->post('settings_lastname', TRUE) ? $this->input->post('settings_lastname', TRUE) : NULL;
 				$attributes['gender'] = $this->input->post('settings_gender', TRUE) ? $this->input->post('settings_gender', TRUE) : NULL;

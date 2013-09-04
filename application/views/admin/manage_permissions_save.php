@@ -96,7 +96,7 @@
         if( $this->authorization->is_permitted('delete_permissions') && $action == 'update' && ! $is_system )
         {
           echo '<span>' . lang('admin_or') . '</span>';
-          if( $is_disabled ){
+          if( isset($permission->suspendedon) ){
             echo form_submit('manage_permission_unban', lang('permissions_unban'), 'class="btn btn-danger"');
           } else {
             echo form_submit('manage_permission_ban', lang('permissions_ban'), 'class="btn btn-danger"');
