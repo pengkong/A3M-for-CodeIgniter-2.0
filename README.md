@@ -1,6 +1,10 @@
-# [A3M (Account Authentication & Authorization)] (https://github.com/donjakobo/A3M/)
+# A3M  
+### 
 
-A CodeIgniter 2.x package that leverages bleeding edge web technologies like OpenID and OAuth to create a user-friendly user experience. It gives you the CRUD to get working right away without too much fuss! A3M is a full package meant for building websites from scratch without all that tiresome login / logout / admin stuff thats always required.
+A3M (Account Authentication & Authorization) is a CodeIgniter 2.x package that leverages bleeding edge web technologies 
+like OpenID and OAuth to create a user-friendly user experience. It gives you the CRUD to get working right away 
+without too much fuss and tinkering! Designed for building webapps from scratch without all that tiresome 
+login / logout / admin stuff thats always required.
 
 ## Original Authors
 
@@ -8,8 +12,6 @@ A CodeIgniter 2.x package that leverages bleeding edge web technologies like Ope
 **PengKong** [@pengkong](https://github.com/pengkong)
 		
 ## Key Features & Design Goals
-
-See our **[app task board on Trello](https://trello.com/board/a3m/512c08b874b855f26200e690)** to get a glimps of to-do items
 
 * Native Sign Up, Sign In with 'Remember me' and Sign Out  
 * Native account Forgot Password and Reset Password  
