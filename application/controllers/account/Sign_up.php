@@ -15,8 +15,7 @@ class Sign_up extends CI_Controller {
 		$this->load->config('account/account');
 		$this->load->helper(array('language', 'account/ssl', 'url'));
 		$this->load->library(array('account/authentication', 'account/authorization', 'account/recaptcha', 'form_validation'));
-		$this->load->model('account/account_details_model');
-		$this->load->model('account/account_model');
+		$this->load->model(array('account/account_details_model', 'account/account_model'));
 		$this->load->language(array('general', 'account/sign_up', 'account/connect_third_party'));
 	}
 
@@ -42,23 +41,13 @@ class Sign_up extends CI_Controller {
 
 		// Setup form validation
 		$this->form_validation->set_error_delimiters('<span class="field_error">', '</span>');
-		$this->form_validation->set_rules(array(array('field' => 'sign_up_username', 'label' => 'lang:sign_up_username', 'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[24]'), array('field' => 'sign_up_password', 'label' => 'lang:sign_up_password', 'rules' => 'trim|required|min_length[6]'), array('field' => 'sign_up_email', 'label' => 'lang:sign_up_email', 'rules' => 'trim|required|valid_email|max_length[160]')));
+		$this->form_validation->set_rules(array(array('field' => 'sign_up_username', 'label' => 'lang:sign_up_username', 'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[24]|callback_username_check'), array('field' => 'sign_up_password', 'label' => 'lang:sign_up_password', 'rules' => 'trim|required|min_length[6]'), array('field' => 'sign_up_email', 'label' => 'lang:sign_up_email', 'rules' => 'trim|required|valid_email|max_length[160]|callback_email_check'), array('field' => 'sign_up_password_confirm', 'label' => 'lang:sign_up_password_confirm', 'rules' => 'trim|required|min_length[6]|matches[sign_up_password]')));
 
 		// Run form validation
 		if (($this->form_validation->run() === TRUE) && ($this->config->item("sign_up_enabled")))
 		{
-			// Check if user name is taken
-			if ($this->username_check($this->input->post('sign_up_username')) === TRUE)
-			{
-				$data['sign_up_username_error'] = lang('sign_up_username_taken');
-			}
-			// Check if email already exist
-			elseif ($this->email_check($this->input->post('sign_up_email')) === TRUE)
-			{
-				$data['sign_up_email_error'] = lang('sign_up_email_exist');
-			}
 			// Either already pass recaptcha or just passed recaptcha
-			elseif ( ! ($this->session->userdata('sign_up_recaptcha_pass') == TRUE || $recaptcha_result === TRUE) && $this->config->item("sign_up_recaptcha_enabled") === TRUE)
+			if ( ! ($this->session->userdata('sign_up_recaptcha_pass') == TRUE || $recaptcha_result === TRUE) && $this->config->item("sign_up_recaptcha_enabled") === TRUE)
 			{
 				$data['sign_up_recaptcha_error'] = $this->input->post('recaptcha_response_field') ? lang('sign_up_recaptcha_incorrect') : lang('sign_up_recaptcha_required');
 			}
@@ -99,7 +88,15 @@ class Sign_up extends CI_Controller {
 	 */
 	function username_check($username)
 	{
-		return $this->account_model->get_by_username($username) ? TRUE : FALSE;
+		if($this->account_model->get_by_username($username))
+		{
+			return TRUE;
+		}
+		else
+		{
+			$this->form_validation->set_message('sign_up_username', 'lang:sign_up_username_taken');
+			return FALSE;
+		}
 	}
 
 	/**
@@ -111,7 +108,15 @@ class Sign_up extends CI_Controller {
 	 */
 	function email_check($email)
 	{
-		return $this->account_model->get_by_email($email) ? TRUE : FALSE;
+		if($this->account_model->get_by_email($email))
+		{
+			return TRUE;
+		}
+		else
+		{
+			$this->form_validation->set_message('sign_up_email', 'lang:');
+			return FALSE;
+		}
 	}
 
 }

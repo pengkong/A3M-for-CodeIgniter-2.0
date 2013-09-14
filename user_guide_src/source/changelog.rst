@@ -181,6 +181,7 @@ Release Date: Not Released
       - Server version checking is now done via ``mysqli::$server_info`` instead of running an SQL query.
       - Added persistent connections support for PHP >= 5.3.
       - Added support for ``backup()`` in :doc:`Database Utilities <database/utilities>`.
+      - Changed methods ``trans_begin()``, ``trans_commit()`` and ``trans_rollback()`` to use the PHP API instead of sending queries.	
 
    -  Improved support of the PDO driver, including:
 
@@ -198,6 +199,7 @@ Release Date: Not Released
       - Removed ``limit()`` and ``order_by()`` support for *UPDATE* and *DELETE* queries as PostgreSQL does not support those features.
       - Added a work-around for dead persistent connections to be re-created after a database restart.
       - Changed ``db_connect()`` to include the (new) **schema** value into Postgre's **search_path** session variable.
+      - ``pg_escape_literal()`` is now used for escaping strings, if available.
 
    -  Improved support of the CUBRID driver, including:
 
@@ -399,6 +401,7 @@ Release Date: Not Released
       -  Changed ``_exception_handler()`` to respect php.ini *display_errors* setting.
       -  Added function :php:func:`is_https()` to check if a secure connection is used.
       -  Added function :php:func:`function_usable()` to check if a function exists and is not disabled by `Suhosin <http://www.hardened-php.net/suhosin/>`.
+      -  Removed the third (`$php_error`) from function :php:func:`log_message()`.
 
    -  :doc:`Output Library <libraries/output>` changes include:
 
@@ -436,6 +439,7 @@ Release Date: Not Released
    -  Added support for HTTP-Only cookies with new config option *cookie_httponly* (default FALSE).
    -  Renamed method ``_call_hook()`` to ``call_hook()`` in the :doc:`Hooks Library <general/hooks>`.
    -  ``$config['time_reference']`` now supports all timezone strings supported by PHP.
+   -  Fatal PHP errors are now also passed to ``_exception_handler()``, so they can be logged.
 
 
 Bug fixes for 3.0
@@ -464,7 +468,7 @@ Bug fixes for 3.0
 -  Fixed a possible bug in ``CI_Input::is_ajax_request()`` where some clients might not send the X-Requested-With HTTP header value exactly as 'XmlHttpRequest'.
 -  Fixed a bug (#1039) - MySQL's _backup() method failed due to a table name not being escaped.
 -  Fixed a bug (#1070) - CI_DB_driver::initialize() didn't set a character set if a database is not selected.
--  Fixed a bug (#177) - CI_Form_validation::set_value() didn't set the default value if POST data is NULL.
+-  Fixed a bug (#177) - ``CI_Form_validation::set_value()`` didn't set the default value if POST data is NULL.
 -  Fixed a bug (#68, #414) - Oracle's escape_str() didn't properly escape LIKE wild characters.
 -  Fixed a bug (#81) - ODBC's list_fields() and field_data() methods skipped the first column due to odbc_field_*() functions' index starting at 1 instead of 0.
 -  Fixed a bug (#129) - ODBC's num_rows() returned -1 in some cases, due to not all subdrivers supporting the odbc_num_rows() function.
@@ -592,7 +596,7 @@ Bug fixes for 3.0
 -  Fixed a bug (#2239) - :doc:`Email Library <libraries/email>` improperly handled the Subject when used with ``bcc_batch_mode`` resulting in E_WARNING messages and an empty Subject.
 -  Fixed a bug (#2234) - :doc:`Query Builder <database/query_builder>` didn't reset JOIN cache for write-type queries.
 -  Fixed a bug (#2298) - :doc:`Database Results <database/results>` method ``next_row()`` kept returning the last row, allowing for infinite loops.
--  Fixed a bug (#2236) - :doc:`Form Helper <helpers/form_helper>` function ``set_value()`` didn't parse array notation for keys if the rule was not present in the :doc:`Form Validation Library <libraries/form_validation>`.
+-  Fixed a bug (#2236, #2639) - :doc:`Form Helper <helpers/form_helper>` functions :func:`set_value()`, :func:`set_select()`, :func:`set_radio()`, :func:`set_checkbox()` didn't parse array notation for keys if the rule was not present in the :doc:`Form Validation Library <libraries/form_validation>`.
 -  Fixed a bug (#2353) - :doc:`Query Builder <database/query_builder>` erroneously prefixed literal strings with **dbprefix**.
 -  Fixed a bug (#78) - :doc:`Cart Library <libraries/cart>` didn't allow non-English letters in product names.
 -  Fixed a bug (#77) - :doc:`Database Class <database/index>` didn't properly handle the transaction "test mode" flag.
@@ -600,7 +604,7 @@ Bug fixes for 3.0
 -  Fixed a bug (#2388) - :doc:`Email Library <libraries/email>` used to ignore attachment errors, resulting in broken emails being sent.
 -  Fixed a bug (#2498) - :doc:`Form Validation Library <libraries/form_validation>` rule **valid_base64** only checked characters instead of actual validity.
 -  Fixed a bug (#2425) - OCI8 :doc:`database <database>` driver's method ``stored_procedure()`` didn't log an error unless **db_debug** was set to TRUE.
--  Fixed a bug (#2490) - :doc:`Database Class <database/queries>` method ``query()`` returning boolean instead of a result object for PostgreSQL-specific *INSERT INTO ... RETURNING* statements.
+-  Fixed a bug (#2490) - :doc:`Database Class <database/queries>` method ``query()`` returning boolean instead of a result object when the PostgreSQL-specific *RETURNING* clause is used.
 -  Fixed a bug (#249) - :doc:`Cache Library <libraries/caching>` didn't properly handle Memcache(d) configurations with missing options.
 -  Fixed a bug (#180) - :php:func:`config_item()` didn't take into account run-time configuration changes.
 -  Fixed a bug (#2551) - :doc:`Loader Library <libraries/loader>` method ``library()`` didn't properly check if a class that is being loaded already exists.
@@ -609,6 +613,7 @@ Bug fixes for 3.0
 -  Fixed an edge case (#2583) in the :doc:`Email Library <libraries/email>` where `Suhosin <http://www.hardened-php.net/suhosin/>` blocked messages sent via ``mail()`` due to trailing newspaces in headers.
 -  Fixed a bug (#2590) - :php:func:`log_message()` didn't actually cache the ``CI_Log`` class instance.
 -  Fixed a bug (#2609) - :php:func:`get_config()` optional argument was only effective on first function call. Also, it can now add items, in addition to updating existing items.
+-  Fixed a bug in the 'postgre' :doc:`database <database/index>` driver where the connection ID wasn't passed to ``pg_escape_string()``.
 
 Version 2.1.4
 =============

@@ -82,7 +82,7 @@ if ( ! function_exists('is_really_writable'))
 	function is_really_writable($file)
 	{
 		// If we're on a Unix server with safe_mode off we call is_writable
-		if (DIRECTORY_SEPARATOR === '/' && (bool) @ini_get('safe_mode') === FALSE)
+		if (DIRECTORY_SEPARATOR === '/' && (is_php('5.4') OR (bool) @ini_get('safe_mode') === FALSE))
 		{
 			return is_writable($file);
 		}
@@ -432,7 +432,7 @@ if ( ! function_exists('log_message'))
 	 * @param	bool	whether the error is a native PHP error
 	 * @return	void
 	 */
-	function log_message($level, $message, $php_error = FALSE)
+	function log_message($level, $message)
 	{
 		static $_log;
 
@@ -442,7 +442,7 @@ if ( ! function_exists('log_message'))
 			$_log[0] =& load_class('Log', 'core');
 		}
 
-		$_log[0]->write_log($level, $message, $php_error);
+		$_log[0]->write_log($level, $message);
 	}
 }
 
@@ -574,6 +574,34 @@ if ( ! function_exists('_exception_handler'))
 		}
 
 		$_error->log_exception($severity, $message, $filepath, $line);
+	}
+}
+
+// ------------------------------------------------------------------------
+
+if ( ! function_exists('_shutdown_handler'))
+{
+	/**
+	 * Shutdown Handler
+	 *
+	 * This is the shutdown handler that is declared at the top
+	 * of CodeIgniter.php. The main reason we use this is to simulate
+	 * a complete custom exception handler.
+	 *
+	 * E_STRICT is purposivly neglected because such events may have 
+	 * been caught. Duplication or none? None is preferred for now.
+	 *
+	 * @link	http://insomanic.me.uk/post/229851073/php-trick-catching-fatal-errors-e-error-with-a
+	 * @return	void
+	 */
+	function _shutdown_handler()
+	{
+		$last_error = function_exists('error_get_last') ? error_get_last() : NULL;
+		if (isset($last_error) &&
+			($last_error['type'] & (E_ERROR | E_PARSE | E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_COMPILE_WARNING)))
+		{
+			_exception_handler($last_error['type'], $last_error['message'], $last_error['file'], $last_error['line']);
+		}
 	}
 }
 

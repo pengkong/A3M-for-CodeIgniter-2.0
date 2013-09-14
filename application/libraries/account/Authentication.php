@@ -66,7 +66,7 @@ class Authentication {
 			}
 			else
 			{
-				$this->sign_in_by_id($user->id, $remember);
+				return $this->sign_in_by_id($user->id, $remember);
 			}
 		}
 	}
@@ -107,7 +107,9 @@ class Authentication {
 			redirect($this->CI->input->get('continue'));
 		}
 		
-		redirect('');
+		//return true if on sign-ip page so that redirect can go where ever it needs to go
+		//return TRUE;
+		redirect(base_url());
 	}
 
 	// --------------------------------------------------------------------

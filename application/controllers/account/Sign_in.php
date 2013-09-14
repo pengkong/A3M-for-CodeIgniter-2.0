@@ -31,7 +31,7 @@ class Sign_in extends CI_Controller {
 		maintain_ssl($this->config->item("ssl_enabled"));
 
 		// Redirect signed in users to homepage
-		if ($this->authentication->is_signed_in()) redirect('');
+		if ($this->authentication->is_signed_in()) redirect(base_url());
 
 		// Set default recaptcha pass
 		$recaptcha_pass = $this->session->userdata('sign_in_failed_attempts') < $this->config->item('sign_in_recaptcha_offset') ? TRUE : FALSE;
@@ -65,8 +65,14 @@ class Sign_in extends CI_Controller {
 			else
 			{
 				// Authenticate
-				if ( ! $this->authentication->sign_in($this->input->post('sign_in_username_email', TRUE), $this->input->post('sign_in_password', TRUE), $this->input->post('sign_in_remember', TRUE)))
+				if ($this->authentication->sign_in($this->input->post('sign_in_username_email', TRUE), $this->input->post('sign_in_password', TRUE), $this->input->post('sign_in_remember', TRUE)))
 				{
+					//change this to redirect to page you want your users to go after logins
+					redirect(base_url());
+				}
+				else
+				{
+					//show login error
 					$data['sign_in_error'] = lang('sign_in_combination_incorrect');
 				}
 			}
