@@ -15,13 +15,7 @@ class Manage_users extends CI_Controller {
     $this->load->config('account/account');
     $this->load->helper(array('date', 'language', 'account/ssl', 'url'));
     $this->load->library(array('account/authentication', 'account/authorization', 'form_validation'));
-    $this->load->model('account/account_model');
-    $this->load->model('account/account_details_model');
-    $this->load->model('account/acl_permission_model');
-    $this->load->model('account/acl_role_model');
-    $this->load->model('account/rel_account_permission_model');
-    $this->load->model('account/rel_account_role_model');
-    $this->load->model('account/rel_role_permission_model');
+    $this->load->model(array('account/account_model', 'account/account_details_model', 'account/acl_permission_model', 'account/acl_role_model', 'account/rel_account_permission_model', 'account/rel_account_role_model', 'account/rel_role_permission_model'));
     $this->load->language(array('general', 'admin/manage_users', 'account/account_settings', 'account/account_profile', 'account/sign_up', 'account/account_password'));
   }
 
@@ -224,11 +218,11 @@ class Manage_users extends CI_Controller {
           if( $this->authorization->is_permitted('ban_users') ) 
           {
             $ban = $this->input->post('manage_user_ban', TRUE);
-            if( isset($ban) ) 
+            if( $this->input->post('manage_user_ban', true) )
             {
               $this->account_model->update_suspended_datetime($id);
             }
-            else
+            elseif( $this->input->post('manage_user_unban', true) )
             {
               $this->account_model->remove_suspended_datetime($id);
             }
@@ -253,18 +247,7 @@ class Manage_users extends CI_Controller {
         }
         $this->rel_account_role_model->delete_update_batch($id, $roles);
 
-        if( $is_new )
-        {
-          // Redirect to view the newly created user
-          redirect("admin/manage_users/save/{$id}");
-        }
-        else
-        {
-          // User information may have been updated, re-get
-          $data['update_account'] = $this->account_model->get_by_id($id);
-          $data['update_account_details'] = $this->account_details_model->get_by_account_id($id);
-          $data['update_account_roles'] = $this->acl_role_model->get_by_account_id($id); 
-        }
+        redirect("admin/manage_users"); 
       }
     }
 

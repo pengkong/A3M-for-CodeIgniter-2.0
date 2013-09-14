@@ -47,21 +47,6 @@
     </div>
 </div>
 
-<div class="control-group <?php echo (form_error('settings_fullname')) ? 'error' : ''; ?>">
-    <label class="control-label" for="settings_fullname"><?php echo lang('settings_fullname'); ?></label>
-
-    <div class="controls">
-		<?php echo form_input(array('name' => 'settings_fullname', 'id' => 'settings_fullname', 'value' => set_value('settings_fullname') ? set_value('settings_fullname') : (isset($account_details->fullname) ? $account_details->fullname : ''), 'maxlength' => 160)); ?>
-		<?php if (form_error('settings_fullname'))
-	{
-		?>
-        <span class="help-inline">
-					<?php echo form_error('settings_fullname'); ?>
-					</span>
-		<?php } ?>
-    </div>
-</div>
-
 <div class="control-group <?php echo (form_error('settings_firstname')) ? 'error' : ''; ?>">
     <label class="control-label" for="settings_firstname"><?php echo lang('settings_firstname'); ?></label>
 
@@ -146,21 +131,6 @@
             <option value="m"<?php if ($s == 'm') echo ' selected="selected"'; ?>><?php echo lang('gender_male'); ?></option>
             <option value="f"<?php if ($s == 'f') echo ' selected="selected"'; ?>><?php echo lang('gender_female'); ?></option>
         </select>
-    </div>
-</div>
-
-<div class="control-group <?php echo (form_error('settings_postalcode')) ? 'error' : ''; ?>">
-    <label class="control-label" for="settings_postalcode"><?php echo lang('settings_postalcode'); ?></label>
-
-    <div class="controls">
-		<?php echo form_input(array('name' => 'settings_postalcode', 'id' => 'settings_postalcode', 'value' => set_value('settings_postalcode') ? set_value('settings_postalcode') : (isset($account_details->postalcode) ? $account_details->postalcode : ''), 'maxlength' => 40, 'class' => 'input-small')); ?>
-		<?php if (form_error('settings_postalcode'))
-	{
-		?>
-        <span class="help-inline">
-					<?php echo form_error('settings_postalcode'); ?>
-					</span>
-		<?php } ?>
     </div>
 </div>
 

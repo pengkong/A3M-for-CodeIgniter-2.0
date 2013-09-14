@@ -28,7 +28,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x3a97578>
+			<function <lambda> at 0x5766c08>
 			</div>
 		</div>
 
@@ -243,6 +243,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Server version checking is now done via <tt class="docutils literal"><span class="pre">mysqli::$server_info</span></tt> instead of running an SQL query.</li>
 <li>Added persistent connections support for PHP &gt;= 5.3.</li>
 <li>Added support for <tt class="docutils literal"><span class="pre">backup()</span></tt> in <a class="reference internal" href="database/utilities.html"><em>Database Utilities</em></a>.</li>
+<li>Changed methods <tt class="docutils literal"><span class="pre">trans_begin()</span></tt>, <tt class="docutils literal"><span class="pre">trans_commit()</span></tt> and <tt class="docutils literal"><span class="pre">trans_rollback()</span></tt> to use the PHP API instead of sending queries.</li>
 </ul>
 </li>
 <li>Improved support of the PDO driver, including:<ul>
@@ -260,6 +261,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Removed <tt class="docutils literal"><span class="pre">limit()</span></tt> and <tt class="docutils literal"><span class="pre">order_by()</span></tt> support for <em>UPDATE</em> and <em>DELETE</em> queries as PostgreSQL does not support those features.</li>
 <li>Added a work-around for dead persistent connections to be re-created after a database restart.</li>
 <li>Changed <tt class="docutils literal"><span class="pre">db_connect()</span></tt> to include the (new) <strong>schema</strong> value into Postgre&#8217;s <strong>search_path</strong> session variable.</li>
+<li><tt class="docutils literal"><span class="pre">pg_escape_literal()</span></tt> is now used for escaping strings, if available.</li>
 </ul>
 </li>
 <li>Improved support of the CUBRID driver, including:<ul>
@@ -462,6 +464,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Changed <tt class="docutils literal"><span class="pre">_exception_handler()</span></tt> to respect php.ini <em>display_errors</em> setting.</li>
 <li>Added function <a class="reference internal" href="general/common_functions.html#is_https" title="is_https"><tt class="xref php php-func docutils literal"><span class="pre">is_https()</span></tt></a> to check if a secure connection is used.</li>
 <li>Added function <a class="reference internal" href="general/common_functions.html#function_usable" title="function_usable"><tt class="xref php php-func docutils literal"><span class="pre">function_usable()</span></tt></a> to check if a function exists and is not disabled by <cite>Suhosin &lt;http://www.hardened-php.net/suhosin/&gt;</cite>.</li>
+<li>Removed the third (<cite>$php_error</cite>) from function <a class="reference internal" href="general/common_functions.html#log_message" title="log_message"><tt class="xref php php-func docutils literal"><span class="pre">log_message()</span></tt></a>.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="libraries/output.html"><em>Output Library</em></a> changes include:<ul>
@@ -500,6 +503,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Added support for HTTP-Only cookies with new config option <em>cookie_httponly</em> (default FALSE).</li>
 <li>Renamed method <tt class="docutils literal"><span class="pre">_call_hook()</span></tt> to <tt class="docutils literal"><span class="pre">call_hook()</span></tt> in the <a class="reference internal" href="general/hooks.html"><em>Hooks Library</em></a>.</li>
 <li><tt class="docutils literal"><span class="pre">$config['time_reference']</span></tt> now supports all timezone strings supported by PHP.</li>
+<li>Fatal PHP errors are now also passed to <tt class="docutils literal"><span class="pre">_exception_handler()</span></tt>, so they can be logged.</li>
 </ul>
 </li>
 </ul>
@@ -529,7 +533,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Fixed a possible bug in <tt class="docutils literal"><span class="pre">CI_Input::is_ajax_request()</span></tt> where some clients might not send the X-Requested-With HTTP header value exactly as &#8216;XmlHttpRequest&#8217;.</li>
 <li>Fixed a bug (#1039) - MySQL&#8217;s _backup() method failed due to a table name not being escaped.</li>
 <li>Fixed a bug (#1070) - CI_DB_driver::initialize() didn&#8217;t set a character set if a database is not selected.</li>
-<li>Fixed a bug (#177) - CI_Form_validation::set_value() didn&#8217;t set the default value if POST data is NULL.</li>
+<li>Fixed a bug (#177) - <tt class="docutils literal"><span class="pre">CI_Form_validation::set_value()</span></tt> didn&#8217;t set the default value if POST data is NULL.</li>
 <li>Fixed a bug (#68, #414) - Oracle&#8217;s escape_str() didn&#8217;t properly escape LIKE wild characters.</li>
 <li>Fixed a bug (#81) - ODBC&#8217;s list_fields() and field_data() methods skipped the first column due to odbc_field_*() functions&#8217; index starting at 1 instead of 0.</li>
 <li>Fixed a bug (#129) - ODBC&#8217;s num_rows() returned -1 in some cases, due to not all subdrivers supporting the odbc_num_rows() function.</li>
@@ -657,7 +661,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Fixed a bug (#2239) - <a class="reference internal" href="libraries/email.html"><em>Email Library</em></a> improperly handled the Subject when used with <tt class="docutils literal"><span class="pre">bcc_batch_mode</span></tt> resulting in E_WARNING messages and an empty Subject.</li>
 <li>Fixed a bug (#2234) - <a class="reference internal" href="database/query_builder.html"><em>Query Builder</em></a> didn&#8217;t reset JOIN cache for write-type queries.</li>
 <li>Fixed a bug (#2298) - <a class="reference internal" href="database/results.html"><em>Database Results</em></a> method <tt class="docutils literal"><span class="pre">next_row()</span></tt> kept returning the last row, allowing for infinite loops.</li>
-<li>Fixed a bug (#2236) - <a class="reference internal" href="helpers/form_helper.html"><em>Form Helper</em></a> function <tt class="docutils literal"><span class="pre">set_value()</span></tt> didn&#8217;t parse array notation for keys if the rule was not present in the <a class="reference internal" href="libraries/form_validation.html"><em>Form Validation Library</em></a>.</li>
+<li>Fixed a bug (#2236, #2639) - <a class="reference internal" href="helpers/form_helper.html"><em>Form Helper</em></a> functions <tt class="xref py py-func docutils literal"><span class="pre">set_value()</span></tt>, <tt class="xref py py-func docutils literal"><span class="pre">set_select()</span></tt>, <tt class="xref py py-func docutils literal"><span class="pre">set_radio()</span></tt>, <tt class="xref py py-func docutils literal"><span class="pre">set_checkbox()</span></tt> didn&#8217;t parse array notation for keys if the rule was not present in the <a class="reference internal" href="libraries/form_validation.html"><em>Form Validation Library</em></a>.</li>
 <li>Fixed a bug (#2353) - <a class="reference internal" href="database/query_builder.html"><em>Query Builder</em></a> erroneously prefixed literal strings with <strong>dbprefix</strong>.</li>
 <li>Fixed a bug (#78) - <a class="reference internal" href="libraries/cart.html"><em>Cart Library</em></a> didn&#8217;t allow non-English letters in product names.</li>
 <li>Fixed a bug (#77) - <a class="reference internal" href="database/index.html"><em>Database Class</em></a> didn&#8217;t properly handle the transaction &#8220;test mode&#8221; flag.</li>
@@ -665,7 +669,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Fixed a bug (#2388) - <a class="reference internal" href="libraries/email.html"><em>Email Library</em></a> used to ignore attachment errors, resulting in broken emails being sent.</li>
 <li>Fixed a bug (#2498) - <a class="reference internal" href="libraries/form_validation.html"><em>Form Validation Library</em></a> rule <strong>valid_base64</strong> only checked characters instead of actual validity.</li>
 <li>Fixed a bug (#2425) - OCI8 <tt class="xref doc docutils literal"><span class="pre">database</span></tt> driver&#8217;s method <tt class="docutils literal"><span class="pre">stored_procedure()</span></tt> didn&#8217;t log an error unless <strong>db_debug</strong> was set to TRUE.</li>
-<li>Fixed a bug (#2490) - <a class="reference internal" href="database/queries.html"><em>Database Class</em></a> method <tt class="docutils literal"><span class="pre">query()</span></tt> returning boolean instead of a result object for PostgreSQL-specific <em>INSERT INTO ... RETURNING</em> statements.</li>
+<li>Fixed a bug (#2490) - <a class="reference internal" href="database/queries.html"><em>Database Class</em></a> method <tt class="docutils literal"><span class="pre">query()</span></tt> returning boolean instead of a result object when the PostgreSQL-specific <em>RETURNING</em> clause is used.</li>
 <li>Fixed a bug (#249) - <a class="reference internal" href="libraries/caching.html"><em>Cache Library</em></a> didn&#8217;t properly handle Memcache(d) configurations with missing options.</li>
 <li>Fixed a bug (#180) - <a class="reference internal" href="general/common_functions.html#config_item" title="config_item"><tt class="xref php php-func docutils literal"><span class="pre">config_item()</span></tt></a> didn&#8217;t take into account run-time configuration changes.</li>
 <li>Fixed a bug (#2551) - <a class="reference internal" href="libraries/loader.html"><em>Loader Library</em></a> method <tt class="docutils literal"><span class="pre">library()</span></tt> didn&#8217;t properly check if a class that is being loaded already exists.</li>
@@ -673,6 +677,8 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Fixed a bug (#2585) - <a class="reference internal" href="database/query_builder.html"><em>Query Builder</em></a> methods <tt class="docutils literal"><span class="pre">min()</span></tt>, <tt class="docutils literal"><span class="pre">max()</span></tt>, <tt class="docutils literal"><span class="pre">avg()</span></tt>, <tt class="docutils literal"><span class="pre">sum()</span></tt> didn&#8217;t escape field names.</li>
 <li>Fixed an edge case (#2583) in the <a class="reference internal" href="libraries/email.html"><em>Email Library</em></a> where <cite>Suhosin &lt;http://www.hardened-php.net/suhosin/&gt;</cite> blocked messages sent via <tt class="docutils literal"><span class="pre">mail()</span></tt> due to trailing newspaces in headers.</li>
 <li>Fixed a bug (#2590) - <a class="reference internal" href="general/common_functions.html#log_message" title="log_message"><tt class="xref php php-func docutils literal"><span class="pre">log_message()</span></tt></a> didn&#8217;t actually cache the <tt class="docutils literal"><span class="pre">CI_Log</span></tt> class instance.</li>
+<li>Fixed a bug (#2609) - <tt class="xref php php-func docutils literal"><span class="pre">get_config()</span></tt> optional argument was only effective on first function call. Also, it can now add items, in addition to updating existing items.</li>
+<li>Fixed a bug in the &#8216;postgre&#8217; <a class="reference internal" href="database/index.html"><em>database</em></a> driver where the connection ID wasn&#8217;t passed to <tt class="docutils literal"><span class="pre">pg_escape_string()</span></tt>.</li>
 </ul>
 </div>
 </div>

@@ -15,13 +15,7 @@ class Manage_roles extends CI_Controller {
     $this->load->config('account/account');
     $this->load->helper(array('date', 'language', 'account/ssl', 'url'));
     $this->load->library(array('account/authentication', 'account/authorization', 'form_validation'));
-    $this->load->model('account/account_model');
-    $this->load->model('account/account_details_model');
-    $this->load->model('account/acl_permission_model');
-    $this->load->model('account/acl_role_model');
-    $this->load->model('account/rel_account_permission_model');
-    $this->load->model('account/rel_account_role_model');
-    $this->load->model('account/rel_role_permission_model');
+    $this->load->model(array('account/account_model', 'account/account_details_model', 'account/acl_permission_model', 'account/acl_role_model', 'account/rel_account_permission_model', 'account/rel_account_role_model', 'account/rel_role_permission_model'));
     $this->load->language(array('general', 'admin/manage_roles', 'account/account_settings', 'account/account_profile', 'account/sign_up', 'account/account_password'));
   }
 
@@ -176,11 +170,11 @@ class Manage_roles extends CI_Controller {
         if( $this->authorization->is_permitted('delete_roles') ) 
         {
           $permission_ban = $this->input->post('manage_role_ban', TRUE);
-          if( isset($permission_ban) ) 
+          if( $this->input->post('manage_role_ban', TRUE) ) 
           {
             $this->acl_role_model->update_suspended_datetime($id);
           }
-          else
+          elseif( $this->input->post('manage_role_unban', TRUE))
           {
             $this->acl_role_model->remove_suspended_datetime($id);
           }
@@ -197,17 +191,7 @@ class Manage_roles extends CI_Controller {
         }
         $this->rel_role_permission_model->delete_update_batch($id, $perms);
 
-        if( $is_new )
-        {
-          // Redirect to view the newly created role
-          redirect("admin/manage_roles/save/{$id}");
-        }
-        else
-        {
-          // Role information may have been updated, re-get
-          $data['role'] = $this->acl_role_model->get_by_id($id);
-          $data['role_permissions'] = $this->rel_role_permission_model->get_by_role_id($id);
-        }
+        redirect('admin/manage_roles'); 
       }
     }
 

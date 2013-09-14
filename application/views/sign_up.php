@@ -45,20 +45,7 @@
 							<?php endif; ?>
 						</div>
 					</div>
-
-					<div class="control-group <?php echo (form_error('sign_up_password')) ? 'error' : ''; ?>">
-						<label class="control-label" for="sign_up_password"><?php echo lang('sign_up_password'); ?></label>
-
-						<div class="controls">
-							<?php echo form_password(array('name' => 'sign_up_password', 'id' => 'sign_up_password', 'value' => set_value('sign_up_password'))); ?>
-							<?php if (form_error('sign_up_password')) : ?>
-								<span class="help-inline">
-								<?php echo form_error('sign_up_password'); ?>
-								</span>
-							<?php endif; ?>
-						</div>
-					</div>
-
+				
 					<div class="control-group <?php echo (form_error('sign_up_email') || isset($sign_up_email_error)) ? 'error' : ''; ?>">
 						<label class="control-label" for="sign_up_email"><?php echo lang('sign_up_email'); ?></label>
 
@@ -75,6 +62,32 @@
 						</div>
 					</div>
 
+					<div class="control-group <?php echo (form_error('sign_up_password')) ? 'error' : ''; ?>">
+						<label class="control-label" for="sign_up_password"><?php echo lang('sign_up_password'); ?></label>
+
+						<div class="controls">
+							<?php echo form_password(array('name' => 'sign_up_password', 'id' => 'sign_up_password', 'value' => set_value('sign_up_password'))); ?>
+							<?php if (form_error('sign_up_password')) : ?>
+								<span class="help-inline">
+								<?php echo form_error('sign_up_password'); ?>
+								</span>
+							<?php endif; ?>
+						</div>
+					</div>
+					
+					<div class="control-group <?php echo (form_error('sign_up_password')) ? 'error' : ''; ?>">
+						<label class="control-label" for="sign_up_confirm_password"><?php echo lang('sign_up_confirm_password'); ?></label>
+
+						<div class="controls">
+							<?php echo form_password(array('name' => 'sign_up_confirm_password', 'id' => 'sign_up_confirm_password', 'value' => set_value('sign_up_confirm_password'))); ?>
+							<?php if (form_error('sign_up_confirm_password')) : ?>
+								<span class="help-inline">
+								<?php echo form_error('sign_up_confirm_password'); ?>
+								</span>
+							<?php endif; ?>
+						</div>
+					</div>
+					
 					<?php if (isset($recaptcha)) :
 						echo $recaptcha;
 						if (isset($sign_up_recaptcha_error)) : ?>
@@ -83,7 +96,7 @@
 					<?php endif; ?>
 
 					<div>
-						<?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-large pull-right', 'content' => '<i class="icon-pencil"></i> '.lang('sign_up_create_my_account'))); ?>
+						<?php echo form_button(array('type' => 'submit','class' => 'btn btn-large pull-right', 'content' => '<i class="icon-pencil"></i> '.lang('sign_up_create_my_account'))); ?>
 					</div>
 					<br/>
 

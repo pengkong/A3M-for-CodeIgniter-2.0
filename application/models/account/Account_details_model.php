@@ -37,7 +37,6 @@ class Account_details_model extends CI_Model {
 	 */
 	function update($account_id, $attributes = array())
 	{
-		if (isset($attributes['fullname'])) if (strlen($attributes['fullname']) > 160) $attributes['fullname'] = substr($attributes['fullname'], 0, 160);
 		if (isset($attributes['firstname'])) if (strlen($attributes['firstname']) > 80) $attributes['firstname'] = substr($attributes['firstname'], 0, 80);
 		if (isset($attributes['lastname'])) if (strlen($attributes['lastname']) > 80) $attributes['lastname'] = substr($attributes['lastname'], 0, 80);
 		if (isset($attributes['dateofbirth']))
@@ -59,7 +58,6 @@ class Account_details_model extends CI_Model {
 					break;
 			}
 		}
-		if (isset($attributes['postalcode'])) if (strlen($attributes['postalcode']) > 40) $attributes['postalcode'] = substr($attributes['postalcode'], 0, 40);
 		// Check that it's a recognized country (see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
 		if (isset($attributes['country']))
 		{
@@ -85,7 +83,6 @@ class Account_details_model extends CI_Model {
 			$this->load->model('account/ref_zoneinfo_model');
 			$timezone = $this->ref_zoneinfo_model->get_by_zoneinfo($attributes['timezone']);
 			$timezone ? $attributes['timezone'] = $timezone->zoneinfo : NULL;
-			$timezone ? $attributes['citimezone'] = $timezone->cicode : NULL;
 
 			// Try to guess country based on timezone
 			if ( ! isset($attributes['country']))

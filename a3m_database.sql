@@ -26,12 +26,10 @@ CREATE TABLE IF NOT EXISTS `a3m_account` (
 
 CREATE TABLE IF NOT EXISTS `a3m_account_details` (
   `account_id` bigint(20) unsigned NOT NULL,
-  `fullname` varchar(160) DEFAULT NULL,
   `firstname` varchar(80) DEFAULT NULL,
   `lastname` varchar(80) DEFAULT NULL,
   `dateofbirth` date DEFAULT NULL,
   `gender` char(1) DEFAULT NULL,
-  `postalcode` varchar(40) DEFAULT NULL,
   `country` char(2) DEFAULT NULL,
   `language` char(2) DEFAULT NULL,
   `timezone` varchar(40) DEFAULT NULL,
