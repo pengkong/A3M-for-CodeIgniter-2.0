@@ -47,7 +47,7 @@ class Sign_up extends CI_Controller {
 		if (($this->form_validation->run() === TRUE) && ($this->config->item("sign_up_enabled")))
 		{
 			// Either already pass recaptcha or just passed recaptcha
-			if ( ! ($this->session->userdata('sign_up_recaptcha_pass') == TRUE || $recaptcha_result === TRUE) && $this->config->item("sign_up_recaptcha_enabled") === TRUE)
+			if ( ($this->session->userdata('sign_up_recaptcha_pass') == FALSE || $recaptcha_result === FALSE) && $this->config->item("sign_up_recaptcha_enabled") === TRUE)
 			{
 				$data['sign_up_recaptcha_error'] = $this->input->post('recaptcha_response_field') ? lang('sign_up_recaptcha_incorrect') : lang('sign_up_recaptcha_required');
 			}
@@ -88,13 +88,16 @@ class Sign_up extends CI_Controller {
 	 */
 	function username_check($username)
 	{
-		if($this->account_model->get_by_username($username))
+		//once we update to PHP 5.5, we will be able to put this into the if statement
+		$result = $this->account_model->get_by_username($username);
+		if( empty($result) )
 		{
 			return TRUE;
 		}
 		else
 		{
-			$this->form_validation->set_message('sign_up_username', 'lang:sign_up_username_taken');
+			$error = lang('sign_up_username_taken');
+			$this->form_validation->set_message('username_check', $error);
 			return FALSE;
 		}
 	}
@@ -108,13 +111,15 @@ class Sign_up extends CI_Controller {
 	 */
 	function email_check($email)
 	{
-		if($this->account_model->get_by_email($email))
+		$result = $this->account_model->get_by_email($email);
+		if( empty($result) )
 		{
 			return TRUE;
 		}
 		else
 		{
-			$this->form_validation->set_message('sign_up_email', 'lang:');
+			$error = lang('sign_up_email_exist');
+			$this->form_validation->set_message('email_check', $error);
 			return FALSE;
 		}
 	}

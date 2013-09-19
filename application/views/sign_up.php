@@ -29,7 +29,6 @@
 				<h3><?php echo lang('sign_up_heading'); ?></h3>
 
 				<div class="well">
-
 					<div class="control-group <?php echo (form_error('sign_up_username') || isset($sign_up_username_error)) ? 'error' : ''; ?>">
 						<label class="control-label" for="sign_up_username"><?php echo lang('sign_up_username'); ?></label>
 
@@ -75,14 +74,14 @@
 						</div>
 					</div>
 					
-					<div class="control-group <?php echo (form_error('sign_up_password')) ? 'error' : ''; ?>">
-						<label class="control-label" for="sign_up_confirm_password"><?php echo lang('sign_up_confirm_password'); ?></label>
+					<div class="control-group <?php echo (form_error('sign_up_password_confirm')) ? 'error' : ''; ?>">
+						<label class="control-label" for="sign_up_password_confirm"><?php echo lang('sign_up_confirm_password'); ?></label>
 
 						<div class="controls">
-							<?php echo form_password(array('name' => 'sign_up_confirm_password', 'id' => 'sign_up_confirm_password', 'value' => set_value('sign_up_confirm_password'))); ?>
-							<?php if (form_error('sign_up_confirm_password')) : ?>
+							<?php echo form_password(array('name' => 'sign_up_password_confirm', 'id' => 'sign_up_password_confirm', 'value' => set_value('sign_up_password_confirm'))); ?>
+							<?php if (form_error('sign_up_password_confirm')) : ?>
 								<span class="help-inline">
-								<?php echo form_error('sign_up_confirm_password'); ?>
+								<?php echo form_error('sign_up_password_confirm'); ?>
 								</span>
 							<?php endif; ?>
 						</div>
