@@ -40,13 +40,13 @@ class Manage_users extends CI_Controller {
     }
 
     // Retrieve sign in user
-    $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
+    $data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
 
     // Get all user information
-    $all_accounts = $this->account_model->get();
-    $all_account_details = $this->account_details_model->get();
-    $all_account_roles = $this->rel_account_role_model->get();
-    $admin_role = $this->acl_role_model->get_by_name('Admin');
+    $all_accounts = $this->Account_model->get();
+    $all_account_details = $this->Account_details_model->get();
+    $all_account_roles = $this->Rel_account_role_model->get();
+    $admin_role = $this->Acl_role_model->get_by_name('Admin');
 
     // Compile an array for the view to use
     $data['all_accounts'] = array();
@@ -117,10 +117,10 @@ class Manage_users extends CI_Controller {
     }
 
     // Retrieve sign in user
-    $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
+    $data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
 
     // Get all the roles
-    $data['roles'] = $this->acl_role_model->get();
+    $data['roles'] = $this->Acl_role_model->get();
 
     // Set action type (create or update user)
     $data['action'] = 'create';
@@ -128,9 +128,9 @@ class Manage_users extends CI_Controller {
     // Get the account to update
     if( ! $is_new )
     {
-      $data['update_account'] = $this->account_model->get_by_id($id);
-      $data['update_account_details'] = $this->account_details_model->get_by_account_id($id);
-      $data['update_account_roles'] = $this->acl_role_model->get_by_account_id($id);
+      $data['update_account'] = $this->Account_model->get_by_id($id);
+      $data['update_account_details'] = $this->Account_details_model->get_by_account_id($id);
+      $data['update_account_roles'] = $this->Acl_role_model->get_by_account_id($id);
       $data['action'] = 'update';
     }
 
@@ -191,7 +191,7 @@ class Manage_users extends CI_Controller {
 
         // Create a new user
         if( empty($id) ) {
-          $id = $this->account_model->create(
+          $id = $this->Account_model->create(
             $this->input->post('users_username', TRUE), 
             $this->input->post('users_email', TRUE), 
             $this->input->post('users_new_password', TRUE));
@@ -200,18 +200,18 @@ class Manage_users extends CI_Controller {
         else 
         {
           // Update account username
-          $this->account_model->update_username($id, 
+          $this->Account_model->update_username($id, 
             $this->input->post('users_username', TRUE) ? $this->input->post('users_username', TRUE) : NULL);
 
           // Update account email
-          $this->account_model->update_email($id, 
+          $this->Account_model->update_email($id, 
             $this->input->post('users_email', TRUE) ? $this->input->post('users_email', TRUE) : NULL);
 
           // Update password
           $pass = $this->input->post('users_new_password', TRUE) ? $this->input->post('users_new_password', TRUE) : NULL;
           if( ! empty($pass) )
           {
-            $this->account_model->update_password($id, $pass);
+            $this->Account_model->update_password($id, $pass);
           }
 
           // Check if the user should be suspended
@@ -220,11 +220,11 @@ class Manage_users extends CI_Controller {
             $ban = $this->input->post('manage_user_ban', TRUE);
             if( $this->input->post('manage_user_ban', true) )
             {
-              $this->account_model->update_suspended_datetime($id);
+              $this->Account_model->update_suspended_datetime($id);
             }
             elseif( $this->input->post('manage_user_unban', true) )
             {
-              $this->account_model->remove_suspended_datetime($id);
+              $this->Account_model->remove_suspended_datetime($id);
             }
           }
         }
@@ -234,7 +234,7 @@ class Manage_users extends CI_Controller {
         $attributes['fullname'] = $this->input->post('users_fullname', TRUE) ? $this->input->post('users_fullname', TRUE) : NULL;
         $attributes['firstname'] = $this->input->post('users_firstname', TRUE) ? $this->input->post('users_firstname', TRUE) : NULL;
         $attributes['lastname'] = $this->input->post('users_lastname', TRUE) ? $this->input->post('users_lastname', TRUE) : NULL;
-        $this->account_details_model->update($id, $attributes);
+        $this->Account_details_model->update($id, $attributes);
 
         // Apply roles
         $roles = array();
@@ -245,7 +245,7 @@ class Manage_users extends CI_Controller {
             $roles[] = $r->id;
           }
         }
-        $this->rel_account_role_model->delete_update_batch($id, $roles);
+        $this->Rel_account_role_model->delete_update_batch($id, $roles);
 
         redirect("admin/manage_users"); 
       }
@@ -277,7 +277,7 @@ class Manage_users extends CI_Controller {
    */
   function username_check($username)
   {
-    return $this->account_model->get_by_username($username) ? TRUE : FALSE;
+    return $this->Account_model->get_by_username($username) ? TRUE : FALSE;
   }
 
   /**
@@ -289,7 +289,7 @@ class Manage_users extends CI_Controller {
    */
   function email_check($email)
   {
-    return $this->account_model->get_by_email($email) ? TRUE : FALSE;
+    return $this->Account_model->get_by_email($email) ? TRUE : FALSE;
   }
 }
 

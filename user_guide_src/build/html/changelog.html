@@ -28,7 +28,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x5766c08>
+			<function <lambda> at 0x639c320>
 			</div>
 		</div>
 
@@ -455,6 +455,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Changed methods <tt class="docutils literal"><span class="pre">get()</span></tt>, <tt class="docutils literal"><span class="pre">post()</span></tt>, <tt class="docutils literal"><span class="pre">get_post()</span></tt>, <tt class="docutils literal"><span class="pre">cookie()</span></tt>, <tt class="docutils literal"><span class="pre">server()</span></tt>, <tt class="docutils literal"><span class="pre">user_agent()</span></tt> to return NULL instead of FALSE when no value is found.</li>
 <li>Added method <tt class="docutils literal"><span class="pre">post_get()</span></tt> and changed <tt class="docutils literal"><span class="pre">get_post()</span></tt> to search in GET data first. Both methods&#8217; names now properly match their GET/POST data search priorities.</li>
 <li>Changed method <tt class="docutils literal"><span class="pre">_fetch_from_array()</span></tt> to parse array notation in field name.</li>
+<li>Added an option for <tt class="docutils literal"><span class="pre">_clean_input_keys()</span></tt> to return FALSE instead of terminating the whole script.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="general/common_functions.html"><em>Common functions</em></a> changes include:<ul>
@@ -679,6 +680,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Fixed a bug (#2590) - <a class="reference internal" href="general/common_functions.html#log_message" title="log_message"><tt class="xref php php-func docutils literal"><span class="pre">log_message()</span></tt></a> didn&#8217;t actually cache the <tt class="docutils literal"><span class="pre">CI_Log</span></tt> class instance.</li>
 <li>Fixed a bug (#2609) - <tt class="xref php php-func docutils literal"><span class="pre">get_config()</span></tt> optional argument was only effective on first function call. Also, it can now add items, in addition to updating existing items.</li>
 <li>Fixed a bug in the &#8216;postgre&#8217; <a class="reference internal" href="database/index.html"><em>database</em></a> driver where the connection ID wasn&#8217;t passed to <tt class="docutils literal"><span class="pre">pg_escape_string()</span></tt>.</li>
+<li>Fixed a bug (#33) - Script execution was terminated when an invalid cookie key was encountered.</li>
 </ul>
 </div>
 </div>
@@ -844,7 +846,6 @@ available to the 404_override controller when a controller existed
 but the requested method did not.</li>
 <li>Fixed a bug (Reactor #89) where MySQL export would fail if the table
 had hyphens or other non alphanumeric/underscore characters.</li>
-<li>Fixed a bug (#200) where MySQL queries would be malformed after calling $this-&gt;db-&gt;count_all() then $this-&gt;db-&gt;get()</li>
 <li>Fixed a bug (#105) that stopped query errors from being logged unless database debugging was enabled</li>
 <li>Fixed a bug (#160) - Removed unneeded array copy in the file cache
 driver.</li>
@@ -865,7 +866,7 @@ APPPATH first, allowing them to be replaced.</li>
 <li>Fixed a bug (#537) - Support for all wav type in browser.</li>
 <li>Fixed a bug (#576) - Using ini_get() function to detect if apc is enabled or not.</li>
 <li>Fixed invalid date time format in <a class="reference internal" href="helpers/date_helper.html"><em>Date helper</em></a> and <a class="reference internal" href="libraries/xmlrpc.html"><em>XMLRPC library</em></a>.</li>
-<li>Fixed a bug (#200) - MySQL queries would be malformed after calling count_all() then db-&gt;get().</li>
+<li>Fixed a bug (#200) - MySQL queries would be malformed after calling db-&gt;count_all() then db-&gt;get().</li>
 </ul>
 </div>
 </div>

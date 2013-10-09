@@ -40,12 +40,12 @@ class Manage_permissions extends CI_Controller {
     }
 
     // Retrieve sign in user
-    $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
+    $data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
 
     // Get all permossions, roles, and role_permissions
-    $roles = $this->acl_role_model->get();
-    $permissions = $this->acl_permission_model->get();
-    $role_permissions = $this->rel_role_permission_model->get();
+    $roles = $this->Acl_role_model->get();
+    $permissions = $this->Acl_permission_model->get();
+    $role_permissions = $this->Rel_role_permission_model->get();
 
     // Combine all these elements for display
     $data['permissions'] = array();
@@ -107,13 +107,13 @@ class Manage_permissions extends CI_Controller {
     }
 
     // Retrieve sign in user
-    $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
+    $data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
 
     // Set action type (create or update permission)
     $data['action'] = 'create';
 
     // Get all the roles
-    $data['roles'] = $this->acl_role_model->get();
+    $data['roles'] = $this->Acl_role_model->get();
 
     // Is this a System Permission?
     $data['is_system'] = FALSE;
@@ -121,8 +121,8 @@ class Manage_permissions extends CI_Controller {
     //Get the role
     if( ! $is_new )
     {
-      $data['permission'] = $this->acl_permission_model->get_by_id($id);
-      $data['role_permissions'] = $this->rel_role_permission_model->get_by_permission_id($id);
+      $data['permission'] = $this->Acl_permission_model->get_by_id($id);
+      $data['role_permissions'] = $this->Rel_role_permission_model->get_by_permission_id($id);
       $data['action'] = 'update';
       $data['is_system'] = ($data['permission']->is_system == 1);
     }
@@ -164,7 +164,7 @@ class Manage_permissions extends CI_Controller {
         }
 
         $attributes['description'] = $this->input->post('permission_description', TRUE) ? $this->input->post('permission_description', TRUE) : NULL;
-        $id = $this->acl_permission_model->update($id, $attributes);
+        $id = $this->Acl_permission_model->update($id, $attributes);
       
 
         // Check if the permission should be disabled
@@ -172,11 +172,11 @@ class Manage_permissions extends CI_Controller {
         {
           if( $this->input->post('manage_permission_ban', TRUE) )
           {
-            $this->acl_permission_model->update_suspended_datetime($id);
+            $this->Acl_permission_model->update_suspended_datetime($id);
           }
           elseif( $this->input->post('manage_permission_unban', TRUE) )
           {
-            $this->acl_permission_model->remove_suspended_datetime($id);
+            $this->Acl_permission_model->remove_suspended_datetime($id);
           }
         }
 
@@ -186,11 +186,11 @@ class Manage_permissions extends CI_Controller {
         {
           if( $this->input->post("role_permission_{$role->id}", TRUE) )
           {
-            $this->rel_role_permission_model->update($role->id, $id);
+            $this->Rel_role_permission_model->update($role->id, $id);
           }
           else
           {
-            $this->rel_role_permission_model->delete($role->id, $id);
+            $this->Rel_role_permission_model->delete($role->id, $id);
           }
         }
 
@@ -210,7 +210,7 @@ class Manage_permissions extends CI_Controller {
    */
   function name_check($permission_name)
   {
-    return $this->acl_permission_model->get_by_name($permission_name) ? TRUE : FALSE;
+    return $this->Acl_permission_model->get_by_name($permission_name) ? TRUE : FALSE;
   }
 }
 

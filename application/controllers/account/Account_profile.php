@@ -34,8 +34,8 @@ class Account_profile extends CI_Controller {
 		}
 
 		// Retrieve sign in user
-		$data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
-		$data['account_details'] = $this->account_details_model->get_by_account_id($this->session->userdata('account_id'));
+		$data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
+		$data['account_details'] = $this->Account_details_model->get_by_account_id($this->session->userdata('account_id'));
 		
 		// Retrieve user's gravatar if available
 		$data['gravatar'] = $this->gravatar->get_gravatar( $data['account']->email );
@@ -50,7 +50,7 @@ class Account_profile extends CI_Controller {
 				unlink(FCPATH.RES_DIR.'/user/profile/'.$data['account_details']->picture);
 			}
 			
-			$this->account_details_model->update($data['account']->id, array('picture' => NULL));
+			$this->Account_details_model->update($data['account']->id, array('picture' => NULL));
 			redirect('account/account_profile');
 		}
 
@@ -70,14 +70,14 @@ class Account_profile extends CI_Controller {
 			else
 			{
 				$data['account']->username = $this->input->post('profile_username', TRUE);
-				$this->account_model->update_username($data['account']->id, $this->input->post('profile_username', TRUE));
+				$this->Account_model->update_username($data['account']->id, $this->input->post('profile_username', TRUE));
 			}
 			
 			switch( $this->input->post('pic_selection') )
 			{
 				case "gravatar":
 
-					$this->account_details_model->update($data['account']->id, array('picture' => $data['gravatar']));
+					$this->Account_details_model->update($data['account']->id, array('picture' => $data['gravatar']));
 					redirect( current_url() );
 					
 				break;
@@ -116,7 +116,7 @@ class Account_profile extends CI_Controller {
 							else
 							{
 								$data['account_details']->picture = 'pic_'.md5($data['account']->id).$picture['file_ext'];
-								$this->account_details_model->update($data['account']->id, array('picture' => $data['account_details']->picture));
+								$this->Account_details_model->update($data['account']->id, array('picture' => $data['account_details']->picture));
 							}
 
 							// Delete original uploaded file
@@ -145,7 +145,7 @@ class Account_profile extends CI_Controller {
 	 */
 	function username_check($username)
 	{
-		return $this->account_model->get_by_username($username) ? TRUE : FALSE;
+		return $this->Account_model->get_by_username($username) ? TRUE : FALSE;
 	}
 
 }

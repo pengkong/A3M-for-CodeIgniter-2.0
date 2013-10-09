@@ -50,7 +50,7 @@ class Reset_password extends CI_Controller {
 		}
 
 		// Get account by email
-		if ($account = $this->account_model->get_by_id($this->input->get('id')))
+		if ($account = $this->Account_model->get_by_id($this->input->get('id')))
 		{
 			// Check if reset password has expired
 			if (now() < (strtotime($account->resetsenton) + $this->config->item("password_reset_expiration")))
@@ -59,7 +59,7 @@ class Reset_password extends CI_Controller {
 				if ($this->input->get('token') == sha1($account->id.strtotime($account->resetsenton).$this->config->item('password_reset_secret')))
 				{
 					// Remove reset sent on datetime
-					$this->account_model->remove_reset_sent_datetime($account->id);
+					$this->Account_model->remove_reset_sent_datetime($account->id);
 
 					// Upon sign in, redirect to change password page
 					$this->session->set_userdata('sign_in_redirect', 'account/account_password');

@@ -18,7 +18,7 @@ class Home extends CI_Controller {
 
 		if ($this->authentication->is_signed_in())
 		{
-			$data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
+			$data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
 		}
 
 		$this->load->view('home', isset($data) ? $data : NULL);

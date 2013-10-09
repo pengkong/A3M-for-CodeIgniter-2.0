@@ -41,7 +41,7 @@ class Connect_twitter extends CI_Controller {
 			}
 
 			// Check if user has connect twitter to a3m
-			if ($user = $this->account_twitter_model->get_by_twitter_id($twitter_info['id']))
+			if ($user = $this->Account_twitter_model->get_by_twitter_id($twitter_info['id']))
 			{
 				// Check if user is not signed in on a3m
 				if ( ! $this->authentication->is_signed_in())
@@ -67,7 +67,7 @@ class Connect_twitter extends CI_Controller {
 				else
 				{
 					// Connect twitter to a3m
-					$this->account_twitter_model->insert($this->session->userdata('account_id'), $twitter_info['id'], $twitter_token->oauth_token, $twitter_token->oauth_token_secret);
+					$this->Account_twitter_model->insert($this->session->userdata('account_id'), $twitter_info['id'], $twitter_token->oauth_token, $twitter_token->oauth_token_secret);
 					$this->session->set_flashdata('linked_info', sprintf(lang('linked_linked_with_your_account'), lang('connect_twitter')));
 					redirect('account/account_linked');
 				}

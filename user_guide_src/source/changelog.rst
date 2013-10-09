@@ -392,6 +392,7 @@ Release Date: Not Released
       -  Changed methods ``get()``, ``post()``, ``get_post()``, ``cookie()``, ``server()``, ``user_agent()`` to return NULL instead of FALSE when no value is found.
       -  Added method ``post_get()`` and changed ``get_post()`` to search in GET data first. Both methods' names now properly match their GET/POST data search priorities.
       -  Changed method ``_fetch_from_array()`` to parse array notation in field name.
+      -  Added an option for ``_clean_input_keys()`` to return FALSE instead of terminating the whole script.
 
    -  :doc:`Common functions <general/common_functions>` changes include:
 
@@ -614,6 +615,7 @@ Bug fixes for 3.0
 -  Fixed a bug (#2590) - :php:func:`log_message()` didn't actually cache the ``CI_Log`` class instance.
 -  Fixed a bug (#2609) - :php:func:`get_config()` optional argument was only effective on first function call. Also, it can now add items, in addition to updating existing items.
 -  Fixed a bug in the 'postgre' :doc:`database <database/index>` driver where the connection ID wasn't passed to ``pg_escape_string()``.
+-  Fixed a bug (#33) - Script execution was terminated when an invalid cookie key was encountered.
 
 Version 2.1.4
 =============
@@ -770,7 +772,6 @@ Bug fixes for 2.1.0
    but the requested method did not.
 -  Fixed a bug (Reactor #89) where MySQL export would fail if the table
    had hyphens or other non alphanumeric/underscore characters.
--  Fixed a bug (#200) where MySQL queries would be malformed after calling $this->db->count_all() then $this->db->get()
 -  Fixed a bug (#105) that stopped query errors from being logged unless database debugging was enabled
 -  Fixed a bug (#160) - Removed unneeded array copy in the file cache
    driver.
@@ -791,7 +792,7 @@ Bug fixes for 2.1.0
 -  Fixed a bug (#537) - Support for all wav type in browser.
 -  Fixed a bug (#576) - Using ini_get() function to detect if apc is enabled or not.
 -  Fixed invalid date time format in :doc:`Date helper <helpers/date_helper>` and :doc:`XMLRPC library <libraries/xmlrpc>`.
--  Fixed a bug (#200) - MySQL queries would be malformed after calling count_all() then db->get().
+-  Fixed a bug (#200) - MySQL queries would be malformed after calling db->count_all() then db->get().
 
 Version 2.0.3
 =============

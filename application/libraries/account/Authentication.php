@@ -50,7 +50,7 @@ class Authentication {
 	function sign_in($username, $password, $remember = FALSE)
 	{
 		// Get user by username / email
-		if ( ! $user = $this->CI->account_model->get_by_username_email($username))
+		if ( ! $user = $this->CI->Account_model->get_by_username_email($username))
 		{
 			return FALSE;
 		}
@@ -66,7 +66,7 @@ class Authentication {
 			}
 			else
 			{
-				return $this->sign_in_by_id($user->id, $remember);
+				$this->sign_in_by_id($user->id, $remember);
 			}
 		}
 	}
@@ -91,9 +91,9 @@ class Authentication {
 		
 		$this->CI->session->set_userdata('account_id', $account_id);
 		
-		$this->CI->load->model('account/account_model');
+		$this->CI->load->model('account/Account_model');
 		
-		$this->CI->account_model->update_last_signed_in_datetime($account_id);
+		$this->CI->Account_model->update_last_signed_in_datetime($account_id);
 		
 		// Redirect signed in user with session redirect
 		if ($redirect = $this->CI->session->userdata('sign_in_redirect'))
@@ -107,8 +107,6 @@ class Authentication {
 			redirect($this->CI->input->get('continue'));
 		}
 		
-		//return true if on sign-ip page so that redirect can go where ever it needs to go
-		//return TRUE;
 		redirect(base_url());
 	}
 

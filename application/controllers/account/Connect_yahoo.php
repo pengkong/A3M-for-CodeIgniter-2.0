@@ -40,7 +40,7 @@ class Connect_yahoo extends CI_Controller {
 			if ($response->status == Auth_OpenID_SUCCESS)
 			{
 				// Check if user has connect yahoo to a3m
-				if ($user = $this->account_openid_model->get_by_openid($response->getDisplayIdentifier()))
+				if ($user = $this->Account_openid_model->get_by_openid($response->getDisplayIdentifier()))
 				{
 					// Check if user is not signed in on a3m
 					if ( ! $this->authentication->is_signed_in())
@@ -83,7 +83,7 @@ class Connect_yahoo extends CI_Controller {
 					else
 					{
 						// Connect yahoo to a3m
-						$this->account_openid_model->insert($response->getDisplayIdentifier(), $this->session->userdata('account_id'));
+						$this->Account_openid_model->insert($response->getDisplayIdentifier(), $this->session->userdata('account_id'));
 						$this->session->set_flashdata('linked_info', sprintf(lang('linked_linked_with_your_account'), lang('connect_yahoo')));
 						redirect('account/account_linked');
 					}

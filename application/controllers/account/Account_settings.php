@@ -34,13 +34,13 @@ class Account_settings extends CI_Controller {
 		}
 
 		// Retrieve sign in user
-		$data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
+		$data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
 		$data['account_details'] = $this->account_details_model->get_by_account_id($this->session->userdata('account_id'));
 
 		// Retrieve countries, languages and timezones
-		$data['countries'] = $this->ref_country_model->get_all();
-		$data['languages'] = $this->ref_language_model->get_all();
-		$data['zoneinfos'] = $this->ref_zoneinfo_model->get_all();
+		$data['countries'] = $this->Ref_country_model->get_all();
+		$data['languages'] = $this->Ref_language_model->get_all();
+		$data['zoneinfos'] = $this->Ref_zoneinfo_model->get_all();
 
 		// Split date of birth into month, day and year
 		if ($data['account_details'] && $data['account_details']->dateofbirth)
@@ -71,7 +71,7 @@ class Account_settings extends CI_Controller {
 			else
 			{
 				// Update account email
-				$this->account_model->update_email($data['account']->id, $this->input->post('settings_email', TRUE) ? $this->input->post('settings_email', TRUE) : NULL);
+				$this->Account_model->update_email($data['account']->id, $this->input->post('settings_email', TRUE) ? $this->input->post('settings_email', TRUE) : NULL);
 
 				// Update account details
 				if ($this->input->post('settings_dob_month', TRUE) && 
@@ -85,7 +85,7 @@ class Account_settings extends CI_Controller {
 				$attributes['country'] = $this->input->post('settings_country', TRUE) ? $this->input->post('settings_country', TRUE) : NULL;
 				$attributes['language'] = $this->input->post('settings_language', TRUE) ? $this->input->post('settings_language', TRUE) : NULL;
 				$attributes['timezone'] = $this->input->post('settings_timezone', TRUE) ? $this->input->post('settings_timezone', TRUE) : NULL;
-				$this->account_details_model->update($data['account']->id, $attributes);
+				$this->Account_details_model->update($data['account']->id, $attributes);
 
 				$data['settings_info'] = lang('settings_details_updated');
 			}
@@ -103,7 +103,7 @@ class Account_settings extends CI_Controller {
 	 */
 	function email_check($email)
 	{
-		return $this->account_model->get_by_email($email) ? TRUE : FALSE;
+		return $this->Account_model->get_by_email($email) ? TRUE : FALSE;
 	}
 
 }

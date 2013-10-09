@@ -61,7 +61,7 @@ class Forgot_password extends CI_Controller {
 				$this->session->unset_userdata('forget_password_recaptcha_pass');
 
 				// Username does not exist
-				if ( ! $account = $this->account_model->get_by_username_email($this->input->post('forgot_password_username_email', TRUE)))
+				if ( ! $account = $this->Account_model->get_by_username_email($this->input->post('forgot_password_username_email', TRUE)))
 				{
 					$data['forgot_password_username_email_error'] = lang('forgot_password_username_email_does_not_exist');
 				}
@@ -73,7 +73,7 @@ class Forgot_password extends CI_Controller {
 				else
 				{
 					// Set reset datetime
-					$time = $this->account_model->update_reset_sent_datetime($account->id);
+					$time = $this->Account_model->update_reset_sent_datetime($account->id);
 
 					// Load email library
 					$this->load->library('email');

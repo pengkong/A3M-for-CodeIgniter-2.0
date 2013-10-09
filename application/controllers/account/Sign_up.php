@@ -57,10 +57,10 @@ class Sign_up extends CI_Controller {
 				$this->session->unset_userdata('sign_up_recaptcha_pass');
 
 				// Create user
-				$user_id = $this->account_model->create($this->input->post('sign_up_username', TRUE), $this->input->post('sign_up_email', TRUE), $this->input->post('sign_up_password', TRUE));
+				$user_id = $this->Account_model->create($this->input->post('sign_up_username', TRUE), $this->input->post('sign_up_email', TRUE), $this->input->post('sign_up_password', TRUE));
 
 				// Add user details (auto detected country, language, timezone)
-				$this->account_details_model->update($user_id);
+				$this->Account_details_model->update($user_id);
 
 				// Auto sign in?
 				if ($this->config->item("sign_up_auto_sign_in"))
@@ -89,7 +89,7 @@ class Sign_up extends CI_Controller {
 	function username_check($username)
 	{
 		//once we update to PHP 5.5, we will be able to put this into the if statement
-		$result = $this->account_model->get_by_username($username);
+		$result = $this->Account_model->get_by_username($username);
 		if( empty($result) )
 		{
 			return TRUE;
@@ -111,7 +111,7 @@ class Sign_up extends CI_Controller {
 	 */
 	function email_check($email)
 	{
-		$result = $this->account_model->get_by_email($email);
+		$result = $this->Account_model->get_by_email($email);
 		if( empty($result) )
 		{
 			return TRUE;
