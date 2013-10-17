@@ -15,7 +15,7 @@ class Sign_up extends CI_Controller {
 		$this->load->config('account/account');
 		$this->load->helper(array('language', 'account/ssl', 'url'));
 		$this->load->library(array('account/authentication', 'account/authorization', 'account/recaptcha', 'form_validation'));
-		$this->load->model(array('account/account_details_model', 'account/account_model'));
+		$this->load->model(array('account/Account_details_model', 'account/Account_model'));
 		$this->load->language(array('general', 'account/sign_up', 'account/connect_third_party'));
 	}
 
@@ -61,6 +61,10 @@ class Sign_up extends CI_Controller {
 
 				// Add user details (auto detected country, language, timezone)
 				$this->Account_details_model->update($user_id);
+				
+				// Assigns user role
+				$this->load->model('account/Rel_account_role_model');
+				$this->Rel_account_role_model->update($user_id, $this->config->item("sign_up_default_user_group"));
 
 				// Auto sign in?
 				if ($this->config->item("sign_up_auto_sign_in"))

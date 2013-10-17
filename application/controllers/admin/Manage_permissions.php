@@ -15,7 +15,7 @@ class Manage_permissions extends CI_Controller {
     $this->load->config('account/account');
     $this->load->helper(array('date', 'language', 'account/ssl', 'url'));
     $this->load->library(array('account/authentication', 'account/authorization', 'form_validation'));
-    $this->load->model(array('account/account_model', 'account/account_details_model', 'account/acl_permission_model', 'account/acl_role_model', 'account/rel_account_permission_model', 'account/rel_account_role_model', 'account/rel_role_permission_model'));
+    $this->load->model(array('account/Account_model', 'account/Account_details_model', 'account/Acl_permission_model', 'account/Acl_role_model', 'account/Rel_account_permission_model', 'account/Rel_account_role_model', 'account/Rel_role_permission_model'));
     $this->load->language(array('general', 'admin/manage_permissions', 'account/account_settings', 'account/account_profile', 'account/sign_up', 'account/account_password'));
   }
 
@@ -56,7 +56,6 @@ class Manage_permissions extends CI_Controller {
       $current['key'] = $perm->key;
       $current['description'] = $perm->description;
       $current['role_list'] = array();
-      $current['is_disabled'] = isset( $perm->suspendedon );
 
       foreach( $role_permissions as $rperm )
       {

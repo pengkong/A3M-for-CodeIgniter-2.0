@@ -28,7 +28,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x639c320>
+			<function <lambda> at 0x66d9320>
 			</div>
 		</div>
 
@@ -414,6 +414,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Database object names are now being displayed.</li>
 <li>The sum of all queries running times in seconds is now being displayed.</li>
 <li>Added support for displaying the HTTP DNT (&#8220;Do Not Track&#8221;) header.</li>
+<li>Added support for displaying $_FILES.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="libraries/migration.html"><em>Migration Library</em></a> changes include:<ul>
@@ -444,6 +445,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Added support for model aliasing on autoload.</li>
 <li>Changed method <tt class="docutils literal"><span class="pre">is_loaded()</span></tt> to ask for the (case sensitive) library name instead of its instance name.</li>
 <li>Removed <tt class="docutils literal"><span class="pre">$_base_classes</span></tt> property and unified all class data in <tt class="docutils literal"><span class="pre">$_ci_classes</span></tt> instead.</li>
+<li>Added method <tt class="docutils literal"><span class="pre">clear_vars()</span></tt> to allow clearing the cached variables for views.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="libraries/input.html"><em>Input Library</em></a> changes include:<ul>

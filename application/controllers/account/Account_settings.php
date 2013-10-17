@@ -15,7 +15,7 @@ class Account_settings extends CI_Controller {
 		$this->load->config('account/account');
 		$this->load->helper(array('date', 'language', 'account/ssl', 'url'));
 		$this->load->library(array('account/authentication', 'account/authorization', 'form_validation'));
-		$this->load->model(array('account/account_model', 'account/account_details_model', 'account/ref_country_model', 'account/ref_language_model', 'account/ref_zoneinfo_model'));
+		$this->load->model(array('account/Account_model', 'account/Account_details_model', 'account/Ref_country_model', 'account/Ref_language_model', 'account/Ref_zoneinfo_model'));
 		$this->load->language(array('general', 'account/account_settings'));
 	}
 

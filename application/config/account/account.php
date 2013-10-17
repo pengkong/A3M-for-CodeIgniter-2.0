@@ -21,7 +21,8 @@ $config['sign_in_recaptcha_offset'] 	= 3;
 |--------------------------------------------------------------------------
 */
 $config['sign_up_recaptcha_enabled'] 	= FALSE;
-$config['sign_up_auto_sign_in'] 		= TRUE;
+$config['sign_up_auto_sign_in'] 	= TRUE;
+$config['sign_up_default_user_group']   = 2;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,7 +67,7 @@ $config['openid_what_is_url'] = 'http://openidexplained.com/';
 */
 $config['password_reset_expiration'] 	= 1800;
 $config['password_reset_secret'] 		= '';
-$config['password_reset_email'] 		= 'no-reply@a3m.com';
+$config['password_reset_email'] 		= 'no-reply@a3m.freedombase.net';
 
 
 /* End of file account.php */

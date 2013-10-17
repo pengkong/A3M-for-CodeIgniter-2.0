@@ -16,6 +16,7 @@ $lang['permissions_create_page_name'] = 'Create New Permission';
 $lang['permissions_create_description'] = 'Create a new user permission';
 $lang['permissions_key'] = 'Key';
 $lang['permissions_description'] = 'Description';
+$lang['permissions_description_none'] = 'None';
 $lang['permissions_role'] = 'Roles';
 $lang['permissions_name_taken'] = 'This Name is already taken.';
 $lang['permissions_ban'] = 'Disable Permission';

@@ -351,6 +351,7 @@ Release Date: Not Released
       -  Database object names are now being displayed.
       -  The sum of all queries running times in seconds is now being displayed.
       -  Added support for displaying the HTTP DNT ("Do Not Track") header.
+      -  Added support for displaying $_FILES.
 
    -  :doc:`Migration Library <libraries/migration>` changes include:
 
@@ -381,6 +382,7 @@ Release Date: Not Released
       -  Added support for model aliasing on autoload.
       -  Changed method ``is_loaded()`` to ask for the (case sensitive) library name instead of its instance name.
       -  Removed ``$_base_classes`` property and unified all class data in ``$_ci_classes`` instead.
+      -  Added method ``clear_vars()`` to allow clearing the cached variables for views.
 
    -  :doc:`Input Library <libraries/input>` changes include:
 
