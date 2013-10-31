@@ -48,6 +48,12 @@ login / logout / admin stuff thats always required.
 * DOM or domxml 
 * GMP or Bcmatch
 
-## How to install?
-Check out the wiki: https://github.com/donjakobo/A3M/wiki/Installation-Instructions
+## Installation Instructions
+Check out our wiki: https://github.com/donjakobo/A3M/wiki/Installation-Instructions
+for help on getting started.
+
+## Help and Support  
+* Found a bug? Try forking and fixing it. 
+* Open an issue if you want to discuss/highlight it
+* Go to StackOverflow under the tag `codeigniter-a3m` http://stackoverflow.com/questions/tagged/codeigniter-a3m if you have implementation issues (installation problems, etc;)
 
