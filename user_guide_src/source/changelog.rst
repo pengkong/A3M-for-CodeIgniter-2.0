@@ -55,6 +55,7 @@ Release Date: Not Released
    -  Changed environment defaults to report all errors in *development* and only fatal ones in *testing*, *production* but only display them in *development*.
    -  Updated *ip_address* database field lengths from 16 to 45 for supporting IPv6 address on :doc:`Trackback Library <libraries/trackback>` and :doc:`Captcha Helper <helpers/captcha_helper>`.
    -  Removed *cheatsheets* and *quick_reference* PDFs from the documentation.
+   -  Added support non-HTML error templates for CLI applications.
    -  Added availability checks where usage of dangerous functions like ``eval()`` and ``exec()`` is required.
    -  Added support for changing the file extension of log files using ``$config['log_file_extension']``.
 
@@ -77,7 +78,6 @@ Release Date: Not Released
       - Added support (auto-detection) for HTTP/1.1 response code 303 in :php:func:`redirect()`.
       - Changed :php:func:`redirect()` to choose the **refresh** method only on IIS servers, instead of all servers on Windows (when **auto** is used).
       - Changed :php:func:`anchor()`, :php:func:`anchor_popup()`, and :php:func:`redirect()` to support protocol-relative URLs (e.g. *//ellislab.com/codeigniter*).
-      - Added an optional second parameter to both :php:func:`base_url()` and :php:func:`site_url()` that allows enforcing of a protocol different than the one in the *base_url* configuration setting.
 
    -  :doc:`HTML Helper <helpers/html_helper>` changes include:
 
@@ -397,6 +397,7 @@ Release Date: Not Released
       -  Added method ``post_get()`` and changed ``get_post()`` to search in GET data first. Both methods' names now properly match their GET/POST data search priorities.
       -  Changed method ``_fetch_from_array()`` to parse array notation in field name.
       -  Added an option for ``_clean_input_keys()`` to return FALSE instead of terminating the whole script.
+      -  Deprecated the ``is_cli_request()`` method, it is now an alias for the new :php:func:`is_cli()` common function.
 
    -  :doc:`Common functions <general/common_functions>` changes include:
 
@@ -405,6 +406,7 @@ Release Date: Not Released
       -  Removed redundant conditional to determine HTTP server protocol in :php:func:`set_status_header()`.
       -  Changed ``_exception_handler()`` to respect php.ini *display_errors* setting.
       -  Added function :php:func:`is_https()` to check if a secure connection is used.
+      -  Added function :php:func:`is_cli()` to replace the ``CI_Input::is_cli_request()`` method.
       -  Added function :php:func:`function_usable()` to check if a function exists and is not disabled by `Suhosin <http://www.hardened-php.net/suhosin/>`.
       -  Removed the third (`$php_error`) from function :php:func:`log_message()`.
 
@@ -419,6 +421,7 @@ Release Date: Not Released
       -  Changed ``site_url()`` method  to accept an array as well.
       -  Removed internal method ``_assign_to_config()`` and moved its implementation to *CodeIgniter.php* instead.
       -  ``item()`` now returns NULL instead of FALSE when the required config item doesn't exist.
+      -  Added an optional second parameter to both ``base_url()`` and ``site_url()`` that allows enforcing of a protocol different than the one in the *base_url* configuration setting.
 
    -  :doc:`Security Library <libraries/security>` changes include:
 
@@ -429,6 +432,7 @@ Release Date: Not Released
 
    -  :doc:`URI Routing <general/routing>` changes include:
 
+      -  Added possibility to route requests using HTTP verbs.
       -  Added possibility to route requests using callbacks.
       -  Added a new reserved route (*translate_uri_dashes*) to allow usage of dashes in the controller and method URI segments.
       -  Deprecated methods ``fetch_directory()``, ``fetch_class()`` and ``fetch_method()`` in favor of their respective public properties.
@@ -623,6 +627,7 @@ Bug fixes for 3.0
 -  Fixed a bug (#2681) - ``CI_Security::entity_decode()`` used the `PREG_REPLACE_EVAL` flag, which is deprecated since PHP 5.5.
 -  Fixed a bug (#2691) - nested transactions could end in a deadlock when an error is encountered with *db_debug* set to TRUE.
 -  Fixed a bug (#2515) - ``_exception_handler()`` used to send the 200 "OK" HTTP status code and didn't stop script exection even on fatal errors.
+-  Fixed a bug - Redis :doc:`Caching <libraries/caching>` driver didn't handle connection failures properly.
 
 Version 2.1.4
 =============

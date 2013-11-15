@@ -27,5 +27,12 @@ $lang['sign_up_forgot_your_password'] = 'Forgot your password?';
 $lang['sign_up_notice'] = 'NOTICE:';
 $lang['sign_up_registration_disabled'] = 'New account registrations are currently disabled.';
 
+$lang['sign_up_email_sender'] = 'A3M';
+$lang['sign_up_email_subject'] = 'A3M account validation';
+$lang['sign_up_email_confirmation'] = "Hello, %s <br /><br /> In order to activate your A3M account, please please click on the link below or copy and paste the URL into your browser: <BR> %s";
+
+$lang['sign_up_validation'] = 'Your e-mail has been validated! You can now login!';
+$lang['sign_up_validation_send'] = "In order to finish your registration we need to validate your email. <BR />We have send an email, to the adress you registered under, with a validation link to finish your registration.";
+
 /* End of file sign_up_lang.php */
 /* Location: ./application/account/language/english/sign_up_lang.php */

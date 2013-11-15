@@ -29,7 +29,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x4483e60>
+			<function <lambda> at 0x59e2578>
 			</div>
 		</div>
 
@@ -368,6 +368,29 @@ function, with the advantage of being able to accept an array of strings.</p>
 
 <p>Returns TRUE if a secure (HTTPS) connection is used and FALSE
 in any other case (including non-HTTP requests).</p>
+</div>
+<div class="section" id="is-cli">
+<h2>is_cli()<a class="headerlink" href="#is-cli" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="is_cli">
+<tt class="descname">is_cli</tt><big>(</big><big>)</big><a class="headerlink" href="#is_cli" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>Returns TRUE if the application is run through the command line
+and FALSE if not.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function checks both if the <tt class="docutils literal"><span class="pre">PHP_SAPI</span></tt> value is &#8216;cli&#8217;
+or if the <tt class="docutils literal"><span class="pre">STDIN</span></tt> constant is defined.</p>
+</div>
 </div>
 <div class="section" id="function-usable">
 <h2>function_usable()<a class="headerlink" href="#function-usable" title="Permalink to this headline">¶</a></h2>

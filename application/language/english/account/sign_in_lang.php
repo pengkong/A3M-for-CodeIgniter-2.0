@@ -21,8 +21,11 @@ $lang['sign_in_sign_up_now'] = 'Sign up now';
 $lang['sign_in_username_email_does_not_exist'] = 'This Username/Email does not exist.';
 $lang['sign_in_recaptcha_required'] = 'The captcha test is required';
 $lang['sign_in_recaptcha_incorrect'] = 'The captcha test is incorrect.';
-$lang['sign_in_combination_incorrect'] = 'Sorry, your Username/Email and Password combination is incorrect.';
 
+//Sign in errors
+$lang['sign_in_combination_incorrect'] = 'Sorry, your Username/Email and Password combination is incorrect.';
+$lang['sign_in_non_validated_email'] = 'Sorry, but you need to validate your e-mail before you can sign in.';
+$lang['sign_in_suspended_account'] = 'Sorry, your account has been suspended. Please contect the administrator.';
 
 /* End of file sign_in_lang.php */
 /* Location: ./application/account/language/english/sign_in_lang.php */

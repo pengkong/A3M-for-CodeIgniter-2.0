@@ -65,15 +65,30 @@ class Sign_in extends CI_Controller {
 			else
 			{
 				// Authenticate
-				if ($this->authentication->sign_in($this->input->post('sign_in_username_email', TRUE), $this->input->post('sign_in_password', TRUE), $this->input->post('sign_in_remember', TRUE)))
+				if($sign_in_error = $this->authentication->sign_in($this->input->post('sign_in_username_email', TRUE), $this->input->post('sign_in_password', TRUE), $this->input->post('sign_in_remember', TRUE)))
 				{
 					//change this to redirect to page you want your users to go after logins
 					redirect(base_url());
 				}
 				else
 				{
-					//show login error
-					$data['sign_in_error'] = lang('sign_in_combination_incorrect');
+					if($sign_in_error = 'invalid')
+					{
+						//show login error
+						$data['sign_in_error'] = lang('sign_in_non_validated_email');
+						
+					}
+					elseif($sign_in_error = 'suspended')
+					{
+						//show login error
+						$data['sign_in_error'] = lang('sign_in_suspended_account');
+					}
+					else
+					{
+						//show login error
+						$data['sign_in_error'] = lang('sign_in_combination_incorrect');
+					}
+					
 				}
 			}
 		}

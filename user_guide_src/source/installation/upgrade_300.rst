@@ -119,11 +119,18 @@ need to rename the `$active_record` variable to `$query_builder`
 	// $active_record = TRUE;
 	$query_builder = TRUE;
 
-*******************************************
-Step 8: Move your error templates directory
-*******************************************
+************************************
+Step 8: Replace your error templates
+************************************
 
-In version 3.0.0, the errors folder has been moved from _application/errors* to _application/views/errors*.
+In CodeIgniter 3.0, the error templates are now considered as views and have been moved to the
+_application/views/errors* directory.
+
+Furthermore, we've added support for CLI error templates in plain-text format that unlike HTML,
+is suitable for the command line. This of course requires another level of separation.
+
+It is safe to move your old templates from _application/errors* to _application/views/errors/html*,
+but you'll have to copy the new _application/views/errors/cli* directory from the CodeIgniter archive.
 
 *******************************************************
 Step 9: Update your config/routes.php containing (:any)
@@ -457,4 +464,28 @@ then you can now just access the properties instead::
 	$this->router->method;
 
 .. note:: Those methods are still available, but you're strongly encouraged to remove their usage
+	sooner rather than later.
+
+Input library method is_cli_request()
+=====================================
+
+Calls to the ``CI_Input::is_cli_request()`` method are necessary at many places
+in the CodeIgniter internals and this is often before the :doc:`Input Library
+<../libraries/input>` is loaded. Because of that, it is being replaced by a common
+function named :php:func:`is_cli()` and this method is now just an alias.
+
+The new function is both available at all times for you to use and shorter to type.
+
+::
+
+	// Old
+	$this->input->is_cli_request();
+
+	// New
+	is_cli();
+
+``CI_Input::is_cli_request()`` is now now deprecated and scheduled for removal in
+CodeIgniter 3.1+.
+
+.. note:: This method is still available, but you're strongly encouraged to remove its usage
 	sooner rather than later.

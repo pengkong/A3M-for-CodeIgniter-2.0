@@ -29,7 +29,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x293ccf8>
+			<function <lambda> at 0x5564050>
 			</div>
 		</div>
 
@@ -203,14 +203,14 @@ the query. This method simply returns the SQL query as a string.</p>
 </pre></div>
 </div>
 <p>The second parameter enables you to set whether or not the query builder query
-will be reset (by default it will be&amp;mdash;just like <cite>$this-&gt;db-&gt;get()</cite>):</p>
+will be reset (by default it will be reset, just like when using <cite>$this-&gt;db-&gt;get()</cite>):</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get_compiled_select</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">,</span> <span class="k">FALSE</span><span class="p">);</span>
 <span class="c1">// Produces string: SELECT * FROM mytable LIMIT 20, 10</span>
 <span class="c1">// (in MySQL. Other databases have slightly different syntax)</span>
 
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;title, content, date&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get_compiled_select</span><span class="p">();</span>
 
-<span class="c1">// Produces string: SELECT title, content, date FROM mytable</span>
+<span class="c1">// Produces string: SELECT title, content, date FROM mytable LIMIT 20, 10</span>
 </pre></div>
 </div>
 <p>The key thing to notice in the above example is that the second query did not
