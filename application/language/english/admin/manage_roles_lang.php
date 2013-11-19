@@ -17,6 +17,7 @@ $lang['roles_create_description'] = 'Create a new role';
 $lang['roles_name'] = 'Name';
 $lang['roles_description'] = 'Description';
 $lang['roles_permission'] = 'Permissions';
+$lang['roles_permission_none'] = 'No Permissions';
 $lang['roles_name_taken'] = 'This Name is already taken.';
 $lang['roles_ban'] = 'Disable Role';
 $lang['roles_unban'] = 'Enable Role';

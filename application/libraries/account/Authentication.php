@@ -45,28 +45,35 @@ class Authentication {
 	 * @param string  $username
 	 * @param string  $password
 	 * @param bool $remember
-	 * @return void
+	 * @return bool or string
 	 */
 	function sign_in($username, $password, $remember = FALSE)
 	{
 		// Get user by username / email
-		if ( ! $user = $this->CI->account_model->get_by_username_email($username))
+		if ( ! $user = $this->CI->Account_model->get_by_username_email($username))
 		{
 			return FALSE;
 		}
 		else
 		{
-			// Check password
-			if ( ! $this->check_password($user->password, $password))
+			if($validation = $this->check_user_validation_suspend($user) === TRUE)
 			{
-				// Increment sign in failed attempts
-				$this->CI->session->set_userdata('sign_in_failed_attempts', (int)$this->CI->session->userdata('sign_in_failed_attempts') + 1);
-				
-				return FALSE;
+				// Check password
+				if ( ! $this->check_password($user->password, $password))
+				{
+					// Increment sign in failed attempts
+					$this->CI->session->set_userdata('sign_in_failed_attempts', (int)$this->CI->session->userdata('sign_in_failed_attempts') + 1);
+					
+					return FALSE;
+				}
+				else
+				{
+					$this->sign_in_by_id($user->id, $remember);
+				}
 			}
 			else
 			{
-				return $this->sign_in_by_id($user->id, $remember);
+				return $validation;
 			}
 		}
 	}
@@ -91,9 +98,9 @@ class Authentication {
 		
 		$this->CI->session->set_userdata('account_id', $account_id);
 		
-		$this->CI->load->model('account/account_model');
+		$this->CI->load->model('account/Account_model');
 		
-		$this->CI->account_model->update_last_signed_in_datetime($account_id);
+		$this->CI->Account_model->update_last_signed_in_datetime($account_id);
 		
 		// Redirect signed in user with session redirect
 		if ($redirect = $this->CI->session->userdata('sign_in_redirect'))
@@ -107,8 +114,6 @@ class Authentication {
 			redirect($this->CI->input->get('continue'));
 		}
 		
-		//return true if on sign-ip page so that redirect can go where ever it needs to go
-		//return TRUE;
 		redirect(base_url());
 	}
 
@@ -132,7 +137,7 @@ class Authentication {
 	/**
 	 * Check password validity
 	 *
-	 * @access public
+	 * @access private
 	 * @param object $account
 	 * @param string $password
 	 * @return bool
@@ -145,7 +150,30 @@ class Authentication {
 
 		return $hasher->CheckPassword($password, $password_hash) ? TRUE : FALSE;
 	}
-
+	
+	/**
+	 * Check if user is allowed to sign in
+	 * Checks if user has been suspended or hasn't validated their e-mail yet
+	 *
+	 * @access private
+	 * @param object $account
+	 * @return bool
+	 */
+	private function check_user_validation_suspend($account)
+	{
+		if($account->verifiedon == NULL && $this->CI->config->item('account_email_validation_required'))
+		{
+			return 'invalid';
+		}
+		elseif($account->suspendedon != NULL)
+		{
+			return 'suspended';
+		}
+		else
+		{
+			return TRUE;
+		}
+	}
 }
 
 

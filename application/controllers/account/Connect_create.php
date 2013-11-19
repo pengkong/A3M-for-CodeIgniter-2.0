@@ -15,7 +15,7 @@ class Connect_create extends CI_Controller {
 		$this->load->config('account/account');
 		$this->load->helper(array('language', 'account/ssl', 'url'));
 		$this->load->library(array('account/authentication', 'account/authorization', 'form_validation'));
-		$this->load->model(array('account/account_model', 'account/account_details_model', 'account/account_facebook_model', 'account/account_twitter_model', 'account/account_openid_model'));
+		$this->load->model(array('account/Account_model', 'account/Account_details_model', 'account/Account_facebook_model', 'account/Account_twitter_model', 'account/Account_openid_model'));
 		$this->load->language(array('general', 'account/connect_third_party'));
 	}
 
@@ -61,22 +61,22 @@ class Connect_create extends CI_Controller {
 				$this->session->unset_userdata('connect_create');
 
 				// Create user
-				$user_id = $this->account_model->create($this->input->post('connect_create_username', TRUE), $this->input->post('connect_create_email', TRUE));
+				$user_id = $this->Account_model->create($this->input->post('connect_create_username', TRUE), $this->input->post('connect_create_email', TRUE));
 
 				// Add user details
-				$this->account_details_model->update($user_id, $data['connect_create'][1]);
+				$this->Account_details_model->update($user_id, $data['connect_create'][1]);
 
 				// Connect third party account to user
 				switch ($data['connect_create'][0]['provider'])
 				{
 					case 'facebook':
-						$this->account_facebook_model->insert($user_id, $data['connect_create'][0]['provider_id']);
+						$this->Account_facebook_model->insert($user_id, $data['connect_create'][0]['provider_id']);
 						break;
 					case 'twitter':
-						$this->account_twitter_model->insert($user_id, $data['connect_create'][0]['provider_id'], $data['connect_create'][0]['token'], $data['connect_create'][0]['secret']);
+						$this->Account_twitter_model->insert($user_id, $data['connect_create'][0]['provider_id'], $data['connect_create'][0]['token'], $data['connect_create'][0]['secret']);
 						break;
 					case 'openid':
-						$this->account_openid_model->insert($data['connect_create'][0]['provider_id'], $user_id);
+						$this->Account_openid_model->insert($data['connect_create'][0]['provider_id'], $user_id);
 						break;
 				}
 

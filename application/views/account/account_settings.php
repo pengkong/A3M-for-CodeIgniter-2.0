@@ -184,7 +184,7 @@
 
 <div class="form-actions">
     <button type="submit" class="btn btn-primary"><?php echo lang('settings_save'); ?></button>
-    <button type="reset" class="btn btn-small">Cancel</button>
+    <button type="reset" class="btn btn-small"><?php echo lang('settings_cancel');?></button>
 </div>
 
 

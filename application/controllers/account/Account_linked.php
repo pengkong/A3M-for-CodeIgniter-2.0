@@ -15,7 +15,7 @@ class Account_linked extends CI_Controller {
 		$this->load->config('account/account');
 		$this->load->helper(array('language', 'account/ssl', 'url'));
 		$this->load->library(array('account/authentication', 'account/authorization', 'form_validation'));
-		$this->load->model(array('account/account_model', 'account/account_facebook_model', 'account/account_twitter_model', 'account/account_openid_model'));
+		$this->load->model(array('account/Account_model', 'account/Account_facebook_model', 'account/Account_twitter_model', 'account/Account_openid_model'));
 		$this->load->language(array('general', 'account/account_linked', 'account/connect_third_party'));
 	}
 
@@ -34,14 +34,14 @@ class Account_linked extends CI_Controller {
 		}
 
 		// Retrieve sign in user
-		$data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
+		$data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
 
 		// Delete a linked account
 		if ($this->input->post('facebook_id') || $this->input->post('twitter_id') || $this->input->post('openid'))
 		{
-			if ($this->input->post('facebook_id')) $this->account_facebook_model->delete($this->input->post('facebook_id', TRUE));
-			elseif ($this->input->post('twitter_id')) $this->account_twitter_model->delete($this->input->post('twitter_id', TRUE));
-			elseif ($this->input->post('openid')) $this->account_openid_model->delete($this->input->post('openid', TRUE));
+			if ($this->input->post('facebook_id')) $this->Account_facebook_model->delete($this->input->post('facebook_id', TRUE));
+			elseif ($this->input->post('twitter_id')) $this->Account_twitter_model->delete($this->input->post('twitter_id', TRUE));
+			elseif ($this->input->post('openid')) $this->Account_openid_model->delete($this->input->post('openid', TRUE));
 			$this->session->set_flashdata('linked_info', lang('linked_linked_account_deleted'));
 			redirect('account/account_linked');
 		}
@@ -50,7 +50,7 @@ class Account_linked extends CI_Controller {
 		$data['num_of_linked_accounts'] = 0;
 
 		// Get Facebook accounts
-		if ($data['facebook_links'] = $this->account_facebook_model->get_by_account_id($this->session->userdata('account_id')))
+		if ($data['facebook_links'] = $this->Account_facebook_model->get_by_account_id($this->session->userdata('account_id')))
 		{
 			foreach ($data['facebook_links'] as $index => $facebook_link)
 			{
@@ -59,7 +59,7 @@ class Account_linked extends CI_Controller {
 		}
 
 		// Get Twitter accounts
-		if ($data['twitter_links'] = $this->account_twitter_model->get_by_account_id($this->session->userdata('account_id')))
+		if ($data['twitter_links'] = $this->Account_twitter_model->get_by_account_id($this->session->userdata('account_id')))
 		{
 			$this->load->config('account/twitter');
 			$this->load->helper('account/twitter');
@@ -72,7 +72,7 @@ class Account_linked extends CI_Controller {
 		}
 
 		// Get OpenID accounts
-		if ($data['openid_links'] = $this->account_openid_model->get_by_account_id($this->session->userdata('account_id')))
+		if ($data['openid_links'] = $this->Account_openid_model->get_by_account_id($this->session->userdata('account_id')))
 		{
 			foreach ($data['openid_links'] as $index => $openid_link)
 			{

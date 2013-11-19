@@ -55,7 +55,7 @@
               </td>
               <td>
                 <?php if( count($role['perm_list']) == 0 ) : ?>
-                  <span class="label">No Permissions</span>
+                  <span class="label"><?php echo lang('roles_permission_none'); ?></span>
                 <?php else : ?>
                   <ul class="inline">
                     <?php foreach( $role['perm_list'] as $itm ) : ?>

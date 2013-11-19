@@ -15,7 +15,7 @@ class Connect_openid extends CI_Controller {
 		$this->load->config('account/account');
 		$this->load->helper(array('language', 'account/ssl', 'url', 'account/openid'));
 		$this->load->library(array('account/authentication', 'account/authorization'));
-		$this->load->model(array('account/account_model', 'account/account_openid_model'));
+		$this->load->model(array('account/Account_model', 'account/Account_openid_model'));
 		$this->load->language(array('general', 'account/sign_in', 'account/account_linked', 'account/connect_third_party'));
 	}
 
@@ -27,7 +27,7 @@ class Connect_openid extends CI_Controller {
 		// Retrieve sign in user
 		if ($this->authentication->is_signed_in())
 		{
-			$data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
+			$data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
 		}
 		//$data['account_details'] = $this->account_details_model->get_by_account_id($this->session->userdata('account_id'));
 
@@ -46,7 +46,7 @@ class Connect_openid extends CI_Controller {
 			if ($response->status == Auth_OpenID_SUCCESS)
 			{
 				// Check if user has connect the openid to a3m
-				if ($user = $this->account_openid_model->get_by_openid($response->getDisplayIdentifier()))
+				if ($user = $this->Account_openid_model->get_by_openid($response->getDisplayIdentifier()))
 				{
 					// Check if user is not signed in on a3m
 					if ( ! $this->authentication->is_signed_in())
@@ -89,7 +89,7 @@ class Connect_openid extends CI_Controller {
 					else
 					{
 						// Connect openid to a3m
-						$this->account_openid_model->insert($response->getDisplayIdentifier(), $this->session->userdata('account_id'));
+						$this->Account_openid_model->insert($response->getDisplayIdentifier(), $this->session->userdata('account_id'));
 						$this->session->set_flashdata('linked_info', sprintf(lang('linked_linked_with_your_account'), lang('connect_openid')));
 						redirect('account/account_linked');
 					}

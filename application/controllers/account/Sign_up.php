@@ -15,7 +15,7 @@ class Sign_up extends CI_Controller {
 		$this->load->config('account/account');
 		$this->load->helper(array('language', 'account/ssl', 'url'));
 		$this->load->library(array('account/authentication', 'account/authorization', 'account/recaptcha', 'form_validation'));
-		$this->load->model(array('account/account_details_model', 'account/account_model'));
+		$this->load->model(array('account/Account_details_model', 'account/Account_model'));
 		$this->load->language(array('general', 'account/sign_up', 'account/connect_third_party'));
 	}
 
@@ -57,26 +57,71 @@ class Sign_up extends CI_Controller {
 				$this->session->unset_userdata('sign_up_recaptcha_pass');
 
 				// Create user
-				$user_id = $this->account_model->create($this->input->post('sign_up_username', TRUE), $this->input->post('sign_up_email', TRUE), $this->input->post('sign_up_password', TRUE));
+				$user_id = $this->Account_model->create($this->input->post('sign_up_username', TRUE), $this->input->post('sign_up_email', TRUE), $this->input->post('sign_up_password', TRUE));
 
 				// Add user details (auto detected country, language, timezone)
-				$this->account_details_model->update($user_id);
+				$this->Account_details_model->update($user_id);
+				
+				// Assigns user role
+				$this->load->model('account/Rel_account_role_model');
+				$this->Rel_account_role_model->update($user_id, $this->config->item("sign_up_default_user_group"));
 
 				// Auto sign in?
-				if ($this->config->item("sign_up_auto_sign_in"))
+				if($this->config->item('account_email_validate'))
 				{
-					// Run sign in routine
-					$this->authentication->sign_in($this->input->post('sign_in_username_email', TRUE), $this->input->post('sign_in_password', TRUE), $this->input->post('sign_in_remember', TRUE));
+					//send authentication email
+					$account = $this->Account_model->get_by_id($user_id);
+					$authentication_url = site_url('account/authenticate?user_id=' . $user_id . '&token='. sha1($user_id . $account->createdon . $this->config->item('password_reset_secret')));
+					
+					// Load email library
+					$this->load->library('email');
+					
+					// Set up email preferences
+					$config['mailtype'] = 'html';
+					
+					// Initialise email lib
+					$this->email->initialize($config);
+					
+					// Send the authentication email
+					$this->email->from($this->config->item('account_email_confirm_sender'), lang('sign_up_email_sender'));
+					$this->email->to($account->email);
+					$this->email->subject(lang('sign_up_email_subject'));
+					$this->email->message($this->load->view('account/account_authentication_email', array(
+						'username' => $account->username,
+						'authentication_url' => anchor($authentication_url, $authentication_url)
+					), TRUE));
+					if($this->email->send())
+					{
+						// Load reset password sent view
+						$this->load->view('account/account_authentication_send', isset($data) ? $data : NULL);
+					}
+					else
+					{
+						echo($this->email->print_debugger());
+					}
+					
+					return;
 				}
-				redirect('account/sign_in');
+				else
+				{
+					if ($this->config->item("sign_up_auto_sign_in"))
+					{
+						// Run sign in routine
+						$this->authentication->sign_in($this->input->post('sign_in_username_email', TRUE), $this->input->post('sign_in_password', TRUE), $this->input->post('sign_in_remember', TRUE));
+					}
+					redirect('account/sign_in');
+				}
+				
 			}
 		}
-
-		// Load recaptcha code
-		if ($this->config->item("sign_up_recaptcha_enabled") === TRUE) if ($this->session->userdata('sign_up_recaptcha_pass') != TRUE) $data['recaptcha'] = $this->recaptcha->load($recaptcha_result, $this->config->item("ssl_enabled"));
-
-		// Load sign up view
-		$this->load->view('sign_up', isset($data) ? $data : NULL);
+		else
+		{
+			// Load recaptcha code
+			if ($this->config->item("sign_up_recaptcha_enabled") === TRUE) if ($this->session->userdata('sign_up_recaptcha_pass') != TRUE) $data['recaptcha'] = $this->recaptcha->load($recaptcha_result, $this->config->item("ssl_enabled"));
+			
+			// Load sign up view
+			$this->load->view('sign_up', isset($data) ? $data : NULL);
+		}
 	}
 
 	/**
@@ -89,7 +134,7 @@ class Sign_up extends CI_Controller {
 	function username_check($username)
 	{
 		//once we update to PHP 5.5, we will be able to put this into the if statement
-		$result = $this->account_model->get_by_username($username);
+		$result = $this->Account_model->get_by_username($username);
 		if( empty($result) )
 		{
 			return TRUE;
@@ -111,7 +156,7 @@ class Sign_up extends CI_Controller {
 	 */
 	function email_check($email)
 	{
-		$result = $this->account_model->get_by_email($email);
+		$result = $this->Account_model->get_by_email($email);
 		if( empty($result) )
 		{
 			return TRUE;

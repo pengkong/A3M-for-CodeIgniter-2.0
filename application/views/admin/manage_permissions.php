@@ -42,14 +42,14 @@
               <td><?php echo $perm['id']; ?></td>
               <td>
                 <?php echo $perm['key']; ?>
-                <?php if( $perm['is_disabled'] ): ?>
+                <?php if( isset($permission->suspendedon) ): ?>
                   <span class="label label-important"><?php echo lang('permissions_banned'); ?></span>
                 <?php endif; ?>
               </td>
               <td><?php echo $perm['description']; ?></td>
               <td>
                 <?php if( count($perm['role_list']) == 0 ) : ?>
-                  <span class="label">None</span>
+                  <span class="label"><?php echo lang('permissions_description_none'); ?></span>
                 <?php else : ?>
                   <ul class="inline">
                     <?php foreach( $perm['role_list'] as $itm ) : ?>

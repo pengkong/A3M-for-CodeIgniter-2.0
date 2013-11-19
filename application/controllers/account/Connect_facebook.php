@@ -15,7 +15,7 @@ class Connect_facebook extends CI_Controller {
 		$this->load->config('account/account');
 		$this->load->helper(array('language', 'account/ssl', 'url'));
 		$this->load->library(array('account/authentication', 'account/authorization', 'account/facebook_lib'));
-		$this->load->model(array('account/account_model', 'account/account_facebook_model'));
+		$this->load->model(array('account/Account_model', 'account/Account_facebook_model'));
 		$this->load->language(array('general', 'account/sign_in', 'account/account_linked', 'account/connect_third_party'));
 	}
 
@@ -28,7 +28,7 @@ class Connect_facebook extends CI_Controller {
 		if ($this->facebook_lib->user)
 		{
 			// Check if user has connect facebook to a3m
-			if ($user = $this->account_facebook_model->get_by_facebook_id($this->facebook_lib->user['id']))
+			if ($user = $this->Account_facebook_model->get_by_facebook_id($this->facebook_lib->user['id']))
 			{
 				// Check if user is not signed in on a3m
 				if ( ! $this->authentication->is_signed_in())
@@ -62,7 +62,7 @@ class Connect_facebook extends CI_Controller {
 				else
 				{
 					// Connect facebook to a3m
-					$this->account_facebook_model->insert($this->session->userdata('account_id'), $this->facebook_lib->user['id']);
+					$this->Account_facebook_model->insert($this->session->userdata('account_id'), $this->facebook_lib->user['id']);
 					$this->session->set_flashdata('linked_info', sprintf(lang('linked_linked_with_your_account'), lang('connect_facebook')));
 					redirect('account/account_linked');
 				}

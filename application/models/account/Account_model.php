@@ -250,6 +250,22 @@ class Account_model extends CI_Model {
 	{
 		$this->db->update('a3m_account', array('suspendedon' => NULL), array('id' => $account_id));
 	}
+	
+	/**
+	 * Verify user
+	 * 
+	 * @access public
+	 * @param int $account_id
+	 * @return void
+	 *
+	 * @todo have return boolen for confirmation, just in case
+	 */
+	function verify($account_id)
+	{
+		$this->load->helper('date');
+		
+		$this->db->update('a3m_account', array('verifiedon' => mdate('%Y-%m-%d %H:%i:%s', now())), array('id' => $account_id));
+	}
 
 }
 
