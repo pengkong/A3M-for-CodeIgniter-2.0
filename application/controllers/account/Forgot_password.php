@@ -15,7 +15,7 @@ class Forgot_password extends CI_Controller {
 		$this->load->config('account/account');
 		$this->load->helper(array('language', 'account/ssl', 'url'));
 		$this->load->library(array('account/authentication', 'account/authorization', 'account/recaptcha', 'form_validation'));
-		$this->load->model('account/account_model');
+		$this->load->model('account/Account_model');
 		$this->load->language(array('general', 'account/forgot_password'));
 	}
 
@@ -61,7 +61,7 @@ class Forgot_password extends CI_Controller {
 				$this->session->unset_userdata('forget_password_recaptcha_pass');
 
 				// Username does not exist
-				if ( ! $account = $this->account_model->get_by_username_email($this->input->post('forgot_password_username_email', TRUE)))
+				if ( ! $account = $this->Account_model->get_by_username_email($this->input->post('forgot_password_username_email', TRUE)))
 				{
 					$data['forgot_password_username_email_error'] = lang('forgot_password_username_email_does_not_exist');
 				}
@@ -73,7 +73,7 @@ class Forgot_password extends CI_Controller {
 				else
 				{
 					// Set reset datetime
-					$time = $this->account_model->update_reset_sent_datetime($account->id);
+					$time = $this->Account_model->update_reset_sent_datetime($account->id);
 
 					// Load email library
 					$this->load->library('email');
@@ -95,10 +95,18 @@ class Forgot_password extends CI_Controller {
 						'username' => $account->username,
 						'password_reset_url' => anchor($password_reset_url, $password_reset_url)
 					), TRUE));
-					@$this->email->send();
-
-					// Load reset password sent view
-					$this->load->view('account/reset_password_sent', isset($data) ? $data : NULL);
+					if($this->email->send())
+					{
+						// Load reset password sent view
+						$this->load->view('account/reset_password_sent', isset($data) ? $data : NULL);
+					}
+					else
+					{
+						//if the email could not be sent it will display the error
+						//should not happen if you have email configured correctly
+						echo $this->email->print_debugger();
+					}
+					
 					return;
 				}
 			}

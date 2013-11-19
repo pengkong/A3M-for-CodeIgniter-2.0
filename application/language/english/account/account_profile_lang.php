@@ -9,6 +9,7 @@ $lang['profile_page_name'] = 'Manage Profile';
 $lang['profile_instructions'] = 'The information you provide on this page is publicly viewable on your site profile.';
 $lang['profile_username'] = 'Username';
 $lang['profile_picture'] = 'Picture';
+$lang['profile_gravatar'] = 'Gravatar';
 $lang['profile_save'] = 'Save changes';
 $lang['profile_updated'] = 'Your profile has been updated.';
 $lang['profile_username_taken'] = 'This Username is already taken.';

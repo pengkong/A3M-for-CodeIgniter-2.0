@@ -316,7 +316,7 @@ if ( ! function_exists('form_dropdown'))
 		{
 			isset($name['options']) OR $name['options'] = array();
 			isset($name['selected']) OR $name['selected'] = array();
-			isset($name['extra']) OR $name['extra'] = array();
+			isset($name['extra']) OR $name['extra'] = '';
 
 			return form_dropdown($name['name'], $name['options'], $name['selected'], $name['extra']);
 		}
@@ -329,10 +329,7 @@ if ( ! function_exists('form_dropdown'))
 			$selected = array($_POST[$name]);
 		}
 
-		if ($extra != '')
-		{
-			$extra = ' '.$extra;
-		}
+		$extra = _attributes_to_string($extra);
 
 		$multiple = (count($selected) > 1 && strpos($extra, 'multiple') === FALSE) ? ' multiple="multiple"' : '';
 
@@ -685,9 +682,20 @@ if ( ! function_exists('set_select'))
 		{
 			return ($default === TRUE) ? ' selected="selected"' : '';
 		}
-		elseif (is_array($input) && in_array($value, $input, TRUE))
+
+		$value = (string) $value;
+		if (is_array($input))
 		{
-			return ' selected="selected"';
+			// Note: in_array('', array(0)) returns TRUE, do not use it
+			foreach ($input as &$v)
+			{
+				if ($value === $v)
+				{
+					return ' selected="selected"';
+				}
+			}
+
+			return '';
 		}
 
 		return ($input === $value) ? ' selected="selected"' : '';
@@ -721,9 +729,20 @@ if ( ! function_exists('set_checkbox'))
 		{
 			return ($default === TRUE) ? ' checked="checked"' : '';
 		}
-		elseif (is_array($input) && in_array($value, $input, TRUE))
+
+		$value = (string) $value;
+		if (is_array($input))
 		{
-			return ' checked="checked"';
+			// Note: in_array('', array(0)) returns TRUE, do not use it
+			foreach ($input as &$v)
+			{
+				if ($value === $v)
+				{
+					return ' checked="checked"';
+				}
+			}
+
+			return '';
 		}
 
 		return ($input === $value) ? ' checked="checked"' : '';
@@ -758,7 +777,7 @@ if ( ! function_exists('set_radio'))
 			return ($default === TRUE) ? ' checked="checked"' : '';
 		}
 
-		return ($input === $value) ? ' checked="checked"' : '';
+		return ($input === (string) $value) ? ' checked="checked"' : '';
 	}
 }
 

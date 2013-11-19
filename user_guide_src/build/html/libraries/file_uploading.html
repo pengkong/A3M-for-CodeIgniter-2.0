@@ -29,7 +29,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x3537b90>
+			<function <lambda> at 0x501ac80>
 			</div>
 		</div>
 
@@ -350,6 +350,14 @@ underscores. This is recommended.</td>
 <td>If set to TRUE, a server side detection of the file type will be
 performed to avoid code injection attacks. DO NOT disable this option
 unless you have no other option as that would cause a security risk.</td>
+</tr>
+<tr class="row-odd"><td><strong>mod_mime_fix</strong></td>
+<td>TRUE</td>
+<td>TRUE/FALSE (boolean)</td>
+<td>If set to TRUE, multiple filename extensions will be suffixed with an
+underscore in order to avoid triggering <a class="reference external" href="http://httpd.apache.org/docs/2.0/mod/mod_mime.html#multipleext">Apache mod_mime</a>.
+DO NOT turn off this option if your upload directory is public, as this
+is a security risk.</td>
 </tr>
 </tbody>
 </table>

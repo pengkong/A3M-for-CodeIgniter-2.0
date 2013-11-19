@@ -29,7 +29,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x32dbed8>
+			<function <lambda> at 0x38fa758>
 			</div>
 		</div>
 
@@ -986,111 +986,116 @@ parameter. Note: This rule requires <a class="reference internal" href="../datab
 enabled in order to work.</td>
 <td>is_unique[table.field]</td>
 </tr>
-<tr class="row-even"><td><strong>max_length</strong></td>
+<tr class="row-even"><td><strong>min_length</strong></td>
+<td>Yes</td>
+<td>Returns FALSE if the form element is shorter then the parameter value.</td>
+<td>min_length[3]</td>
+</tr>
+<tr class="row-odd"><td><strong>max_length</strong></td>
 <td>Yes</td>
 <td>Returns FALSE if the form element is longer then the parameter value.</td>
 <td>max_length[12]</td>
 </tr>
-<tr class="row-odd"><td><strong>exact_length</strong></td>
+<tr class="row-even"><td><strong>exact_length</strong></td>
 <td>Yes</td>
 <td>Returns FALSE if the form element is not exactly the parameter value.</td>
 <td>exact_length[8]</td>
 </tr>
-<tr class="row-even"><td><strong>greater_than</strong></td>
+<tr class="row-odd"><td><strong>greater_than</strong></td>
 <td>Yes</td>
 <td>Returns FALSE if the form element is less than or equal to the parameter value or not
 numeric.</td>
 <td>greater_than[8]</td>
 </tr>
-<tr class="row-odd"><td><strong>greater_than_equal_to</strong></td>
+<tr class="row-even"><td><strong>greater_than_equal_to</strong></td>
 <td>Yes</td>
 <td>Returns FALSE if the form element is less than the parameter value,
 or not numeric.</td>
 <td>greater_than_equal_to[8]</td>
 </tr>
-<tr class="row-even"><td><strong>less_than</strong></td>
+<tr class="row-odd"><td><strong>less_than</strong></td>
 <td>Yes</td>
 <td>Returns FALSE if the form element is greater than or equal to the parameter value or
 not numeric.</td>
 <td>less_than[8]</td>
 </tr>
-<tr class="row-odd"><td><strong>less_than_equal_to</strong></td>
+<tr class="row-even"><td><strong>less_than_equal_to</strong></td>
 <td>Yes</td>
 <td>Returns FALSE if the form element is greater than the parameter value,
 or not numeric.</td>
 <td>less_than_equal_to[8]</td>
 </tr>
-<tr class="row-even"><td><strong>alpha</strong></td>
+<tr class="row-odd"><td><strong>alpha</strong></td>
 <td>No</td>
 <td>Returns FALSE if the form element contains anything other than alphabetical characters.</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td><strong>alpha_numeric</strong></td>
+<tr class="row-even"><td><strong>alpha_numeric</strong></td>
 <td>No</td>
 <td>Returns FALSE if the form element contains anything other than alpha-numeric characters.</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><strong>alpha_numeric_spaces</strong></td>
+<tr class="row-odd"><td><strong>alpha_numeric_spaces</strong></td>
 <td>No</td>
 <td>Returns FALSE if the form element contains anything other than alpha-numeric characters
 or spaces.  Should be used after trim to avoid spaces at the beginning or end.</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td><strong>alpha_dash</strong></td>
+<tr class="row-even"><td><strong>alpha_dash</strong></td>
 <td>No</td>
 <td>Returns FALSE if the form element contains anything other than alpha-numeric characters,
 underscores or dashes.</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><strong>numeric</strong></td>
+<tr class="row-odd"><td><strong>numeric</strong></td>
 <td>No</td>
 <td>Returns FALSE if the form element contains anything other than numeric characters.</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td><strong>integer</strong></td>
+<tr class="row-even"><td><strong>integer</strong></td>
 <td>No</td>
 <td>Returns FALSE if the form element contains anything other than an integer.</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><strong>decimal</strong></td>
+<tr class="row-odd"><td><strong>decimal</strong></td>
 <td>No</td>
 <td>Returns FALSE if the form element contains anything other than a decimal number.</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td><strong>is_natural</strong></td>
+<tr class="row-even"><td><strong>is_natural</strong></td>
 <td>No</td>
 <td>Returns FALSE if the form element contains anything other than a natural number:
 0, 1, 2, 3, etc.</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><strong>is_natural_no_zero</strong></td>
+<tr class="row-odd"><td><strong>is_natural_no_zero</strong></td>
 <td>No</td>
 <td>Returns FALSE if the form element contains anything other than a natural
 number, but not zero: 1, 2, 3, etc.</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td><strong>valid_url</strong></td>
+<tr class="row-even"><td><strong>valid_url</strong></td>
 <td>No</td>
 <td>Returns FALSE if the form element does not contain a valid URL.</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><strong>valid_email</strong></td>
+<tr class="row-odd"><td><strong>valid_email</strong></td>
 <td>No</td>
 <td>Returns FALSE if the form element does not contain a valid email address.</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td><strong>valid_emails</strong></td>
+<tr class="row-even"><td><strong>valid_emails</strong></td>
 <td>No</td>
 <td>Returns FALSE if any value provided in a comma separated list is not a valid email.</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td><strong>valid_ip</strong></td>
+<tr class="row-odd"><td><strong>valid_ip</strong></td>
 <td>No</td>
 <td>Returns FALSE if the supplied IP is not valid.
 Accepts an optional parameter of &#8216;ipv4&#8217; or &#8216;ipv6&#8217; to specify an IP format.</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td><strong>valid_base64</strong></td>
+<tr class="row-even"><td><strong>valid_base64</strong></td>
 <td>No</td>
 <td>Returns FALSE if the supplied string contains anything other than valid Base64 characters.</td>
 <td>&nbsp;</td>

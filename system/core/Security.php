@@ -553,9 +553,9 @@ class CI_Security {
 		{
 			$matches = $matches1 = 0;
 
+			$str = preg_replace('~(&#x0*[0-9a-f]{2,5});?~iS', '$1;', $str, -1, $matches);
+			$str = preg_replace('~(&#\d{2,4});?~S', '$1;', $str, -1, $matches1);
 			$str = html_entity_decode($str, ENT_COMPAT, $charset);
-			$str = preg_replace('~&#x(0*[0-9a-f]{2,5})~ei', 'chr(hexdec("\\1"))', $str, -1, $matches);
-			$str = preg_replace('~&#([0-9]{2,4})~e', 'chr(\\1)', $str, -1, $matches1);
 		}
 		while ($matches OR $matches1);
 
@@ -603,7 +603,7 @@ class CI_Security {
 	 */
 	public function strip_image_tags($str)
 	{
-		return preg_replace(array('#<img\s+.*?src\s*=\s*["\'](.+?)["\'].*?\>#', '#<img\s+.*?src\s*=\s*(.+?).*?\>#'), '\\1', $str);
+		return preg_replace(array('#<img[\s/]+.*?src\s*=\s*["\'](.+?)["\'].*?\>#', '#<img[\s/]+.*?src\s*=\s*(.+?).*?\>#'), '\\1', $str);
 	}
 
 	// ----------------------------------------------------------------
@@ -884,7 +884,7 @@ class CI_Security {
 	{
 		if ($this->_csrf_hash === '')
 		{
-			// If the cookie exists we will use it's value.
+			// If the cookie exists we will use its value.
 			// We don't necessarily want to regenerate it with
 			// each page load since a page could contain embedded
 			// sub-pages causing this feature to fail
@@ -894,7 +894,7 @@ class CI_Security {
 				return $this->_csrf_hash = $_COOKIE[$this->_csrf_cookie_name];
 			}
 
-			$this->_csrf_hash = md5(uniqid(rand(), TRUE));
+			$this->_csrf_hash = md5(uniqid(mt_rand(), TRUE));
 			$this->csrf_set_cookie();
 		}
 

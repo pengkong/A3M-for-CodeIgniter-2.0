@@ -77,7 +77,7 @@
 
                 <div class="media-body">
                     <h4 class="media-heading">Your stylesheets are here</h4>
-                    <code>/<?php echo RES_DIR?>/css/</code>
+                    <code>/<?php echo RES_DIR; ?>/css/</code>
                 </div>
             </div>
 
@@ -86,7 +86,7 @@
 
                 <div class="media-body">
                     <h4 class="media-heading">Images live here</h4>
-                    <code>/<?php echo RES_DIR?>/img/</code>
+                    <code>/<?php echo RES_DIR; ?>/img/</code>
                 </div>
             </div>
 
@@ -97,7 +97,7 @@
                     <h4 class="media-heading">Twitter Bootstrap
                         <small><a href="http://twitter.github.com/bootstrap/" title="Go-to Bootstrap site"><i class="icon-share"></i></a></small>
                     </h4>
-                    <code>/<?php echo RES_DIR?>/bootstrap/</code>
+                    <code>/<?php echo RES_DIR; ?>/bootstrap/</code>
                 </div>
             </div>
 

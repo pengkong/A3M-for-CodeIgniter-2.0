@@ -15,7 +15,7 @@ class Manage_permissions extends CI_Controller {
     $this->load->config('account/account');
     $this->load->helper(array('date', 'language', 'account/ssl', 'url'));
     $this->load->library(array('account/authentication', 'account/authorization', 'form_validation'));
-    $this->load->model(array('account/account_model', 'account/account_details_model', 'account/acl_permission_model', 'account/acl_role_model', 'account/rel_account_permission_model', 'account/rel_account_role_model', 'account/rel_role_permission_model'));
+    $this->load->model(array('account/Account_model', 'account/Account_details_model', 'account/Acl_permission_model', 'account/Acl_role_model', 'account/Rel_account_permission_model', 'account/Rel_account_role_model', 'account/Rel_role_permission_model'));
     $this->load->language(array('general', 'admin/manage_permissions', 'account/account_settings', 'account/account_profile', 'account/sign_up', 'account/account_password'));
   }
 
@@ -40,12 +40,12 @@ class Manage_permissions extends CI_Controller {
     }
 
     // Retrieve sign in user
-    $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
+    $data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
 
     // Get all permossions, roles, and role_permissions
-    $roles = $this->acl_role_model->get();
-    $permissions = $this->acl_permission_model->get();
-    $role_permissions = $this->rel_role_permission_model->get();
+    $roles = $this->Acl_role_model->get();
+    $permissions = $this->Acl_permission_model->get();
+    $role_permissions = $this->Rel_role_permission_model->get();
 
     // Combine all these elements for display
     $data['permissions'] = array();
@@ -56,7 +56,6 @@ class Manage_permissions extends CI_Controller {
       $current['key'] = $perm->key;
       $current['description'] = $perm->description;
       $current['role_list'] = array();
-      $current['is_disabled'] = isset( $perm->suspendedon );
 
       foreach( $role_permissions as $rperm )
       {
@@ -107,13 +106,13 @@ class Manage_permissions extends CI_Controller {
     }
 
     // Retrieve sign in user
-    $data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
+    $data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
 
     // Set action type (create or update permission)
     $data['action'] = 'create';
 
     // Get all the roles
-    $data['roles'] = $this->acl_role_model->get();
+    $data['roles'] = $this->Acl_role_model->get();
 
     // Is this a System Permission?
     $data['is_system'] = FALSE;
@@ -121,10 +120,11 @@ class Manage_permissions extends CI_Controller {
     //Get the role
     if( ! $is_new )
     {
-      $data['permission'] = $this->acl_permission_model->get_by_id($id);
-      $data['role_permissions'] = $this->rel_role_permission_model->get_by_permission_id($id);
+      $data['permission'] = $this->Acl_permission_model->get_by_id($id);
+      $data['role_permissions'] = $this->Rel_role_permission_model->get_by_permission_id($id);
       $data['action'] = 'update';
       $data['is_system'] = ($data['permission']->is_system == 1);
+      $data['is_disabled'] = isset( $data['permission']->suspendedon );
     }
 
     // Setup form validation
@@ -164,7 +164,7 @@ class Manage_permissions extends CI_Controller {
         }
 
         $attributes['description'] = $this->input->post('permission_description', TRUE) ? $this->input->post('permission_description', TRUE) : NULL;
-        $id = $this->acl_permission_model->update($id, $attributes);
+        $id = $this->Acl_permission_model->update($id, $attributes);
       
 
         // Check if the permission should be disabled
@@ -172,11 +172,11 @@ class Manage_permissions extends CI_Controller {
         {
           if( $this->input->post('manage_permission_ban', TRUE) )
           {
-            $this->acl_permission_model->update_suspended_datetime($id);
+            $this->Acl_permission_model->update_suspended_datetime($id);
           }
           elseif( $this->input->post('manage_permission_unban', TRUE) )
           {
-            $this->acl_permission_model->remove_suspended_datetime($id);
+            $this->Acl_permission_model->remove_suspended_datetime($id);
           }
         }
 
@@ -186,11 +186,11 @@ class Manage_permissions extends CI_Controller {
         {
           if( $this->input->post("role_permission_{$role->id}", TRUE) )
           {
-            $this->rel_role_permission_model->update($role->id, $id);
+            $this->Rel_role_permission_model->update($role->id, $id);
           }
           else
           {
-            $this->rel_role_permission_model->delete($role->id, $id);
+            $this->Rel_role_permission_model->delete($role->id, $id);
           }
         }
 
@@ -210,7 +210,7 @@ class Manage_permissions extends CI_Controller {
    */
   function name_check($permission_name)
   {
-    return $this->acl_permission_model->get_by_name($permission_name) ? TRUE : FALSE;
+    return $this->Acl_permission_model->get_by_name($permission_name) ? TRUE : FALSE;
   }
 }
 

@@ -22,14 +22,14 @@
             </div>
             <div class="clear"></div>
 			<?php if (isset($reset_password_recaptcha_error)) : ?>
-                <div class="grid_6 alpha omega">
+                <div class="span6">
                     <span class="field_error"><?php echo $reset_password_recaptcha_error; ?></span>
                 </div>
                 <div class="clear"></div>
 				<?php endif; ?>
 			<?php endif; ?>
             <div class="span6">
-				<?php echo form_button(array('type' => 'submit', 'class' => 'button', 'content' => lang('reset_password_captcha_submit'))); ?>
+				<?php echo form_button(array('type' => 'submit', 'class' => 'btn', 'content' => lang('reset_password_captcha_submit'))); ?>
             </div>
 			<?php echo form_fieldset_close(); ?>
 			<?php echo form_close(); ?>

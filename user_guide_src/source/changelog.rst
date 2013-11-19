@@ -55,6 +55,7 @@ Release Date: Not Released
    -  Changed environment defaults to report all errors in *development* and only fatal ones in *testing*, *production* but only display them in *development*.
    -  Updated *ip_address* database field lengths from 16 to 45 for supporting IPv6 address on :doc:`Trackback Library <libraries/trackback>` and :doc:`Captcha Helper <helpers/captcha_helper>`.
    -  Removed *cheatsheets* and *quick_reference* PDFs from the documentation.
+   -  Added support non-HTML error templates for CLI applications.
    -  Added availability checks where usage of dangerous functions like ``eval()`` and ``exec()`` is required.
    -  Added support for changing the file extension of log files using ``$config['log_file_extension']``.
 
@@ -77,7 +78,6 @@ Release Date: Not Released
       - Added support (auto-detection) for HTTP/1.1 response code 303 in :php:func:`redirect()`.
       - Changed :php:func:`redirect()` to choose the **refresh** method only on IIS servers, instead of all servers on Windows (when **auto** is used).
       - Changed :php:func:`anchor()`, :php:func:`anchor_popup()`, and :php:func:`redirect()` to support protocol-relative URLs (e.g. *//ellislab.com/codeigniter*).
-      - Added an optional second parameter to both :php:func:`base_url()` and :php:func:`site_url()` that allows enforcing of a protocol different than the one in the *base_url* configuration setting.
 
    -  :doc:`HTML Helper <helpers/html_helper>` changes include:
 
@@ -128,6 +128,7 @@ Release Date: Not Released
 
       - Added *word_length* and *pool* options to allow customization of the generated word.
       - Added *colors* configuration to allow customization for the *background*, *border*, *text* and *grid* colors.
+      - Added *filename* to the returned array elements.
 
    -  :doc:`Directory Helper <helpers/directory_helper>` :php:func:`directory_map()` will now append ``DIRECTORY_SEPARATOR`` to directory names in the returned array.
    -  :doc:`Array Helper <helpers/array_helper>` :php:func:`element()` and :php:func:`elements()` now return NULL instead of FALSE when the required elements don't exist.
@@ -273,6 +274,7 @@ Release Date: Not Released
       -  Added the **min_width** and **min_height** options for images.
       -  Removed method ``clean_file_name()`` and its usage in favor of :doc:`Security Library <libraries/security>`'s ``sanitize_filename()``.
       -  Added **file_ext_tolower** config setting.
+      -  Added **mod_mime_fix** option to disable suffixing multiple file extensions with an underscore.
 
    -  :doc:`Cart library <libraries/cart>` changes include:
 
@@ -351,6 +353,7 @@ Release Date: Not Released
       -  Database object names are now being displayed.
       -  The sum of all queries running times in seconds is now being displayed.
       -  Added support for displaying the HTTP DNT ("Do Not Track") header.
+      -  Added support for displaying $_FILES.
 
    -  :doc:`Migration Library <libraries/migration>` changes include:
 
@@ -381,6 +384,7 @@ Release Date: Not Released
       -  Added support for model aliasing on autoload.
       -  Changed method ``is_loaded()`` to ask for the (case sensitive) library name instead of its instance name.
       -  Removed ``$_base_classes`` property and unified all class data in ``$_ci_classes`` instead.
+      -  Added method ``clear_vars()`` to allow clearing the cached variables for views.
 
    -  :doc:`Input Library <libraries/input>` changes include:
 
@@ -392,6 +396,8 @@ Release Date: Not Released
       -  Changed methods ``get()``, ``post()``, ``get_post()``, ``cookie()``, ``server()``, ``user_agent()`` to return NULL instead of FALSE when no value is found.
       -  Added method ``post_get()`` and changed ``get_post()`` to search in GET data first. Both methods' names now properly match their GET/POST data search priorities.
       -  Changed method ``_fetch_from_array()`` to parse array notation in field name.
+      -  Added an option for ``_clean_input_keys()`` to return FALSE instead of terminating the whole script.
+      -  Deprecated the ``is_cli_request()`` method, it is now an alias for the new :php:func:`is_cli()` common function.
 
    -  :doc:`Common functions <general/common_functions>` changes include:
 
@@ -400,6 +406,7 @@ Release Date: Not Released
       -  Removed redundant conditional to determine HTTP server protocol in :php:func:`set_status_header()`.
       -  Changed ``_exception_handler()`` to respect php.ini *display_errors* setting.
       -  Added function :php:func:`is_https()` to check if a secure connection is used.
+      -  Added function :php:func:`is_cli()` to replace the ``CI_Input::is_cli_request()`` method.
       -  Added function :php:func:`function_usable()` to check if a function exists and is not disabled by `Suhosin <http://www.hardened-php.net/suhosin/>`.
       -  Removed the third (`$php_error`) from function :php:func:`log_message()`.
 
@@ -414,6 +421,7 @@ Release Date: Not Released
       -  Changed ``site_url()`` method  to accept an array as well.
       -  Removed internal method ``_assign_to_config()`` and moved its implementation to *CodeIgniter.php* instead.
       -  ``item()`` now returns NULL instead of FALSE when the required config item doesn't exist.
+      -  Added an optional second parameter to both ``base_url()`` and ``site_url()`` that allows enforcing of a protocol different than the one in the *base_url* configuration setting.
 
    -  :doc:`Security Library <libraries/security>` changes include:
 
@@ -424,6 +432,7 @@ Release Date: Not Released
 
    -  :doc:`URI Routing <general/routing>` changes include:
 
+      -  Added possibility to route requests using HTTP verbs.
       -  Added possibility to route requests using callbacks.
       -  Added a new reserved route (*translate_uri_dashes*) to allow usage of dashes in the controller and method URI segments.
       -  Deprecated methods ``fetch_directory()``, ``fetch_class()`` and ``fetch_method()`` in favor of their respective public properties.
@@ -614,6 +623,11 @@ Bug fixes for 3.0
 -  Fixed a bug (#2590) - :php:func:`log_message()` didn't actually cache the ``CI_Log`` class instance.
 -  Fixed a bug (#2609) - :php:func:`get_config()` optional argument was only effective on first function call. Also, it can now add items, in addition to updating existing items.
 -  Fixed a bug in the 'postgre' :doc:`database <database/index>` driver where the connection ID wasn't passed to ``pg_escape_string()``.
+-  Fixed a bug (#33) - Script execution was terminated when an invalid cookie key was encountered.
+-  Fixed a bug (#2681) - ``CI_Security::entity_decode()`` used the `PREG_REPLACE_EVAL` flag, which is deprecated since PHP 5.5.
+-  Fixed a bug (#2691) - nested transactions could end in a deadlock when an error is encountered with *db_debug* set to TRUE.
+-  Fixed a bug (#2515) - ``_exception_handler()`` used to send the 200 "OK" HTTP status code and didn't stop script exection even on fatal errors.
+-  Fixed a bug - Redis :doc:`Caching <libraries/caching>` driver didn't handle connection failures properly.
 
 Version 2.1.4
 =============
@@ -770,7 +784,6 @@ Bug fixes for 2.1.0
    but the requested method did not.
 -  Fixed a bug (Reactor #89) where MySQL export would fail if the table
    had hyphens or other non alphanumeric/underscore characters.
--  Fixed a bug (#200) where MySQL queries would be malformed after calling $this->db->count_all() then $this->db->get()
 -  Fixed a bug (#105) that stopped query errors from being logged unless database debugging was enabled
 -  Fixed a bug (#160) - Removed unneeded array copy in the file cache
    driver.
@@ -791,7 +804,7 @@ Bug fixes for 2.1.0
 -  Fixed a bug (#537) - Support for all wav type in browser.
 -  Fixed a bug (#576) - Using ini_get() function to detect if apc is enabled or not.
 -  Fixed invalid date time format in :doc:`Date helper <helpers/date_helper>` and :doc:`XMLRPC library <libraries/xmlrpc>`.
--  Fixed a bug (#200) - MySQL queries would be malformed after calling count_all() then db->get().
+-  Fixed a bug (#200) - MySQL queries would be malformed after calling db->count_all() then db->get().
 
 Version 2.0.3
 =============

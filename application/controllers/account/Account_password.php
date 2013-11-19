@@ -15,7 +15,7 @@ class Account_password extends CI_Controller {
 		$this->load->config('account/account');
 		$this->load->helper(array('date', 'language', 'account/ssl', 'url'));
 		$this->load->library(array('account/authentication', 'account/authorization', 'form_validation'));
-		$this->load->model('account/account_model');
+		$this->load->model('account/Account_model');
 		$this->load->language(array('general', 'account/account_password'));
 	}
 
@@ -34,7 +34,7 @@ class Account_password extends CI_Controller {
 		}
 
 		// Retrieve sign in user
-		$data['account'] = $this->account_model->get_by_id($this->session->userdata('account_id'));
+		$data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
 
 		// No access to users without a password
 		if ( ! $data['account']->password) redirect('');
@@ -47,7 +47,7 @@ class Account_password extends CI_Controller {
 		if ($this->form_validation->run())
 		{
 			// Change user's password
-			$this->account_model->update_password($data['account']->id, $this->input->post('password_new_password', TRUE));
+			$this->Account_model->update_password($data['account']->id, $this->input->post('password_new_password', TRUE));
 			$this->session->set_flashdata('password_info', lang('password_password_has_been_changed'));
 			redirect('account/account_password');
 		}

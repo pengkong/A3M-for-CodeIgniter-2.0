@@ -29,7 +29,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x245f938>
+			<function <lambda> at 0x4eb47d0>
 			</div>
 		</div>
 
@@ -203,6 +203,25 @@ routing rules to process the back-references. Example:</p>
 <span class="p">};</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="using-http-verbs-in-routes">
+<h2>Using HTTP verbs in routes<a class="headerlink" href="#using-http-verbs-in-routes" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to use HTTP verbs (request method) to define your routing rules.
+This is particularly useful when building RESTful applications. You can use standard HTTP
+verbs (GET, PUT, POST, DELETE, PATCH) or a custom one such (e.g. PURGE). HTTP verb rules
+are case-insensitive. All you need to do is to add the verb as an array key to your route.
+Example:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$route</span><span class="p">[</span><span class="s1">&#39;products&#39;</span><span class="p">][</span><span class="s1">&#39;put&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;product/insert&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>In the above example, a PUT request to URI &#8220;products&#8221; would call the <tt class="docutils literal"><span class="pre">Product::insert()</span></tt>
+controller method.</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$route</span><span class="p">[</span><span class="s1">&#39;products/(:num)&#39;</span><span class="p">][</span><span class="s1">&#39;DELETE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;product/delete/$1&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>A DELETE request to URL with &#8220;products&#8221; as first the segment and a number in the second will be
+mapped to the <tt class="docutils literal"><span class="pre">Product::delete()</span></tt> method, passing the numeric value as the first parameter.</p>
+<p>Using HTTP verbs is of course, optional.</p>
 </div>
 <div class="section" id="reserved-routes">
 <h2>Reserved Routes<a class="headerlink" href="#reserved-routes" title="Permalink to this headline">¶</a></h2>

@@ -19,6 +19,7 @@ $lang['settings_country'] = 'Country';
 $lang['settings_language'] = 'Language';
 $lang['settings_timezone'] = 'Timezone';
 $lang['settings_save'] = 'Save changes';
+$lang['settings_cancel'] = 'Cancel';
 $lang['settings_email_exist'] = 'This Email is already registered.';
 $lang['settings_dateofbirth_incomplete'] = 'Date of Birth selection is incomplete.';
 $lang['settings_details_updated'] = 'Your account details have been updated.';

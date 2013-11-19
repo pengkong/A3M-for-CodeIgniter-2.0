@@ -415,7 +415,7 @@ class CI_Loader {
 	 *				to be extracted for use in the view
 	 * @param	bool	$return	Whether to return the view output
 	 *				or leave it to the Output class
-	 * @return	void
+	 * @return	void|string
 	 */
 	public function view($view, $vars = array(), $return = FALSE)
 	{
@@ -468,6 +468,20 @@ class CI_Loader {
 		}
 	}
 
+	// --------------------------------------------------------------------
+
+	/**
+	 * Clear Cached Variables
+	 * 
+	 * Clears the cached variables.
+	 * 
+	 * @return  void
+	 */
+	public function clear_vars()
+	{
+		$this->_ci_cached_vars = array();
+	}
+	
 	// --------------------------------------------------------------------
 
 	/**

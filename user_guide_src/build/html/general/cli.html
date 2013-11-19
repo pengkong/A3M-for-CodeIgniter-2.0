@@ -29,7 +29,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x245fc08>
+			<function <lambda> at 0x2a8d050>
 			</div>
 		</div>
 
@@ -97,7 +97,7 @@ but they are not always obvious.</p>
 <ul class="simple">
 <li>Run your cron-jobs without needing to use <em>wget</em> or <em>curl</em></li>
 <li>Make your cron-jobs inaccessible from being loaded in the URL by
-checking for <tt class="docutils literal"><span class="pre">$this-&gt;input-&gt;is_cli_request()</span></tt></li>
+checking the return value of <tt class="xref py py-func docutils literal"><span class="pre">is_cli()</span></tt>.</li>
 <li>Make interactive &#8220;tasks&#8221; that can do things like set permissions,
 prune cache folders, run backups, etc.</li>
 <li>Integrate with other applications in other languages. For example, a
