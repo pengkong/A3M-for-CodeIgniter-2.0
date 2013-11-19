@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * Manage_permissions Controller
  */
@@ -36,7 +36,7 @@ class Manage_permissions extends CI_Controller {
     // Redirect unauthorized users to account profile page
     if ( ! $this->authorization->is_permitted('retrieve_permissions'))
     {
-      redirect('account/account_profile');
+      redirect('account/profile');
     }
 
     // Retrieve sign in user
@@ -78,7 +78,8 @@ class Manage_permissions extends CI_Controller {
     }
 
     // Load manage permissions view
-    $this->load->view('admin/manage_permissions', $data);
+    $data['content'] = $this->load->view('admin/manage_permissions', $data, TRUE);
+    $this->load->view('template', $data);
   }
 
 
@@ -102,7 +103,7 @@ class Manage_permissions extends CI_Controller {
     // Redirect unauthorized users to account profile page
     if ( ! $this->authorization->is_permitted('retrieve_permissions'))
     {
-      redirect('account/account_profile');
+      redirect('account/profile');
     }
 
     // Retrieve sign in user
@@ -197,7 +198,8 @@ class Manage_permissions extends CI_Controller {
       }
     }
     // Load manage permissions view
-    $this->load->view('admin/manage_permissions_save', $data);
+    $data['content'] = $this->load->view('admin/manage_permissions_save', $data, TRUE);
+    $this->load->view('template', $data);
   }
 
   /**

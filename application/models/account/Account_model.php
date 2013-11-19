@@ -266,7 +266,6 @@ class Account_model extends CI_Model {
 		
 		$this->db->update('a3m_account', array('verifiedon' => mdate('%Y-%m-%d %H:%i:%s', now())), array('id' => $account_id));
 	}
-
 }
 
 

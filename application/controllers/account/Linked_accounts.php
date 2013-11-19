@@ -1,8 +1,8 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * Account_linked Controller
  */
-class Account_linked extends CI_Controller {
+class Linked_accounts extends CI_Controller {
 
 	/**
 	 * Constructor
@@ -30,7 +30,7 @@ class Account_linked extends CI_Controller {
 		// Redirect unauthenticated users to signin page
 		if ( ! $this->authentication->is_signed_in())
 		{
-			redirect('account/sign_in/?continue='.urlencode(base_url().'account/account_linked'));
+			redirect('account/sign_in/?continue='.urlencode(base_url().'account/linked_accounts'));
 		}
 
 		// Retrieve sign in user
@@ -86,11 +86,12 @@ class Account_linked extends CI_Controller {
 			}
 		}
 
-		$this->load->view('account/account_linked', $data);
+		$data['content'] = $this->load->view('account/account_linked', $data, TRUE);
+		$this->load->view('template', $data);
 	}
 
 }
 
 
-/* End of file Account_linked.php */
-/* Location: ./application/controllers/account/Account_linked.php */
+/* End of file Connect_accounts.php */
+/* Location: ./application/controllers/account/Connect_accounts.php */

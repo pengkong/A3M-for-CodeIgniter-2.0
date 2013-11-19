@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * Connect_openid Controller
  */
@@ -132,7 +132,8 @@ class Connect_openid extends CI_Controller {
 			}
 		}
 
-		$this->load->view('account/connect_openid', isset($data) ? $data : NULL);
+		$data['content'] = $this->load->view('account/connect_openid', isset($data) ? $data : NULL, TRUE);
+		$this->load->view('template', $data);
 	}
 
 }

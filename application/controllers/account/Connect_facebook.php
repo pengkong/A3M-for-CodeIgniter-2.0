@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * Connect_facebook Controller
  */
@@ -70,7 +70,8 @@ class Connect_facebook extends CI_Controller {
 		}
 
 		// Load facebook redirect view
-		$this->load->view("account/redirect_fb");
+		$data['content'] = $this->load->view("account/redirect_fb", '', TRUE);
+		$this->load->view('template', $data);
 	}
 
 }

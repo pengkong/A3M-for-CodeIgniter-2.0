@@ -1,4 +1,4 @@
 RewriteEngine on 
 RewriteRule ^$ /index.php [L] 
-RewriteCond $1 !^(index\.php|resource|system|user_guide|bootstrap|robots\.txt|favicon\.ico) 
+RewriteCond $1 !^(index\.php|resource|system|user_guide_src|bootstrap|robots\.txt|favicon\.ico) 
 RewriteRule ^(.*)$ /index.php/$1 [L] 

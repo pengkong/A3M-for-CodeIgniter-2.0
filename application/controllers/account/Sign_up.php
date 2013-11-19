@@ -41,7 +41,7 @@ class Sign_up extends CI_Controller {
 
 		// Setup form validation
 		$this->form_validation->set_error_delimiters('<span class="field_error">', '</span>');
-		$this->form_validation->set_rules(array(array('field' => 'sign_up_username', 'label' => 'lang:sign_up_username', 'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[24]|callback_username_check'), array('field' => 'sign_up_password', 'label' => 'lang:sign_up_password', 'rules' => 'trim|required|min_length[6]'), array('field' => 'sign_up_email', 'label' => 'lang:sign_up_email', 'rules' => 'trim|required|valid_email|max_length[160]|callback_email_check'), array('field' => 'sign_up_password_confirm', 'label' => 'lang:sign_up_password_confirm', 'rules' => 'trim|required|min_length[6]|matches[sign_up_password]')));
+		$this->form_validation->set_rules(array(array('field' => 'sign_up_username', 'label' => 'lang:sign_up_username', 'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[24]|callback_username_check'), array('field' => 'sign_up_password', 'label' => 'lang:sign_up_password', 'rules' => 'trim|required|min_length[6]'), array('field' => 'sign_up_email', 'label' => 'lang:sign_up_email', 'rules' => 'trim|required|valid_email|max_length[160]|callback_email_check'), array('field' => 'sign_up_confirm_password', 'label' => 'lang:sign_up_password_confirm', 'rules' => 'trim|required|min_length[6]|matches[sign_up_password]'), array('field' => 'sign_up_terms', 'label' => 'lang:sign_up_terms_confirm', 'rules' => 'trim|required')));
 
 		// Run form validation
 		if (($this->form_validation->run() === TRUE) && ($this->config->item("sign_up_enabled")))
@@ -71,7 +71,7 @@ class Sign_up extends CI_Controller {
 				{
 					//send authentication email
 					$account = $this->Account_model->get_by_id($user_id);
-					$authentication_url = site_url('account/authenticate?user_id=' . $user_id . '&token='. sha1($user_id . $account->createdon . $this->config->item('password_reset_secret')));
+					$authentication_url = site_url('account/validate?user_id=' . $user_id . '&token='. sha1($user_id . $account->createdon . $this->config->item('password_reset_secret')));
 					
 					// Load email library
 					$this->load->library('email');
@@ -86,14 +86,15 @@ class Sign_up extends CI_Controller {
 					$this->email->from($this->config->item('account_email_confirm_sender'), lang('sign_up_email_sender'));
 					$this->email->to($account->email);
 					$this->email->subject(lang('sign_up_email_subject'));
-					$this->email->message($this->load->view('account/account_authentication_email', array(
+					$this->email->message($this->load->view('account/account_validation_email', array(
 						'username' => $account->username,
 						'authentication_url' => anchor($authentication_url, $authentication_url)
 					), TRUE));
 					if($this->email->send())
 					{
 						// Load reset password sent view
-						$this->load->view('account/account_authentication_send', isset($data) ? $data : NULL);
+						$data['content'] = $this->load->view('account/account_validation_send', isset($data) ? $data : NULL, TRUE);
+						$this->load->view('template', $data);
 					}
 					else
 					{
@@ -120,7 +121,8 @@ class Sign_up extends CI_Controller {
 			if ($this->config->item("sign_up_recaptcha_enabled") === TRUE) if ($this->session->userdata('sign_up_recaptcha_pass') != TRUE) $data['recaptcha'] = $this->recaptcha->load($recaptcha_result, $this->config->item("ssl_enabled"));
 			
 			// Load sign up view
-			$this->load->view('sign_up', isset($data) ? $data : NULL);
+			$data['content'] = $this->load->view('sign_up', isset($data) ? $data : NULL, TRUE);
+			$this->load->view('template', $data);
 		}
 	}
 

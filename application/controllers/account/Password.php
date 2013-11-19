@@ -1,8 +1,8 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * Account_password Controller
  */
-class Account_password extends CI_Controller {
+class Password extends CI_Controller {
 
 	/**
 	 * Constructor
@@ -30,7 +30,7 @@ class Account_password extends CI_Controller {
 		// Redirect unauthenticated users to signin page
 		if ( ! $this->authentication->is_signed_in())
 		{
-			redirect('account/sign_in/?continue='.urlencode(base_url().'account/account_password'));
+			redirect('account/sign_in/?continue='.urlencode(base_url().'account/password'));
 		}
 
 		// Retrieve sign in user
@@ -52,11 +52,12 @@ class Account_password extends CI_Controller {
 			redirect('account/account_password');
 		}
 
-		$this->load->view('account/account_password', $data);
+		$data['content'] = $this->load->view('account/account_password', $data, TRUE);
+		$this->load->view('template', $data);
 	}
 
 }
 
 
-/* End of file Account_password.php */
-/* Location: ./application/controllers/account/Account_password.php */
+/* End of file Ppassword.php */
+/* Location: ./application/controllers/account/Password.php */
