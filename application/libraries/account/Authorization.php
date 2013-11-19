@@ -12,7 +12,15 @@ class Authorization {
     // Obtain a reference to the ci super object
     $this->CI =& get_instance();
 
-    $this->CI->load->library('session');
+    //Load the session, if CI2 load it as library, if it is CI3 load as a driver
+    if (substr(CI_VERSION, 0, 1) == '2')
+    {
+      $this->CI->load->library('session');
+    }
+    else
+    {
+      $this->CI->load->driver('session');
+    }
   }
 
   /**
@@ -87,10 +95,9 @@ class Authorization {
   // --------------------------------------------------------------------
   
   /**
-   * Check if user has permission
+   * Check if user is admin
    *
    * @access public
-   * @param string $permission_key
    * @return bool
    */
   function is_admin()
@@ -101,13 +108,27 @@ class Authorization {
 
     return $this->CI->acl_role_model->has_role('Admin', $account_id);
   }
+  
+  // --------------------------------------------------------------------
+  
+  /**
+   * Check if user is a specific role
+   *
+   * @access public
+   * @param string $role
+   * @return bool
+   */
+  function is_role($role)
+  {
+    $account_id = $this->CI->session->userdata('account_id');
+    
+    $this->CI->load->model('account/acl_role_model');
+    
+    return $this->CI->acl_role_model->has_role($role, $account_id);
+  }
 
 }
 
 
 /* End of file Authorization.php */
 /* Location: ./application/account/libraries/Authorization.php */
-
-// --------------------------------------------------------------------
-  
-  

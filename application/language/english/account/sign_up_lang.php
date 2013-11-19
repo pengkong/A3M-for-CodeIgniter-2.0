@@ -12,6 +12,7 @@ $lang['sign_up_with'] = 'Sign Up with %s';
 
 $lang['sign_up_username'] = 'Username';
 $lang['sign_up_password'] = 'Password';
+$lang['sign_up_confirm_password'] = "Confirm your password";
 $lang['sign_up_email'] = 'Email';
 $lang['sign_up_create_my_account'] = 'Create my account';
 $lang['sign_up_sign_in_now'] = 'Sign in now';
