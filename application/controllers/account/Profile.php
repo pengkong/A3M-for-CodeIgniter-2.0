@@ -148,7 +148,18 @@ class Profile extends CI_Controller {
 	{
 		return $this->Account_model->get_by_username($username) ? TRUE : FALSE;
 	}
-
+	
+	/**
+	* Public function for ajax calls for username checks
+	*
+	* @access public
+	* @param string
+	* @return boolean
+	*/
+	function username_exists($username)
+	{
+		echo $this->username_check($username);
+	}
 }
 
 

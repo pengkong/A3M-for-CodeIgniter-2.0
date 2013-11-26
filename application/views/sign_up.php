@@ -119,4 +119,35 @@
 			</ul>
 		<?php endif; ?>
 	</div><!-- /span6 -->
+	<?php
+	    if(!isset($account))
+	    {
+		    echo '<script src="'.base_url('/resource/js/sign_up_validation.js').'"></script>';
+		    echo '<script>
+		    <!-- START : Instant Verification Check -->
+		    var _u_noUsername = "'.lang('sign_up_js_validation_no_username').'";
+		    var _u_tooShort = "'.lang('sign_up_js_validation_short').'";
+		    var _u_inVaildChars = "'.lang('sign_up_js_validation_invalid_chars').'";
+		    var _u_alreadyExists = "'.lang('sign_up_js_validation_username_exists').'";
+		    var _u_avail = "'.lang('sign_up_js_validation_username_available').'";
+		    
+		    var _e_invaild = "'.lang('sign_up_js_validation_email_invaild').'";
+		    var _e_vaild = "'.lang('sign_up_js_validation_email_vaild').'";
+		    
+		    var _p_no = "'.lang('sign_up_js_validation_password_no').'";
+		    var _p_tooShort = "'.lang('sign_up_js_validation_password_tooShort').'";
+		    var _p_tooLong = "'.lang('sign_up_js_validation_password_tooLong').'";
+		    var _p_good = "'.lang('sign_up_js_validation_password_good').'";
+		    
+		    var _cp_dot = "'.lang('sign_up_js_validation_password_confirm_dot').'";
+		    var _cp_noMatch = "'.lang('sign_up_js_validation_password_cofirm_nomatch').'";
+		    var _cp_match = "'.lang('sign_up_js_validation_password_cofirm_match').'";
+		    
+		    $(document).ready(function(){
+			    setUpMessages("");
+		    });
+		    <!-- END : Instant Verification Check -->
+	    </script>';
+	    }
+    ?>
 <?php endif;?>

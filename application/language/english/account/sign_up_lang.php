@@ -37,5 +37,26 @@ $lang['sign_up_email_confirmation'] = "Hello, %s <br /><br /> In order to activa
 $lang['sign_up_validation'] = 'Your e-mail has been validated! You can now login!';
 $lang['sign_up_validation_send'] = "In order to finish your registration we need to validate your email. <br />We have send an email, to the adress you registered under, with a validation link to finish your registration.";
 
+/*
+ * JS Validation language files
+ */
+$lang['sign_up_js_validation_no_username'] = "Enter a username.";
+$lang['sign_up_js_validation_short'] = "Please enter a longer username. (2-24 characters)";
+$lang['sign_up_js_validation_invalid_chars'] = "Invaild character detected. Only letters, numbers, -, and _ are vaild.";
+$lang['sign_up_js_validation_username_exists'] = "This username already exists!";
+$lang['sign_up_js_validation_username_available'] = "This username is available!";
+
+$lang['sign_up_js_validation_email_invaild'] = "Please enter a valid email.";
+$lang['sign_up_js_validation_email_vaild'] = "Vaild Email.";
+
+$lang['sign_up_js_validation_password_no'] = "Enter a password.";
+$lang['sign_up_js_validation_password_tooShort'] = "Enter a longer password. (6-20 characters)";
+$lang['sign_up_js_validation_password_tooLong'] = "Too long! (6-20 characters)";
+$lang['sign_up_js_validation_password_good'] = "That works!";
+
+$lang['sign_up_js_validation_password_confirm_dot'] = "...";
+$lang['sign_up_js_validation_password_cofirm_nomatch'] = "The passwords must match!";
+$lang['sign_up_js_validation_password_cofirm_match'] = "That matches!";
+
 /* End of file sign_up_lang.php */
 /* Location: ./application/account/language/english/sign_up_lang.php */
