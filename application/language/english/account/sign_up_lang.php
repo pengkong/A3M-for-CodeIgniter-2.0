@@ -50,8 +50,7 @@ $lang['sign_up_js_validation_email_invaild'] = "Please enter a valid email.";
 $lang['sign_up_js_validation_email_vaild'] = "Vaild Email.";
 
 $lang['sign_up_js_validation_password_no'] = "Enter a password.";
-$lang['sign_up_js_validation_password_tooShort'] = "Enter a longer password. (6-20 characters)";
-$lang['sign_up_js_validation_password_tooLong'] = "Too long! (6-20 characters)";
+$lang['sign_up_js_validation_password_short'] = "Enter a longer password. Please enter more than 6 characters.";
 $lang['sign_up_js_validation_password_good'] = "That works!";
 
 $lang['sign_up_js_validation_password_confirm_dot'] = "...";

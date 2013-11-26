@@ -135,8 +135,7 @@
 		    var _e_vaild = "'.lang('sign_up_js_validation_email_vaild').'";
 		    
 		    var _p_no = "'.lang('sign_up_js_validation_password_no').'";
-		    var _p_tooShort = "'.lang('sign_up_js_validation_password_tooShort').'";
-		    var _p_tooLong = "'.lang('sign_up_js_validation_password_tooLong').'";
+		    var _p_tooShort = "'.lang('sign_up_js_validation_password_short').'";
 		    var _p_good = "'.lang('sign_up_js_validation_password_good').'";
 		    
 		    var _cp_dot = "'.lang('sign_up_js_validation_password_confirm_dot').'";
