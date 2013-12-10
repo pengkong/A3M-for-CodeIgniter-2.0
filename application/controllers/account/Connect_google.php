@@ -15,7 +15,7 @@ class Connect_google extends CI_Controller {
 		$this->load->config('account/account');
 		$this->load->helper(array('language', 'account/ssl', 'url', 'account/openid'));
 		$this->load->library(array('account/authentication', 'account/authorization'));
-		$this->load->model(array('Account/account_model', 'account/Account_openid_model'));
+		$this->load->model(array('account/Account_model', 'account/Account_openid_model'));
 		$this->load->language(array('general', 'account/sign_in', 'account/account_linked', 'account/connect_third_party'));
 	}
 
@@ -49,7 +49,7 @@ class Connect_google extends CI_Controller {
 						$this->authentication->sign_in_by_id($user->account_id);
 					}
 					$user->account_id === $this->session->userdata('account_id') ? $this->session->set_flashdata('linked_error', sprintf(lang('linked_linked_with_this_account'), lang('connect_google'))) : $this->session->set_flashdata('linked_error', sprintf(lang('linked_linked_with_another_account'), lang('connect_google')));
-					redirect('account/account_linked');
+					redirect('account/linked_accounts');
 				}
 				// The user has not connect google to a3m
 				else
@@ -86,14 +86,14 @@ class Connect_google extends CI_Controller {
 						// Connect google to a3m
 						$this->Account_openid_model->insert($response->getDisplayIdentifier(), $this->session->userdata('account_id'));
 						$this->session->set_flashdata('linked_info', sprintf(lang('linked_linked_with_your_account'), lang('connect_google')));
-						redirect('account/account_linked');
+						redirect('account/linked_accounts');
 					}
 				}
 			}
 			// Auth_OpenID_CANCEL or Auth_OpenID_FAILURE or anything else
 			else
 			{
-				$this->authentication->is_signed_in() ? redirect('account/account_linked') : redirect('account/sign_up');
+				$this->authentication->is_signed_in() ? redirect('account/linked_accounts') : redirect('account/sign_up');
 			}
 		}
 
@@ -116,7 +116,7 @@ class Connect_google extends CI_Controller {
 		$auth_request->addExtension($ax_request);
 
 		// Redirect to authorizate URL
-		header("Location: ".$auth_request->redirectURL(base_url(), site_url('account/connect_google')));
+		header("Location: ".$auth_request->redirectURL(base_url('account/connect_google')));
 	}
 
 }

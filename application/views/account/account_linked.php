@@ -6,7 +6,7 @@
 <?php endif; ?>
 
 <?php if ($this->session->flashdata('linked_error')) : ?>
-    <div class="alert alert-error fade in">
+    <div class="alert alert-danger alert-dismissable">
 	<button type="button" class="close" data-dismiss="alert">&times;</button>
 		<?php echo $this->session->flashdata('linked_error'); ?>
     </div>

@@ -43,7 +43,7 @@ class Linked_accounts extends CI_Controller {
 			elseif ($this->input->post('twitter_id')) $this->Account_twitter_model->delete($this->input->post('twitter_id', TRUE));
 			elseif ($this->input->post('openid')) $this->Account_openid_model->delete($this->input->post('openid', TRUE));
 			$this->session->set_flashdata('linked_info', lang('linked_linked_account_deleted'));
-			redirect('account/account_linked');
+			redirect('account/linked_accounts');
 		}
 
 		// Check for linked accounts

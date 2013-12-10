@@ -28,7 +28,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x5564410>
+			<function <lambda> at 0x5e64de8>
 			</div>
 		</div>
 
@@ -693,6 +693,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Fixed a bug (#2691) - nested transactions could end in a deadlock when an error is encountered with <em>db_debug</em> set to TRUE.</li>
 <li>Fixed a bug (#2515) - <tt class="docutils literal"><span class="pre">_exception_handler()</span></tt> used to send the 200 &#8220;OK&#8221; HTTP status code and didn&#8217;t stop script exection even on fatal errors.</li>
 <li>Fixed a bug - Redis <a class="reference internal" href="libraries/caching.html"><em>Caching</em></a> driver didn&#8217;t handle connection failures properly.</li>
+<li>Fixed a bug (#2756) - <a class="reference internal" href="database/index.html"><em>Database Class</em></a> executed the MySQL-specific <cite>SET SESSION sql_mode</cite> query for all drivers when the &#8216;stricton&#8217; option is set.</li>
 </ul>
 </div>
 </div>

@@ -47,10 +47,10 @@ class Connect_twitter extends CI_Controller {
 				if ( ! $this->authentication->is_signed_in())
 				{
 					// Run sign in routine
-					$this->authentication->sign_in($user->account_id);
+					$this->authentication->sign_in_by_id($user->account_id);
 				}
 				$user->account_id === $this->session->userdata('account_id') ? $this->session->set_flashdata('linked_error', sprintf(lang('linked_linked_with_this_account'), lang('connect_twitter'))) : $this->session->set_flashdata('linked_error', sprintf(lang('linked_linked_with_another_account'), lang('connect_twitter')));
-				redirect('account/account_linked');
+				redirect('account/linked_accounts');
 			}
 			// The user has not connect twitter to a3m
 			else
@@ -69,7 +69,7 @@ class Connect_twitter extends CI_Controller {
 					// Connect twitter to a3m
 					$this->Account_twitter_model->insert($this->session->userdata('account_id'), $twitter_info['id'], $twitter_token->oauth_token, $twitter_token->oauth_token_secret);
 					$this->session->set_flashdata('linked_info', sprintf(lang('linked_linked_with_your_account'), lang('connect_twitter')));
-					redirect('account/account_linked');
+					redirect('account/linked_accounts');
 				}
 			}
 		}
