@@ -116,7 +116,7 @@ class Connect_google extends CI_Controller {
 		$auth_request->addExtension($ax_request);
 
 		// Redirect to authorizate URL
-		header("Location: ".$auth_request->redirectURL(base_url('account/connect_google')));
+		header("Location: ".$auth_request->redirectURL(base_url(), site_url('account/connect_google')));
 	}
 
 }
