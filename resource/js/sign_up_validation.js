@@ -21,14 +21,14 @@ function setUpMessages(modal_value)
  * @param string modal For modal sign up functionality or similar
  */
 function fieldErrorCheck(field, modal){
-	if($("#"+field+"Controls"+modal+" .help-inline").length){
+	if($("#"+field+"_controls"+modal+" .help-inline").length){
 		//it exists
-		$("#"+field+"Controls"+modal+" .help-inline").attr("id",field+"Help-Inline"+modal);
-		$("#"+field+"Help-Inline"+modal+" .field_error").removeClass("label label-warning label-success").addClass("label label-danger");
+		$("#"+field+"_controls"+modal+" .help-inline").attr("id",field+"Help-Inline"+modal);
+		$("#"+field+"_Help-Inline"+modal+" .field_error").removeClass("label label-warning label-success").addClass("label label-danger");
 	}else{
 		//create it
-		$("#"+field+"Controls"+modal).append('<span id = "'+field+'Help-Inline'+modal+'" class = "help-inline"></span>');
-		$("#"+field+"Help-Inline"+modal).append('<span class = "field_error"></span>');
+		$("#"+field+"_controls"+modal).append('<span id = "'+field+'Help-Inline'+modal+'" class = "help-inline"></span>');
+		$("#"+field+"_Help-Inline"+modal).append('<span class = "field_error"></span>');
 	}
 }
 
@@ -41,8 +41,8 @@ function fieldErrorCheck(field, modal){
  */
 function errorNote(field, func, text, modal){
 	if(text !== ""){
-		$("#"+field+"Help-Inline"+modal+" .field_error").removeClass("label label-warning label-success").addClass("label label-danger");
-		$("#"+field+"Help-Inline"+modal+" .field_error").text(text);
+		$("#"+field+"_Help-Inline"+modal+" .field_error").removeClass("label label-warning label-success").addClass("label label-danger");
+		$("#"+field+"_Help-Inline"+modal+" .field_error").text(text);
 	}
 	$("#sign_up_"+field+modal).on('input', func);
 }
@@ -59,17 +59,17 @@ function validateUser(evt){
 	var test = checkUser(value, modal);
 	window.clearTimeout(myTimeout);
 	if(test === true){
-		$("#usernameHelp-Inline"+modal+" .field_error").removeClass("label label-danger label-success").addClass("label label-warning");
-		$("#usernameHelp-Inline"+modal+" .field_error").text("Checking if available...");
+		$("#username_Help-Inline"+modal+" .field_error").removeClass("label label-danger label-success").addClass("label label-warning");
+		$("#username_Help-Inline"+modal+" .field_error").text(_s_checking);
 		myTimeout = window.setTimeout(function() {
 			$.ajax({url:"/account/profile/username_exists/"+value}).done(function(check){
 				if(checkUser($("#sign_up_username"+modal).val(), modal) === true){
 					if(check == 1){
-						$("#usernameHelp-Inline"+modal+" .field_error").removeClass("label label-warning label-success").addClass("label label-danger");
-						$("#usernameHelp-Inline"+modal+" .field_error").text(_u_alreadyExists);
+						$("#username_Help-Inline"+modal+" .field_error").removeClass("label label-warning label-success").addClass("label label-danger");
+						$("#username_Help-Inline"+modal+" .field_error").text(_u_alreadyExists);
 					}else{
-						$("#usernameHelp-Inline"+modal+" .field_error").removeClass("label label-danger label-warning").addClass("label label-success");
-						$("#usernameHelp-Inline"+modal+" .field_error").text(_u_avail);
+						$("#username_Help-Inline"+modal+" .field_error").removeClass("label label-danger label-warning").addClass("label label-success");
+						$("#username_Help-Inline"+modal+" .field_error").text(_u_avail);
 					}
 				}
 			});}, 300);
@@ -84,20 +84,20 @@ function validateUser(evt){
 function checkUser(value, modal){
 	var re = /^[a-z,A-Z,0-9,_,-]+$/i;
 	if(value === ""){
-		$("#usernameHelp-Inline"+modal+" .field_error").removeClass("label label-warning label-success").addClass("label label-danger");
-		$("#usernameHelp-Inline"+modal+" .field_error").text(_u_noUsername);
+		$("#username_Help-Inline"+modal+" .field_error").removeClass("label label-warning label-success").addClass("label label-danger");
+		$("#username_Help-Inline"+modal+" .field_error").text(_u_noUsername);
 		return false;
 	}else if(value.length < 2){
-		$("#usernameHelp-Inline"+modal+" .field_error").removeClass("label label-warning label-success").addClass("label label-danger");
-		$("#usernameHelp-Inline"+modal+" .field_error").text(_u_tooShort);
+		$("#username_Help-Inline"+modal+" .field_error").removeClass("label label-warning label-success").addClass("label label-danger");
+		$("#username_Help-Inline"+modal+" .field_error").text(_u_tooShort);
 		return false;
 	}else if(value.length > 24){
-		$("#usernameHelp-Inline"+modal+" .field_error").removeClass("label label-warning label-success").addClass("label label-danger");
-		$("#usernameHelp-Inline"+modal+" .field_error").text(_u_tooLong);
+		$("#username_Help-Inline"+modal+" .field_error").removeClass("label label-warning label-success").addClass("label label-danger");
+		$("#username_Help-Inline"+modal+" .field_error").text(_u_tooLong);
 		return false;
 	}else if(!re.test(value)){
-		$("#usernameHelp-Inline"+modal+" .field_error").removeClass("label label-warning label-success").addClass("label label-danger");
-		$("#usernameHelp-Inline"+modal+" .field_error").text(_u_inVaildChars);
+		$("#username_Help-Inline"+modal+" .field_error").removeClass("label label-warning label-success").addClass("label label-danger");
+		$("#username_Help-Inline"+modal+" .field_error").text(_u_inVaildChars);
 		return false;
 	}else{
 		return true;
@@ -115,11 +115,11 @@ function validateEmail(evt)
 	var re = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
 	var value = $(evt.target).val();
 	if(!re.test(value)){
-		$("#emailHelp-Inline"+modal+" .field_error").removeClass("label label-warning label-success").addClass("label label-danger");
-		$("#emailHelp-Inline"+modal+" .field_error").text(_e_invaild);
+		$("#email_Help-Inline"+modal+" .field_error").removeClass("label label-warning label-success").addClass("label label-danger");
+		$("#email_Help-Inline"+modal+" .field_error").text(_e_invaild);
 	}else{
-		$("#emailHelp-Inline"+modal+" .field_error").removeClass("label label-danger label-warning").addClass("label label-success");
-		$("#emailHelp-Inline"+modal+" .field_error").text(_e_vaild);
+		$("#email_Help-Inline"+modal+" .field_error").removeClass("label label-danger label-warning").addClass("label label-success");
+		$("#email_Help-Inline"+modal+" .field_error").text(_e_vaild);
 	}
 }
 
@@ -130,8 +130,8 @@ function validateEmail(evt)
 function validatePass(evt)
 {
 	var modal = $(this).attr("id").indexOf("modal") > 0 ? "_modal" : "";
-	var phife = $("#passwordHelp-Inline"+modal+" .field_error");
-	var cphife = $("#confirm_passwordHelp-Inline"+modal+" .field_error");
+	var phife = $("#password_Help-Inline"+modal+" .field_error");
+	var cphife = $("#confirm_password_Help-Inline"+modal+" .field_error");
 	var vpv = $("#sign_up_password"+modal).val();
 	var vcv = $("#sign_up_confirm_password"+modal).val();
 	

@@ -29,7 +29,6 @@ class Connect_openid extends CI_Controller {
 		{
 			$data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
 		}
-		//$data['account_details'] = $this->account_details_model->get_by_account_id($this->session->userdata('account_id'));
 
 		// Get OpenID store object
 		$store = new Auth_OpenID_FileStore($this->config->item("openid_file_store_path"));

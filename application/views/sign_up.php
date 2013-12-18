@@ -17,10 +17,10 @@
 		
 		<div class="well">
 			
-			<div id="usernameError" class="form-group <?php echo (form_error('sign_up_username') || isset($sign_up_username_error)) ? 'error' : ''; ?>">
+			<div id="username" class="form-group <?php echo (form_error('sign_up_username') || isset($sign_up_username_error)) ? 'error' : ''; ?>">
 				<label class="control-label col-lg-2" for="sign_up_username"><?php echo lang('sign_up_username'); ?></label>
 				
-				<div id="usernameControls" class="col-lg-10">
+				<div id="username_controls" class="col-lg-10">
 					<?php echo form_input(array('name' => 'sign_up_username', 'id' => 'sign_up_username', 'value' => set_value('sign_up_username'), 'maxlength' => '24', 'class' => 'form-control')); ?>
 					<?php if (form_error('sign_up_username') || isset($sign_up_username_error)) : ?>
 						<span class="help-inline">
@@ -32,11 +32,27 @@
 					<?php endif; ?>
 				</div>
 			</div>
+		
+			<div id="email" class="form-group <?php echo (form_error('sign_up_email') || isset($sign_up_email_error)) ? 'error' : ''; ?>">
+				<label class="control-label col-lg-2" for="sign_up_email"><?php echo lang('sign_up_email'); ?></label>
+				
+				<div id="email_controls" class="col-lg-10">
+					<?php echo form_input(array('name' => 'sign_up_email', 'id' => 'sign_up_email', 'value' => set_value('sign_up_email'), 'maxlength' => '160', 'class' => 'form-control')); ?>
+					<?php if (form_error('sign_up_email') || isset($sign_up_email_error)) : ?>
+						<span class="help-inline">
+						<?php echo form_error('sign_up_email'); ?>
+						<?php if (isset($sign_up_email_error)) : ?>
+							<span class="field_error"><?php echo $sign_up_email_error; ?></span>
+						<?php endif; ?>
+						</span>
+					<?php endif; ?>
+				</div>
+			</div>
 			
-			<div id="passwordError" class="form-group <?php echo (form_error('sign_up_password')) ? 'error' : ''; ?>">
+			<div id="password" class="form-group <?php echo (form_error('sign_up_password')) ? 'error' : ''; ?>">
 				<label class="control-label col-lg-2" for="sign_up_password"><?php echo lang('sign_up_password'); ?></label>
 				
-				<div id="passwordControls" class="col-lg-10">
+				<div id="password_controls" class="col-lg-10">
 					<?php echo form_password(array('name' => 'sign_up_password', 'id' => 'sign_up_password', 'value' => set_value('sign_up_password'), 'class' => 'form-control')); ?>
 					<?php if (form_error('sign_up_password')) : ?>
 						<span class="help-inline">
@@ -46,30 +62,14 @@
 				</div>
 			</div>
 			
-			<div id="confirm_passwordError" class="form-group <?php echo (form_error('sign_up_confirm_password')) ? 'error' : ''; ?>">
+			<div id="confirm_password" class="form-group <?php echo (form_error('sign_up_confirm_password')) ? 'error' : ''; ?>">
 				<label class="control-label col-lg-2" for="sign_up_confirm_password"><?php echo lang('sign_up_confirm_password'); ?></label>
 				
-				<div id="confirm_passwordControls" class="col-lg-10">
+				<div id="confirm_password_controls" class="col-lg-10">
 					<?php echo form_password(array('name' => 'sign_up_confirm_password', 'id' => 'sign_up_confirm_password', 'value' => set_value('sign_up_confirm_password'), 'class' => 'form-control')); ?>
 					<?php if (form_error('sign_up_confirm_password')) : ?>
 						<span class="help-inline">
 						<?php echo form_error('sign_up_confirm_password'); ?>
-						</span>
-					<?php endif; ?>
-				</div>
-			</div>
-			
-			<div id="emailError" class="form-group <?php echo (form_error('sign_up_email') || isset($sign_up_email_error)) ? 'error' : ''; ?>">
-				<label class="control-label col-lg-2" for="sign_up_email"><?php echo lang('sign_up_email'); ?></label>
-				
-				<div id="emailControls" class="col-lg-10">
-					<?php echo form_input(array('name' => 'sign_up_email', 'id' => 'sign_up_email', 'value' => set_value('sign_up_email'), 'maxlength' => '160', 'class' => 'form-control')); ?>
-					<?php if (form_error('sign_up_email') || isset($sign_up_email_error)) : ?>
-						<span class="help-inline">
-						<?php echo form_error('sign_up_email'); ?>
-						<?php if (isset($sign_up_email_error)) : ?>
-							<span class="field_error"><?php echo $sign_up_email_error; ?></span>
-						<?php endif; ?>
 						</span>
 					<?php endif; ?>
 				</div>
@@ -128,7 +128,7 @@
 		    var _u_noUsername = "'.lang('sign_up_js_validation_no_username').'";
 		    var _u_tooShort = "'.lang('sign_up_js_validation_short').'";
 		    var _u_inVaildChars = "'.lang('sign_up_js_validation_invalid_chars').'";
-		    var _u_alreadyExists = "'.lang('sign_up_js_validation_username_exists').'";
+		    var _u_alreadyExists = "'.lang('sign_up_username_taken').'";
 		    var _u_avail = "'.lang('sign_up_js_validation_username_available').'";
 		    
 		    var _e_invaild = "'.lang('sign_up_js_validation_email_invaild').'";
@@ -141,6 +141,8 @@
 		    var _cp_dot = "'.lang('sign_up_js_validation_password_confirm_dot').'";
 		    var _cp_noMatch = "'.lang('sign_up_js_validation_password_cofirm_nomatch').'";
 		    var _cp_match = "'.lang('sign_up_js_validation_password_cofirm_match').'";
+		    
+		    var _s_checking = "'.lang('sign_up_js_validation_checking').'";
 		    
 		    $(document).ready(function(){
 			    setUpMessages("");
