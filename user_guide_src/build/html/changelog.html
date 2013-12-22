@@ -28,7 +28,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x5e64de8>
+			<function <lambda> at 0x44edaa0>
 			</div>
 		</div>
 
@@ -227,6 +227,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Added an optional parameter that allows to disable escaping (useful for custom fields) for methods <tt class="docutils literal"><span class="pre">join()</span></tt>, <tt class="docutils literal"><span class="pre">order_by()</span></tt>, <tt class="docutils literal"><span class="pre">where_in()</span></tt>, <tt class="docutils literal"><span class="pre">or_where_in()</span></tt>, <tt class="docutils literal"><span class="pre">where_not_in()</span></tt>, <tt class="docutils literal"><span class="pre">or_where_not_in()</span></tt>, <tt class="docutils literal"><span class="pre">insert()</span></tt>, <tt class="docutils literal"><span class="pre">insert_batch()</span></tt>.</li>
 <li>Added support for <tt class="docutils literal"><span class="pre">join()</span></tt> with multiple conditions.</li>
 <li>Added support for <em>USING</em> in <tt class="docutils literal"><span class="pre">join()</span></tt>.</li>
+<li>Added support for <em>EXISTS</em> in <tt class="docutils literal"><span class="pre">where()</span></tt>.</li>
 <li>Added seed values support for random ordering with <tt class="docutils literal"><span class="pre">order_by(seed,</span> <span class="pre">'RANDOM')</span></tt>.</li>
 <li>Changed <tt class="docutils literal"><span class="pre">limit()</span></tt> to ignore NULL values instead of always casting to integer.</li>
 <li>Changed <tt class="docutils literal"><span class="pre">offset()</span></tt> to ignore empty values instead of always casting to integer.</li>
@@ -502,7 +503,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 </ul>
 </li>
 <li><a class="reference internal" href="libraries/language.html"><em>Language Library</em></a> changes include:<ul>
-<li>Changed method <tt class="docutils literal"><span class="pre">load()</span></tt> to filter the language name with <tt class="docutils literal"><span class="pre">ctype_digit()</span></tt>.</li>
+<li>Changed method <tt class="docutils literal"><span class="pre">load()</span></tt> to filter the language name with <tt class="docutils literal"><span class="pre">ctype_alpha()</span></tt>.</li>
 <li>Added an optional second parameter to method <tt class="docutils literal"><span class="pre">line()</span></tt> to disable error login for line keys that were not found.</li>
 <li>Language files are now loaded in a cascading style with the one in <strong>system/</strong> always loaded and overriden afterwards, if another one is found.</li>
 </ul>
