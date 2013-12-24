@@ -26,7 +26,9 @@
                 </p>
 
                 <p><a class="btn btn-primary btn-large pull-right" href="https://github.com/donjakobo/A3M"><i class="icon-wrench icon-white"></i> Fork it &raquo;
-                </a><br/></p>
+                </a>
+                <a class="btn btn-primary btn-large pull-right" href="http://stackoverflow.com/questions/tagged/codeigniter-a3m"><i class="icon-comment icon-white"></i> Have questions? &raquo;
+                </a></p>
             </div>
 
         </div>
