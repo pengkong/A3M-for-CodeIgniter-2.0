@@ -10,7 +10,7 @@
 		
 		<p>This is the homepage for your web-app. You can use this as a starting point for creating with A3M and building the rest of your site.
 		If you like this project, please help contribute with <b>bug fixes &amp; enhancements</b> on <a href="https://github.com/donjakobo/A3M">GitHub</a>.</p>
-		<p><a class="btn btn-primary btn-large pull-right" href="https://github.com/donjakobo/A3M"><i class="glyphicon glyphicon-wrench"></i> Fork it &raquo;</a></p>
+		<p><a class="btn btn-primary btn-large pull-right" href="https://github.com/donjakobo/A3M"><i class="glyphicon glyphicon-wrench"></i> Fork it &raquo;</a> <a class="btn btn-primary btn-large pull-right" href="http://stackoverflow.com/questions/tagged/codeigniter-a3m"><i class="glyphicon glyphicon-comment"></i> Have questions? &raquo;</a></p>
 	</div>
     </div>
 </div>
