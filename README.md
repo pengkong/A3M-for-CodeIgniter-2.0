@@ -22,10 +22,10 @@ login / logout / admin stuff thats always required.
 * Facebook/Twitter/Google/Yahoo/OpenID Sign Up, Sign In and Sign Out  
 * Manage Account Details, Profile Details and Linked Accounts  
 * reCAPTCHA Support, SSL Support, Language Files Support  
-* Gravatar support for picture selection (via account profile) **(NEW)**
-* Create a painless user experience for sign up and sign in  
-* Create code that is easily understood and re-purposed  
-* Utilize Twitter Bootstrap (a fantastic CSS / JS library)  
+* Gravatar support for picture selection (via account profile)
+* Create a painless user experience for sign up and sign in
+* Create code that is easily understood and re-purposed
+* Utilize Twitter Bootstrap 3 (a fantastic CSS / JS library)
 * Graceful degradation of JavaScript and CSS  
 * Proper usage of CodeIgniter's libraries, helpers and plugins  
 * Easily Configurable via config file  
@@ -40,7 +40,7 @@ login / logout / admin stuff thats always required.
 ## 3rd Party Libraries & Plugins
 
 * [recaptcha_pi.php](http://code.google.com/p/recaptcha/) - recaptcha-php-1.11
-* [facebook_pi.php](https://github.com/facebook/facebook-php-sdk/) - v.3.2.2 
+* [facebook_pi.php](https://github.com/facebook/facebook-php-sdk/) - v.3.2.3
 * [twitter_pi.php](https://github.com/jmathai/twitter-async) - Updated to latest release - [Jun 21, 2013](https://github.com/jmathai/twitter-async/commits/master)  
 * [phpass_pi.php](http://www.openwall.com/phpass/) - Version 0.3 / genuine _(latest)_ 
 * [openid_pi.php](http://sourcecookbook.com/en/recipes/60/janrain-s-php-openid-library-fixed-for-php-5-3-and-how-i-did-it) - php-openid-php5.3  
