@@ -1,5 +1,5 @@
-# A3M  
-### 
+A3M  
+=== 
 
 A3M (Account Authentication & Authorization) is a CodeIgniter 2.x and 3-dev package that leverages bleeding edge web technologies 
 like OpenID and OAuth to create a user-friendly user experience. It gives you the CRUD to get working right away 
@@ -10,10 +10,6 @@ login / logout / admin stuff thats always required.
 
 **Jakub** [@kubanishku](https://twitter.com/kubanishku/)  
 **PengKong** [@pengkong](https://github.com/pengkong)
-
-## CodeIgniter 3 upgrade author
-
-**AdwinTrave** [@Storyteller_cz](https://twitter.com/Storyteller_cz)
 
 ## Key Features & Design Goals
 
