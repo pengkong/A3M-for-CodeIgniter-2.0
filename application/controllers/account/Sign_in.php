@@ -72,13 +72,13 @@ class Sign_in extends CI_Controller {
 				}
 				else
 				{
-					if($sign_in_error = 'invalid')
+					if($sign_in_error == 'invalid')
 					{
 						//show login error
 						$data['sign_in_error'] = lang('sign_in_non_validated_email');
 						
 					}
-					elseif($sign_in_error = 'suspended')
+					elseif($sign_in_error == 'suspended')
 					{
 						//show login error
 						$data['sign_in_error'] = lang('sign_in_suspended_account');
@@ -88,22 +88,19 @@ class Sign_in extends CI_Controller {
 						//show login error
 						$data['sign_in_error'] = lang('sign_in_combination_incorrect');
 					}
-					
 				}
 			}
 		}
-
+		
 		// Load recaptcha code
 		if ($this->config->item("sign_in_recaptcha_enabled") === TRUE)
 			if ($this->config->item('sign_in_recaptcha_offset') <= $this->session->userdata('sign_in_failed_attempts'))
 				$data['recaptcha'] = $this->recaptcha->load($recaptcha_result, $this->config->item("ssl_enabled"));
-
+			
 		// Load sign in view
-		$this->load->view('sign_in', isset($data) ? $data : NULL);
+		$data['content'] = $this->load->view('sign_in', isset($data) ? $data : NULL, TRUE);
+		$this->load->view('template', $data);
 	}
-
 }
-
-
 /* End of file Sign_in.php */
 /* Location: ./application/controllers/account/Sign_in.php */

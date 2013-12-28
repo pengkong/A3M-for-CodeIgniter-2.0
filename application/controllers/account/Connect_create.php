@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * Connect_create Controller
  */
@@ -85,7 +85,8 @@ class Connect_create extends CI_Controller {
 			}
 		}
 
-		$this->load->view('account/connect_create', isset($data) ? $data : NULL);
+		$data['content'] = $this->load->view('account/connect_create', isset($data) ? $data : NULL, TRUE);
+		$this->load->view('template', $data);
 	}
 
 	/**

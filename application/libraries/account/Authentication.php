@@ -50,6 +50,8 @@ class Authentication {
 	function sign_in($username, $password, $remember = FALSE)
 	{
 		// Get user by username / email
+		$this->CI->load->model('account/Account_model');
+		
 		if ( ! $user = $this->CI->Account_model->get_by_username_email($username))
 		{
 			return FALSE;

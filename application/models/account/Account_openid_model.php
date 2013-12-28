@@ -40,10 +40,9 @@ class Account_openid_model extends CI_Model {
 	 */
 	function insert($openid, $account_id)
 	{
-		$this->load->helper('date');
-
 		if ( ! $this->get_by_openid($openid)) // ignore insert
 		{
+			$this->load->helper('date');
 			$this->db->insert('a3m_account_openid', array('openid' => $openid, 'account_id' => $account_id, 'linkedon' => mdate('%Y-%m-%d %H:%i:%s', now())));
 			return TRUE;
 		}

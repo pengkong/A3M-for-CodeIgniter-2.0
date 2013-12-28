@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * Manage_users Controller
  */
@@ -36,7 +36,7 @@ class Manage_users extends CI_Controller {
     // Redirect unauthorized users to account profile page
     if ( ! $this->authorization->is_permitted('retrieve_users'))
     {
-      redirect('account/account_profile');
+      redirect('account/profile');
     }
 
     // Retrieve sign in user
@@ -84,7 +84,8 @@ class Manage_users extends CI_Controller {
     }
 
     // Load manage users view
-    $this->load->view('admin/manage_users', $data);
+    $data['content'] = $this->load->view('admin/manage_users', $data, TRUE);
+    $this->load->view('template', $data);
   }
 
   /**
@@ -252,7 +253,8 @@ class Manage_users extends CI_Controller {
     }
 
     // Load manage users view
-    $this->load->view('admin/manage_users_save', $data);
+    $data['content'] = $this->load->view('admin/manage_users_save', $data, TRUE);
+    $this->load->view('template', $data);
   }
 
   /**

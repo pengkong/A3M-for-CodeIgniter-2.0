@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * Connect_openid Controller
  */
@@ -29,7 +29,6 @@ class Connect_openid extends CI_Controller {
 		{
 			$data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
 		}
-		//$data['account_details'] = $this->account_details_model->get_by_account_id($this->session->userdata('account_id'));
 
 		// Get OpenID store object
 		$store = new Auth_OpenID_FileStore($this->config->item("openid_file_store_path"));
@@ -52,10 +51,10 @@ class Connect_openid extends CI_Controller {
 					if ( ! $this->authentication->is_signed_in())
 					{
 						// Run sign in routine
-						$this->authentication->sign_in($user->account_id);
+						$this->authentication->sign_in_by_id($user->account_id);
 					}
 					$user->account_id === $this->session->userdata('account_id') ? $this->session->set_flashdata('linked_error', sprintf(lang('linked_linked_with_this_account'), lang('connect_openid'))) : $this->session->set_flashdata('linked_error', sprintf(lang('linked_linked_with_another_account'), lang('connect_openid')));
-					redirect('account/account_linked');
+					redirect('account/linked_accounts');
 				}
 				// The user has not connect openid to a3m
 				else
@@ -91,7 +90,7 @@ class Connect_openid extends CI_Controller {
 						// Connect openid to a3m
 						$this->Account_openid_model->insert($response->getDisplayIdentifier(), $this->session->userdata('account_id'));
 						$this->session->set_flashdata('linked_info', sprintf(lang('linked_linked_with_your_account'), lang('connect_openid')));
-						redirect('account/account_linked');
+						redirect('account/linked_accounts');
 					}
 				}
 			}
@@ -132,7 +131,8 @@ class Connect_openid extends CI_Controller {
 			}
 		}
 
-		$this->load->view('account/connect_openid', isset($data) ? $data : NULL);
+		$data['content'] = $this->load->view('account/connect_openid', isset($data) ? $data : NULL, TRUE);
+		$this->load->view('template', $data);
 	}
 
 }

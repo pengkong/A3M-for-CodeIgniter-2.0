@@ -29,7 +29,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x216dcf8>
+			<function <lambda> at 0x32a5500>
 			</div>
 		</div>
 
@@ -139,11 +139,11 @@ application/config/config.php file and setting this:</p>
 </div>
 <p>If you use the <a class="reference internal" href="../helpers/form_helper.html"><em>form helper</em></a>, then
 <tt class="docutils literal"><span class="pre">form_open()</span></tt> will automatically insert a hidden csrf field in
-your forms. If not, then you can use <tt class="docutils literal"><span class="pre">csrf_get_token_name()</span></tt>
-and <tt class="docutils literal"><span class="pre">csrf_get_hash()</span></tt></p>
+your forms. If not, then you can use <tt class="docutils literal"><span class="pre">get_csrf_token_name()</span></tt>
+and <tt class="docutils literal"><span class="pre">get_csrf_hash()</span></tt></p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$csrf</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
-        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">security</span><span class="o">-&gt;</span><span class="na">csrf_get_token_name</span><span class="p">(),</span>
-        <span class="s1">&#39;hash&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">security</span><span class="o">-&gt;</span><span class="na">csrf_get_hash</span><span class="p">()</span>
+        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">security</span><span class="o">-&gt;</span><span class="na">get_csrf_token_name</span><span class="p">(),</span>
+        <span class="s1">&#39;hash&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">security</span><span class="o">-&gt;</span><span class="na">get_csrf_hash</span><span class="p">()</span>
 <span class="p">);</span>
 
 <span class="o">...</span>

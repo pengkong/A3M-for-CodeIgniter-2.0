@@ -83,7 +83,5 @@ $config['account_email_validate']           = TRUE;
 $config['account_email_validation_required']= TRUE;
 $config['account_email_confirm_sender']     = 'no-reply@a3m.net';
 
-
-
 /* End of file account.php */
 /* Location: ./application/account/config/account.php */

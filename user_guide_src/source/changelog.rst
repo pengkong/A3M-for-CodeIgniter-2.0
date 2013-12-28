@@ -165,6 +165,7 @@ Release Date: Not Released
       - Added an optional parameter that allows to disable escaping (useful for custom fields) for methods ``join()``, ``order_by()``, ``where_in()``, ``or_where_in()``, ``where_not_in()``, ``or_where_not_in()``, ``insert()``, ``insert_batch()``.
       - Added support for ``join()`` with multiple conditions.
       - Added support for *USING* in ``join()``.
+      - Added support for *EXISTS* in ``where()``.
       - Added seed values support for random ordering with ``order_by(seed, 'RANDOM')``.
       - Changed ``limit()`` to ignore NULL values instead of always casting to integer.
       - Changed ``offset()`` to ignore empty values instead of always casting to integer.
@@ -439,7 +440,7 @@ Release Date: Not Released
 
    -  :doc:`Language Library <libraries/language>` changes include:
 
-      -  Changed method ``load()`` to filter the language name with ``ctype_digit()``.
+      -  Changed method ``load()`` to filter the language name with ``ctype_alpha()``.
       -  Added an optional second parameter to method ``line()`` to disable error login for line keys that were not found.
       -  Language files are now loaded in a cascading style with the one in **system/** always loaded and overriden afterwards, if another one is found.
 
@@ -628,6 +629,7 @@ Bug fixes for 3.0
 -  Fixed a bug (#2691) - nested transactions could end in a deadlock when an error is encountered with *db_debug* set to TRUE.
 -  Fixed a bug (#2515) - ``_exception_handler()`` used to send the 200 "OK" HTTP status code and didn't stop script exection even on fatal errors.
 -  Fixed a bug - Redis :doc:`Caching <libraries/caching>` driver didn't handle connection failures properly.
+-  Fixed a bug (#2756) - :doc:`Database Class <database/index>` executed the MySQL-specific `SET SESSION sql_mode` query for all drivers when the 'stricton' option is set.
 
 Version 2.1.4
 =============

@@ -40,10 +40,9 @@ class Account_facebook_model extends CI_Model {
 	 */
 	function insert($account_id, $facebook_id)
 	{
-		$this->load->helper('date');
-
 		if ( ! $this->get_by_facebook_id($facebook_id)) // ignore insert
 		{
+			$this->load->helper('date');
 			$this->db->insert('a3m_account_facebook', array('account_id' => $account_id, 'facebook_id' => $facebook_id, 'linkedon' => mdate('%Y-%m-%d %H:%i:%s', now())));
 			return TRUE;
 		}
