@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * Connect_facebook Controller
  */
@@ -34,11 +34,11 @@ class Connect_facebook extends CI_Controller {
 				if ( ! $this->authentication->is_signed_in())
 				{
 					// Run sign in routine
-					$this->authentication->sign_in($user->account_id);
+					$this->authentication->sign_in_by_id($user->account_id);
 				}
 
 				$user->account_id === $this->session->userdata('account_id') ? $this->session->set_flashdata('linked_error', sprintf(lang('linked_linked_with_this_account'), lang('connect_facebook'))) : $this->session->set_flashdata('linked_error', sprintf(lang('linked_linked_with_another_account'), lang('connect_facebook')));
-				redirect('account/account_linked');
+				redirect('account/linked_accounts');
 			}
 			// The user has not connect facebook to a3m
 			else
@@ -64,13 +64,14 @@ class Connect_facebook extends CI_Controller {
 					// Connect facebook to a3m
 					$this->Account_facebook_model->insert($this->session->userdata('account_id'), $this->facebook_lib->user['id']);
 					$this->session->set_flashdata('linked_info', sprintf(lang('linked_linked_with_your_account'), lang('connect_facebook')));
-					redirect('account/account_linked');
+					redirect('account/linked_accounts');
 				}
 			}
 		}
 
 		// Load facebook redirect view
-		$this->load->view("account/redirect_fb");
+		$data['content'] = $this->load->view("account/redirect_fb", '', TRUE);
+		$this->load->view('template', $data);
 	}
 
 }

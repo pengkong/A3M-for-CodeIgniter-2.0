@@ -1,8 +1,8 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * Account_settings Controller
  */
-class Account_settings extends CI_Controller {
+class Settings extends CI_Controller {
 
 	/**
 	 * Constructor
@@ -30,12 +30,12 @@ class Account_settings extends CI_Controller {
 		// Redirect unauthenticated users to signin page
 		if ( ! $this->authentication->is_signed_in())
 		{
-			redirect('account/sign_in/?continue='.urlencode(base_url().'account/account_settings'));
+			redirect('account/sign_in/?continue='.urlencode(base_url().'account/settings'));
 		}
 
 		// Retrieve sign in user
 		$data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
-		$data['account_details'] = $this->account_details_model->get_by_account_id($this->session->userdata('account_id'));
+		$data['account_details'] = $this->Account_details_model->get_by_account_id($this->session->userdata('account_id'));
 
 		// Retrieve countries, languages and timezones
 		$data['countries'] = $this->Ref_country_model->get_all();
@@ -91,7 +91,8 @@ class Account_settings extends CI_Controller {
 			}
 		}
 
-		$this->load->view('account/account_settings', $data);
+		$data['content'] = $this->load->view('account/account_settings', $data, TRUE);
+		$this->load->view('template', $data);
 	}
 
 	/**
@@ -109,5 +110,5 @@ class Account_settings extends CI_Controller {
 }
 
 
-/* End of file Account_settings.php */
-/* Location: ./application/controllers/account/Account_settings.php */
+/* End of file Settings.php */
+/* Location: ./application/controllers/account/Settings.php */

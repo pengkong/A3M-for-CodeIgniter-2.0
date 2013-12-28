@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * Manage_roles Controller
  */
@@ -36,7 +36,7 @@ class Manage_roles extends CI_Controller {
     // Redirect unauthorized users to account profile page
     if ( ! $this->authorization->is_permitted('retrieve_roles'))
     {
-      redirect('account/account_profile');
+      redirect('account/profile');
     }
 
     // Retrieve sign in user
@@ -81,7 +81,8 @@ class Manage_roles extends CI_Controller {
 
 
     // Load manage roles view
-    $this->load->view('admin/manage_roles', $data);
+    $data['content'] = $this->load->view('admin/manage_roles', $data, true);
+    $this->load->view('template', $data);
   }
 
 
@@ -105,7 +106,7 @@ class Manage_roles extends CI_Controller {
     // Redirect unauthorized users to account profile page
     if ( ! $this->authorization->is_permitted('retrieve_roles'))
     {
-      redirect('account/account_profile');
+      redirect('account/profile');
     }
 
     // Set action type (create or update role)
@@ -196,7 +197,8 @@ class Manage_roles extends CI_Controller {
     }
 
     // Load manage roles view
-    $this->load->view('admin/manage_roles_save', $data);
+    $data['content'] = $this->load->view('admin/manage_roles_save', $data, TRUE);
+    $this->load->view('template', $data);
   }
 
   /**

@@ -1,0 +1,1 @@
+<p><?php echo lang('sign_up_validation_send'); ?></p>

@@ -1,8 +1,8 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * Account_profile Controller
  */
-class Account_profile extends CI_Controller {
+class Profile extends CI_Controller {
 
 	/**
 	 * Constructor
@@ -14,7 +14,7 @@ class Account_profile extends CI_Controller {
 		// Load the necessary stuff...
 		$this->load->config('account/account');
 		$this->load->helper(array('language', 'account/ssl', 'url', 'photo'));
-		$this->load->library(array('account/authentication', 'account/authorization', 'form_validation', 'gravatar'));
+		$this->load->library(array('account/authentication', 'account/authorization', 'form_validation', 'account/gravatar'));
 		$this->load->model(array('account/Account_model', 'account/Account_details_model'));
 		$this->load->language(array('general', 'account/account_profile'));
 	}
@@ -30,7 +30,7 @@ class Account_profile extends CI_Controller {
 		// Redirect unauthenticated users to signin page
 		if ( ! $this->authentication->is_signed_in())
 		{
-			redirect('account/sign_in/?continue='.urlencode(base_url().'account/account_profile'));
+			redirect('account/sign_in/?continue='.urlencode(base_url().'account/profile'));
 		}
 
 		// Retrieve sign in user
@@ -133,7 +133,8 @@ class Account_profile extends CI_Controller {
 			if ( ! isset($error)) $data['profile_info'] = lang('profile_updated');
 		}
 
-		$this->load->view('account/account_profile', $data);
+		$data['content'] = $this->load->view('account/account_profile', $data, TRUE);
+		$this->load->view('template', $data);
 	}
 
 	/**
@@ -147,9 +148,20 @@ class Account_profile extends CI_Controller {
 	{
 		return $this->Account_model->get_by_username($username) ? TRUE : FALSE;
 	}
-
+	
+	/**
+	* Public function for ajax calls for username checks
+	*
+	* @access public
+	* @param string
+	* @return boolean
+	*/
+	function username_exists($username)
+	{
+		echo $this->username_check($username);
+	}
 }
 
 
-/* End of file Account_profile.php */
-/* Location: ./application/controllers/account/Account_profile.php */
+/* End of file Profile.php */
+/* Location: ./application/controllers/account/Profile.php */

@@ -1,8 +1,8 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
- * Authenticate Controller
+ * Validate Controller
  */
-class Authenticate extends CI_Controller {
+class Validate extends CI_Controller {
     function __construct()
     {
 	parent::__construct();
@@ -16,7 +16,7 @@ class Authenticate extends CI_Controller {
     }
     
     /**
-     * Authenticate
+     * Validates account e-mail
      */
     function Index()
     {
@@ -41,12 +41,15 @@ class Authenticate extends CI_Controller {
             $this->Account_model->verify($account->id);
             
             //load the confirmation page
-            $this->load->view('account/account_authentication', isset($data) ? $data : NULL);
+            $data['content'] = $this->load->view('account/account_validation', isset($data) ? $data : NULL, TRUE);
+	    $this->load->view('template', $data);
         }
         else
         {
-	    echo "FALSE";
-            //redirect('');
+            redirect('');
         }
     }
 }
+
+/* End of file Validate.php */
+/* Location: ./application/controllers/account/Validate.php */

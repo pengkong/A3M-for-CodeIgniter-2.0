@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
  * Forgot_password Controller
  */
@@ -98,7 +98,8 @@ class Forgot_password extends CI_Controller {
 					if($this->email->send())
 					{
 						// Load reset password sent view
-						$this->load->view('account/reset_password_sent', isset($data) ? $data : NULL);
+						$data['content'] = $this->load->view('account/reset_password_sent', isset($data) ? $data : NULL, TRUE);
+						$this->load->view('template', $data);
 					}
 					else
 					{
@@ -118,7 +119,8 @@ class Forgot_password extends CI_Controller {
 				$data['recaptcha'] = $this->recaptcha->load($recaptcha_result, $this->config->item("ssl_enabled"));
 
 		// Load forgot password view
-		$this->load->view('account/forgot_password', isset($data) ? $data : NULL);
+		$data['content'] = $this->load->view('account/forgot_password', isset($data) ? $data : NULL, TRUE);
+		$this->load->view('template', $data);
 	}
 
 	public function check_username_or_email($str)

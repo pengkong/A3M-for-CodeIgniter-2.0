@@ -42,10 +42,9 @@ class Account_twitter_model extends CI_Model {
 	 */
 	function insert($account_id, $twitter_id, $oauth_token, $oauth_token_secret)
 	{
-		$this->load->helper('date');
-
 		if ( ! $this->get_by_twitter_id($twitter_id)) // ignore insert
 		{
+			$this->load->helper('date');
 			$this->db->insert('a3m_account_twitter', array('account_id' => $account_id, 'twitter_id' => $twitter_id, 'oauth_token' => $oauth_token, 'oauth_token_secret' => $oauth_token_secret, 'linkedon' => mdate('%Y-%m-%d %H:%i:%s', now())));
 			return TRUE;
 		}
