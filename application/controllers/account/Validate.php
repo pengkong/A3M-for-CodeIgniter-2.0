@@ -1,8 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
- * Authenticate Controller
+ * Validate Controller
  */
-class Authenticate extends CI_Controller {
+class Validate extends CI_Controller {
     function __construct()
     {
 	parent::__construct();
@@ -16,7 +16,7 @@ class Authenticate extends CI_Controller {
     }
     
     /**
-     * Authenticate
+     * Validates account e-mail
      */
     function Index()
     {
