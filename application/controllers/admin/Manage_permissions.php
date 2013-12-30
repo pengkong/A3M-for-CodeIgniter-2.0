@@ -125,6 +125,7 @@ class Manage_permissions extends CI_Controller {
       $data['role_permissions'] = $this->Rel_role_permission_model->get_by_permission_id($id);
       $data['action'] = 'update';
       $data['is_system'] = ($data['permission']->is_system == 1);
+      $data['is_disabled'] = isset( $data['permission']->suspendedon );
     }
 
     // Setup form validation

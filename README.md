@@ -10,7 +10,7 @@ login / logout / admin stuff thats always required.
 
 **Jakub** [@kubanishku](https://twitter.com/kubanishku/)  
 **PengKong** [@pengkong](https://github.com/pengkong)
-
+		
 ## Key Features & Design Goals
 
 * Native Sign Up, Sign In with 'Remember me' and Sign Out  
