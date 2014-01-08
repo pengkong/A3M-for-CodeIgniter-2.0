@@ -50,6 +50,13 @@ $config['openid_yahoo_discovery_endpoint'] = 'http://www.yahoo.com/';
 /*
 |--------------------------------------------------------------------------
 | Third Party Auth
+| Available services:
+| facebook
+| twitter
+| google
+| yahoo
+| openid
+| linkedin
 |--------------------------------------------------------------------------
 */
 $config['third_party_auth_providers'] = array('facebook', 'twitter', 'google', 'yahoo', 'openid');

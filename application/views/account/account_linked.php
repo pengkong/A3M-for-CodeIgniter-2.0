@@ -56,8 +56,6 @@
 
 	<?php if ($twitter_links) : ?>
 		<?php foreach ($twitter_links as $twitter_link) : ?>
-
-
 	    <div class="clearfix">
 		<div class="col-lg-1">
 		    <img src="<?php echo base_url(RES_DIR);?>/img/auth_icons/twitter.png" alt="<?php echo lang('connect_twitter'); ?>" title="<?php echo lang('connect_twitter'); ?>"
@@ -80,9 +78,35 @@
 	    </div>
 		<?php endforeach; ?>
 	<?php endif; ?>
+	
+	<?php if ($linkedin_links) : ?>
+		<?php foreach ($linkedin_links as $linkedin_link) : ?>
+	    <div class="clearfix">
+		<div class="col-lg-1">
+		    <img src="<?php echo base_url(RES_DIR);?>/img/auth_icons/linkedin.png" alt="<?php echo lang('connect_linkedin'); ?>" title="<?php echo lang('connect_linkedin'); ?>"
+			 width="40"/>
+		</div>
+		<div class="col-lg-9">
+			<strong><?php echo lang('connect_linkedin'); ?></strong><br/>
+			<?php echo anchor('http://www.linkedin.com/profile/view?id='.$linkedin_link->linkedin_id, substr('http://www.linkedin.com/profile/view?id='.$linkedin_link->linkedin_id, 0, 30).(strlen('http://www.linkedin.com/profile/view?id='.$linkedin_link->linkedin_id) > 30 ? '...' : ''), array('target' => '_blank', 'title' => 'http://www.linkedin.com/profile/view?id='.$linkedin_link->linkedin_id)); ?>
+</div>
+<div class="col-lg-2">
+			<?php if ($num_of_linked_accounts >= 1 && isset($account->password)) : ?>
+			<?php echo form_open(uri_string()); ?>
+			<?php echo form_fieldset(); ?>
+			<?php echo form_hidden('linkedin_id', $linkedin_link->linkedin_id); ?>
+			<?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-default', 'content' => '<i class="glyphicon glyphicon-trash"></i> '.lang('linked_remove'))); ?>
+			<?php echo form_fieldset_close(); ?>
+			<?php echo form_close(); ?>
+			<?php endif; ?>
+		</div>
+	    </div>
+		<?php endforeach; ?>
+	<?php endif; ?>
+	
 
-		<?php if ($openid_links) : ?>
-			<?php foreach ($openid_links as $openid_link) : ?>
+	<?php if ($openid_links) : ?>
+		<?php foreach ($openid_links as $openid_link) : ?>
 
 	    <div class="clearfix">
 		<div class="col-lg-1">
