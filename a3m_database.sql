@@ -84,6 +84,21 @@ CREATE TABLE IF NOT EXISTS `a3m_account_twitter` (
   KEY `twitter_id` (`twitter_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `a3m_account_linkedin`
+--
+
+CREATE TABLE IF NOT EXISTS `a3m_account_linkedin` (
+  `account_id` bigint(20) NOT NULL,
+  `linkedin_id` varchar(20) NOT NULL,
+  `oauth_token` varchar(80) NOT NULL,
+  `linkedon` datetime NOT NULL,
+  PRIMARY KEY (`account_id`),
+  KEY `linkedin_id` (`linkedin_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 
 -- --------------------------------------------------------
 

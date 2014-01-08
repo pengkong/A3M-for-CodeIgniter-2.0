@@ -29,7 +29,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x44ed848>
+			<function <lambda> at 0x37a8938>
 			</div>
 		</div>
 
@@ -1131,6 +1131,13 @@ run the query:</p>
 <span class="c1">// Would execute and return an array of results of the following query:</span>
 <span class="c1">// SELECT field1, field1 from mytable where field3 = 5;</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Double calls to <tt class="docutils literal"><span class="pre">get_compiled_select()</span></tt> while you&#8217;re using the
+Query Builder Caching functionality and NOT resetting your queries
+will results in the cache being merged twice. That in turn will
+i.e. if you&#8217;re caching a <tt class="docutils literal"><span class="pre">select()</span></tt> - select the same field twice.</p>
 </div>
 </div>
 </div>

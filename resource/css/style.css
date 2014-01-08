@@ -31,6 +31,7 @@ li.twitter { background: url(../img/auth_icons/twitter.png) no-repeat; border-ra
 li.facebook { background: url(../img/auth_icons/facebook.png) no-repeat }
 li.myspace { background: url(../img/auth_icons/myspace.png) no-repeat }
 li.openid { background: url(../img/auth_icons/openid.png) no-repeat; border: solid 1px #fff; border-radius: 5px; }
+li.linkedin { background: url(../img/auth_icons/linkedin.png) no-repeat;}
 input.openid {
     background: #fff url(../img/auth_icons/openid-icon.png) no-repeat left center;
     border: 1px solid #999;

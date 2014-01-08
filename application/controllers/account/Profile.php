@@ -51,7 +51,7 @@ class Profile extends CI_Controller {
 			}
 			
 			$this->Account_details_model->update($data['account']->id, array('picture' => NULL));
-			redirect('account/account_profile');
+			redirect('account/profile');
 		}
 
 		// Setup form validation

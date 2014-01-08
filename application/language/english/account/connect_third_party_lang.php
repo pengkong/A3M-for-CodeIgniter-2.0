@@ -12,6 +12,7 @@ $lang['connect_openid'] = 'OpenID';
 $lang['connect_facebook'] = 'Facebook';
 $lang['connect_myspace'] = 'MySpace';
 $lang['connect_twitter'] = 'Twitter';
+$lang['connect_linkedin'] = 'LinkedIn';
 
 $lang['connect_with_x'] = 'Connect with %s';
 $lang['connect_click_button'] = 'To proceed, click the following button.';

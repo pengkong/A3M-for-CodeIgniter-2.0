@@ -35,10 +35,10 @@ class Account_twitter_model extends CI_Model {
 	 *
 	 * @access public
 	 * @param int    $account_id
-	 * @param int    $twitter_id
+	 * @param string $twitter_id
 	 * @param string $oauth_token
 	 * @param string $oauth_token_secret
-	 * @return void
+	 * @return boolean
 	 */
 	function insert($account_id, $twitter_id, $oauth_token, $oauth_token_secret)
 	{

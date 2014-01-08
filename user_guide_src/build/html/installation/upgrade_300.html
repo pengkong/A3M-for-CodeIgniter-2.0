@@ -29,7 +29,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x4a78aa0>
+			<function <lambda> at 0x43356e0>
 			</div>
 		</div>
 
@@ -537,6 +537,22 @@ CodeIgniter 3.1+.</p>
 <p class="last">This method is still available, but you&#8217;re strongly encouraged to remove its usage
 sooner rather than later.</p>
 </div>
+</div>
+</div>
+<div class="section" id="step-17-check-your-usage-of-text-helper-highlight-phrase">
+<h2>Step 17: Check your usage of Text helper highlight_phrase()<a class="headerlink" href="#step-17-check-your-usage-of-text-helper-highlight-phrase" title="Permalink to this headline">¶</a></h2>
+<p>The default HTML tag used by <a class="reference internal" href="../helpers/text_helper.html"><em>Text Helper</em></a> function
+<tt class="xref py py-func docutils literal"><span class="pre">highlight_phrase()</span></tt> has been changed from <tt class="docutils literal"><span class="pre">&lt;strong&gt;</span></tt> to the new HTML5
+tag <tt class="docutils literal"><span class="pre">&lt;mark&gt;</span></tt>.</p>
+<p>Unless you&#8217;ve used your own highlighting tags, this might cause trouble
+for your visitors who use older web browsers such as Internet Explorer 8.
+We therefore suggest that you add the following code to your CSS files
+in order to avoid backwards compatibility with old browsers:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nx">mark</span> <span class="p">{</span>
+        <span class="nx">background</span><span class="o">:</span> <span class="c1">#ff0;</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="c1">#000;</span>
+<span class="p">};</span>
+</pre></div>
 </div>
 </div>
 </div>

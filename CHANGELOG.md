@@ -1,4 +1,5 @@
 ## v2.0.0
+* New feature: #27 Added Linkedin connect. Turned off by default.
 * New feature: #30 Verify e-mail upon sign-up (can be now enabled in config).
 * New feature: Default user group can be set in config.
 * New feature: Added jQuery validation to sign up page.

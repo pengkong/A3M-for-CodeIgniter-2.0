@@ -56,7 +56,7 @@ class MY_Session_cookie extends CI_Session_cookie {
 		}
 
 		// Serialize the userdata for the cookie
-		$cookie_data = $this->_serialize($cookie_data);
+		$cookie_data = serialize($cookie_data);
 
 		if ($this->sess_encrypt_cookie === TRUE)
 		{

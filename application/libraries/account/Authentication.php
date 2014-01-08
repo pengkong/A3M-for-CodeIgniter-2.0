@@ -140,7 +140,7 @@ class Authentication {
 	 * Check password validity
 	 *
 	 * @access private
-	 * @param object $account
+	 * @param string $password_hash
 	 * @param string $password
 	 * @return bool
 	 */
