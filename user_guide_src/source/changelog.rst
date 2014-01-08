@@ -130,9 +130,10 @@ Release Date: Not Released
       - Added *colors* configuration to allow customization for the *background*, *border*, *text* and *grid* colors.
       - Added *filename* to the returned array elements.
 
-   -  :doc:`Directory Helper <helpers/directory_helper>` :php:func:`directory_map()` will now append ``DIRECTORY_SEPARATOR`` to directory names in the returned array.
-   -  :doc:`Array Helper <helpers/array_helper>` :php:func:`element()` and :php:func:`elements()` now return NULL instead of FALSE when the required elements don't exist.
-   -  :doc:`Language Helper <helpers/language_helper>` :php:func:`lang()` now accepts an optional list of additional HTML attributes.
+   -  :doc:`Directory Helper <helpers/directory_helper>` :func:`directory_map()` will now append ``DIRECTORY_SEPARATOR`` to directory names in the returned array.
+   -  :doc:`Array Helper <helpers/array_helper>` :func:`element()` and :php:func:`elements()` now return NULL instead of FALSE when the required elements don't exist.
+   -  :doc:`Language Helper <helpers/language_helper>` :func:`lang()` now accepts an optional list of additional HTML attributes.
+   -  Changed the default tag for use in :doc:`Text Helper <helpers/text_helper>` :func:`highlight_phrase()` to ``<mark>`` (formerly ``<strong>``).
    -  Deprecated the :doc:`Email Helper <helpers/email_helper>` as its ``valid_email()``, ``send_email()`` functions are now only aliases for PHP native functions ``filter_var()`` and ``mail()`` respectively.
 
 -  Database
@@ -342,7 +343,6 @@ Release Date: Not Released
       -  Deprecated usage of the "anchor_class" setting (use the new "attributes" setting instead).
       -  Added $config['reuse_query_string'] to allow automatic repopulation of query string arguments, combined with normal URI segments.
       -  Removed the default ``&nbsp;`` from a number of the configuration variables.
-      -  Added the ability to use a proxy with the :doc:`XML-RPC Library <libraries/xmlrpc>`.
 
    -  :doc:`Encryption Library <libraries/encryption>` changes include:
 
@@ -354,15 +354,21 @@ Release Date: Not Released
       -  Database object names are now being displayed.
       -  The sum of all queries running times in seconds is now being displayed.
       -  Added support for displaying the HTTP DNT ("Do Not Track") header.
-      -  Added support for displaying $_FILES.
+      -  Added support for displaying ``$_FILES``.
 
    -  :doc:`Migration Library <libraries/migration>` changes include:
 
       -  Added support for timestamp-based migrations (enabled by default).
       -  Added ``$config['migration_type']`` to allow switching between *sequential* and *timestamp* migrations.
 
+   -  :doc:`XML-RPC Library <libraries/xmlrpc>` changes include:
+
+      -  Added the ability to use a proxy.
+      -  Added Basic HTTP authentication support.
+
    -  :doc:`User Agent Library <libraries/user_agent>` will now check if robots are pretending to be mobile clients (helps with e.g. Google indexing mobile website versions).
    -  Added support for setting :doc:`Table <libraries/table>` class defaults in a config file.
+   -  :doc:`Zip Library <libraries/zip>` method ``read_file()`` can now also alter the original file path/name while adding files to an archive.
 
 -  Core
 
@@ -377,6 +383,7 @@ Release Date: Not Released
 
    -  :doc:`Loader Library <libraries/loader>` changes include:
 
+      -  Added method chaining support.
       -  Added method ``get_vars()`` to the Loader to retrieve all variables loaded with ``$this->load->vars()``.
       -  ``_ci_autoloader()`` is now a protected method.
       -  Added autoloading of drivers with ``$autoload['drivers']``.
@@ -630,6 +637,11 @@ Bug fixes for 3.0
 -  Fixed a bug (#2515) - ``_exception_handler()`` used to send the 200 "OK" HTTP status code and didn't stop script exection even on fatal errors.
 -  Fixed a bug - Redis :doc:`Caching <libraries/caching>` driver didn't handle connection failures properly.
 -  Fixed a bug (#2756) - :doc:`Database Class <database/index>` executed the MySQL-specific `SET SESSION sql_mode` query for all drivers when the 'stricton' option is set.
+-  Fixed a bug (#2579) - :doc:`Query Builder <database/query_builder>`s "no escape" functionality didn't work properly with query cache.
+-  Fixed a bug (#2237) - :doc:`Parser Library <libraries/parser>` failed if the same tag pair is used more than once within a template.
+-  Fixed a bug (#2268) - :doc:`Security Library <libraries/security>` didn't properly match JavaScript events.
+-  Fixed a bug (#2143) - :doc:`Form Validation Library <libraries/form_validation>` didn't check for rule groups named in a *controller/method* manner when trying to load from a config file.
+-  Fixed a bug (#2762) - :doc:`Hooks Class <general/hooks>` didn't properly check if the called class/function exists.
 
 Version 2.1.4
 =============
