@@ -49,7 +49,7 @@ class Password extends CI_Controller {
 			// Change user's password
 			$this->Account_model->update_password($data['account']->id, $this->input->post('password_new_password', TRUE));
 			$this->session->set_flashdata('password_info', lang('password_password_has_been_changed'));
-			redirect('account/account_password');
+			redirect('account/password');
 		}
 
 		$data['content'] = $this->load->view('account/account_password', $data, TRUE);

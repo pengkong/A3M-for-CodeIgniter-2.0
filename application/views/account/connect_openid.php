@@ -22,7 +22,7 @@
     <?php endif; ?>
 
     <div class="col-lg-4">
-		    <?php echo form_input(array('name' => 'connect_openid_url', 'id' => 'connect_openid_url', 'class' => 'openid', 'value' => set_value('connect_openid_url'))); ?>
+		    <?php echo form_input(array('name' => 'connect_openid_url', 'id' => 'connect_openid_url', 'class' => 'openid form-control', 'value' => set_value('connect_openid_url'))); ?>
 		    <?php echo "<br />".'<span class="field_error">'.form_error('connect_openid_url')."</span>"; ?>
     </div>
 

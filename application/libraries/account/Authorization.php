@@ -21,6 +21,8 @@ class Authorization {
     {
       $this->CI->load->driver('session');
     }
+    
+    log_message('debug', 'Authorization Class Initalized');
   }
 
   /**

@@ -63,7 +63,7 @@ class Reset_password extends CI_Controller {
 					$this->Account_model->remove_reset_sent_datetime($account->id);
 
 					// Upon sign in, redirect to change password page
-					$this->session->set_userdata('sign_in_redirect', 'account/account_password');
+					$this->session->set_userdata('sign_in_redirect', 'account/password');
 
 					// Run sign in routine
 					$this->authentication->sign_in_by_id($account->id);

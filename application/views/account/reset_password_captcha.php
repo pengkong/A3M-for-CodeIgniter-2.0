@@ -5,21 +5,21 @@
 
 	<p><?php echo lang('reset_password_captcha'); ?></p>
     </div>
-    <div class="clear"></div>
+    <div class="clearfix"></div>
 		<?php if (isset($recaptcha)) : ?>
     <div class="col-lg-6">
 			<?php echo $recaptcha; ?>
     </div>
-    <div class="clear"></div>
+    <div class="clearfix"></div>
 		<?php if (isset($reset_password_recaptcha_error)) : ?>
 	<div class="col-lg-6">
 	    <span class="field_error"><?php echo $reset_password_recaptcha_error; ?></span>
 	</div>
-	<div class="clear"></div>
+	<div class="clearfix"></div>
 			<?php endif; ?>
 		<?php endif; ?>
     <div class="col-lg-6">
-			<?php echo form_button(array('type' => 'submit', 'class' => 'btn', 'content' => lang('reset_password_captcha_submit'))); ?>
+			<?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-primary', 'content' => lang('reset_password_captcha_submit'))); ?>
     </div>
 <?php echo form_fieldset_close(); ?>
 <?php echo form_close(); ?>

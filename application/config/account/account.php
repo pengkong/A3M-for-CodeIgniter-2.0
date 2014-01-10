@@ -59,8 +59,68 @@ $config['openid_yahoo_discovery_endpoint'] = 'http://www.yahoo.com/';
 | linkedin
 |--------------------------------------------------------------------------
 */
-$config['third_party_auth_providers'] = array('facebook', 'twitter', 'google', 'yahoo', 'openid');
 $config['openid_what_is_url'] = 'http://openidexplained.com/';
+$config['third_party_auth'] = array(
+// set on "base_url" the relative url that point to HybridAuth Endpoint
+'base_url' => '/account/connect_end/',
+
+"providers" => array (
+        // openid providers
+        "OpenID" => array (
+                "enabled" => true
+        ),
+
+        "Yahoo" => array (
+                "enabled" => FALSE,
+                "keys"    => array ( "id" => "", "secret" => "" ),
+        ),
+
+        "AOL"  => array (
+                "enabled" => true
+        ),
+
+        "Google" => array (
+                "enabled" => FALSE,
+                "keys"    => array ( "id" => "", "secret" => "" ),
+        ),
+
+        "Facebook" => array (
+                "enabled" => true,
+                "keys"    => array ( "id" => "464764366948522", "secret" => "cf8e6a9331fc0d947f0ab776e4290b5c" ),
+        ),
+
+        "Twitter" => array (
+                "enabled" => true,
+                "keys"    => array ( "key" => "9QqvcR2WkK9Ki1Mi1vkSnw", "secret" => "FamNmwSV3FGJ4wMNEHuw6LN26PhlD2reOIctpvNqias" )
+        ),
+
+        // windows live
+        "Live" => array (
+                "enabled" => FALSE,
+                "keys"    => array ( "id" => "", "secret" => "" )
+        ),
+
+        "MySpace" => array (
+                "enabled" => FALSE,
+                "keys"    => array ( "key" => "", "secret" => "" )
+        ),
+
+        "LinkedIn" => array (
+                "enabled" => TRUE,
+                "keys"    => array ( "key" => "77d2ggniatdzlf", "secret" => "TDoEdghviAleMmcZ" )
+        ),
+
+        "Foursquare" => array (
+                "enabled" => FALSE,
+                "keys"    => array ( "id" => "", "secret" => "" )
+        ),
+),
+
+// if you want to enable logging, set 'debug_mode' to true  then provide a writable file by the web server on "debug_file"
+"debug_mode" => (ENVIRONMENT == 'development'),
+
+"debug_file" => APPPATH.'/logs/hybridauth.log',
+);
 
 /*
 |--------------------------------------------------------------------------

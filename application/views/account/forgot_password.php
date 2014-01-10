@@ -41,7 +41,7 @@
 <div class="clearfix">
 		    <?php echo form_button(array(
 		    'type' => 'submit',
-		    'class' => 'btn btn-large btn-warning col-lg-offset-2',
+		    'class' => 'btn btn-warning btn-large col-lg-offset-2',
 		    'content' => lang('forgot_password_send_instructions')
 	    )); ?>
 </div>

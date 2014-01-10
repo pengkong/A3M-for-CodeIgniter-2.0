@@ -20,9 +20,9 @@
 
     <h3><?php echo lang('linked_currently_linked_accounts'); ?></h3>
 
-
+<!-- Decaprated! Will be removed once a migration is made. -->
 <?php if ($num_of_linked_accounts == 0) : ?>
-    <div class="alert alert-error">
+    <div class="alert alert-warning">
 	<?php echo lang('linked_no_linked_accounts'); ?>
     </div>
 
@@ -128,15 +128,54 @@
 		</div>
 	    </div>
 
-			<?php endforeach; ?>
-		<?php endif; ?>
+		<?php endforeach; ?>
 	<?php endif; ?>
+<?php endif; ?>
 
     <br/>
 
-    <h3 class="clearfix"><?php echo lang('linked_link_with_your_account_from'); ?></h3>
-    <ul class="third_party">
-	<?php foreach ($this->config->item('third_party_auth_providers') as $provider) : ?>
-		<li class="third_party <?php echo $provider; ?>"><?php echo anchor('account/connect_'.$provider, ' ', array('title' => sprintf(lang('connect_with_x'), lang('connect_'.$provider)))); ?></li>
+<!-- Here begins the new linked accounts -->
+<?php if($linked_accounts == NULL) : ?>
+    <div class="alert alert-warning">
+	<?php echo lang('linked_no_linked_accounts'); ?>
+    </div>
+<?php else: ?>
+    <?php $total_linked = count($linked_accounts); ?>
+    <?php foreach($linked_accounts as $link): ?>
+	<div class="clearfix">
+	    <div class="col-lg-1">
+		<img src="<?php echo base_url(RES_DIR);?>/img/auth_icons/<?php echo $link->provider; ?>.png" alt="<?php echo lang('connect_'.$link->provider); ?>" width="40"/>
+	    </div>
+	    <div class="col-lg-9">
+		<strong><?php echo lang('connect_'.$link->provider); ?></strong><br/>
+		<?php echo anchor($link->profile_url, substr($link->profile_url, 0, 30).(strlen($link->profile_url) > 30 ? '...' : ''), array('target' => '_blank', 'title' => $link->profile_url)); ?>
+	    </div>
+	    <div class="col-lg-2">
+		<?php if ($total_linked >= 1 && isset($account->password)) : ?>
+		<?php echo form_open(uri_string()); ?>
+		<?php echo form_fieldset(); ?>
+		<?php echo form_hidden('provider', $link->provider); ?>
+		<?php echo form_hidden('uid', $link->provider_uid); ?>
+		<?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-default', 'content' => '<i class="glyphicon glyphicon-trash"></i> '.lang('linked_remove'))); ?>
+		<?php echo form_fieldset_close(); ?>
+		<?php echo form_close(); ?>
+		<?php endif; ?>
+	    </div>
+	    
+	</div>
+    <?php endforeach; ?>
+<?php endif; ?>
+
+<br />
+
+<h3 class="clearfix"><?php echo lang('linked_link_with_your_account_from'); ?></h3>
+<?php if ($this->config->item('third_party_auth')) : ?>
+    <h3><?php echo sprintf(lang('sign_up_third_party_heading')); ?></h3>
+    <ul>
+	<?php foreach ($this->config->item('third_party_auth')['providers'] as $provider_name => $provider_values) : ?>
+	    <?php if($provider_values['enabled']) : ?>
+		<li class="third_party <?php echo $provider_name; ?>"><?php echo anchor('account/connect/'.$provider_name, ' ', array('title' => sprintf(lang('sign_up_with'), lang('connect_'.$provider_name)))); ?></li>
+	    <?php endif; ?>
 	<?php endforeach; ?>
     </ul>
+<?php endif; ?>

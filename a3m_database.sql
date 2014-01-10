@@ -39,66 +39,26 @@ CREATE TABLE IF NOT EXISTS `a3m_account_details` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
-
 --
--- Table structure for table `a3m_account_facebook`
---
-
-CREATE TABLE IF NOT EXISTS `a3m_account_facebook` (
-  `account_id` bigint(20) NOT NULL,
-  `facebook_id` bigint(20) NOT NULL,
-  `linkedon` datetime NOT NULL,
-  PRIMARY KEY (`account_id`),
-  UNIQUE KEY `facebook_id` (`facebook_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `a3m_account_openid`
+-- Table structure for table `a3m_providers`
 --
 
-CREATE TABLE IF NOT EXISTS `a3m_account_openid` (
-  `openid` varchar(240) NOT NULL,
-  `account_id` bigint(20) unsigned NOT NULL,
-  `linkedon` datetime NOT NULL,
-  PRIMARY KEY (`openid`),
-  KEY `account_id` (`account_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `a3m_account_twitter`
---
-
-CREATE TABLE IF NOT EXISTS `a3m_account_twitter` (
-  `account_id` bigint(20) NOT NULL,
-  `twitter_id` bigint(20) NOT NULL,
-  `oauth_token` varchar(80) NOT NULL,
-  `oauth_token_secret` varchar(80) NOT NULL,
-  `linkedon` datetime NOT NULL,
-  PRIMARY KEY (`account_id`),
-  KEY `twitter_id` (`twitter_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `a3m_account_linkedin`
---
-
-CREATE TABLE IF NOT EXISTS `a3m_account_linkedin` (
-  `account_id` bigint(20) NOT NULL,
-  `linkedin_id` varchar(20) NOT NULL,
-  `oauth_token` varchar(80) NOT NULL,
-  `linkedon` datetime NOT NULL,
-  PRIMARY KEY (`account_id`),
-  KEY `linkedin_id` (`linkedin_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
+CREATE TABLE IF NOT EXISTS `a3m_providers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL COMMENT 'refer to a3m_account.id',
+  `provider` varchar(100) NOT NULL,
+  `provider_uid` varchar(255) NOT NULL,
+  `email` varchar(200) DEFAULT NULL,
+  `display_name` varchar(150) DEFAULT NULL,
+  `first_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(100) DEFAULT NULL,
+  `profile_url` varchar(300) DEFAULT NULL,
+  `website_url` varchar(300) DEFAULT NULL,
+  `photo_url` varchar(300) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `provider_uid` (`provider_uid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
 -- --------------------------------------------------------
 
