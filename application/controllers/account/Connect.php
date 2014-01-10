@@ -67,7 +67,7 @@ class Connect extends CI_Controller
                     log_message('debug', 'controllers.HAuth.login: user profile:'.PHP_EOL.print_r($user_profile, TRUE));
                     
 		    //User has connected provider to A3M
-                    if ($user = $this->Account_providers_model->get_by_provider_uid($provider, $user_profile->identifier)->account_id)
+                    if ($user = $this->Account_providers_model->get_by_provider_uid($provider, $user_profile->identifier)->user_id)
                     {
 			if(! $this->authentication->is_signed_in())
 			{

@@ -144,10 +144,10 @@
     <?php foreach($linked_accounts as $link): ?>
 	<div class="clearfix">
 	    <div class="col-lg-1">
-		<img src="<?php echo base_url(RES_DIR);?>/img/auth_icons/<?php echo $link->provider; ?>.png" alt="<?php echo lang('connect_'.$link->provider); ?>" width="40"/>
+		<img src="<?php echo base_url(RES_DIR);?>/img/auth_icons/<?php echo strtolower($link->provider); ?>.png" alt="<?php echo lang('connect_'.strtolower($link->provider)); ?>" width="40"/>
 	    </div>
 	    <div class="col-lg-9">
-		<strong><?php echo lang('connect_'.$link->provider); ?></strong><br/>
+		<strong><?php echo lang('connect_'.strtolower($link->provider)); ?></strong><br/>
 		<?php echo anchor($link->profile_url, substr($link->profile_url, 0, 30).(strlen($link->profile_url) > 30 ? '...' : ''), array('target' => '_blank', 'title' => $link->profile_url)); ?>
 	    </div>
 	    <div class="col-lg-2">

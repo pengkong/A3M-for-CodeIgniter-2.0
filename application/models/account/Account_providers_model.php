@@ -45,9 +45,10 @@ class Account_providers_model extends CI_Model {
      * @param string $provider Provider name
      * @param string $id Provider id
      */
-    public function delete($user_id, $provider, $id)
+    public function delete($user_id, $provider, $uid)
     {
-        $this->db->where(array('user_id' => $user_id, 'provider' => $provider, 'provider_uid' => $id));
+        $this->db->where(array('user_id' => $user_id, 'provider' => $provider, 'provider_uid' => $uid));
+        $this->db->delete('a3m_providers');
     }
 }
 /* End of file Account_providers_model.php */
