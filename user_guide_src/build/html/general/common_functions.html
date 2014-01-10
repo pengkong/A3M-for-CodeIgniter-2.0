@@ -29,7 +29,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x59e2578>
+			<function <lambda> at 0x4f52cf8>
 			</div>
 		</div>
 
@@ -173,77 +173,16 @@ documentation for more information.</p>
 </div>
 <div class="section" id="show-error">
 <h2>show_error()<a class="headerlink" href="#show-error" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="show_error">
-<tt class="descname">show_error</tt><big>(</big><em>$message</em>, <em>$status_code</em>, <em>$heading = 'An Error Was Encountered'</em><big>)</big><a class="headerlink" href="#show_error" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>$message</strong> (<em>mixed</em>) &#8211; Error message</li>
-<li><strong>$status_code</strong> (<em>int</em>) &#8211; HTTP Response status code</li>
-<li><strong>$heading</strong> (<em>string</em>) &#8211; Error page heading</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">void</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <p>This function calls <tt class="docutils literal"><span class="pre">CI_Exception::show_error()</span></tt>. For more info,
 please see the <a class="reference internal" href="errors.html"><em>Error Handling</em></a> documentation.</p>
 </div>
 <div class="section" id="show-404">
 <h2>show_404()<a class="headerlink" href="#show-404" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="show_404">
-<tt class="descname">show_404</tt><big>(</big><em>$page = ''</em>, <em>$log_error = TRUE</em><big>)</big><a class="headerlink" href="#show_404" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>$page</strong> (<em>string</em>) &#8211; URI string</li>
-<li><strong>$log_error</strong> (<em>bool</em>) &#8211; Whether to log the error</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">void</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <p>This function calls <tt class="docutils literal"><span class="pre">CI_Exception::show_404()</span></tt>. For more info,
 please see the <a class="reference internal" href="errors.html"><em>Error Handling</em></a> documentation.</p>
 </div>
 <div class="section" id="log-message">
 <h2>log_message()<a class="headerlink" href="#log-message" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="log_message">
-<tt class="descname">log_message</tt><big>(</big><em>$level</em>, <em>$message</em><big>)</big><a class="headerlink" href="#log_message" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>$level</strong> (<em>string</em>) &#8211; Log level: &#8216;error&#8217;, &#8216;debug&#8217; or &#8216;info&#8217;</li>
-<li><strong>$message</strong> (<em>string</em>) &#8211; Message to log</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">void</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <p>This function is an alias for <tt class="docutils literal"><span class="pre">CI_Log::write_log()</span></tt>. For more info,
 please see the <a class="reference internal" href="errors.html"><em>Error Handling</em></a> documentation.</p>
 </div>

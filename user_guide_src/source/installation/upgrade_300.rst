@@ -188,8 +188,39 @@ Many methods and functions now return NULL instead of FALSE when the required it
    - element()
    - elements()
 
+*******************************
+Step 11: Usage of XSS filtering
+*******************************
+
+Many functions in CodeIgniter allow you to use its XSS filtering feature
+on demand by passing a boolean parameter. The default value of that
+parameter used to be boolean FALSE, but it is now changed to NULL and it
+will be dynamically determined by your ``$config['global_xss_filtering']``
+value.
+
+If you used to manually pass a boolean value for the ``$xss_filter``
+parameter or if you've always had ``$config['global_xss_filtering']`` set
+to FALSE, then this change doesn't concern you.
+
+Otherwise however, please review your usage of the following functions:
+
+ - :doc:`Input Library <../libraries/input>`
+
+   - input->get()
+   - input->post()
+   - input->get_post()
+   - input->cookie()
+   - input->server()
+   - input->input_stream()
+
+ - :doc:`Cookie Helper <../helpers/cookie_helper>` :func:`get_cookie()`
+
+.. important:: Another related change is that the ``$_GET``, ``$_POST``,
+	``$_COOKIE`` and ``$_SERVER`` superglobals are no longer
+	automatically overwritten when global XSS filtering is turned on.
+
 ********************************************************
-Step 11: Update usage of Input Class's get_post() method
+Step 12: Update usage of Input Class's get_post() method
 ********************************************************
 
 Previously, the :doc:`Input Class <../libraries/input>` method ``get_post()``
@@ -200,14 +231,14 @@ A method has been added, ``post_get()``, which searches in POST then in GET, as
 ``get_post()`` was doing before.
 
 ***********************************************************************
-Step 12: Update usage of Directory Helper's directory_map() function
+Step 13: Update usage of Directory Helper's directory_map() function
 ***********************************************************************
 
 In the resulting array, directories now end with a trailing directory
 separator (i.e. a slash, usually).
 
 *************************************************************
-Step 13: Update usage of Database Forge's drop_table() method
+Step 14: Update usage of Database Forge's drop_table() method
 *************************************************************
 
 Up until now, ``drop_table()`` added an IF EXISTS clause by default or it didn't work
@@ -229,7 +260,7 @@ If your application relies on IF EXISTS, you'll have to change its usage.
 	all drivers with the exception of ODBC.
 
 ***********************************************************
-Step 14: Change usage of Email library with multiple emails
+Step 15: Change usage of Email library with multiple emails
 ***********************************************************
 
 The :doc:`Email Library <../libraries/email>` will automatically clear the
@@ -244,7 +275,7 @@ pass FALSE as the first parameter in the ``send()`` method:
  	}
 
 ***************************************************
-Step 15: Update your Form_validation language lines
+Step 16: Update your Form_validation language lines
 ***************************************************
 
 Two improvements have been made to the :doc:`Form Validation Library
@@ -275,7 +306,7 @@ files and error messages format:
 	later.
 
 ****************************************************************
-Step 16: Remove usage of (previously) deprecated functionalities
+Step 17: Remove usage of (previously) deprecated functionalities
 ****************************************************************
 
 In addition to the ``$autoload['core']`` configuration setting, there's a
@@ -301,6 +332,26 @@ Smiley helper js_insert_smiley()
 
 :doc:`Smiley Helper <../helpers/smiley_helper>` function ``js_insert_smiley()`` has been deprecated
 since CodeIgniter 1.7.2 and is now removed. You'll need to switch to ``smiley_js()`` instead.
+
+Database drivers 'mysql', 'sqlite', 'mssql', 'pdo/dblib'
+========================================================
+
+The **mysql** driver utilizes the old 'mysql' PHP extension, known for its aging code base and
+many low-level problems. The extension is deprecated as of PHP 5.5 and CodeIgniter deprecates
+it in version 3.0, switching the default configured MySQL driver to **mysqli**.
+
+Please use either the 'mysqli' or 'pdo/mysql' drivers for MySQL. The old 'mysql' driver will be
+removed at some point in the future.
+
+The **sqlite**, **mssql** and **pdo/dblib** (also known as pdo/mssql or pdo/sybase) drivers
+all depend on PHP extensions that for different reasons no longer exist since PHP 5.3.
+
+Therefore we are now deprecating these drivers as we will have to remove them in one of the next
+CodeIgniter versions. You should use the more advanced, **sqlite3**, **sqlsrv** or **pdo/sqlsrv**
+drivers respectively.
+
+.. note:: These drivers are still available, but you're strongly encouraged to switch to other ones
+	sooner rather than later.
 
 Security helper do_hash()
 =========================
@@ -491,7 +542,7 @@ CodeIgniter 3.1+.
 	sooner rather than later.
 
 ***********************************************************
-Step 17: Check your usage of Text helper highlight_phrase()
+Step 18: Check your usage of Text helper highlight_phrase()
 ***********************************************************
 
 The default HTML tag used by :doc:`Text Helper <../helpers/text_helper>` function

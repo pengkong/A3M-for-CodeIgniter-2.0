@@ -29,7 +29,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x43356e0>
+			<function <lambda> at 0x45f3b90>
 			</div>
 		</div>
 
@@ -239,21 +239,53 @@ regular expression:</p>
 </ul>
 </div></blockquote>
 </div>
-<div class="section" id="step-11-update-usage-of-input-class-s-get-post-method">
-<h2>Step 11: Update usage of Input Class&#8217;s get_post() method<a class="headerlink" href="#step-11-update-usage-of-input-class-s-get-post-method" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-11-usage-of-xss-filtering">
+<h2>Step 11: Usage of XSS filtering<a class="headerlink" href="#step-11-usage-of-xss-filtering" title="Permalink to this headline">¶</a></h2>
+<p>Many functions in CodeIgniter allow you to use its XSS filtering feature
+on demand by passing a boolean parameter. The default value of that
+parameter used to be boolean FALSE, but it is now changed to NULL and it
+will be dynamically determined by your <tt class="docutils literal"><span class="pre">$config['global_xss_filtering']</span></tt>
+value.</p>
+<p>If you used to manually pass a boolean value for the <tt class="docutils literal"><span class="pre">$xss_filter</span></tt>
+parameter or if you&#8217;ve always had <tt class="docutils literal"><span class="pre">$config['global_xss_filtering']</span></tt> set
+to FALSE, then this change doesn&#8217;t concern you.</p>
+<p>Otherwise however, please review your usage of the following functions:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="../libraries/input.html"><em>Input Library</em></a><ul>
+<li>input-&gt;get()</li>
+<li>input-&gt;post()</li>
+<li>input-&gt;get_post()</li>
+<li>input-&gt;cookie()</li>
+<li>input-&gt;server()</li>
+<li>input-&gt;input_stream()</li>
+</ul>
+</li>
+<li><a class="reference internal" href="../helpers/cookie_helper.html"><em>Cookie Helper</em></a> <tt class="xref py py-func docutils literal"><span class="pre">get_cookie()</span></tt></li>
+</ul>
+</div></blockquote>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Another related change is that the <tt class="docutils literal"><span class="pre">$_GET</span></tt>, <tt class="docutils literal"><span class="pre">$_POST</span></tt>,
+<tt class="docutils literal"><span class="pre">$_COOKIE</span></tt> and <tt class="docutils literal"><span class="pre">$_SERVER</span></tt> superglobals are no longer
+automatically overwritten when global XSS filtering is turned on.</p>
+</div>
+</div>
+<div class="section" id="step-12-update-usage-of-input-class-s-get-post-method">
+<h2>Step 12: Update usage of Input Class&#8217;s get_post() method<a class="headerlink" href="#step-12-update-usage-of-input-class-s-get-post-method" title="Permalink to this headline">¶</a></h2>
 <p>Previously, the <a class="reference internal" href="../libraries/input.html"><em>Input Class</em></a> method <tt class="docutils literal"><span class="pre">get_post()</span></tt>
 was searching first in POST data, then in GET data. This method has been
 modified so that it searches in GET then in POST, as its name suggests.</p>
 <p>A method has been added, <tt class="docutils literal"><span class="pre">post_get()</span></tt>, which searches in POST then in GET, as
 <tt class="docutils literal"><span class="pre">get_post()</span></tt> was doing before.</p>
 </div>
-<div class="section" id="step-12-update-usage-of-directory-helper-s-directory-map-function">
-<h2>Step 12: Update usage of Directory Helper&#8217;s directory_map() function<a class="headerlink" href="#step-12-update-usage-of-directory-helper-s-directory-map-function" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-13-update-usage-of-directory-helper-s-directory-map-function">
+<h2>Step 13: Update usage of Directory Helper&#8217;s directory_map() function<a class="headerlink" href="#step-13-update-usage-of-directory-helper-s-directory-map-function" title="Permalink to this headline">¶</a></h2>
 <p>In the resulting array, directories now end with a trailing directory
 separator (i.e. a slash, usually).</p>
 </div>
-<div class="section" id="step-13-update-usage-of-database-forge-s-drop-table-method">
-<h2>Step 13: Update usage of Database Forge&#8217;s drop_table() method<a class="headerlink" href="#step-13-update-usage-of-database-forge-s-drop-table-method" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-14-update-usage-of-database-forge-s-drop-table-method">
+<h2>Step 14: Update usage of Database Forge&#8217;s drop_table() method<a class="headerlink" href="#step-14-update-usage-of-database-forge-s-drop-table-method" title="Permalink to this headline">¶</a></h2>
 <p>Up until now, <tt class="docutils literal"><span class="pre">drop_table()</span></tt> added an IF EXISTS clause by default or it didn&#8217;t work
 at all with some drivers. In CodeIgniter 3.0, the IF EXISTS condition is no longer added
 by default and has an optional second parameter that allows that instead and is set to
@@ -272,8 +304,8 @@ FALSE by default.</p>
 all drivers with the exception of ODBC.</p>
 </div>
 </div>
-<div class="section" id="step-14-change-usage-of-email-library-with-multiple-emails">
-<h2>Step 14: Change usage of Email library with multiple emails<a class="headerlink" href="#step-14-change-usage-of-email-library-with-multiple-emails" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-15-change-usage-of-email-library-with-multiple-emails">
+<h2>Step 15: Change usage of Email library with multiple emails<a class="headerlink" href="#step-15-change-usage-of-email-library-with-multiple-emails" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="../libraries/email.html"><em>Email Library</em></a> will automatically clear the
 set parameters after successfully sending emails. To override this behaviour,
 pass FALSE as the first parameter in the <tt class="docutils literal"><span class="pre">send()</span></tt> method:</p>
@@ -284,8 +316,8 @@ pass FALSE as the first parameter in the <tt class="docutils literal"><span clas
 </pre></div>
 </div>
 </div>
-<div class="section" id="step-15-update-your-form-validation-language-lines">
-<h2>Step 15: Update your Form_validation language lines<a class="headerlink" href="#step-15-update-your-form-validation-language-lines" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-16-update-your-form-validation-language-lines">
+<h2>Step 16: Update your Form_validation language lines<a class="headerlink" href="#step-16-update-your-form-validation-language-lines" title="Permalink to this headline">¶</a></h2>
 <p>Two improvements have been made to the <a class="reference internal" href="../libraries/form_validation.html"><em>Form Validation Library</em></a>&#8216;s <a class="reference internal" href="../libraries/language.html"><em>language</em></a>
 files and error messages format:</p>
 <blockquote>
@@ -320,8 +352,8 @@ Therefore you&#8217;re encouraged to update its usage sooner rather than
 later.</p>
 </div>
 </div>
-<div class="section" id="step-16-remove-usage-of-previously-deprecated-functionalities">
-<h2>Step 16: Remove usage of (previously) deprecated functionalities<a class="headerlink" href="#step-16-remove-usage-of-previously-deprecated-functionalities" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-17-remove-usage-of-previously-deprecated-functionalities">
+<h2>Step 17: Remove usage of (previously) deprecated functionalities<a class="headerlink" href="#step-17-remove-usage-of-previously-deprecated-functionalities" title="Permalink to this headline">¶</a></h2>
 <p>In addition to the <tt class="docutils literal"><span class="pre">$autoload['core']</span></tt> configuration setting, there&#8217;s a
 number of other functionalities that have been removed in CodeIgniter 3.0.0:</p>
 <div class="section" id="the-sha1-library">
@@ -340,6 +372,24 @@ the <tt class="docutils literal"><span class="pre">EXT</span></tt> constant has 
 <h3>Smiley helper js_insert_smiley()<a class="headerlink" href="#smiley-helper-js-insert-smiley" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="../helpers/smiley_helper.html"><em>Smiley Helper</em></a> function <tt class="docutils literal"><span class="pre">js_insert_smiley()</span></tt> has been deprecated
 since CodeIgniter 1.7.2 and is now removed. You&#8217;ll need to switch to <tt class="docutils literal"><span class="pre">smiley_js()</span></tt> instead.</p>
+</div>
+<div class="section" id="database-drivers-mysql-sqlite-mssql-pdo-dblib">
+<h3>Database drivers &#8216;mysql&#8217;, &#8216;sqlite&#8217;, &#8216;mssql&#8217;, &#8216;pdo/dblib&#8217;<a class="headerlink" href="#database-drivers-mysql-sqlite-mssql-pdo-dblib" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>mysql</strong> driver utilizes the old &#8216;mysql&#8217; PHP extension, known for its aging code base and
+many low-level problems. The extension is deprecated as of PHP 5.5 and CodeIgniter deprecates
+it in version 3.0, switching the default configured MySQL driver to <strong>mysqli</strong>.</p>
+<p>Please use either the &#8216;mysqli&#8217; or &#8216;pdo/mysql&#8217; drivers for MySQL. The old &#8216;mysql&#8217; driver will be
+removed at some point in the future.</p>
+<p>The <strong>sqlite</strong>, <strong>mssql</strong> and <strong>pdo/dblib</strong> (also known as pdo/mssql or pdo/sybase) drivers
+all depend on PHP extensions that for different reasons no longer exist since PHP 5.3.</p>
+<p>Therefore we are now deprecating these drivers as we will have to remove them in one of the next
+CodeIgniter versions. You should use the more advanced, <strong>sqlite3</strong>, <strong>sqlsrv</strong> or <strong>pdo/sqlsrv</strong>
+drivers respectively.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">These drivers are still available, but you&#8217;re strongly encouraged to switch to other ones
+sooner rather than later.</p>
+</div>
 </div>
 <div class="section" id="security-helper-do-hash">
 <h3>Security helper do_hash()<a class="headerlink" href="#security-helper-do-hash" title="Permalink to this headline">¶</a></h3>
@@ -539,8 +589,8 @@ sooner rather than later.</p>
 </div>
 </div>
 </div>
-<div class="section" id="step-17-check-your-usage-of-text-helper-highlight-phrase">
-<h2>Step 17: Check your usage of Text helper highlight_phrase()<a class="headerlink" href="#step-17-check-your-usage-of-text-helper-highlight-phrase" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-18-check-your-usage-of-text-helper-highlight-phrase">
+<h2>Step 18: Check your usage of Text helper highlight_phrase()<a class="headerlink" href="#step-18-check-your-usage-of-text-helper-highlight-phrase" title="Permalink to this headline">¶</a></h2>
 <p>The default HTML tag used by <a class="reference internal" href="../helpers/text_helper.html"><em>Text Helper</em></a> function
 <tt class="xref py py-func docutils literal"><span class="pre">highlight_phrase()</span></tt> has been changed from <tt class="docutils literal"><span class="pre">&lt;strong&gt;</span></tt> to the new HTML5
 tag <tt class="docutils literal"><span class="pre">&lt;mark&gt;</span></tt>.</p>
