@@ -170,6 +170,11 @@ CREATE TABLE IF NOT EXISTS `a3m_rel_account_role` (
   PRIMARY KEY (`account_id`,`role_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Adding default user as admin `a3m_acl_role`
+--
+
+INSERT INTO `a3m_rel_account_role` (`account_id`, `role_id`) VALUES (1, 1);
 
 -- --------------------------------------------------------
 
