@@ -40,23 +40,7 @@ $config['forgot_password_recaptcha_enabled'] 	= TRUE;
 
 /*
 |--------------------------------------------------------------------------
-| OpenID
-|--------------------------------------------------------------------------
-*/
-$config['openid_file_store_path'] = 'application/cache';
-$config['openid_google_discovery_endpoint'] = 'http://www.google.com/accounts/o8/id';
-$config['openid_yahoo_discovery_endpoint'] = 'http://www.yahoo.com/';
-
-/*
-|--------------------------------------------------------------------------
 | Third Party Auth
-| Available services:
-| facebook
-| twitter
-| google
-| yahoo
-| openid
-| linkedin
 |--------------------------------------------------------------------------
 */
 $config['openid_what_is_url'] = 'http://openidexplained.com/';

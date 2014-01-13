@@ -28,7 +28,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x64b5cf8>
+			<function <lambda> at 0x54f9140>
 			</div>
 		</div>
 
@@ -395,10 +395,12 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 </ul>
 </li>
 <li><a class="reference internal" href="libraries/email.html"><em>Email Library</em></a> changes include:<ul>
-<li>Added custom filename to <tt class="docutils literal"><span class="pre">Email::attach()</span></tt> as <tt class="docutils literal"><span class="pre">$this-&gt;email-&gt;attach($filename,</span> <span class="pre">$disposition,</span> <span class="pre">$newname)</span></tt>.</li>
-<li>Added possibility to send attachment as buffer string in <tt class="docutils literal"><span class="pre">Email::attach()</span></tt> as <tt class="docutils literal"><span class="pre">$this-&gt;email-&gt;attach($buffer,</span> <span class="pre">$disposition,</span> <span class="pre">$newname,</span> <span class="pre">$mime)</span></tt>.</li>
+<li>Added a custom filename parameter to <tt class="docutils literal"><span class="pre">attach()</span></tt> as <tt class="docutils literal"><span class="pre">$this-&gt;email-&gt;attach($filename,</span> <span class="pre">$disposition,</span> <span class="pre">$newname)</span></tt>.</li>
+<li>Added possibility to send attachment as buffer string in <tt class="docutils literal"><span class="pre">attach()</span></tt> as <tt class="docutils literal"><span class="pre">$this-&gt;email-&gt;attach($buffer,</span> <span class="pre">$disposition,</span> <span class="pre">$newname,</span> <span class="pre">$mime)</span></tt>.</li>
+<li>Added possibility to attach remote files by passing a URL.</li>
+<li>Added method <tt class="docutils literal"><span class="pre">attachment_cid()</span></tt> to enable embedding inline attachments into HTML.</li>
 <li>Added dsn (delivery status notification) option.</li>
-<li>Renamed method _set_header() to set_header() and made it public to enable adding custom headers in the <a class="reference internal" href="libraries/email.html"><em>Email Library</em></a>.</li>
+<li>Renamed method <tt class="docutils literal"><span class="pre">_set_header()</span></tt> to <tt class="docutils literal"><span class="pre">set_header()</span></tt> and made it public to enable adding custom headers.</li>
 <li>Successfully sent emails will automatically clear the parameters.</li>
 <li>Added a <em>return_path</em> parameter to the <tt class="docutils literal"><span class="pre">from()</span></tt> method.</li>
 <li>Removed the second parameter (character limit) from internal method <tt class="docutils literal"><span class="pre">_prep_quoted_printable()</span></tt> as it is never used.</li>
@@ -407,7 +409,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Removed unused protected method <tt class="docutils literal"><span class="pre">_get_ip()</span></tt> (<a class="reference internal" href="libraries/input.html"><em>Input Library</em></a>&#8216;s <tt class="docutils literal"><span class="pre">ip_address()</span></tt> should be used anyway).</li>
 <li>Internal method <tt class="docutils literal"><span class="pre">_prep_q_encoding()</span></tt> now utilizes PHP&#8217;s <em>mbstring</em> and <em>iconv</em> extensions (when available) and no longer has a second (<tt class="docutils literal"><span class="pre">$from</span></tt>) argument.</li>
 <li>Added an optional parameter to <tt class="docutils literal"><span class="pre">print_debugger()</span></tt> to allow specifying which parts of the message should be printed (&#8216;headers&#8217;, &#8216;subject&#8217;, &#8216;body&#8217;).</li>
-<li>Added SMTP keepalive option to avoid opening the connection for each <tt class="docutils literal"><span class="pre">Email::send()</span></tt>. Accessible as <tt class="docutils literal"><span class="pre">$smtp_keepalive</span></tt>.</li>
+<li>Added SMTP keepalive option to avoid opening the connection for each <tt class="docutils literal"><span class="pre">send()</span></tt> call. Accessible as <tt class="docutils literal"><span class="pre">$smtp_keepalive</span></tt>.</li>
 <li>Public method <tt class="docutils literal"><span class="pre">set_header()</span></tt> now filters the input by removing all &#8220;\r&#8221; and &#8220;\n&#8221; characters.</li>
 </ul>
 </li>
@@ -523,6 +525,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Added possibility to route requests using callbacks.</li>
 <li>Added a new reserved route (<em>translate_uri_dashes</em>) to allow usage of dashes in the controller and method URI segments.</li>
 <li>Deprecated methods <tt class="docutils literal"><span class="pre">fetch_directory()</span></tt>, <tt class="docutils literal"><span class="pre">fetch_class()</span></tt> and <tt class="docutils literal"><span class="pre">fetch_method()</span></tt> in favor of their respective public properties.</li>
+<li>Removed method <tt class="docutils literal"><span class="pre">_set_overrides()</span></tt> and moved its logic to the class constructor.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="libraries/language.html"><em>Language Library</em></a> changes include:<ul>

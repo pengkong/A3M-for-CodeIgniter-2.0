@@ -18,6 +18,13 @@ CREATE TABLE IF NOT EXISTS `a3m_account` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=1 ;
 
+--
+-- Adding default user as admin `a3m_acl_role`
+--
+
+INSERT INTO `a3m_rel_account_role` (`account_id`, `role_id`) VALUES (1, 1);
+
+
 -- --------------------------------------------------------
 
 --
