@@ -28,7 +28,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x54f9140>
+			<function <lambda> at 0x69ca8c0>
 			</div>
 		</div>
 
@@ -224,6 +224,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Added support for SQLite3 database driver.</li>
 <li>Added Interbase/Firebird database support via the <em>ibase</em> driver.</li>
 <li>Added ODBC support for <tt class="docutils literal"><span class="pre">create_database()</span></tt>, <tt class="docutils literal"><span class="pre">drop_database()</span></tt> and <tt class="docutils literal"><span class="pre">drop_table()</span></tt> in <a class="reference internal" href="database/forge.html"><em>Database Forge</em></a>.</li>
+<li>Added <strong>save_queries</strong> configuration setting to <em>application/config/database.php</em> (defaults to <tt class="docutils literal"><span class="pre">TRUE</span></tt>).</li>
 <li><a class="reference internal" href="database/query_builder.html"><em>Query Builder</em></a> changes include:<ul>
 <li>Renamed the Active Record class to Query Builder to remove confusion with the Active Record design pattern.</li>
 <li>Added the ability to insert objects with <tt class="docutils literal"><span class="pre">insert_batch()</span></tt>.</li>
@@ -453,13 +454,28 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 </ul>
 </li>
 <li>Core<ul>
+<li><a class="reference internal" href="general/routing.html"><em>Routing</em></a> changes include:<ul>
+<li>Added support for multiple levels of controller directories.</li>
+<li>Added support for per-directory <em>default_controller</em> and <em>404_override</em> classes.</li>
+<li>Added possibility to route requests using HTTP verbs.</li>
+<li>Added possibility to route requests using callbacks.</li>
+<li>Added a new reserved route (<em>translate_uri_dashes</em>) to allow usage of dashes in the controller and method URI segments.</li>
+<li>Deprecated methods <tt class="docutils literal"><span class="pre">fetch_directory()</span></tt>, <tt class="docutils literal"><span class="pre">fetch_class()</span></tt> and <tt class="docutils literal"><span class="pre">fetch_method()</span></tt> in favor of their respective public properties.</li>
+<li>Removed method <tt class="docutils literal"><span class="pre">_set_overrides()</span></tt> and moved its logic to the class constructor.</li>
+</ul>
+</li>
 <li><a class="reference internal" href="libraries/uri.html"><em>URI Library</em></a> changes include:<ul>
+<li>Added conditional PCRE UTF-8 support to the &#8220;invalid URI characters&#8221; check and removed the <tt class="docutils literal"><span class="pre">preg_quote()</span></tt> call from it to allow more flexibility.</li>
+<li>Renamed method <tt class="docutils literal"><span class="pre">_filter_uri()</span></tt> to <tt class="docutils literal"><span class="pre">filter_uri()</span></tt>.</li>
 <li>Changed private methods to protected so that MY_URI can override them.</li>
 <li>Renamed internal method <tt class="docutils literal"><span class="pre">_parse_cli_args()</span></tt> to <tt class="docutils literal"><span class="pre">_parse_argv()</span></tt>.</li>
 <li>Renamed internal method <tt class="docutils literal"><span class="pre">_detect_uri()</span></tt> to <tt class="docutils literal"><span class="pre">_parse_request_uri()</span></tt>.</li>
 <li>Changed <tt class="docutils literal"><span class="pre">_parse_request_uri()</span></tt> to accept absolute URIs for compatibility with HTTP/1.1 as per <cite>RFC2616 &lt;http://www.ietf.org/rfc/rfc2616.txt&gt;</cite>.</li>
 <li>Added protected method <tt class="docutils literal"><span class="pre">_parse_query_string()</span></tt> to URI paths in the the <strong>QUERY_STRING</strong> value, like <tt class="docutils literal"><span class="pre">_parse_request_uri()</span></tt> does.</li>
 <li>Changed <tt class="docutils literal"><span class="pre">_fetch_uri_string()</span></tt> to try the <strong>PATH_INFO</strong> variable first when auto-detecting.</li>
+<li>Removed methods <tt class="docutils literal"><span class="pre">_remove_url_suffix()</span></tt>, <tt class="docutils literal"><span class="pre">_explode_segments()</span></tt> and moved their logic into <tt class="docutils literal"><span class="pre">_set_uri_string()</span></tt>.</li>
+<li>Removed method <tt class="docutils literal"><span class="pre">_fetch_uri_string()</span></tt> and moved its logic into the class constructor.</li>
+<li>Removed method <tt class="docutils literal"><span class="pre">_reindex_segments()</span></tt>.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="libraries/loader.html"><em>Loader Library</em></a> changes include:<ul>
@@ -469,7 +485,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Added autoloading of drivers with <tt class="docutils literal"><span class="pre">$autoload['drivers']</span></tt>.</li>
 <li><tt class="docutils literal"><span class="pre">$config['rewrite_short_tags']</span></tt> now has no effect when using PHP 5.4 as <tt class="docutils literal"><span class="pre">&lt;?=</span></tt> will always be available.</li>
 <li>Changed method <tt class="docutils literal"><span class="pre">config()</span></tt> to return whatever <tt class="docutils literal"><span class="pre">CI_Config::load()</span></tt> returns instead of always being void.</li>
-<li>Added support for model aliasing on autoload.</li>
+<li>Added support for library and model aliasing on autoload.</li>
 <li>Changed method <tt class="docutils literal"><span class="pre">is_loaded()</span></tt> to ask for the (case sensitive) library name instead of its instance name.</li>
 <li>Removed <tt class="docutils literal"><span class="pre">$_base_classes</span></tt> property and unified all class data in <tt class="docutils literal"><span class="pre">$_ci_classes</span></tt> instead.</li>
 <li>Added method <tt class="docutils literal"><span class="pre">clear_vars()</span></tt> to allow clearing the cached variables for views.</li>
@@ -504,6 +520,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Added a second argument to method <tt class="docutils literal"><span class="pre">set_content_type()</span></tt> that allows setting the document charset as well.</li>
 <li>Added methods <tt class="docutils literal"><span class="pre">get_content_type()</span></tt> and <tt class="docutils literal"><span class="pre">get_header()</span></tt>.</li>
 <li>Added method <tt class="docutils literal"><span class="pre">delete_cache()</span></tt>.</li>
+<li>Changed caching behavior to compress the output before storing it, if <tt class="docutils literal"><span class="pre">$config['compress_output']</span></tt> is enabled.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="libraries/config.html"><em>Config Library</em></a> changes include:<ul>
@@ -518,14 +535,6 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Added <tt class="docutils literal"><span class="pre">$config['csrf_regeneration']</span></tt>, which makes token regeneration optional.</li>
 <li>Added <tt class="docutils literal"><span class="pre">$config['csrf_exclude_uris']</span></tt>, which allows you list URIs which will not have the CSRF validation methods run.</li>
 <li>Modified method <tt class="docutils literal"><span class="pre">sanitize_filename()</span></tt> to read a public <tt class="docutils literal"><span class="pre">$filename_bad_chars</span></tt> property for getting the invalid characters list.</li>
-</ul>
-</li>
-<li><a class="reference internal" href="general/routing.html"><em>URI Routing</em></a> changes include:<ul>
-<li>Added possibility to route requests using HTTP verbs.</li>
-<li>Added possibility to route requests using callbacks.</li>
-<li>Added a new reserved route (<em>translate_uri_dashes</em>) to allow usage of dashes in the controller and method URI segments.</li>
-<li>Deprecated methods <tt class="docutils literal"><span class="pre">fetch_directory()</span></tt>, <tt class="docutils literal"><span class="pre">fetch_class()</span></tt> and <tt class="docutils literal"><span class="pre">fetch_method()</span></tt> in favor of their respective public properties.</li>
-<li>Removed method <tt class="docutils literal"><span class="pre">_set_overrides()</span></tt> and moved its logic to the class constructor.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="libraries/language.html"><em>Language Library</em></a> changes include:<ul>
@@ -732,6 +741,11 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Fixed a bug (#346) - with <tt class="docutils literal"><span class="pre">$config['global_xss_filtering']</span></tt> turned on, the <tt class="docutils literal"><span class="pre">$_GET</span></tt>, <tt class="docutils literal"><span class="pre">$_POST</span></tt>, <tt class="docutils literal"><span class="pre">$_COOKIE</span></tt> and <tt class="docutils literal"><span class="pre">$_SERVER</span></tt> superglobals were overwritten during initialization time, resulting in XSS filtering being either performed twice or there was no possible way to get the original data, even though options for this do exist.</li>
 <li>Fixed an edge case (#555) - incorrect browser version was reported for Opera 10+ due to a non-standard user-agent string.</li>
 <li>Fixed a bug (#133) - <a class="reference internal" href="helpers/text_helper.html"><em>Text Helper</em></a> <tt class="xref py py-func docutils literal"><span class="pre">ascii_to_entities()</span></tt> stripped the last character if it happens to be in the extended ASCII group.</li>
+<li>Fixed a bug (#2822) - <tt class="docutils literal"><span class="pre">fwrite()</span></tt> was used incorrectly throughout the whole framework, allowing incomplete writes when writing to a network stream and possibly a few other edge cases.</li>
+<li>Fixed a bug where <a class="reference internal" href="libraries/user_agent.html"><em>User Agent Library</em></a> methods <tt class="docutils literal"><span class="pre">accept_charset()</span></tt> and <tt class="docutils literal"><span class="pre">accept_lang()</span></tt> didn&#8217;t properly parse HTTP headers that contain spaces.</li>
+<li>Fixed a bug where <em>default_controller</em> was called instad of triggering a 404 error if the current route is in a controller directory.</li>
+<li>Fixed a bug (#2737) - <a class="reference internal" href="libraries/xmlrpc.html"><em>XML-RPC Library</em></a> used objects as array keys, which triggered E_NOTICE messages.</li>
+<li>Fixed a bug (#2729) - <tt class="docutils literal"><span class="pre">CI_Securty::_validate_entities()</span></tt> used overly-intrusive <tt class="docutils literal"><span class="pre">preg_replace()</span></tt> patterns that produced false-positives.</li>
 </ul>
 </div>
 </div>

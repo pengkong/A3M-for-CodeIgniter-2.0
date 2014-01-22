@@ -29,7 +29,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x216dc80>
+			<function <lambda> at 0x52aeb90>
 			</div>
 		</div>
 
@@ -92,7 +92,7 @@ in the database driver file.</p>
 </div>
 </div>
 <div class="section" id="this-db-count-all">
-<h2>$this-&gt;db-&gt;count_all();<a class="headerlink" href="#this-db-count-all" title="Permalink to this headline">¶</a></h2>
+<h2>$this-&gt;db-&gt;count_all()<a class="headerlink" href="#this-db-count-all" title="Permalink to this headline">¶</a></h2>
 <p>Permits you to determine the number of rows in a particular table.
 Submit the table name in the first parameter. Example:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">count_all</span><span class="p">(</span><span class="s1">&#39;my_table&#39;</span><span class="p">);</span>
@@ -117,7 +117,7 @@ etc...):</p>
 </div>
 </div>
 <div class="section" id="this-db-last-query">
-<h2>$this-&gt;db-&gt;last_query();<a class="headerlink" href="#this-db-last-query" title="Permalink to this headline">¶</a></h2>
+<h2>$this-&gt;db-&gt;last_query()<a class="headerlink" href="#this-db-last-query" title="Permalink to this headline">¶</a></h2>
 <p>Returns the last query that was run (the query string, not the result).
 Example:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$str</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">last_query</span><span class="p">();</span>
@@ -125,11 +125,14 @@ Example:</p>
 <span class="c1">// Produces:  SELECT * FROM sometable....</span>
 </pre></div>
 </div>
-<p>The following two functions help simplify the process of writing
-database INSERTs and UPDATEs.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Disabling the <strong>save_queries</strong> setting in your database
+configuration will render this function useless.</p>
+</div>
 </div>
 <div class="section" id="this-db-insert-string">
-<h2>$this-&gt;db-&gt;insert_string();<a class="headerlink" href="#this-db-insert-string" title="Permalink to this headline">¶</a></h2>
+<h2>$this-&gt;db-&gt;insert_string()<a class="headerlink" href="#this-db-insert-string" title="Permalink to this headline">¶</a></h2>
 <p>This function simplifies the process of writing database inserts. It
 returns a correctly formatted SQL insert string. Example:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$name</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="nv">$email</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="nv">$url</span><span class="p">);</span>
@@ -148,7 +151,7 @@ array with the data to be inserted. The above example produces:</p>
 </div>
 </div>
 <div class="section" id="this-db-update-string">
-<h2>$this-&gt;db-&gt;update_string();<a class="headerlink" href="#this-db-update-string" title="Permalink to this headline">¶</a></h2>
+<h2>$this-&gt;db-&gt;update_string()<a class="headerlink" href="#this-db-update-string" title="Permalink to this headline">¶</a></h2>
 <p>This function simplifies the process of writing database updates. It
 returns a correctly formatted SQL update string. Example:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$name</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="nv">$email</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="nv">$url</span><span class="p">);</span>

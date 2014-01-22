@@ -60,7 +60,7 @@ $config['third_party_auth'] = array(
         ),
 
         "AOL"  => array (
-                "enabled" => true
+                "enabled" => TRUE
         ),
 
         "Google" => array (
