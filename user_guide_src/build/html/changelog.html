@@ -28,7 +28,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x69ca8c0>
+			<function <lambda> at 0x4795f50>
 			</div>
 		</div>
 
@@ -284,6 +284,9 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Added port handling support for UNIX-based systems (MSSQL driver).</li>
 <li>Added <em>OFFSET</em> support for SQL Server 2005 and above.</li>
 <li>Added <tt class="docutils literal"><span class="pre">db_set_charset()</span></tt> support (MSSQL driver).</li>
+<li>Added a <em>scrollable</em> property to enable configuration of the cursor to use (SQLSRV driver).</li>
+<li>Added support and auto-detection for the <tt class="docutils literal"><span class="pre">SQLSRV_CURSOR_CLIENT_BUFFERED</span></tt> scrollable cursor flag (SQLSRV driver).</li>
+<li>Changed default behavior to not use <tt class="docutils literal"><span class="pre">SQLSRV_CURSOR_STATIC</span></tt> due to performance issues (SQLSRV driver).</li>
 </ul>
 </li>
 <li>Improved support of the Oracle (OCI8) driver, including:<ul>
@@ -302,8 +305,9 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li><a class="reference internal" href="database/forge.html"><em>Database Forge</em></a> changes include:<ul>
 <li>Added an optional second parameter to <tt class="docutils literal"><span class="pre">drop_table()</span></tt> that allows adding the <strong>IF EXISTS</strong> condition, which is no longer the default.</li>
 <li>Added support for passing a custom database object to the loader.</li>
-<li>Deprecated <tt class="docutils literal"><span class="pre">add_column()</span></tt>&#8216;s third method. <em>AFTER</em> clause should now be added to the field definition array instead.</li>
+<li>Added support for passing custom table attributes (such as <tt class="docutils literal"><span class="pre">ENGINE</span></tt> for MySQL) to <tt class="docutils literal"><span class="pre">create_table()</span></tt>.</li>
 <li>Added support for usage of the <em>FIRST</em> clause in <tt class="docutils literal"><span class="pre">add_column()</span></tt> for MySQL and CUBRID.</li>
+<li>Deprecated <tt class="docutils literal"><span class="pre">add_column()</span></tt>&#8216;s third method. <em>AFTER</em> clause should now be added to the field definition array instead.</li>
 <li>Overall improved support for all of the drivers.</li>
 </ul>
 </li>
@@ -745,7 +749,8 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Fixed a bug where <a class="reference internal" href="libraries/user_agent.html"><em>User Agent Library</em></a> methods <tt class="docutils literal"><span class="pre">accept_charset()</span></tt> and <tt class="docutils literal"><span class="pre">accept_lang()</span></tt> didn&#8217;t properly parse HTTP headers that contain spaces.</li>
 <li>Fixed a bug where <em>default_controller</em> was called instad of triggering a 404 error if the current route is in a controller directory.</li>
 <li>Fixed a bug (#2737) - <a class="reference internal" href="libraries/xmlrpc.html"><em>XML-RPC Library</em></a> used objects as array keys, which triggered E_NOTICE messages.</li>
-<li>Fixed a bug (#2729) - <tt class="docutils literal"><span class="pre">CI_Securty::_validate_entities()</span></tt> used overly-intrusive <tt class="docutils literal"><span class="pre">preg_replace()</span></tt> patterns that produced false-positives.</li>
+<li>Fixed a bug (#2729) - <tt class="docutils literal"><span class="pre">CI_Security::_validate_entities()</span></tt> used overly-intrusive <tt class="docutils literal"><span class="pre">preg_replace()</span></tt> patterns that produced false-positives.</li>
+<li>Fixed a bug (#2771) - <tt class="docutils literal"><span class="pre">CI_Security::xss_clean()</span></tt> didn&#8217;t take into account HTML5 entities.</li>
 </ul>
 </div>
 </div>

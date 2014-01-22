@@ -222,6 +222,9 @@ Release Date: Not Released
       - Added port handling support for UNIX-based systems (MSSQL driver).
       - Added *OFFSET* support for SQL Server 2005 and above.
       - Added ``db_set_charset()`` support (MSSQL driver).
+      - Added a *scrollable* property to enable configuration of the cursor to use (SQLSRV driver).
+      - Added support and auto-detection for the ``SQLSRV_CURSOR_CLIENT_BUFFERED`` scrollable cursor flag (SQLSRV driver).
+      - Changed default behavior to not use ``SQLSRV_CURSOR_STATIC`` due to performance issues (SQLSRV driver).
 
    -  Improved support of the Oracle (OCI8) driver, including:
 
@@ -240,8 +243,9 @@ Release Date: Not Released
 
       - Added an optional second parameter to ``drop_table()`` that allows adding the **IF EXISTS** condition, which is no longer the default.
       - Added support for passing a custom database object to the loader.
-      - Deprecated ``add_column()``'s third method. *AFTER* clause should now be added to the field definition array instead.
+      - Added support for passing custom table attributes (such as ``ENGINE`` for MySQL) to ``create_table()``.
       - Added support for usage of the *FIRST* clause in ``add_column()`` for MySQL and CUBRID.
+      - Deprecated ``add_column()``'s third method. *AFTER* clause should now be added to the field definition array instead.
       - Overall improved support for all of the drivers.
 
    -  :doc:`Database Utility <database/utilities>` changes include:
@@ -681,7 +685,8 @@ Bug fixes for 3.0
 -  Fixed a bug where :doc:`User Agent Library <libraries/user_agent>` methods ``accept_charset()`` and ``accept_lang()`` didn't properly parse HTTP headers that contain spaces.
 -  Fixed a bug where *default_controller* was called instad of triggering a 404 error if the current route is in a controller directory.
 -  Fixed a bug (#2737) - :doc:`XML-RPC Library <libraries/xmlrpc>` used objects as array keys, which triggered E_NOTICE messages.
--  Fixed a bug (#2729) - ``CI_Securty::_validate_entities()`` used overly-intrusive ``preg_replace()`` patterns that produced false-positives.
+-  Fixed a bug (#2729) - ``CI_Security::_validate_entities()`` used overly-intrusive ``preg_replace()`` patterns that produced false-positives.
+-  Fixed a bug (#2771) - ``CI_Security::xss_clean()`` didn't take into account HTML5 entities.
 
 Version 2.1.4
 =============
