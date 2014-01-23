@@ -39,11 +39,9 @@ class Password extends CI_Controller {
 		// No access to users without a password
 		if ( ! $data['account']->password) redirect('');
 
-		### Setup form validation
-		$this->form_validation->set_error_delimiters('<span class="field_error">', '</span>');
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
 		$this->form_validation->set_rules(array(array('field' => 'password_new_password', 'label' => 'lang:password_new_password', 'rules' => 'trim|required|min_length[6]'), array('field' => 'password_retype_new_password', 'label' => 'lang:password_retype_new_password', 'rules' => 'trim|required|matches[password_new_password]')));
 
-		### Run form validation
 		if ($this->form_validation->run())
 		{
 			// Change user's password

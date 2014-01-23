@@ -55,7 +55,7 @@ class Profile extends CI_Controller {
 		}
 
 		// Setup form validation
-		$this->form_validation->set_error_delimiters('<div class="field_error">', '</div>');
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
 		$this->form_validation->set_rules(array(array('field' => 'profile_username', 'label' => 'lang:profile_username', 'rules' => 'trim|required|alpha_dash|min_length[2]|max_length[24]')));
 
 		// Run form validation
