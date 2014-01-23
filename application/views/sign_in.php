@@ -6,7 +6,7 @@
 
     <div class="well">
 		<?php if (isset($sign_in_error)) : ?>
-	<div class="form_error"><?php echo $sign_in_error; ?></div>
+	<div class="alert alert-danger"><?php echo $sign_in_error; ?></div>
 		<?php endif; ?>
 
 	<div class="form-group <?php echo (form_error('sign_in_username_email') || isset($sign_in_username_email_error)) ? 'error' : ''; ?>">

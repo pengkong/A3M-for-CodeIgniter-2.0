@@ -2,7 +2,7 @@
 	<div class="col-lg-12">
 		<h3><?php echo lang('sign_up_heading'); ?></h3>
 		
-		<div class="alert">
+		<div class="alert alert-danger">
 			<strong><?php echo lang('notice');?> </strong> <?php echo lang('registration_disabled'); ?>
 		</div>
 	</div>

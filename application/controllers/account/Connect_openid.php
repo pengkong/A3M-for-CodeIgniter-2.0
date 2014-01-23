@@ -33,7 +33,7 @@ class Connect_openid extends CI_Controller {
 		$this->load->library('form_validation');
 		
 		// Setup form validation
-		$this->form_validation->set_error_delimiters('<span class="field_error">', '</span>');
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
 		$this->form_validation->set_rules(array(array('field' => 'connect_openid_url', 'label' => 'lang:connect_openid_url', 'rules' => 'trim|required')));
 
 		// Run form validation
