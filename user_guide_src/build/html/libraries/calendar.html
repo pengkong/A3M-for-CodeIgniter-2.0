@@ -29,7 +29,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x22e4c80>
+			<function <lambda> at 0x5394ed8>
 			</div>
 		</div>
 
@@ -152,10 +152,10 @@ month heading, and the &#8220;short&#8221; day names. More information regarding
 preferences below.</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="15%" />
-<col width="7%" />
-<col width="32%" />
-<col width="46%" />
+<col width="14%" />
+<col width="11%" />
+<col width="31%" />
+<col width="44%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Preference</th>
@@ -168,8 +168,11 @@ preferences below.</p>
 <tr class="row-even"><td><strong>template</strong></td>
 <td>None</td>
 <td>None</td>
-<td>A string containing your calendar template.
-See the template section below.</td>
+<td><dl class="first last docutils">
+<dt>A string containing your calendar template.</dt>
+<dd>See the template section below.</dd>
+</dl>
+</td>
 </tr>
 <tr class="row-odd"><td><strong>local_time</strong></td>
 <td>time()</td>
@@ -184,25 +187,43 @@ See the template section below.</td>
 <tr class="row-odd"><td><strong>month_type</strong></td>
 <td>long</td>
 <td>long, short</td>
-<td>Determines what version of the month name to use in the header.
-long = January, short = Jan.</td>
+<td><dl class="first last docutils">
+<dt>Determines what version of the month name to use in the header.</dt>
+<dd>long = January, short = Jan.</dd>
+</dl>
+</td>
 </tr>
 <tr class="row-even"><td><strong>day_type</strong></td>
 <td>abr</td>
 <td>long, short, abr</td>
-<td>Determines what version of the weekday names to use in
-the column headers. long = Sunday, short = Sun, abr = Su.</td>
+<td><dl class="first last docutils">
+<dt>Determines what version of the weekday names to use in</dt>
+<dd>the column headers. long = Sunday, short = Sun, abr = Su.</dd>
+</dl>
+</td>
 </tr>
 <tr class="row-odd"><td><strong>show_next_prev</strong></td>
 <td>FALSE</td>
 <td>TRUE/FALSE (boolean)</td>
-<td>Determines whether to display links allowing you to toggle
-to next/previous months. See information on this feature below.</td>
+<td><dl class="first last docutils">
+<dt>Determines whether to display links allowing you to toggle</dt>
+<dd>to next/previous months. See information on this feature below.</dd>
+</dl>
+</td>
 </tr>
 <tr class="row-even"><td><strong>next_prev_url</strong></td>
-<td>None</td>
+<td>controller/method</td>
 <td>A URL</td>
 <td>Sets the basepath used in the next/previous calendar links.</td>
+</tr>
+<tr class="row-odd"><td><strong>show_other_days</strong></td>
+<td>FALSE</td>
+<td>TRUE/FALSE (boolean)</td>
+<td><dl class="first last docutils">
+<dt>Determines whether to display days of other months that share the</dt>
+<dd>first or last week of the calendar month.</dd>
+</dl>
+</td>
 </tr>
 </tbody>
 </table>
@@ -226,7 +247,8 @@ to this example:</p>
 <ul class="simple">
 <li>You must set the &#8220;show_next_prev&#8221; to TRUE.</li>
 <li>You must supply the URL to the controller containing your calendar in
-the &#8220;next_prev_url&#8221; preference.</li>
+the &#8220;next_prev_url&#8221; preference. If you don&#8217;t, it will be set to the current
+<em>controller/method</em>.</li>
 <li>You must supply the &#8220;year&#8221; and &#8220;month&#8221; to the calendar generating
 function via the URI segments where they appear (Note: The calendar
 class automatically adds the year/month to the base URL you
@@ -256,6 +278,8 @@ pair of pseudo-variables as shown here:</p>
 
 <span class="s1">   {cal_row_start}&lt;tr&gt;{/cal_row_start}</span>
 <span class="s1">   {cal_cell_start}&lt;td&gt;{/cal_cell_start}</span>
+<span class="s1">   {cal_cell_start_today}&lt;td&gt;{/cal_cell_start_today}</span>
+<span class="s1">   {cal_cell_start_other}&lt;td class=&quot;other-month&quot;&gt;{/cal_cell_start_other}</span>
 
 <span class="s1">   {cal_cell_content}&lt;a href=&quot;{content}&quot;&gt;{day}&lt;/a&gt;{/cal_cell_content}</span>
 <span class="s1">   {cal_cell_content_today}&lt;div class=&quot;highlight&quot;&gt;&lt;a href=&quot;{content}&quot;&gt;{day}&lt;/a&gt;&lt;/div&gt;{/cal_cell_content_today}</span>
@@ -265,7 +289,11 @@ pair of pseudo-variables as shown here:</p>
 
 <span class="s1">   {cal_cell_blank}&amp;nbsp;{/cal_cell_blank}</span>
 
+<span class="s1">   {cal_cell_other}{day}{cal_cel_other}</span>
+
 <span class="s1">   {cal_cell_end}&lt;/td&gt;{/cal_cell_end}</span>
+<span class="s1">   {cal_cell_end_today}&lt;/td&gt;{/cal_cell_end_today}</span>
+<span class="s1">   {cal_cell_end_other}&lt;/td&gt;{/cal_cell_end_other}</span>
 <span class="s1">   {cal_row_end}&lt;/tr&gt;{/cal_row_end}</span>
 
 <span class="s1">   {table_close}&lt;/table&gt;{/table_close}</span>

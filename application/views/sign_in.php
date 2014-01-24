@@ -6,7 +6,7 @@
 
     <div class="well">
 		<?php if (isset($sign_in_error)) : ?>
-	<div class="form_error"><?php echo $sign_in_error; ?></div>
+	<div class="alert alert-danger"><?php echo $sign_in_error; ?></div>
 		<?php endif; ?>
 
 	<div class="form-group <?php echo (form_error('sign_in_username_email') || isset($sign_in_username_email_error)) ? 'error' : ''; ?>">
@@ -66,13 +66,14 @@
 <!-- /span6 -->
 
 <div class="col-lg-6">
-	<?php if ($this->config->item('third_party_auth_providers')) : ?>
-    <h3><?php echo sprintf(lang('sign_in_third_party_heading')); ?></h3>
-    <ul>
-		<?php foreach ($this->config->item('third_party_auth_providers') as $provider) : ?>
-	<li class="third_party <?php echo $provider; ?>"><?php echo anchor('account/connect_'.$provider, ' ', array('title' => sprintf(lang('sign_in_with'), lang('connect_'.$provider)))); ?></li>
-		<?php endforeach; ?>
-    </ul>
+	<?php if ($third_party_auth = $this->config->item('third_party_auth')) : ?>
+		<h3><?php echo sprintf(lang('sign_up_third_party_heading')); ?></h3>
+		<ul>
+			<?php foreach($third_party_auth['providers'] as $provider_name => $provider_values) : ?>
+				<?php if($provider_values['enabled']) : ?>
+				<li class="third_party"><?php echo anchor('account/connect/'.$provider_name, '<img src="'.base_url(RES_DIR.'/img/auth_icons/'.strtolower($provider_name).'.png').'" alt="'.sprintf(lang('sign_up_with'), lang('connect_'.strtolower($provider_name))).'" height="64" width="64">' ); ?></li>
+				<?php endif; ?>
+			<?php endforeach; ?>
+		</ul>
 	<?php endif; ?>
-</div>
-<!-- /span6 -->
+</div><!-- /span6 -->

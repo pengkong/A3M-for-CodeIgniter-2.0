@@ -83,6 +83,8 @@ $route['sign_out'] = "account/sign_out";
 $route['login'] = "account/sign_in";
 $route['logout'] = "account/sign_out";
 $route['register'] = "account/sign_up";
+$route['account/connect/(.+)'] = "account/connect/index/$1";
+$route['account/connect_end(:any)'] = "account/connect/index$1";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

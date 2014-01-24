@@ -29,7 +29,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x295f578>
+			<function <lambda> at 0x456aed8>
 			</div>
 		</div>
 
@@ -401,8 +401,8 @@ to avoid clearing the email parameters.</p>
 <div class="section" id="this-email-attach">
 <h3>$this-&gt;email-&gt;attach()<a class="headerlink" href="#this-email-attach" title="Permalink to this headline">¶</a></h3>
 <p>Enables you to send an attachment. Put the file path/name in the first
-parameter. Note: Use a file path, not a URL. For multiple attachments
-use the method multiple times. For example:</p>
+parameter. For multiple attachments use the method multiple times.
+For example:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">email</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;/path/to/photo1.jpg&#39;</span><span class="p">);</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">email</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;/path/to/photo2.jpg&#39;</span><span class="p">);</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">email</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;/path/to/photo3.jpg&#39;</span><span class="p">);</span>
@@ -411,6 +411,10 @@ use the method multiple times. For example:</p>
 <p>To use the default disposition (attachment), leave the second parameter blank,
 otherwise use a custom disposition:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">email</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;image.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;inline&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>You can use URL:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">email</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;http://example.com/filename.pdf&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>If you&#8217;d like to use a custom file name, you can use the third paramater:</p>
@@ -423,6 +427,23 @@ parameter as mime-type:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">email</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="nv">$buffer</span><span class="p">,</span> <span class="s1">&#39;attachment&#39;</span><span class="p">,</span> <span class="s1">&#39;report.pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;application/pdf&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="this-email-attachment-cid">
+<h3>$this-&gt;email-&gt;attachment_cid()<a class="headerlink" href="#this-email-attachment-cid" title="Permalink to this headline">¶</a></h3>
+<p>Sets and returns an attachment&#8217;s Content-ID, which enables your to embed an inline
+(picture) attachment into HTML. First parameter must be attached file.</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$filename</span> <span class="o">=</span> <span class="s1">&#39;/img/photo1.jpg&#39;</span><span class="p">;</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">email</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="nv">$filename</span><span class="p">);</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$list</span> <span class="k">as</span> <span class="nv">$address</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">email</span><span class="o">-&gt;</span><span class="na">to</span><span class="p">(</span><span class="nv">$address</span><span class="p">);</span>
+        <span class="nv">$cid</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">email</span><span class="o">-&gt;</span><span class="na">attach_cid</span><span class="p">(</span><span class="nv">$filename</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">email</span><span class="o">-&gt;</span><span class="na">message</span><span class="p">(</span><span class="s1">&#39;&lt;img src=&#39;</span><span class="nx">cid</span><span class="o">:</span><span class="s2">&quot;. </span><span class="si">$cid</span><span class="s2"> .&quot;</span><span class="s1">&#39; alt=&quot;photo1&quot; /&gt;&#39;</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">email</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>CID for each Email have to be create again to be unique.</p>
 </div>
 <div class="section" id="this-email-print-debugger">
 <h3>$this-&gt;email-&gt;print_debugger()<a class="headerlink" href="#this-email-print-debugger" title="Permalink to this headline">¶</a></h3>

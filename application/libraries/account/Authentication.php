@@ -21,6 +21,8 @@ class Authentication {
 		{
 			$this->CI->load->driver('session');
 		}
+		
+		log_message('debug', 'Authentication Class Initalized');
 	}
 
 	// --------------------------------------------------------------------
@@ -42,7 +44,7 @@ class Authentication {
 	 * Sign user in
 	 *
 	 * @access public
-	 * @param string  $username
+	 * @param string  $username Username or e-mail
 	 * @param string  $password
 	 * @param bool $remember
 	 * @return bool or string
@@ -58,7 +60,8 @@ class Authentication {
 		}
 		else
 		{
-			if($validation = $this->check_user_validation_suspend($user) === TRUE)
+			$validation = $this->check_user_validation_suspend($user);
+			if($validation != 'invalid' || $validation != 'suspended')
 			{
 				// Check password
 				if ( ! $this->check_password($user->password, $password))
@@ -163,13 +166,13 @@ class Authentication {
 	 */
 	private function check_user_validation_suspend($account)
 	{
-		if($account->verifiedon == NULL && $this->CI->config->item('account_email_validation_required'))
+		if($account->verifiedon === NULL && $this->CI->config->item('account_email_validation_required'))
 		{
-			return 'invalid';
+			return "invalid";
 		}
 		elseif($account->suspendedon != NULL)
 		{
-			return 'suspended';
+			return "suspended";
 		}
 		else
 		{

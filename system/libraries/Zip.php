@@ -403,11 +403,19 @@ class CI_Zip {
 		}
 
 		flock($fp, LOCK_EX);
-		fwrite($fp, $this->get_zip());
+
+		for ($written = 0, $data = $this->get_zip(), $length = strlen($data); $written < $length; $written += $result)
+		{
+			if (($result = fwrite($fp, substr($data, $written))) === FALSE)
+			{
+				break;
+			}
+		}
+
 		flock($fp, LOCK_UN);
 		fclose($fp);
 
-		return TRUE;
+		return is_int($result);
 	}
 
 	// --------------------------------------------------------------------
@@ -425,8 +433,7 @@ class CI_Zip {
 			$filename .= '.zip';
 		}
 
-		$CI =& get_instance();
-		$CI->load->helper('download');
+		get_instance()->load->helper('download');
 		$get_zip = $this->get_zip();
 		$zip_content =& $get_zip;
 

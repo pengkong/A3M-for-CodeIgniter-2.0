@@ -29,7 +29,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x28547d0>
+			<function <lambda> at 0x3db7de8>
 			</div>
 		</div>
 
@@ -274,6 +274,18 @@ into the definition</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dbforge</span><span class="o">-&gt;</span><span class="na">create_table</span><span class="p">(</span><span class="s1">&#39;table_name&#39;</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">);</span>
 <span class="c1">// gives CREATE TABLE IF NOT EXISTS table_name</span>
 </pre></div>
+</div>
+<p>You could also pass optional table attributes, such as MySQL&#8217;s <tt class="docutils literal"><span class="pre">ENGINE</span></tt>:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$attributes</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;ENGINE&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;InnoDB&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dbforge</span><span class="o">-&gt;</span><span class="na">create_table</span><span class="p">(</span><span class="s1">&#39;table_name&#39;</span><span class="p">,</span> <span class="k">FALSE</span><span class="p">,</span> <span class="nv">$attributes</span><span class="p">);</span>
+<span class="c1">// produces: CREATE TABLE `table_name` (...) ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Unless you specify the <tt class="docutils literal"><span class="pre">CHARACTER</span> <span class="pre">SET</span></tt> and/or <tt class="docutils literal"><span class="pre">COLLATE</span></tt> attributes,
+<tt class="docutils literal"><span class="pre">create_table()</span></tt> will always add them with your configured <em>char_set</em>
+and <em>dbcollat</em> values, as long as they are not empty (MySQL only).</p>
 </div>
 </div>
 <div class="section" id="dropping-a-table">

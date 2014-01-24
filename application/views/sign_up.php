@@ -2,7 +2,7 @@
 	<div class="col-lg-12">
 		<h3><?php echo lang('sign_up_heading'); ?></h3>
 		
-		<div class="alert">
+		<div class="alert alert-danger">
 			<strong><?php echo lang('notice');?> </strong> <?php echo lang('registration_disabled'); ?>
 		</div>
 	</div>
@@ -110,11 +110,13 @@
 	</div>
 
 	<div class="col-lg-6">
-		<?php if ($this->config->item('third_party_auth_providers')) : ?>
+		<?php if ($third_party_auth = $this->config->item('third_party_auth')) : ?>
 			<h3><?php echo sprintf(lang('sign_up_third_party_heading')); ?></h3>
 			<ul>
-				<?php foreach ($this->config->item('third_party_auth_providers') as $provider) : ?>
-				<li class="third_party <?php echo $provider; ?>"><?php echo anchor('account/connect_'.$provider, ' ', array('title' => sprintf(lang('sign_up_with'), lang('connect_'.$provider)))); ?></li>
+				<?php foreach($third_party_auth['providers'] as $provider_name => $provider_values) : ?>
+					<?php if($provider_values['enabled']) : ?>
+					<li class="third_party"><?php echo anchor('account/connect/'.$provider_name, '<img src="'.base_url(RES_DIR.'/img/auth_icons/'.strtolower($provider_name).'.png').'" alt="'.sprintf(lang('sign_up_with'), lang('connect_'.strtolower($provider_name))).'" height="64" width="64">' ); ?></li>
+					<?php endif; ?>
 				<?php endforeach; ?>
 			</ul>
 		<?php endif; ?>
@@ -122,7 +124,7 @@
 	<?php
 	    if(!isset($account))
 	    {
-		    echo '<script src="'.base_url('/resource/js/sign_up_validation.js').'"></script>';
+		    echo '<script src="'.base_url('resource/js/sign_up_validation.js').'"></script>';
 		    echo '<script>
 		    <!-- START : Instant Verification Check -->
 		    var _u_noUsername = "'.lang('sign_up_js_validation_no_username').'";

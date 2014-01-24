@@ -52,7 +52,7 @@ class Settings extends CI_Controller {
 		}
 
 		// Setup form validation
-		$this->form_validation->set_error_delimiters('<div class="field_error">', '</div>');
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
 		$this->form_validation->set_rules(array(array('field' => 'settings_email', 'label' => 'lang:settings_email', 'rules' => 'trim|required|valid_email|max_length[160]'), array('field' => 'settings_firstname', 'label' => 'lang:settings_firstname', 'rules' => 'trim|max_length[80]'), array('field' => 'settings_lastname', 'label' => 'lang:settings_lastname', 'rules' => 'trim|max_length[80]')));
 
 		// Run form validation

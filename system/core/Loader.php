@@ -184,9 +184,16 @@ class CI_Loader {
 		}
 		elseif (is_array($library))
 		{
-			foreach ($library as $class)
+			foreach ($library as $key => $value)
 			{
-				$this->library($class, $params);
+				if (is_int($key))
+				{
+					$this->library($value, $params);
+				}
+				else
+				{
+					$this->library($key, $params, $value);
+				}
 			}
 
 			return $this;
@@ -642,8 +649,7 @@ class CI_Loader {
 	 */
 	public function config($file, $use_sections = FALSE, $fail_gracefully = FALSE)
 	{
-		$CI =& get_instance();
-		return $CI->config->load($file, $use_sections, $fail_gracefully);
+		return get_instance()->config->load($file, $use_sections, $fail_gracefully);
 	}
 
 	// --------------------------------------------------------------------

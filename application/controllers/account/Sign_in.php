@@ -40,7 +40,7 @@ class Sign_in extends CI_Controller {
 		$recaptcha_result = $this->recaptcha->check();
 
 		// Setup form validation
-		$this->form_validation->set_error_delimiters('<span class="field_error">', '</span>');
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
 		$this->form_validation->set_rules(array(
 			array(
 				'field' => 'sign_in_username_email',
@@ -72,13 +72,13 @@ class Sign_in extends CI_Controller {
 				}
 				else
 				{
-					if($sign_in_error == 'invalid')
+					if($sign_in_error === "invalid")
 					{
 						//show login error
 						$data['sign_in_error'] = lang('sign_in_non_validated_email');
 						
 					}
-					elseif($sign_in_error == 'suspended')
+					elseif($sign_in_error === "suspended")
 					{
 						//show login error
 						$data['sign_in_error'] = lang('sign_in_suspended_account');

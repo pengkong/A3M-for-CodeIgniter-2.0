@@ -131,7 +131,7 @@ class Manage_roles extends CI_Controller {
     $data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
 
     // Setup form validation
-    $this->form_validation->set_error_delimiters('<div class="field_error">', '</div>');
+    $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
     $this->form_validation->set_rules(
       array(
         array(

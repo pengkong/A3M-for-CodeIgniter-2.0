@@ -724,7 +724,15 @@ class XML_RPC_Client extends CI_Xmlrpc
 			.'Content-Length: '.strlen($msg->payload).$r.$r
 			.$msg->payload;
 
-		if ( ! fwrite($fp, $op, strlen($op)))
+		for ($written = 0, $length = strlen($op); $written < $length; $written += $result)
+		{
+			if (($result = fwrite($fp, substr($op, $written))) === FALSE)
+			{
+				break;
+			}
+		}
+
+		if ($result === FALSE)
 		{
 			error_log($this->xmlrpcstr['http_error']);
 			return new XML_RPC_Response(0, $this->xmlrpcerr['http_error'], $this->xmlrpcstr['http_error']);
@@ -884,10 +892,10 @@ class XML_RPC_Response
 	/**
 	 * Decode
 	 *
-	 * @param	mixed
+	 * @param	mixed	$array
 	 * @return	array
 	 */
-	public function decode($array = FALSE)
+	public function decode($array = NULL)
 	{
 		$CI =& get_instance();
 
@@ -899,9 +907,9 @@ class XML_RPC_Response
 				{
 					$array[$key] = $this->decode($array[$key]);
 				}
-				else
+				elseif ($this->xss_clean)
 				{
-					$array[$key] = ($this->xss_clean) ? $CI->security->xss_clean($array[$key]) : $array[$key];
+					$array[$key] = $CI->security->xss_clean($array[$key]);
 				}
 			}
 
@@ -914,9 +922,9 @@ class XML_RPC_Response
 		{
 			$result = $this->decode($result);
 		}
-		else
+		elseif ($this->xss_clean)
 		{
-			$result = ($this->xss_clean) ? $CI->security->xss_clean($result) : $result;
+			$result = $CI->security->xss_clean($result);
 		}
 
 		return $result;
@@ -1113,15 +1121,15 @@ class XML_RPC_Message extends CI_Xmlrpc
 		//-------------------------------------
 
 		$parser = xml_parser_create($this->xmlrpc_defencoding);
-
-		$this->xh[$parser] = array(
-						'isf'		=> 0,
-						'ac'		=> '',
-						'headers'	=> array(),
-						'stack'		=> array(),
-						'valuestack'	=> array(),
-						'isf_reason'	=> 0
-					);
+		$pname = (string) $parser;
+		$this->xh[$pname] = array(
+			'isf'		=> 0,
+			'ac'		=> '',
+			'headers'	=> array(),
+			'stack'		=> array(),
+			'valuestack'	=> array(),
+			'isf_reason'	=> 0
+		);
 
 		xml_set_object($parser, $this);
 		xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, TRUE);
@@ -1137,7 +1145,7 @@ class XML_RPC_Message extends CI_Xmlrpc
 			{
 				break;
 			}
-			$this->xh[$parser]['headers'][] = $line;
+			$this->xh[$pname]['headers'][] = $line;
 		}
 		$data = implode("\r\n", $lines);
 
@@ -1155,18 +1163,18 @@ class XML_RPC_Message extends CI_Xmlrpc
 		xml_parser_free($parser);
 
 		// Got ourselves some badness, it seems
-		if ($this->xh[$parser]['isf'] > 1)
+		if ($this->xh[$pname]['isf'] > 1)
 		{
 			if ($this->debug === TRUE)
 			{
-				echo "---Invalid Return---\n".$this->xh[$parser]['isf_reason']."---Invalid Return---\n\n";
+				echo "---Invalid Return---\n".$this->xh[$pname]['isf_reason']."---Invalid Return---\n\n";
 			}
 
-			return new XML_RPC_Response(0, $this->xmlrpcerr['invalid_return'], $this->xmlrpcstr['invalid_return'].' '.$this->xh[$parser]['isf_reason']);
+			return new XML_RPC_Response(0, $this->xmlrpcerr['invalid_return'], $this->xmlrpcstr['invalid_return'].' '.$this->xh[$pname]['isf_reason']);
 		}
-		elseif ( ! is_object($this->xh[$parser]['value']))
+		elseif ( ! is_object($this->xh[$pname]['value']))
 		{
-			return new XML_RPC_Response(0, $this->xmlrpcerr['invalid_return'], $this->xmlrpcstr['invalid_return'].' '.$this->xh[$parser]['isf_reason']);
+			return new XML_RPC_Response(0, $this->xmlrpcerr['invalid_return'], $this->xmlrpcstr['invalid_return'].' '.$this->xh[$pname]['isf_reason']);
 		}
 
 		// Display XML content for debugging
@@ -1174,10 +1182,10 @@ class XML_RPC_Message extends CI_Xmlrpc
 		{
 			echo '<pre>';
 
-			if (count($this->xh[$parser]['headers'] > 0))
+			if (count($this->xh[$pname]['headers'] > 0))
 			{
 				echo "---HEADERS---\n";
-				foreach ($this->xh[$parser]['headers'] as $header)
+				foreach ($this->xh[$pname]['headers'] as $header)
 				{
 					echo $header."\n";
 				}
@@ -1185,13 +1193,13 @@ class XML_RPC_Message extends CI_Xmlrpc
 			}
 
 			echo "---DATA---\n".htmlspecialchars($data)."\n---END DATA---\n\n---PARSED---\n";
-			var_dump($this->xh[$parser]['value']);
+			var_dump($this->xh[$pname]['value']);
 			echo "\n---END PARSED---</pre>";
 		}
 
 		// Send response
-		$v = $this->xh[$parser]['value'];
-		if ($this->xh[$parser]['isf'])
+		$v = $this->xh[$pname]['value'];
+		if ($this->xh[$pname]['isf'])
 		{
 			$errno_v = $v->me['struct']['faultCode'];
 			$errstr_v = $v->me['struct']['faultString'];
@@ -1210,7 +1218,7 @@ class XML_RPC_Message extends CI_Xmlrpc
 			$r = new XML_RPC_Response($v);
 		}
 
-		$r->headers = $this->xh[$parser]['headers'];
+		$r->headers = $this->xh[$pname]['headers'];
 		return $r;
 	}
 
@@ -1241,6 +1249,8 @@ class XML_RPC_Message extends CI_Xmlrpc
 	 */
 	public function open_tag($the_parser, $name)
 	{
+		$the_parser = (string) $the_parser;
+
 		// If invalid nesting, then return
 		if ($this->xh[$the_parser]['isf'] > 1) return;
 
@@ -1340,6 +1350,8 @@ class XML_RPC_Message extends CI_Xmlrpc
 	 */
 	public function closing_tag($the_parser, $name)
 	{
+		$the_parser = (string) $the_parser;
+
 		if ($this->xh[$the_parser]['isf'] > 1) return;
 
 		// Remove current element from stack and set variable
@@ -1472,6 +1484,8 @@ class XML_RPC_Message extends CI_Xmlrpc
 	 */
 	public function character_data($the_parser, $data)
 	{
+		$the_parser = (string) $the_parser;
+
 		if ($this->xh[$the_parser]['isf'] > 1) return; // XML Fault found already
 
 		// If a value has not been found
@@ -1509,14 +1523,14 @@ class XML_RPC_Message extends CI_Xmlrpc
 	/**
 	 * Output parameters
 	 *
-	 * @param	array
+	 * @param	array	$array
 	 * @return	array
 	 */
-	public function output_parameters($array = FALSE)
+	public function output_parameters(array $array = array())
 	{
 		$CI =& get_instance();
 
-		if (is_array($array))
+		if ( ! empty($array))
 		{
 			while (list($key) = each($array))
 			{
@@ -1524,11 +1538,11 @@ class XML_RPC_Message extends CI_Xmlrpc
 				{
 					$array[$key] = $this->output_parameters($array[$key]);
 				}
-				else
+				elseif ($key !== 'bits' && $this->xss_clean)
 				{
 					// 'bits' is for the MetaWeblog API image bits
 					// @todo - this needs to be made more general purpose
-					$array[$key] = ($key === 'bits' OR $this->xss_clean === FALSE) ? $array[$key] : $CI->security->xss_clean($array[$key]);
+					$array[$key] = $CI->security->xss_clean($array[$key]);
 				}
 			}
 
