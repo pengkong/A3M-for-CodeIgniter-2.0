@@ -29,7 +29,7 @@ class MY_Session extends CI_Session {
 		// Mark all 'old' flashdata as 'new' (keep data from being deleted during next request)
 		else
 		{
-			$userdata = $this->all_userdata();
+			$userdata = $this->userdata();
 			foreach ($userdata as $name => $value)
 			{
 				$parts = explode(':old:', $name);

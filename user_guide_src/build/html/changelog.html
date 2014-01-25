@@ -28,7 +28,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x4795f50>
+			<function <lambda> at 0x2d39848>
 			</div>
 		</div>
 
@@ -322,22 +322,18 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 </li>
 <li>Libraries<ul>
 <li><a class="reference internal" href="libraries/sessions.html"><em>Session Library</em></a> changes include:<ul>
-<li>Library changed to <a class="reference internal" href="general/drivers.html"><em>Driver</em></a> with classic Cookie driver as default.</li>
-<li>Added Native PHP Session driver to work with <tt class="docutils literal"><span class="pre">$_SESSION</span></tt>.</li>
-<li>Custom drivers can be added anywhere in package paths and be loaded with the library.</li>
-<li>Drivers interchangeable on the fly.</li>
-<li>New <strong>tempdata</strong> feature allows setting user data items with an expiration time.</li>
-<li>Added default <tt class="docutils literal"><span class="pre">$config['sess_driver']</span></tt> and <tt class="docutils literal"><span class="pre">$config['sess_valid_drivers']</span></tt> items to <em>config.php</em> file.</li>
-<li>Cookie driver now respects php.ini&#8217;s <em>session.gc_probability</em> and <em>session.gc_divisor</em> settings.</li>
-<li>Cookie driver now uses HMAC authentication instead of the simple md5 checksum.</li>
-<li>The Cookie driver now also checks authentication on encrypted session data.</li>
-<li>Changed the Cookie driver to select only one row when using database sessions.</li>
-<li>Cookie driver now only writes to database at end of request when using database.</li>
-<li>Cookie driver now uses PHP functions for faster array manipulation when using database.</li>
-<li>Added <tt class="docutils literal"><span class="pre">all_flashdata()</span></tt> method to session class. Returns an associative array of only flashdata.</li>
-<li>Added <tt class="docutils literal"><span class="pre">has_userdata()</span></tt> method to verify existence of userdata item.</li>
-<li>Added <tt class="docutils literal"><span class="pre">tempdata()</span></tt>, <tt class="docutils literal"><span class="pre">set_tempdata()</span></tt>, and <tt class="docutils literal"><span class="pre">unset_tempdata()</span></tt> methods for manipulating tempdata.</li>
-<li><tt class="docutils literal"><span class="pre">keep_flashdata()</span></tt> now accepts an array of keys.</li>
+<li>Library changed to <a class="reference internal" href="general/drivers.html"><em>Driver</em></a> with classic &#8216;cookie&#8217; driver as the default.</li>
+<li>Added a &#8216;native&#8217; PHP Session driver to work with <tt class="docutils literal"><span class="pre">$_SESSION</span></tt>.</li>
+<li>Added a new <strong>tempdata</strong> feature that allows setting userdata items with expiration time (<tt class="docutils literal"><span class="pre">tempdata()</span></tt>, <tt class="docutils literal"><span class="pre">set_tempdata()</span></tt>, <tt class="docutils literal"><span class="pre">unset_tempdata()</span></tt>).</li>
+<li>Added default <tt class="docutils literal"><span class="pre">$config['sess_driver']</span></tt> and <tt class="docutils literal"><span class="pre">$config['sess_valid_drivers']</span></tt> items to <em>application/config.php</em> file.</li>
+<li>Changed &#8216;cookie&#8217; driver to respect php.ini&#8217;s <em>session.gc_probability</em> and <em>session.gc_divisor</em> settings.</li>
+<li>Changed &#8216;cookie&#8217; driver to use HMAC authentication instead of a simple md5 checksum.</li>
+<li>Changed &#8216;cookie&#8217; driver to select only one row when using database sessions.</li>
+<li>Changed &#8216;cookie&#8217; driver to write to only write to the database at end of page execution.</li>
+<li>Changed method <tt class="docutils literal"><span class="pre">keep_flashdata()</span></tt> to also accept an array of keys.</li>
+<li>Changed methods <tt class="docutils literal"><span class="pre">userdata()</span></tt>, <tt class="docutils literal"><span class="pre">flashdata()</span></tt> to return an array of all userdata/flashdata when no parameter is passed.</li>
+<li>Deprecated method <tt class="docutils literal"><span class="pre">all_userdata()</span></tt> - it is now just an alias for <tt class="docutils literal"><span class="pre">userdata()</span></tt> with no parameters.</li>
+<li>Added method <tt class="docutils literal"><span class="pre">has_userdata()</span></tt> that verifies the existence of a userdata item.</li>
 <li>Added <em>debug</em> level log messages for key events in the session validation process.</li>
 </ul>
 </li>
@@ -751,6 +747,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Fixed a bug (#2737) - <a class="reference internal" href="libraries/xmlrpc.html"><em>XML-RPC Library</em></a> used objects as array keys, which triggered E_NOTICE messages.</li>
 <li>Fixed a bug (#2729) - <tt class="docutils literal"><span class="pre">CI_Security::_validate_entities()</span></tt> used overly-intrusive <tt class="docutils literal"><span class="pre">preg_replace()</span></tt> patterns that produced false-positives.</li>
 <li>Fixed a bug (#2771) - <tt class="docutils literal"><span class="pre">CI_Security::xss_clean()</span></tt> didn&#8217;t take into account HTML5 entities.</li>
+<li>Fixed a bug in the <a class="reference internal" href="libraries/sessions.html"><em>Session Library</em></a> &#8216;cookie&#8217; driver where authentication was not performed for encrypted cookies.</li>
 </ul>
 </div>
 </div>
