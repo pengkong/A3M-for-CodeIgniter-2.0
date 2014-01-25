@@ -144,7 +144,7 @@ class Account_model extends CI_Model {
 		$hasher = new PasswordHash(PHPASS_HASH_STRENGTH, PHPASS_HASH_PORTABLE);
 		$new_hashed_password = $hasher->HashPassword($password_new);
 
-		$this->db->update('a3m_account', array('password' => $new_hashed_password), array('id' => $account_id));
+		$this->db->update('a3m_account', array('password' => $new_hashed_password, 'forceresetpass' => FALSE), array('id' => $account_id));
 	}
 
 	// --------------------------------------------------------------------
@@ -238,6 +238,8 @@ class Account_model extends CI_Model {
 
 		$this->db->update('a3m_account', array('suspendedon' => mdate('%Y-%m-%d %H:%i:%s', now())), array('id' => $account_id));
 	}
+	
+	// --------------------------------------------------------------------
 
 	/**
 	 * Remove account suspended datetime
@@ -251,20 +253,47 @@ class Account_model extends CI_Model {
 		$this->db->update('a3m_account', array('suspendedon' => NULL), array('id' => $account_id));
 	}
 	
+	// --------------------------------------------------------------------
+	
 	/**
 	 * Verify user
 	 * 
 	 * @access public
 	 * @param int $account_id
-	 * @return void
-	 *
-	 * @todo have return boolen for confirmation, just in case
+	 * @return boolean
 	 */
 	function verify($account_id)
 	{
 		$this->load->helper('date');
 		
 		$this->db->update('a3m_account', array('verifiedon' => mdate('%Y-%m-%d %H:%i:%s', now())), array('id' => $account_id));
+		
+		if($this->db->affected_rows() === 1)
+		{
+			return TRUE;
+		}
+		
+		return FALSE;
+	}
+	
+	// --------------------------------------------------------------------
+	
+	/**
+	 * Changes the force reset parameter in the DB
+	 * @param int $account_id
+	 * @param boolean $action Set TRUE to force user to reset password on next login or FALSE when the reset has been performed
+	 * @return boolean
+	 */
+	public function force_reset_password($account_id, $action)
+	{
+		$this->db->update('a3m_account', array('forceresetpass' => $action), array('id' => $account_id));
+		
+		if($this->db->affected_rows() === 1)
+		{
+			return TRUE;
+		}
+		
+		return FALSE;
 	}
 }
 

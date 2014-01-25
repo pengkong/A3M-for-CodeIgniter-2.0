@@ -107,6 +107,15 @@ class Authentication {
 		
 		$this->CI->Account_model->update_last_signed_in_datetime($account_id);
 		
+		//check if they need to reset password
+		$account = $this->CI->Account_model->get_by_id($account_id);
+		
+		if($account->forceresetpass)
+		{
+			//redirect to password page
+			redirect(base_url('account/password/'));
+		}
+		
 		// Redirect signed in user with session redirect
 		if ($redirect = $this->CI->session->userdata('sign_in_redirect'))
 		{
@@ -119,6 +128,7 @@ class Authentication {
 			redirect($this->CI->input->get('continue'));
 		}
 		
+		//change this URL for default redirect after sign in
 		redirect(base_url());
 	}
 
