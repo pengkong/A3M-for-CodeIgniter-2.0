@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS  `ci_sessions` (
     `user_data` text NOT NULL,
     PRIMARY KEY (`session_id`, `ip_address`, `user_agent`),
     KEY `last_activity_idx` (`last_activity`)
-);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
