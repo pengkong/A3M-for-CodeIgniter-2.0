@@ -28,7 +28,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x2d39848>
+			<function <lambda> at 0x57cf848>
 			</div>
 		</div>
 
@@ -512,7 +512,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Changed <tt class="docutils literal"><span class="pre">_exception_handler()</span></tt> to respect php.ini <em>display_errors</em> setting.</li>
 <li>Added function <a class="reference internal" href="general/common_functions.html#is_https" title="is_https"><tt class="xref php php-func docutils literal"><span class="pre">is_https()</span></tt></a> to check if a secure connection is used.</li>
 <li>Added function <a class="reference internal" href="general/common_functions.html#is_cli" title="is_cli"><tt class="xref php php-func docutils literal"><span class="pre">is_cli()</span></tt></a> to replace the <tt class="docutils literal"><span class="pre">CI_Input::is_cli_request()</span></tt> method.</li>
-<li>Added function <a class="reference internal" href="general/common_functions.html#function_usable" title="function_usable"><tt class="xref php php-func docutils literal"><span class="pre">function_usable()</span></tt></a> to check if a function exists and is not disabled by <cite>Suhosin &lt;http://www.hardened-php.net/suhosin/&gt;</cite>.</li>
+<li>Added function <a class="reference internal" href="general/common_functions.html#function_usable" title="function_usable"><tt class="xref php php-func docutils literal"><span class="pre">function_usable()</span></tt></a> to work around a bug in <cite>Suhosin &lt;http://www.hardened-php.net/suhosin/&gt;</cite>.</li>
 <li>Removed the third (<cite>$php_error</cite>) from function <tt class="xref php php-func docutils literal"><span class="pre">log_message()</span></tt>.</li>
 </ul>
 </li>

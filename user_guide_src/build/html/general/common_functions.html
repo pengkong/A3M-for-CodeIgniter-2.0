@@ -29,7 +29,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x4f52cf8>
+			<function <lambda> at 0x40fbc08>
 			</div>
 		</div>
 
@@ -359,6 +359,13 @@ checks if it doesn&#8217;t disable the function being checked.</p>
 <p>It is useful if you want to check for the availability of functions
 such as <tt class="docutils literal"><span class="pre">eval()</span></tt> and <tt class="docutils literal"><span class="pre">exec()</span></tt>, which are dangerous and might be
 disabled on servers with highly restrictive security policies.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This function was introduced because Suhosin terminated
+script execution, but this turned out to be a bug. A fix
+has been available for some time (version 0.9.34), but is
+unfortunately not released yet.</p>
+</div>
 </div>
 </div>
 
