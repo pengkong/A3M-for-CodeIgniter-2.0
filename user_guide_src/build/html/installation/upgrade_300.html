@@ -31,7 +31,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x4a5e320>
+			<function <lambda> at 0x4b17ed8>
 			</div>
 		</div>
 
@@ -599,6 +599,19 @@ function named <a class="reference internal" href="../general/common_functions.h
 </pre></div>
 </div>
 <p><tt class="docutils literal"><span class="pre">CI_Input::is_cli_request()</span></tt> is now now deprecated and scheduled for removal in
+CodeIgniter 3.1+.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method is still available, but you&#8217;re strongly encouraged to remove its usage
+sooner rather than later.</p>
+</div>
+</div>
+<div class="section" id="config-library-method-system-url">
+<h3>Config library method system_url()<a class="headerlink" href="#config-library-method-system-url" title="Permalink to this headline">¶</a></h3>
+<p>Usage of <tt class="docutils literal"><span class="pre">CI_Config::system_url()</span></tt> encourages insecure coding practices.
+Namely, your CodeIgniter <em>system/</em> directory shouldn&#8217;t be publicly accessible
+from a security point of view.</p>
+<p>Because of this, this method is now deprecated and scheduled for removal in
 CodeIgniter 3.1+.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>

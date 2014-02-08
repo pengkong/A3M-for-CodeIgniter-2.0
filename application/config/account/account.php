@@ -58,7 +58,7 @@ $config['third_party_auth'] = array(
 
         "Yahoo" => array (
                 "enabled" => FALSE,
-                "keys"    => array ( "id" => "", "secret" => "" ),
+                "keys"    => array ( "key" => "", "secret" => "" ),
         ),
 
         "AOL"  => array (
