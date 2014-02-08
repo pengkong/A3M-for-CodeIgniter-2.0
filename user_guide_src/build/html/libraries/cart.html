@@ -21,6 +21,8 @@
 	    <script type="text/javascript" src="../_static/jquery.js"></script>
 	    <script type="text/javascript" src="../_static/underscore.js"></script>
 	    <script type="text/javascript" src="../_static/doctools.js"></script>
+
+	    <script type="text/javascript" src="../_static/asset/js/method-toc.js"></script>
 	    <link rel="top" title="CodeIgniter 3.0-dev documentation" href="../index.html" />
 	    <link rel="up" title="Libraries" href="index.html" />
 	    <link rel="next" title="Config Class" href="config.html" />
@@ -29,7 +31,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x2dac0c8>
+			<function <lambda> at 0x50497d0>
 			</div>
 		</div>
 
@@ -68,7 +70,7 @@
 
 		<div class="section body" id="content">
   <div class="section" id="shopping-cart-class">
-<h1><a class="toc-backref" href="#id1">Shopping Cart Class</a><a class="headerlink" href="#shopping-cart-class" title="Permalink to this headline">¶</a></h1>
+<h1>Shopping Cart Class<a class="headerlink" href="#shopping-cart-class" title="Permalink to this headline">¶</a></h1>
 <p>The Cart Class permits items to be added to a session that stays active
 while a user is browsing your site. These items can be retrieved and
 displayed in a standard &#8220;shopping cart&#8221; format, allowing the user to
@@ -76,10 +78,9 @@ update the quantity or remove items from the cart.</p>
 <p>Please note that the Cart Class ONLY provides the core &#8220;cart&#8221;
 functionality. It does not provide shipping, credit card authorization,
 or other processing components.</p>
-<div class="contents topic" id="page-contents">
-<p class="topic-title first">Page Contents</p>
+<div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#shopping-cart-class" id="id1">Shopping Cart Class</a><ul>
+<li><a class="reference internal" href="#using-the-cart-class" id="id1">Using the Cart Class</a><ul>
 <li><a class="reference internal" href="#initializing-the-shopping-cart-class" id="id2">Initializing the Shopping Cart Class</a></li>
 <li><a class="reference internal" href="#adding-an-item-to-the-cart" id="id3">Adding an Item to The Cart</a></li>
 <li><a class="reference internal" href="#adding-multiple-items-to-the-cart" id="id4">Adding Multiple Items to The Cart</a></li>
@@ -88,25 +89,15 @@ or other processing components.</p>
 <li><a class="reference internal" href="#what-is-a-row-id" id="id7">What is a Row ID?</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#function-reference" id="id8">Function Reference</a><ul>
-<li><a class="reference internal" href="#this-cart-insert" id="id9">$this-&gt;cart-&gt;insert();</a></li>
-<li><a class="reference internal" href="#this-cart-update" id="id10">$this-&gt;cart-&gt;update();</a></li>
-<li><a class="reference internal" href="#this-cart-remove-rowid" id="id11">$this-&gt;cart-&gt;remove(rowid);</a></li>
-<li><a class="reference internal" href="#this-cart-total" id="id12">$this-&gt;cart-&gt;total();</a></li>
-<li><a class="reference internal" href="#this-cart-total-items" id="id13">$this-&gt;cart-&gt;total_items();</a></li>
-<li><a class="reference internal" href="#this-cart-contents-boolean" id="id14">$this-&gt;cart-&gt;contents(boolean);</a></li>
-<li><a class="reference internal" href="#this-cart-get-item-row-id" id="id15">$this-&gt;cart-&gt;get_item($row_id);</a></li>
-<li><a class="reference internal" href="#this-cart-has-options-row-id" id="id16">$this-&gt;cart-&gt;has_options($row_id);</a></li>
-<li><a class="reference internal" href="#this-cart-product-options-row-id" id="id17">$this-&gt;cart-&gt;product_options($row_id);</a></li>
-<li><a class="reference internal" href="#this-cart-destroy" id="id18">$this-&gt;cart-&gt;destroy();</a></li>
 </ul>
 </li>
-</ul>
-</li>
+<li><a class="reference internal" href="#class-reference" id="id8">Class Reference</a></li>
 </ul>
 </div>
+<div class="custom-index container"></div><div class="section" id="using-the-cart-class">
+<h2><a class="toc-backref" href="#id1">Using the Cart Class</a><a class="headerlink" href="#using-the-cart-class" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="initializing-the-shopping-cart-class">
-<h2><a class="toc-backref" href="#id2">Initializing the Shopping Cart Class</a><a class="headerlink" href="#initializing-the-shopping-cart-class" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id2">Initializing the Shopping Cart Class</a><a class="headerlink" href="#initializing-the-shopping-cart-class" title="Permalink to this headline">¶</a></h3>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
 <p class="last">The Cart class utilizes CodeIgniter&#8217;s <a class="reference internal" href="sessions.html"><em>Session
@@ -133,7 +124,7 @@ application, you do not need to load the Session class.</p>
 </div>
 </div>
 <div class="section" id="adding-an-item-to-the-cart">
-<h2><a class="toc-backref" href="#id3">Adding an Item to The Cart</a><a class="headerlink" href="#adding-an-item-to-the-cart" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id3">Adding an Item to The Cart</a><a class="headerlink" href="#adding-an-item-to-the-cart" title="Permalink to this headline">¶</a></h3>
 <p>To add an item to the shopping cart, simply pass an array with the
 product information to the $this-&gt;cart-&gt;insert() function, as shown
 below:</p>
@@ -178,7 +169,7 @@ information in a table easier.</p>
 single item.</p>
 </div>
 <div class="section" id="adding-multiple-items-to-the-cart">
-<h2><a class="toc-backref" href="#id4">Adding Multiple Items to The Cart</a><a class="headerlink" href="#adding-multiple-items-to-the-cart" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id4">Adding Multiple Items to The Cart</a><a class="headerlink" href="#adding-multiple-items-to-the-cart" title="Permalink to this headline">¶</a></h3>
 <p>By using a multi-dimensional array, as shown below, it is possible to
 add multiple products to the cart in one action. This is useful in cases
 where you wish to allow people to select from among several items on the
@@ -210,7 +201,7 @@ same page.</p>
 </div>
 </div>
 <div class="section" id="displaying-the-cart">
-<h2><a class="toc-backref" href="#id5">Displaying the Cart</a><a class="headerlink" href="#displaying-the-cart" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id5">Displaying the Cart</a><a class="headerlink" href="#displaying-the-cart" title="Permalink to this headline">¶</a></h3>
 <p>To display the cart you will create a <a class="reference internal" href="../general/views.html"><em>view
 file</em></a> with code similar to the one shown below.</p>
 <p>Please note that this example uses the <a class="reference internal" href="../helpers/form_helper.html"><em>form
@@ -271,7 +262,7 @@ helper</em></a>.</p>
 </div>
 </div>
 <div class="section" id="updating-the-cart">
-<h2><a class="toc-backref" href="#id6">Updating The Cart</a><a class="headerlink" href="#updating-the-cart" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id6">Updating The Cart</a><a class="headerlink" href="#updating-the-cart" title="Permalink to this headline">¶</a></h3>
 <p>To update the information in your cart, you must pass an array
 containing the Row ID and quantity to the $this-&gt;cart-&gt;update()
 function:</p>
@@ -308,7 +299,7 @@ the cart.</p>
 </pre></div>
 </div>
 <div class="section" id="what-is-a-row-id">
-<h3><a class="toc-backref" href="#id7">What is a Row ID?</a><a class="headerlink" href="#what-is-a-row-id" title="Permalink to this headline">¶</a></h3>
+<h4><a class="toc-backref" href="#id7">What is a Row ID?</a><a class="headerlink" href="#what-is-a-row-id" title="Permalink to this headline">¶</a></h4>
 <p>The row ID is a unique identifier that is
 generated by the cart code when an item is added to the cart. The reason
 a unique ID is created is so that identical products with different
@@ -322,66 +313,229 @@ managed independently. It does so by creating a unique &#8220;row ID&#8221; base
 the product ID and any options associated with it.</p>
 <p>In nearly all cases, updating the cart will be something the user does
 via the &#8220;view cart&#8221; page, so as a developer, it is unlikely that you
-will ever have to concern yourself with the &#8220;row ID&#8221;, other then making
+will ever have to concern yourself with the &#8220;row ID&#8221;, other than making
 sure your &#8220;view cart&#8221; page contains this information in a hidden form
 field, and making sure it gets passed to the update function when the
 update form is submitted. Please examine the construction of the &#8220;view
 cart&#8221; page above for more information.</p>
 </div>
 </div>
-<div class="section" id="function-reference">
-<h2><a class="toc-backref" href="#id8">Function Reference</a><a class="headerlink" href="#function-reference" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="this-cart-insert">
-<h3><a class="toc-backref" href="#id9">$this-&gt;cart-&gt;insert();</a><a class="headerlink" href="#this-cart-insert" title="Permalink to this headline">¶</a></h3>
-<p>Permits you to add items to the shopping cart, as outlined above.</p>
 </div>
-<div class="section" id="this-cart-update">
-<h3><a class="toc-backref" href="#id10">$this-&gt;cart-&gt;update();</a><a class="headerlink" href="#this-cart-update" title="Permalink to this headline">¶</a></h3>
-<p>Permits you to update items in the shopping cart, as outlined above.</p>
-</div>
-<div class="section" id="this-cart-remove-rowid">
-<h3><a class="toc-backref" href="#id11">$this-&gt;cart-&gt;remove(rowid);</a><a class="headerlink" href="#this-cart-remove-rowid" title="Permalink to this headline">¶</a></h3>
-<p>Allows you to remove an item from the shopping cart by passing it the rowid.</p>
-</div>
-<div class="section" id="this-cart-total">
-<h3><a class="toc-backref" href="#id12">$this-&gt;cart-&gt;total();</a><a class="headerlink" href="#this-cart-total" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="class-reference">
+<h2><a class="toc-backref" href="#id8">Class Reference</a><a class="headerlink" href="#class-reference" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="CI_Cart">
+<em class="property">class </em><tt class="descname">CI_Cart</tt><a class="headerlink" href="#CI_Cart" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt>
+<tt class="descname">$product_id_rules = '.a-z0-9_-'</tt></dt>
+<dd><p>These are the regular expression rules that we use to validate the product
+ID - alpha-numeric, dashes, underscores, or periods by default</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<tt class="descname">$product_name_rules      = 'w -.:'</tt></dt>
+<dd><p>These are the regular expression rules that we use to validate the product ID and product name - alpha-numeric, dashes, underscores, colons or periods by
+default</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<tt class="descname">$product_name_safe = TRUE</tt></dt>
+<dd><p>Whether or not to only allow safe product names. Default TRUE.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Cart.insert">
+<tt class="descname">insert</tt><big>(</big><span class="optional">[</span><em>$items = array()</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#CI_Cart.insert" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$items</strong> (<em>array</em>) &#8211; Items to insert into the cart</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">TRUE on success, FALSE on failure</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+<p>Insert items into the cart and save it to the session table. Returns TRUE
+on success and FALSE on failure.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Cart.update">
+<tt class="descname">update</tt><big>(</big><span class="optional">[</span><em>$items = array()</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#CI_Cart.update" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$items</strong> (<em>array</em>) &#8211; Items to update in the cart</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">TRUE on success, FALSE on failure</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+<p>This method permits the quantity of a given item to be changed.
+Typically it is called from the &#8220;view cart&#8221; page if a user makes changes
+to the quantity before checkout. That array must contain the product ID
+and quantity for each item.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Cart.remove">
+<tt class="descname">remove</tt><big>(</big><em>$rowid</em><big>)</big><a class="headerlink" href="#CI_Cart.remove" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$rowid</strong> (<em>int</em>) &#8211; ID of the item to remove from the cart</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">TRUE on success, FALSE on failure</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+<p>Allows you to remove an item from the shopping cart by passing it the
+<tt class="docutils literal"><span class="pre">$rowid</span></tt>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Cart.total">
+<tt class="descname">total</tt><big>(</big><big>)</big><a class="headerlink" href="#CI_Cart.total" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Total amount</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
 <p>Displays the total amount in the cart.</p>
-</div>
-<div class="section" id="this-cart-total-items">
-<h3><a class="toc-backref" href="#id13">$this-&gt;cart-&gt;total_items();</a><a class="headerlink" href="#this-cart-total-items" title="Permalink to this headline">¶</a></h3>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Cart.total_items">
+<tt class="descname">total_items</tt><big>(</big><big>)</big><a class="headerlink" href="#CI_Cart.total_items" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Total amount of items in the cart</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
 <p>Displays the total number of items in the cart.</p>
-</div>
-<div class="section" id="this-cart-contents-boolean">
-<h3><a class="toc-backref" href="#id14">$this-&gt;cart-&gt;contents(boolean);</a><a class="headerlink" href="#this-cart-contents-boolean" title="Permalink to this headline">¶</a></h3>
-<p>Returns an array containing everything in the cart. You can sort the order,
-by which this is returned by passing it &#8220;true&#8221; where the contents will be sorted
-from newest to oldest, by leaving this function blank, you&#8217;ll automatically just get
-first added to the basket to last added to the basket.</p>
-</div>
-<div class="section" id="this-cart-get-item-row-id">
-<h3><a class="toc-backref" href="#id15">$this-&gt;cart-&gt;get_item($row_id);</a><a class="headerlink" href="#this-cart-get-item-row-id" title="Permalink to this headline">¶</a></h3>
-<p>Returns an array containing data for the item matching the specified row ID,
-or FALSE if no such item exists.</p>
-</div>
-<div class="section" id="this-cart-has-options-row-id">
-<h3><a class="toc-backref" href="#id16">$this-&gt;cart-&gt;has_options($row_id);</a><a class="headerlink" href="#this-cart-has-options-row-id" title="Permalink to this headline">¶</a></h3>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Cart.contents">
+<tt class="descname">contents</tt><big>(</big><span class="optional">[</span><em>$newest_first = FALSE</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#CI_Cart.contents" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$newest_first</strong> (<em>bool</em>) &#8211; Whether to order the array with newest items first</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">An array of cart contents</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>Returns an array containing everything in the cart. You can sort the
+order by which the array is returned by passing it TRUE where the contents
+will be sorted from newest to oldest, otherwise it is sorted from oldest
+to newest.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Cart.get_item">
+<tt class="descname">get_item</tt><big>(</big><em>$row_id</em><big>)</big><a class="headerlink" href="#CI_Cart.get_item" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$row_id</strong> (<em>int</em>) &#8211; Row ID to retrieve</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Array of item data</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>Returns an array containing data for the item matching the specified row
+ID, or FALSE if no such item exists.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Cart.has_options">
+<tt class="descname">has_options</tt><big>(</big><em>$row_id = ''</em><big>)</big><a class="headerlink" href="#CI_Cart.has_options" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$row_id</strong> (<em>int</em>) &#8211; Row ID to inspect</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">TRUE if options exist, FALSE otherwise</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
 <p>Returns TRUE (boolean) if a particular row in the cart contains options.
-This function is designed to be used in a loop with
-$this-&gt;cart-&gt;contents(), since you must pass the rowid to this function,
-as shown in the Displaying the Cart example above.</p>
-</div>
-<div class="section" id="this-cart-product-options-row-id">
-<h3><a class="toc-backref" href="#id17">$this-&gt;cart-&gt;product_options($row_id);</a><a class="headerlink" href="#this-cart-product-options-row-id" title="Permalink to this headline">¶</a></h3>
-<p>Returns an array of options for a particular product. This function is
-designed to be used in a loop with $this-&gt;cart-&gt;contents(), since you
-must pass the rowid to this function, as shown in the Displaying the
+This method is designed to be used in a loop with <tt class="docutils literal"><span class="pre">contents()</span></tt>, since
+you must pass the rowid to this function, as shown in the Displaying
+the Cart example above.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Cart.product_options">
+<tt class="descname">product_options</tt><big>(</big><span class="optional">[</span><em>$row_id = ''</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#CI_Cart.product_options" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$row_id</strong> (<em>int</em>) &#8211; Row ID</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Array of product options</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>Returns an array of options for a particular product. This method is
+designed to be used in a loop with <tt class="docutils literal"><span class="pre">contents()</span></tt>, since you
+must pass the rowid to this method, as shown in the Displaying the
 Cart example above.</p>
-</div>
-<div class="section" id="this-cart-destroy">
-<h3><a class="toc-backref" href="#id18">$this-&gt;cart-&gt;destroy();</a><a class="headerlink" href="#this-cart-destroy" title="Permalink to this headline">¶</a></h3>
-<p>Permits you to destroy the cart. This function will likely be called
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Cart.destroy">
+<tt class="descname">destroy</tt><big>(</big><big>)</big><a class="headerlink" href="#CI_Cart.destroy" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">void</td>
+</tr>
+</tbody>
+</table>
+<p>Permits you to destroy the cart. This method will likely be called
 when you are finished processing the customer&#8217;s order.</p>
-</div>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
@@ -389,7 +543,7 @@ when you are finished processing the customer&#8217;s order.</p>
 		</div>
 
 		<!-- {user_guide_comments} -->
-					
+		
 		<div id="footer">
 			<p class="top"><a href="#header" title="Return to top">Return to top</a></p>
 			<p><a href="http://codeigniter.com/">CodeIgniter</a> &ndash; Copyright &copy; 2013, EllisLab, Inc.</a></p>

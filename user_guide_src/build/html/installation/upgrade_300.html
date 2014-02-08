@@ -21,6 +21,8 @@
 	    <script type="text/javascript" src="../_static/jquery.js"></script>
 	    <script type="text/javascript" src="../_static/underscore.js"></script>
 	    <script type="text/javascript" src="../_static/doctools.js"></script>
+
+	    <script type="text/javascript" src="../_static/asset/js/method-toc.js"></script>
 	    <link rel="top" title="CodeIgniter 3.0-dev documentation" href="../index.html" />
 	    <link rel="up" title="Installation Instructions" href="index.html" />
 	    <link rel="next" title="Upgrading From Beta 1.0 to Beta 1.1" href="upgrade_b11.html" />
@@ -29,7 +31,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x2e6b320>
+			<function <lambda> at 0x4a5e320>
 			</div>
 		</div>
 
@@ -261,7 +263,7 @@ to FALSE, then this change doesn&#8217;t concern you.</p>
 <li>input-&gt;input_stream()</li>
 </ul>
 </li>
-<li><a class="reference internal" href="../helpers/cookie_helper.html"><em>Cookie Helper</em></a> <tt class="xref py py-func docutils literal"><span class="pre">get_cookie()</span></tt></li>
+<li><a class="reference internal" href="../helpers/cookie_helper.html"><em>Cookie Helper</em></a> <a class="reference internal" href="../helpers/cookie_helper.html#get_cookie" title="get_cookie"><tt class="xref py py-func docutils literal"><span class="pre">get_cookie()</span></tt></a></li>
 </ul>
 </div></blockquote>
 <div class="admonition important">
@@ -414,7 +416,7 @@ rather than later.</p>
 </div>
 <div class="section" id="string-helper-repeater">
 <h3>String helper repeater()<a class="headerlink" href="#string-helper-repeater" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="../helpers/string_helper.html"><em>String Helper</em></a> function <tt class="xref php php-func docutils literal"><span class="pre">repeater()</span></tt> is now just an alias for
+<p><a class="reference internal" href="../helpers/string_helper.html"><em>String Helper</em></a> function <a class="reference internal" href="../helpers/string_helper.html#repeater" title="repeater"><tt class="xref py py-func docutils literal"><span class="pre">repeater()</span></tt></a> is now just an alias for
 PHP&#8217;s native <tt class="docutils literal"><span class="pre">str_repeat()</span></tt> function. It is deprecated and scheduled for removal in CodeIgniter 3.1+.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -424,7 +426,7 @@ rather than later.</p>
 </div>
 <div class="section" id="string-helper-trim-slashes">
 <h3>String helper trim_slashes()<a class="headerlink" href="#string-helper-trim-slashes" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference internal" href="../helpers/string_helper.html"><em>String Helper</em></a> function <a class="reference internal" href="../helpers/string_helper.html#trim_slashes" title="trim_slashes"><tt class="xref php php-func docutils literal"><span class="pre">trim_slashes()</span></tt></a> is now just an alias
+<p><a class="reference internal" href="../helpers/string_helper.html"><em>String Helper</em></a> function <a class="reference internal" href="../helpers/string_helper.html#trim_slashes" title="trim_slashes"><tt class="xref py py-func docutils literal"><span class="pre">trim_slashes()</span></tt></a> is now just an alias
 for PHP&#8217;s native <tt class="docutils literal"><span class="pre">trim()</span></tt> function (with a slash passed as its second argument). It is deprecated and
 scheduled for removal in CodeIgniter 3.1+.</p>
 <div class="admonition note">
@@ -438,8 +440,8 @@ rather than later.</p>
 <p><a class="reference internal" href="../helpers/email_helper.html"><em>Email Helper</em></a> only has two functions</p>
 <blockquote>
 <div><ul class="simple">
-<li><a class="reference internal" href="../helpers/email_helper.html#valid_email" title="valid_email"><tt class="xref php php-func docutils literal"><span class="pre">valid_email()</span></tt></a></li>
-<li><a class="reference internal" href="../helpers/email_helper.html#send_email" title="send_email"><tt class="xref php php-func docutils literal"><span class="pre">send_email()</span></tt></a></li>
+<li><a class="reference internal" href="../helpers/email_helper.html#valid_email" title="valid_email"><tt class="xref py py-func docutils literal"><span class="pre">valid_email()</span></tt></a></li>
+<li><a class="reference internal" href="../helpers/email_helper.html#send_email" title="send_email"><tt class="xref py py-func docutils literal"><span class="pre">send_email()</span></tt></a></li>
 </ul>
 </div></blockquote>
 <p>Both of them are now aliases for PHP&#8217;s native <tt class="docutils literal"><span class="pre">filter_var()</span></tt> and <tt class="docutils literal"><span class="pre">mail()</span></tt> functions, respectively.
@@ -492,7 +494,7 @@ rather than later.</p>
 </div>
 <div class="section" id="string-helper-random-string-types-unique-and-encrypt">
 <h3>String helper random_string() types &#8216;unique&#8217; and &#8216;encrypt&#8217;<a class="headerlink" href="#string-helper-random-string-types-unique-and-encrypt" title="Permalink to this headline">¶</a></h3>
-<p>When using the <a class="reference internal" href="../helpers/string_helper.html"><em>String Helper</em></a> function <a class="reference internal" href="../helpers/string_helper.html#random_string" title="random_string"><tt class="xref php php-func docutils literal"><span class="pre">random_string()</span></tt></a>,
+<p>When using the <a class="reference internal" href="../helpers/string_helper.html"><em>String Helper</em></a> function <a class="reference internal" href="../helpers/string_helper.html#random_string" title="random_string"><tt class="xref py py-func docutils literal"><span class="pre">random_string()</span></tt></a>,
 you should no longer pass the <strong>unique</strong> and <strong>encrypt</strong> randomization types. They are only
 aliases for <strong>md5</strong> and <strong>sha1</strong> respectively and are now deprecated and scheduled for removal
 in CodeIgniter 3.1+.</p>
@@ -504,7 +506,7 @@ sooner rather than later.</p>
 </div>
 <div class="section" id="url-helper-url-title-separators-dash-and-underscore">
 <h3>URL helper url_title() separators &#8216;dash&#8217; and &#8216;underscore&#8217;<a class="headerlink" href="#url-helper-url-title-separators-dash-and-underscore" title="Permalink to this headline">¶</a></h3>
-<p>When using the <a class="reference internal" href="../helpers/url_helper.html"><em>URL Helper</em></a> function <a class="reference internal" href="../helpers/url_helper.html#url_title" title="url_title"><tt class="xref php php-func docutils literal"><span class="pre">url_title()</span></tt></a>, you
+<p>When using the <a class="reference internal" href="../helpers/url_helper.html"><em>URL Helper</em></a> function <a class="reference internal" href="../helpers/url_helper.html#url_title" title="url_title"><tt class="xref py py-func docutils literal"><span class="pre">url_title()</span></tt></a>, you
 should no longer pass <strong>dash</strong> or <strong>underscore</strong> as the word separator. This function will
 now accept any character and you should just pass the chosen character directly, so you
 should write &#8216;-&#8216; instead of &#8216;dash&#8217; and &#8216;_&#8217; instead of &#8216;underscore&#8217;.</p>
@@ -587,7 +589,7 @@ sooner rather than later.</p>
 <h3>Input library method is_cli_request()<a class="headerlink" href="#input-library-method-is-cli-request" title="Permalink to this headline">¶</a></h3>
 <p>Calls to the <tt class="docutils literal"><span class="pre">CI_Input::is_cli_request()</span></tt> method are necessary at many places
 in the CodeIgniter internals and this is often before the <a class="reference internal" href="../libraries/input.html"><em>Input Library</em></a> is loaded. Because of that, it is being replaced by a common
-function named <a class="reference internal" href="../general/common_functions.html#is_cli" title="is_cli"><tt class="xref php php-func docutils literal"><span class="pre">is_cli()</span></tt></a> and this method is now just an alias.</p>
+function named <a class="reference internal" href="../general/common_functions.html#is_cli" title="is_cli"><tt class="xref py py-func docutils literal"><span class="pre">is_cli()</span></tt></a> and this method is now just an alias.</p>
 <p>The new function is both available at all times for you to use and shorter to type.</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="c1">// Old</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">input</span><span class="o">-&gt;</span><span class="na">is_cli_request</span><span class="p">();</span>
@@ -608,7 +610,7 @@ sooner rather than later.</p>
 <div class="section" id="step-18-check-your-usage-of-text-helper-highlight-phrase">
 <h2>Step 18: Check your usage of Text helper highlight_phrase()<a class="headerlink" href="#step-18-check-your-usage-of-text-helper-highlight-phrase" title="Permalink to this headline">¶</a></h2>
 <p>The default HTML tag used by <a class="reference internal" href="../helpers/text_helper.html"><em>Text Helper</em></a> function
-<tt class="xref py py-func docutils literal"><span class="pre">highlight_phrase()</span></tt> has been changed from <tt class="docutils literal"><span class="pre">&lt;strong&gt;</span></tt> to the new HTML5
+<a class="reference internal" href="../helpers/text_helper.html#highlight_phrase" title="highlight_phrase"><tt class="xref py py-func docutils literal"><span class="pre">highlight_phrase()</span></tt></a> has been changed from <tt class="docutils literal"><span class="pre">&lt;strong&gt;</span></tt> to the new HTML5
 tag <tt class="docutils literal"><span class="pre">&lt;mark&gt;</span></tt>.</p>
 <p>Unless you&#8217;ve used your own highlighting tags, this might cause trouble
 for your visitors who use older web browsers such as Internet Explorer 8.
@@ -627,7 +629,7 @@ in order to avoid backwards compatibility with old browsers:</p>
 		</div>
 
 		<!-- {user_guide_comments} -->
-					
+		
 		<div id="footer">
 			<p class="top"><a href="#header" title="Return to top">Return to top</a></p>
 			<p><a href="http://codeigniter.com/">CodeIgniter</a> &ndash; Copyright &copy; 2013, EllisLab, Inc.</a></p>

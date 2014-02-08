@@ -21,6 +21,8 @@
 	    <script type="text/javascript" src="../_static/jquery.js"></script>
 	    <script type="text/javascript" src="../_static/underscore.js"></script>
 	    <script type="text/javascript" src="../_static/doctools.js"></script>
+
+	    <script type="text/javascript" src="../_static/asset/js/method-toc.js"></script>
 	    <link rel="top" title="CodeIgniter 3.0-dev documentation" href="../index.html" />
 	    <link rel="up" title="Libraries" href="index.html" />
 	    <link rel="next" title="HTML Table Class" href="table.html" />
@@ -29,7 +31,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x3128f50>
+			<function <lambda> at 0x33e8398>
 			</div>
 		</div>
 
@@ -75,8 +77,37 @@ session drivers: the classic <a class="reference internal" href="#cookie-driver"
 which supports usage of the native PHP Session mechanism. In addition,
 you may create your own <a class="reference internal" href="#custom-drivers">Custom Drivers</a> to store session data however
 you wish, while still taking advantage of the features of the Session class.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#using-the-session-class" id="id1">Using the Session Class</a><ul>
+<li><a class="reference internal" href="#initializing-a-session" id="id2">Initializing a Session</a></li>
+<li><a class="reference internal" href="#how-do-sessions-work" id="id3">How do Sessions work?</a></li>
+<li><a class="reference internal" href="#what-is-session-data" id="id4">What is Session Data?</a></li>
+<li><a class="reference internal" href="#retrieving-session-data" id="id5">Retrieving Session Data</a></li>
+<li><a class="reference internal" href="#adding-custom-session-data" id="id6">Adding Custom Session Data</a></li>
+<li><a class="reference internal" href="#removing-session-data" id="id7">Removing Session Data</a></li>
+<li><a class="reference internal" href="#flashdata" id="id8">Flashdata</a></li>
+<li><a class="reference internal" href="#tempdata" id="id9">Tempdata</a></li>
+<li><a class="reference internal" href="#destroying-a-session" id="id10">Destroying a Session</a></li>
+<li><a class="reference internal" href="#session-preferences" id="id11">Session Preferences</a></li>
+<li><a class="reference internal" href="#session-drivers" id="id12">Session Drivers</a><ul>
+<li><a class="reference internal" href="#cookie-driver" id="id13">Cookie Driver</a><ul>
+<li><a class="reference internal" href="#saving-session-data-to-a-database" id="id14">Saving Session Data to a Database</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#native-driver" id="id15">Native Driver</a></li>
+<li><a class="reference internal" href="#custom-drivers" id="id16">Custom Drivers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-reference" id="id17">Class Reference</a></li>
+</ul>
+</div>
+<div class="custom-index container"></div><div class="section" id="using-the-session-class">
+<h2><a class="toc-backref" href="#id1">Using the Session Class</a><a class="headerlink" href="#using-the-session-class" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="initializing-a-session">
-<h2>Initializing a Session<a class="headerlink" href="#initializing-a-session" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id2">Initializing a Session</a><a class="headerlink" href="#initializing-a-session" title="Permalink to this headline">¶</a></h3>
 <p>Sessions will typically run globally with each page load, so the session
 class must either be <a class="reference internal" href="../general/drivers.html"><em>initialized</em></a> in your
 <a class="reference internal" href="../general/controllers.html"><em>controller</em></a> constructors, or it can be
@@ -85,15 +116,17 @@ part the session class will run unattended in the background, so simply
 initializing the class will cause it to read, create, and update
 sessions.</p>
 <p>To initialize the Session class manually in your controller constructor,
-use the $this-&gt;load-&gt;driver function:</p>
+use the <tt class="docutils literal"><span class="pre">$this-&gt;load-&gt;driver</span></tt> function:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">driver</span><span class="p">(</span><span class="s1">&#39;session&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Once loaded, the Sessions library object will be available using:
-$this-&gt;session</p>
+<p>Once loaded, the Sessions library object will be available using:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="how-do-sessions-work">
-<h2>How do Sessions work?<a class="headerlink" href="#how-do-sessions-work" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id3">How do Sessions work?</a><a class="headerlink" href="#how-do-sessions-work" title="Permalink to this headline">¶</a></h3>
 <p>When a page is loaded, the session class will check to see if valid
 session data exists in the user&#8217;s session. If sessions data does <strong>not</strong>
 exist (or if it has expired) a new session will be created and saved.
@@ -106,7 +139,7 @@ session data or even add your own data to a user&#8217;s session, but the
 process of reading, writing, and updating a session is automatic.</p>
 </div>
 <div class="section" id="what-is-session-data">
-<h2>What is Session Data?<a class="headerlink" href="#what-is-session-data" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id4">What is Session Data?</a><a class="headerlink" href="#what-is-session-data" title="Permalink to this headline">¶</a></h3>
 <p>A <em>session</em>, as far as CodeIgniter is concerned, is simply an array
 containing the following information:</p>
 <ul class="simple">
@@ -122,10 +155,10 @@ data string)</li>
 prototype:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="p">[</span><span class="k">array</span><span class="p">]</span>
 <span class="p">(</span>
-     <span class="s1">&#39;session_id&#39;</span>    <span class="o">=&gt;</span> <span class="nx">random</span> <span class="nb">hash</span><span class="p">,</span>
-     <span class="s1">&#39;ip_address&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;string - user IP address&#39;</span><span class="p">,</span>
-     <span class="s1">&#39;user_agent&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;string - user agent data&#39;</span><span class="p">,</span>
-     <span class="s1">&#39;last_activity&#39;</span> <span class="o">=&gt;</span> <span class="nx">timestamp</span>
+        <span class="s1">&#39;session_id&#39;</span>    <span class="o">=&gt;</span> <span class="nx">random</span> <span class="nb">hash</span><span class="p">,</span>
+        <span class="s1">&#39;ip_address&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;string - user IP address&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;user_agent&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;string - user agent data&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;last_activity&#39;</span> <span class="o">=&gt;</span> <span class="nx">timestamp</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -140,7 +173,7 @@ your system/config/config.php file.</p>
 </div>
 </div>
 <div class="section" id="retrieving-session-data">
-<h2>Retrieving Session Data<a class="headerlink" href="#retrieving-session-data" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id5">Retrieving Session Data</a><a class="headerlink" href="#retrieving-session-data" title="Permalink to this headline">¶</a></h3>
 <p>Any piece of information from the session array is available using the
 following function:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">userdata</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">);</span>
@@ -156,9 +189,26 @@ fetch. For example, to fetch the session ID you will do this:</p>
 <p class="last">The function returns NULL if the item you are
 trying to access does not exist.</p>
 </div>
+<p>If you want to retrieve all of the existing userdata, you can simply
+omit the item key parameter:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">userdata</span><span class="p">();</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * Produces something similar to:</span>
+<span class="sd"> *</span>
+<span class="sd"> *      Array</span>
+<span class="sd"> *      (</span>
+<span class="sd"> *              [session_id] =&gt; 4a5a5dca22728fb0a84364eeb405b601</span>
+<span class="sd"> *              [ip_address] =&gt; 127.0.0.1</span>
+<span class="sd"> *              [user_agent] =&gt; Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7;</span>
+<span class="sd"> *              [last_activity] =&gt; 1303142623</span>
+<span class="sd"> *      )</span>
+<span class="sd"> */</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="adding-custom-session-data">
-<h2>Adding Custom Session Data<a class="headerlink" href="#adding-custom-session-data" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id6">Adding Custom Session Data</a><a class="headerlink" href="#adding-custom-session-data" title="Permalink to this headline">¶</a></h3>
 <p>A useful aspect of the session array is that you can add your own data
 to it and it will be stored in the user&#8217;s cookie. Why would you want to
 do this? Here&#8217;s one example:</p>
@@ -174,43 +224,26 @@ containing your new data to this function:</p>
 <p>Where $array is an associative array containing your new data. Here&#8217;s an
 example:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$newdata</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
-                   <span class="s1">&#39;username&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;johndoe&#39;</span><span class="p">,</span>
-                   <span class="s1">&#39;email&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;johndoe@some-site.com&#39;</span><span class="p">,</span>
-                   <span class="s1">&#39;logged_in&#39;</span> <span class="o">=&gt;</span> <span class="k">TRUE</span>
-               <span class="p">);</span>
+        <span class="s1">&#39;username&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;johndoe&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;email&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;johndoe@some-site.com&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;logged_in&#39;</span> <span class="o">=&gt;</span> <span class="k">TRUE</span>
+<span class="p">);</span>
 
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">set_userdata</span><span class="p">(</span><span class="nv">$newdata</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>If you want to add userdata one value at a time, set_userdata() also
+<p>If you want to add userdata one value at a time, <tt class="docutils literal"><span class="pre">set_userdata()</span></tt> also
 supports this syntax.</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">set_userdata</span><span class="p">(</span><span class="s1">&#39;some_name&#39;</span><span class="p">,</span> <span class="s1">&#39;some_value&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>If you want to verify that a userdata value exists, call has_userdata().</p>
+<p>If you want to verify that a userdata value exists, call <tt class="docutils literal"><span class="pre">has_userdata()</span></tt>.</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">has_userdata</span><span class="p">(</span><span class="s1">&#39;some_name&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="retrieving-all-session-data">
-<h2>Retrieving All Session Data<a class="headerlink" href="#retrieving-all-session-data" title="Permalink to this headline">¶</a></h2>
-<p>An array of all userdata can be retrieved as follows:</p>
-<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">userdata</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>And returns an associative array like the following:</p>
-<div class="highlight-ci"><div class="highlight"><pre><span class="k">Array</span>
-<span class="p">(</span>
-    <span class="p">[</span><span class="nb">session_id</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">4</span><span class="nx">a5a5dca22728fb0a84364eeb405b601</span>
-    <span class="p">[</span><span class="nx">ip_address</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
-    <span class="p">[</span><span class="nx">user_agent</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">Mozilla</span><span class="o">/</span><span class="mf">5.0</span> <span class="p">(</span><span class="nx">Macintosh</span><span class="p">;</span> <span class="nx">U</span><span class="p">;</span> <span class="nx">Intel</span> <span class="nx">Mac</span> <span class="nx">OS</span> <span class="nx">X</span> <span class="mi">10</span><span class="nx">_6_7</span><span class="p">;</span>
-    <span class="p">[</span><span class="nx">last_activity</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1303142623</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
 <div class="section" id="removing-session-data">
-<h2>Removing Session Data<a class="headerlink" href="#removing-session-data" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id7">Removing Session Data</a><a class="headerlink" href="#removing-session-data" title="Permalink to this headline">¶</a></h3>
 <p>Just as set_userdata() can be used to add information into a session,
 unset_userdata() can be used to remove it, by passing the session key.
 For example, if you wanted to remove &#8216;some_name&#8217; from your session
@@ -226,7 +259,7 @@ information:</p>
 </div>
 </div>
 <div class="section" id="flashdata">
-<h2>Flashdata<a class="headerlink" href="#flashdata" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id8">Flashdata</a><a class="headerlink" href="#flashdata" title="Permalink to this headline">¶</a></h3>
 <p>CodeIgniter supports &#8220;flashdata&#8221;, or session data that will only be
 available for the next server request, and are then automatically
 cleared. These can be very useful, and are typically used for
@@ -240,8 +273,8 @@ in your own session names.</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">set_flashdata</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>You can also pass an array to set_flashdata(), in the same manner as
-set_userdata().</p>
+<p>You can also pass an array to <tt class="docutils literal"><span class="pre">set_flashdata()</span></tt>, in the same manner as
+<tt class="docutils literal"><span class="pre">set_userdata()</span></tt>.</p>
 <p>To read a flashdata variable:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">flashdata</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">);</span>
 </pre></div>
@@ -251,15 +284,19 @@ set_userdata().</p>
 </pre></div>
 </div>
 <p>If you find that you need to preserve a flashdata variable through an
-additional request, you can do so using the keep_flashdata() function.
+additional request, you can do so using the <tt class="docutils literal"><span class="pre">keep_flashdata()</span></tt> function.
 You can either pass a single item or an array of flashdata items to keep.</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">keep_flashdata</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">);</span>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">keep_flashdata</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;item1&#39;</span><span class="p">,</span> <span class="s1">&#39;item2&#39;</span><span class="p">,</span> <span class="s1">&#39;item3&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The function will return NULL if the item cannot be found.</p>
+</div>
 </div>
 <div class="section" id="tempdata">
-<h2>Tempdata<a class="headerlink" href="#tempdata" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id9">Tempdata</a><a class="headerlink" href="#tempdata" title="Permalink to this headline">¶</a></h3>
 <p>CodeIgniter also supports &#8220;tempdata&#8221;, or session data with a specific
 expiration time. After the value expires, or the session expires or is
 deleted, the value is automatically removed.</p>
@@ -269,7 +306,7 @@ deleted, the value is automatically removed.</p>
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">set_tempdata</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="nv">$expire</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>You can also pass an array to set_tempdata():</p>
+<p>You can also pass an array to <tt class="docutils literal"><span class="pre">set_tempdata()</span></tt>:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$tempdata</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;newuser&#39;</span> <span class="o">=&gt;</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Thanks for joining!&#39;</span><span class="p">);</span>
 
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">set_tempdata</span><span class="p">(</span><span class="nv">$tempdata</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nv">$expire</span><span class="p">);</span>
@@ -284,14 +321,18 @@ deleted, the value is automatically removed.</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">tempdata</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
+<p>And of course, if you want to retrieve all existing tempdata:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">tempdata</span><span class="p">();</span>
+</pre></div>
+</div>
 <p>If you need to remove a tempdata value before it expires,
-use unset_tempdata():</p>
+use <tt class="docutils literal"><span class="pre">unset_tempdata()</span></tt>:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">unset_tempdata</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="destroying-a-session">
-<h2>Destroying a Session<a class="headerlink" href="#destroying-a-session" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id10">Destroying a Session</a><a class="headerlink" href="#destroying-a-session" title="Permalink to this headline">¶</a></h3>
 <p>To clear the current session:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">sess_destroy</span><span class="p">();</span>
 </pre></div>
@@ -300,11 +341,11 @@ use unset_tempdata():</p>
 <p class="first admonition-title">Note</p>
 <p class="last">This function should be the last one called, and even flash
 variables will no longer be available. If you only want some items
-destroyed and not all, use unset_userdata().</p>
+destroyed and not all, use <tt class="docutils literal"><span class="pre">unset_userdata()</span></tt>.</p>
 </div>
 </div>
 <div class="section" id="session-preferences">
-<h2>Session Preferences<a class="headerlink" href="#session-preferences" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id11">Session Preferences</a><a class="headerlink" href="#session-preferences" title="Permalink to this headline">¶</a></h3>
 <p>You&#8217;ll find the following Session related preferences in your
 <em>application/config/config.php</em> file:</p>
 <table border="1" class="docutils">
@@ -420,7 +461,7 @@ following configuration values shared by the <a class="reference internal" href=
 </table>
 </div>
 <div class="section" id="session-drivers">
-<h2>Session Drivers<a class="headerlink" href="#session-drivers" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id12">Session Drivers</a><a class="headerlink" href="#session-drivers" title="Permalink to this headline">¶</a></h3>
 <p>By default, the <a class="reference internal" href="#cookie-driver">Cookie Driver</a> is loaded when a session is initialized.
 However, any valid driver may be selected with the $config[&#8216;sess_driver&#8217;]
 line in your config.php file.</p>
@@ -429,7 +470,7 @@ installed, and <a class="reference internal" href="#custom-drivers">Custom Drive
 <p>Typically, only one driver will be used at a time, but CodeIgniter does
 support loading multiple drivers. If a specific valid driver is called, it
 will be automatically loaded. Or, an additional driver may be explicitly
-loaded by calling load_driver():</p>
+loaded by <tt class="docutils literal"><span class="pre">calling</span> <span class="pre">load_driver()</span></tt>:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">load_driver</span><span class="p">(</span><span class="s1">&#39;native&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -452,14 +493,14 @@ the <em>cookie</em> userdata &#8216;foo&#8217;, nor would the <em>cookie</em> va
 the call to unset the <em>native</em> &#8216;foo&#8217; value. The drivers maintain independent
 sets of values, regardless of key names.</p>
 <p>A specific driver may also be explicitly selected for use by pursuant
-methods with the select_driver() call:</p>
+methods with the <tt class="docutils literal"><span class="pre">select_driver()</span></tt> call:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">select_driver</span><span class="p">(</span><span class="s1">&#39;native&#39;</span><span class="p">);</span>
 
 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">userdata</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">);</span>       <span class="c1">// Uses the native driver</span>
 </pre></div>
 </div>
 <div class="section" id="cookie-driver">
-<h3>Cookie Driver<a class="headerlink" href="#cookie-driver" title="Permalink to this headline">¶</a></h3>
+<h4><a class="toc-backref" href="#id13">Cookie Driver</a><a class="headerlink" href="#cookie-driver" title="Permalink to this headline">¶</a></h4>
 <p>The Cookie driver stores session information for each user as serialized
 (and optionally encrypted) data in a cookie. It can also store the session
 data in a database table for added security, as this permits the session ID
@@ -486,7 +527,7 @@ data string than the original so keep careful track of how much data you
 are storing.</p>
 </div>
 <div class="section" id="saving-session-data-to-a-database">
-<h4>Saving Session Data to a Database<a class="headerlink" href="#saving-session-data-to-a-database" title="Permalink to this headline">¶</a></h4>
+<h5><a class="toc-backref" href="#id14">Saving Session Data to a Database</a><a class="headerlink" href="#saving-session-data-to-a-database" title="Permalink to this headline">¶</a></h5>
 <p>While the session data array stored in the user&#8217;s cookie contains a
 Session ID, unless you store session data in a database there is no way
 to validate it. For some applications that require little or no
@@ -512,13 +553,26 @@ session class:</p>
 <span class="p">);</span>
 </pre></div>
 </div>
+<p>Or if you&#8217;re using PostgreSQL:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nx">CREATE</span> <span class="nx">TABLE</span>  <span class="nx">ci_sessions</span> <span class="p">(</span>
+        <span class="nb">session_id</span> <span class="nx">varchar</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="s1">&#39;0&#39;</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+        <span class="nx">ip_address</span> <span class="nx">varchar</span><span class="p">(</span><span class="mi">45</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="s1">&#39;0&#39;</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+        <span class="nx">user_agent</span> <span class="nx">varchar</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+        <span class="nx">last_activity</span> <span class="nx">bigint</span> <span class="k">DEFAULT</span> <span class="mi">0</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+        <span class="nx">user_data</span> <span class="nx">text</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+        <span class="nx">PRIMARY</span> <span class="nx">KEY</span> <span class="p">(</span><span class="nb">session_id</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="nx">CREATE</span> <span class="nx">INDEX</span> <span class="nx">last_activity_idx</span> <span class="nx">ON</span> <span class="nx">ci_sessions</span><span class="p">(</span><span class="nx">last_activity</span><span class="p">);</span>
+</pre></div>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>By default the table is called ci_sessions, but you can name
 it anything you want as long as you update the
-application/config/config.php file so that it contains the name you have
-chosen. Once you have created your database table you can enable the
-database option in your config.php file as follows:</p>
+<em>application/config/config.php</em> file so that it contains the name
+you have chosen. Once you have created your database table you
+can enable the database option in your config.php file as follows:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;sess_use_database&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">TRUE</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -537,23 +591,24 @@ it.</p>
 </div>
 </div>
 <div class="section" id="native-driver">
-<h3>Native Driver<a class="headerlink" href="#native-driver" title="Permalink to this headline">¶</a></h3>
+<h4><a class="toc-backref" href="#id15">Native Driver</a><a class="headerlink" href="#native-driver" title="Permalink to this headline">¶</a></h4>
 <p>The Native driver relies on native PHP sessions to store data in the
 $_SESSION superglobal array. All stored values continue to be available
 through $_SESSION, but flash- and temp- data items carry special prefixes.</p>
 </div>
 <div class="section" id="custom-drivers">
-<h3>Custom Drivers<a class="headerlink" href="#custom-drivers" title="Permalink to this headline">¶</a></h3>
+<h4><a class="toc-backref" href="#id16">Custom Drivers</a><a class="headerlink" href="#custom-drivers" title="Permalink to this headline">¶</a></h4>
 <p>You may also <a class="reference internal" href="../general/creating_drivers.html"><em>create your own</em></a> custom
 session drivers. A session driver basically manages an array of name/value
 pairs with some sort of storage mechanism.</p>
-<p>To make a new driver, extend CI_Session_driver. Overload the initialize()
+<p>To make a new driver, extend CI_Session_driver. Overload the <tt class="docutils literal"><span class="pre">initialize()</span></tt>
 method and read or create session data. Then implement a save handler to
 write changed data to storage (sess_save), a destroy handler to remove
 deleted data (sess_destroy), a regenerate handler to make a new session ID
 (sess_regenerate), and an access handler to expose the data (get_userdata).
 Your initial class might look like:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CI_Session_custom</span> <span class="k">extends</span> <span class="nx">CI_Session_driver</span> <span class="p">{</span>
+
         <span class="k">protected</span> <span class="k">function</span> <span class="nf">initialize</span><span class="p">()</span>
         <span class="p">{</span>
                 <span class="c1">// Read existing session data or create a new one</span>
@@ -578,15 +633,16 @@ Your initial class might look like:</p>
         <span class="p">{</span>
                 <span class="c1">// Return a reference to your userdata array</span>
         <span class="p">}</span>
+
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Notice that get_userdata() returns a reference so the parent library is
+<p>Notice that <tt class="docutils literal"><span class="pre">get_userdata()</span></tt> returns a reference so the parent library is
 accessing the same array the driver object is using. This saves memory
 and avoids synchronization issues during usage.</p>
 <p>Put your driver in the libraries/Session/drivers folder anywhere in your
 package paths. This includes the application directory, the system directory,
-or any path you add with $CI-&gt;load-&gt;add_package_path(). Your driver must be
+or any path you add with <tt class="docutils literal"><span class="pre">$CI-&gt;load-&gt;add_package_path()</span></tt>. Your driver must be
 named CI_Session_&lt;name&gt;, and your filename must be Session_&lt;name&gt;.php,
 preferably also capitalized, such as:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nx">CI_Session_foo</span> <span class="nx">in</span> <span class="nx">libraries</span><span class="o">/</span><span class="nx">Session</span><span class="o">/</span><span class="nx">drivers</span><span class="o">/</span><span class="nx">Session_foo</span><span class="o">.</span><span class="nx">php</span>
@@ -611,12 +667,367 @@ your config.php file to an array including your driver name:</p>
 </div>
 </div>
 </div>
+<div class="section" id="class-reference">
+<h2><a class="toc-backref" href="#id17">Class Reference</a><a class="headerlink" href="#class-reference" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="CI_Session">
+<em class="property">class </em><tt class="descname">CI_Session</tt><a class="headerlink" href="#CI_Session" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="CI_Session.load_driver">
+<tt class="descname">load_driver</tt><big>(</big><em>$driver</em><big>)</big><a class="headerlink" href="#CI_Session.load_driver" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$driver</strong> (<em>string</em>) &#8211; Driver name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Instance of currently loaded session driver</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">mixed</td>
+</tr>
+</tbody>
+</table>
+<p>Loads a session storage driver</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Session.select_driver">
+<tt class="descname">select_driver</tt><big>(</big><em>$driver</em><big>)</big><a class="headerlink" href="#CI_Session.select_driver" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$driver</strong> (<em>string</em>) &#8211; Driver name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">void</td>
+</tr>
+</tbody>
+</table>
+<p>Selects default session storage driver.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Session.sess_destroy">
+<tt class="descname">sess_destroy</tt><big>(</big><big>)</big><a class="headerlink" href="#CI_Session.sess_destroy" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">void</td>
+</tr>
+</tbody>
+</table>
+<p>Destroys current session</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method should be the last one called, and even flash
+variables will no longer be available after it is used.
+If you only want some items destroyed and not all, use
+<tt class="docutils literal"><span class="pre">unset_userdata()</span></tt>.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Session.sess_regenerate">
+<tt class="descname">sess_regenerate</tt><big>(</big><span class="optional">[</span><em>$destroy = FALSE</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#CI_Session.sess_regenerate" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$destroy</strong> (<em>bool</em>) &#8211; Whether to destroy session data</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">void</td>
+</tr>
+</tbody>
+</table>
+<p>Regenerate the current session data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Session.userdata">
+<tt class="descname">userdata</tt><big>(</big><span class="optional">[</span><em>$item = NULL</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#CI_Session.userdata" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$item</strong> (<em>string</em>) &#8211; Session item name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Item value if found, NULL if not or an array of all userdata if $item parameter is not used</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">mixed</td>
+</tr>
+</tbody>
+</table>
+<p>If no parameter is passed, it will return an associative array of all existing userdata.</p>
+<p>Otherwise returns a string containing the value of the passed item or NULL if the item is not found.
+Example:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">userdata</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">);</span>
+<span class="c1">//returns example@example.com considering the set_userdata example.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Session.all_userdata">
+<tt class="descname">all_userdata</tt><big>(</big><big>)</big><a class="headerlink" href="#CI_Session.all_userdata" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An array of all userdata</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>Returns an array with all of the session userdata items.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This method is DEPRECATED. Use <tt class="docutils literal"><span class="pre">userdata()</span></tt> with no parameters instead.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<tt class="descname">&amp;get_userdata()</tt></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A reference to the userdata array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">&amp;array</td>
+</tr>
+</tbody>
+</table>
+<p>Returns a reference to the userdata array.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Session.set_userdata">
+<tt class="descname">set_userdata</tt><big>(</big><em>$newdata</em><span class="optional">[</span>, <em>$newval = ''</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#CI_Session.set_userdata" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$newdata</strong> (<em>mixed</em>) &#8211; Item name or array of items</li>
+<li><strong>$newval</strong> (<em>mixed</em>) &#8211; Item value or empty string (not required if $newdata is array)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">void</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Sets items into session example usages:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">set_userdata</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;example@example.com&#39;</span><span class="p">);</span>
+<span class="c1">// adds item user with value example@example.com to the session</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">set_userdata</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;example@example.com&#39;</span><span class="p">));</span>
+<span class="c1">// does the same as the above example - adds item user with value example@example.com to the session</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Session.unset_userdata">
+<tt class="descname">unset_userdata</tt><big>(</big><em>$item</em><big>)</big><a class="headerlink" href="#CI_Session.unset_userdata" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$item</strong> (<em>mixed</em>) &#8211; Item name or an array containing multiple items</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">void</td>
+</tr>
+</tbody>
+</table>
+<p>Unsets previously set items from the session. Example:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">unset_userdata</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">);</span>
+<span class="c1">//unsets &#39;user&#39; from session data.</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">unset_userdata</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;useremail&#39;</span><span class="p">));</span>
+<span class="c1">//unsets both &#39;user&#39; and &#39;useremail&#39; from the session data.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Session.has_userdata">
+<tt class="descname">has_userdata</tt><big>(</big><em>$item</em><big>)</big><a class="headerlink" href="#CI_Session.has_userdata" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$item</strong> (<em>string</em>) &#8211; Item name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">TRUE if item exists, FALSE if not</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+<p>Checks if an item exists in the session.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Session.flashdata">
+<tt class="descname">flashdata</tt><big>(</big><span class="optional">[</span><em>$item = NULL</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#CI_Session.flashdata" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$item</strong> (<em>string</em>) &#8211; Flashdata item name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Item value if found, NULL if not or an array of all flashdata if $item parameter is not used</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">mixed</td>
+</tr>
+</tbody>
+</table>
+<p>If no parameter is passed, it will return an associative array of all existing flashdata.</p>
+<p>Otherwise returns a string containing the value of the passed item or NULL if the item is not found.
+Example:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">flashdata</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">);</span>
+<span class="c1">//returns &#39;Test message.&#39; considering the set_flashdata example.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Session.set_flashdata">
+<tt class="descname">set_flashdata</tt><big>(</big><em>$newdata</em><span class="optional">[</span>, <em>$newval = ''</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#CI_Session.set_flashdata" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$newdata</strong> (<em>mixed</em>) &#8211; Item name or an array of items</li>
+<li><strong>$newval</strong> (<em>mixed</em>) &#8211; Item value or empty string (not required if $newdata is array)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">void</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Sets items into session flashdata example usages:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">set_flashdata</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="s1">&#39;Test message.&#39;</span><span class="p">);</span>
+<span class="c1">// adds item &#39;message&#39; with value &#39;Test message.&#39; to the session flashdata</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">set_flashdata</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;Test message.&#39;</span><span class="p">));</span>
+<span class="c1">// does the same as the above example - adds item &#39;message&#39; with value &#39;Test message.&#39;</span>
+ <span class="nx">to</span> <span class="nx">the</span> <span class="nx">session</span> <span class="nx">flashdata</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Session.keep_flashdata">
+<tt class="descname">keep_flashdata</tt><big>(</big><em>$item</em><big>)</big><a class="headerlink" href="#CI_Session.keep_flashdata" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$item</strong> (<em>mixed</em>) &#8211; Item name or an array containing multiple flashdata items</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">void</td>
+</tr>
+</tbody>
+</table>
+<p>Keeps items into flashdata for one more request.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Session.tempdata">
+<tt class="descname">tempdata</tt><big>(</big><span class="optional">[</span><em>$item = NULL</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#CI_Session.tempdata" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$item</strong> (<em>string</em>) &#8211; Tempdata item name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Item value if found, NULL if not or an array of all tempdata if $item parameter is not used</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">mixed</td>
+</tr>
+</tbody>
+</table>
+<p>If no parameter is passed, it will return an associative array of all existing tempdata.</p>
+<p>Otherwise returns a string containing the value of the passed item or NULL if the item is not found.
+Example:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">tempdata</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">);</span>
+<span class="c1">//returns &#39;Test message.&#39; considering the set_tempdata example.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Session.set_tempdata">
+<tt class="descname">set_tempdata</tt><big>(</big><em>$newdata</em><span class="optional">[</span>, <em>$newval = ''</em><span class="optional">[</span>, <em>$expire = 0</em><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#CI_Session.set_tempdata" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$newdata</strong> (<em>mixed</em>) &#8211; Item name or array containing multiple items</li>
+<li><strong>$newval</strong> (<em>string</em>) &#8211; Item value or empty string (not required if $newdata is array)</li>
+<li><strong>$expire</strong> (<em>int</em>) &#8211; Lifetime in seconds (0 for default)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">void</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Sets items into session tempdata example:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">set_tempdata</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="s1">&#39;Test message.&#39;</span><span class="p">,</span> <span class="s1">&#39;60&#39;</span><span class="p">);</span>
+<span class="c1">// adds item &#39;message&#39; with value &#39;Test message.&#39; to the session tempdata for 60 seconds</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">set_tempdata</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;Test message.&#39;</span><span class="p">));</span>
+<span class="c1">// does the same as the above example - adds item &#39;message&#39; with value &#39;Test message.&#39;</span>
+<span class="nx">to</span> <span class="nx">the</span> <span class="nx">session</span> <span class="nx">tempdata</span> <span class="k">for</span> <span class="nx">the</span> <span class="k">default</span> <span class="nx">value</span> <span class="nx">of</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Session.unset_tempdata">
+<tt class="descname">unset_tempdata</tt><big>(</big><em>$item</em><big>)</big><a class="headerlink" href="#CI_Session.unset_tempdata" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$item</strong> (<em>mixed</em>) &#8211; Item name or an array containing multiple items</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">void</td>
+</tr>
+</tbody>
+</table>
+<p>Unsets previously set items from tempdata. Example:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">unset_tempdata</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">);</span>
+<span class="c1">//unsets &#39;user&#39; from tempdata.</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">unset_tempdata</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;useremail&#39;</span><span class="p">));</span>
+<span class="c1">//unsets both &#39;user&#39; and &#39;useremail&#39; from the tempdata.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
 
 
 		</div>
 
 		<!-- {user_guide_comments} -->
-					
+		
 		<div id="footer">
 			<p class="top"><a href="#header" title="Return to top">Return to top</a></p>
 			<p><a href="http://codeigniter.com/">CodeIgniter</a> &ndash; Copyright &copy; 2013, EllisLab, Inc.</a></p>

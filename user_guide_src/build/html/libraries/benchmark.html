@@ -21,6 +21,8 @@
 	    <script type="text/javascript" src="../_static/jquery.js"></script>
 	    <script type="text/javascript" src="../_static/underscore.js"></script>
 	    <script type="text/javascript" src="../_static/doctools.js"></script>
+
+	    <script type="text/javascript" src="../_static/asset/js/method-toc.js"></script>
 	    <link rel="top" title="CodeIgniter 3.0-dev documentation" href="../index.html" />
 	    <link rel="up" title="Libraries" href="index.html" />
 	    <link rel="next" title="Caching Driver" href="caching.html" />
@@ -29,7 +31,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x295f488>
+			<function <lambda> at 0x33e85f0>
 			</div>
 		</div>
 
@@ -68,7 +70,7 @@
 
 		<div class="section body" id="content">
   <div class="section" id="benchmarking-class">
-<h1><a class="toc-backref" href="#id1">Benchmarking Class</a><a class="headerlink" href="#benchmarking-class" title="Permalink to this headline">¶</a></h1>
+<h1>Benchmarking Class<a class="headerlink" href="#benchmarking-class" title="Permalink to this headline">¶</a></h1>
 <p>CodeIgniter has a Benchmarking class that is always active, enabling the
 time difference between any two marked points to be calculated.</p>
 <div class="admonition note">
@@ -80,20 +82,19 @@ is no need to do it manually.</p>
 invoked, and ended by the output class right before sending the final
 view to the browser, enabling a very accurate timing of the entire
 system execution to be shown.</p>
-<div class="contents topic" id="table-of-contents">
-<p class="topic-title first">Table of Contents</p>
+<div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#benchmarking-class" id="id1">Benchmarking Class</a><ul>
-<li><a class="reference internal" href="#using-the-benchmark-class" id="id2">Using the Benchmark Class</a></li>
-<li><a class="reference internal" href="#profiling-your-benchmark-points" id="id3">Profiling Your Benchmark Points</a></li>
-<li><a class="reference internal" href="#displaying-total-execution-time" id="id4">Displaying Total Execution Time</a></li>
-<li><a class="reference internal" href="#displaying-memory-consumption" id="id5">Displaying Memory Consumption</a></li>
+<li><a class="reference internal" href="#using-the-benchmark-class" id="id1">Using the Benchmark Class</a><ul>
+<li><a class="reference internal" href="#profiling-your-benchmark-points" id="id2">Profiling Your Benchmark Points</a></li>
+<li><a class="reference internal" href="#displaying-total-execution-time" id="id3">Displaying Total Execution Time</a></li>
+<li><a class="reference internal" href="#displaying-memory-consumption" id="id4">Displaying Memory Consumption</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#class-reference" id="id5">Class Reference</a></li>
 </ul>
 </div>
-<div class="section" id="using-the-benchmark-class">
-<h2><a class="toc-backref" href="#id2">Using the Benchmark Class</a><a class="headerlink" href="#using-the-benchmark-class" title="Permalink to this headline">¶</a></h2>
+<div class="custom-index container"></div><div class="section" id="using-the-benchmark-class">
+<h2><a class="toc-backref" href="#id1">Using the Benchmark Class</a><a class="headerlink" href="#using-the-benchmark-class" title="Permalink to this headline">¶</a></h2>
 <p>The Benchmark class can be used within your
 <a class="reference internal" href="../general/controllers.html"><em>controllers</em></a>,
 <a class="reference internal" href="../general/views.html"><em>views</em></a>, or your <a class="reference internal" href="../general/models.html"><em>models</em></a>.
@@ -134,9 +135,8 @@ want, and you can set multiple sets of markers. Consider this example:</p>
 </pre></div>
 </div>
 </div>
-</div>
 <div class="section" id="profiling-your-benchmark-points">
-<h2><a class="toc-backref" href="#id3">Profiling Your Benchmark Points</a><a class="headerlink" href="#profiling-your-benchmark-points" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id2">Profiling Your Benchmark Points</a><a class="headerlink" href="#profiling-your-benchmark-points" title="Permalink to this headline">¶</a></h3>
 <p>If you want your benchmark data to be available to the
 <a class="reference internal" href="../general/profiling.html"><em>Profiler</em></a> all of your marked points must
 be set up in pairs, and each mark point name must end with _start and
@@ -158,7 +158,7 @@ _end. Each pair of points must otherwise be named identically. Example:</p>
 information.</p>
 </div>
 <div class="section" id="displaying-total-execution-time">
-<h2><a class="toc-backref" href="#id4">Displaying Total Execution Time</a><a class="headerlink" href="#displaying-total-execution-time" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id3">Displaying Total Execution Time</a><a class="headerlink" href="#displaying-total-execution-time" title="Permalink to this headline">¶</a></h3>
 <p>If you would like to display the total elapsed time from the moment
 CodeIgniter starts to the moment the final output is sent to the
 browser, simply place this in one of your view templates:</p>
@@ -183,7 +183,7 @@ functions you must set your own start/end points.</p>
 </div>
 </div>
 <div class="section" id="displaying-memory-consumption">
-<h2><a class="toc-backref" href="#id5">Displaying Memory Consumption</a><a class="headerlink" href="#displaying-memory-consumption" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id4">Displaying Memory Consumption</a><a class="headerlink" href="#displaying-memory-consumption" title="Permalink to this headline">¶</a></h3>
 <p>If your PHP installation is configured with &#8211;enable-memory-limit, you
 can display the amount of memory consumed by the entire system using the
 following code in one of your view file:</p>
@@ -202,12 +202,85 @@ this pseudo-variable, if you prefer not to use the pure PHP:</p>
 </div>
 </div>
 </div>
+<div class="section" id="class-reference">
+<h2><a class="toc-backref" href="#id5">Class Reference</a><a class="headerlink" href="#class-reference" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="CI_Benchmark">
+<em class="property">class </em><tt class="descname">CI_Benchmark</tt><a class="headerlink" href="#CI_Benchmark" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="CI_Benchmark.mark">
+<tt class="descname">mark</tt><big>(</big><em>$name</em><big>)</big><a class="headerlink" href="#CI_Benchmark.mark" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$name</strong> (<em>string</em>) &#8211; the name you wish to assign to your marker</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">void</td>
+</tr>
+</tbody>
+</table>
+<p>Sets a benchmark marker.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Benchmark.elapsed_time">
+<tt class="descname">elapsed_time</tt><big>(</big><span class="optional">[</span><em>$point1 = ''</em><span class="optional">[</span>, <em>$point2 = ''</em><span class="optional">[</span>, <em>$decimals = 4</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#CI_Benchmark.elapsed_time" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$point1</strong> (<em>string</em>) &#8211; a particular marked point</li>
+<li><strong>$point2</strong> (<em>string</em>) &#8211; a particular marked point</li>
+<li><strong>$decimals</strong> (<em>int</em>) &#8211; number of decimal places for precision</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Elapsed time</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Calculates and returns the time difference between two marked points.</p>
+<p>If the first parameter is empty this function instead returns the
+<tt class="docutils literal"><span class="pre">{elapsed_time}</span></tt> pseudo-variable. This permits the full system
+execution time to be shown in a template. The output class will
+swap the real value for this variable.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Benchmark.memory_usage">
+<tt class="descname">memory_usage</tt><big>(</big><big>)</big><a class="headerlink" href="#CI_Benchmark.memory_usage" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Memory usage info</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p>Simply returns the <tt class="docutils literal"><span class="pre">{memory_usage}</span></tt> marker.</p>
+<p>This permits it to be put it anywhere in a template without the memory
+being calculated until the end. The <a class="reference internal" href="output.html"><em>Output Class</em></a> will
+swap the real value for this variable.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
 
 
 		</div>
 
 		<!-- {user_guide_comments} -->
-					
+		
 		<div id="footer">
 			<p class="top"><a href="#header" title="Return to top">Return to top</a></p>
 			<p><a href="http://codeigniter.com/">CodeIgniter</a> &ndash; Copyright &copy; 2013, EllisLab, Inc.</a></p>

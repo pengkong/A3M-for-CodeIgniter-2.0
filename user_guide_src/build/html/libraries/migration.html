@@ -21,6 +21,8 @@
 	    <script type="text/javascript" src="../_static/jquery.js"></script>
 	    <script type="text/javascript" src="../_static/underscore.js"></script>
 	    <script type="text/javascript" src="../_static/doctools.js"></script>
+
+	    <script type="text/javascript" src="../_static/asset/js/method-toc.js"></script>
 	    <link rel="top" title="CodeIgniter 3.0-dev documentation" href="../index.html" />
 	    <link rel="up" title="Libraries" href="index.html" />
 	    <link rel="next" title="Output Class" href="output.html" />
@@ -29,7 +31,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x35375f0>
+			<function <lambda> at 0x33376e0>
 			</div>
 		</div>
 
@@ -76,10 +78,19 @@ need to go and run them. You would also have to keep track of which changes
 need to be run against the production machines next time you deploy.</p>
 <p>The database table <strong>migration</strong> tracks which migrations have already been
 run so all you have to do is update your application files and
-call <strong>$this-&gt;migration-&gt;current()</strong> to work out which migrations should be run.
-The current version is found in <strong>config/migration.php</strong>.</p>
-<div class="section" id="migration-file-names">
-<h2>Migration file names<a class="headerlink" href="#migration-file-names" title="Permalink to this headline">¶</a></h2>
+call <tt class="docutils literal"><span class="pre">$this-&gt;migration-&gt;current()</span></tt> to work out which migrations should be run.
+The current version is found in <strong>application/config/migration.php</strong>.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#migration-file-names" id="id1">Migration file names</a></li>
+<li><a class="reference internal" href="#create-a-migration" id="id2">Create a Migration</a></li>
+<li><a class="reference internal" href="#usage-example" id="id3">Usage Example</a></li>
+<li><a class="reference internal" href="#migration-preferences" id="id4">Migration Preferences</a></li>
+<li><a class="reference internal" href="#class-reference" id="id5">Class Reference</a></li>
+</ul>
+</div>
+<div class="custom-index container"></div><div class="section" id="migration-file-names">
+<h2><a class="toc-backref" href="#id1">Migration file names</a><a class="headerlink" href="#migration-file-names" title="Permalink to this headline">¶</a></h2>
 <p>Each Migration is run in numeric order forward or backwards depending on the
 method taken. Two numbering styles are available:</p>
 <ul class="simple">
@@ -91,21 +102,21 @@ was created, in <strong>YYYYMMDDHHIISS</strong> format (e.g. <strong>20121031100
 helps prevent numbering conflicts when working in a team environment, and is
 the preferred scheme in CodeIgniter 3.0 and later.</li>
 </ul>
-<p>The desired style may be selected using the <strong>$config[&#8216;migration_type&#8217;]</strong>
-setting in your <strong>migration.php</strong> config file.</p>
+<p>The desired style may be selected using the <tt class="docutils literal"><span class="pre">$config['migration_type']</span></tt>
+setting in your <em>application/config/migration.php</em> file.</p>
 <p>Regardless of which numbering style you choose to use, prefix your migration
 files with the migration number followed by an underscore and a descriptive
 name for the migration. For example:</p>
 <ul class="simple">
-<li><strong>001_add_blog.php</strong> (sequential numbering)</li>
-<li><strong>20121031100537_add_blog.php</strong> (timestamp numbering)</li>
+<li>001_add_blog.php (sequential numbering)</li>
+<li>20121031100537_add_blog.php (timestamp numbering)</li>
 </ul>
 </div>
 <div class="section" id="create-a-migration">
-<h2>Create a Migration<a class="headerlink" href="#create-a-migration" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id2">Create a Migration</a><a class="headerlink" href="#create-a-migration" title="Permalink to this headline">¶</a></h2>
 <p>This will be the first migration for a new site which has a blog. All
-migrations go in the folder <strong>application/migrations/</strong> and have names such
-as <strong>20121031100537_add_blog.php</strong>.:</p>
+migrations go in the <strong>application/migrations/</strong> directory and have names such
+as <em>20121031100537_add_blog.php</em>.</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
 
 <span class="nb">defined</span><span class="p">(</span><span class="s1">&#39;BASEPATH&#39;</span><span class="p">)</span> <span class="k">OR</span> <span class="k">exit</span><span class="p">(</span><span class="s1">&#39;No direct script access allowed&#39;</span><span class="p">);</span>
@@ -141,64 +152,33 @@ as <strong>20121031100537_add_blog.php</strong>.:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Then in <strong>application/config/migration.php</strong> set <strong>$config[&#8216;migration_version&#8217;] = 1;</strong>.</p>
+<p>Then in <strong>application/config/migration.php</strong> set <tt class="docutils literal"><span class="pre">$config['migration_version']</span> <span class="pre">=</span> <span class="pre">1;</span></tt>.</p>
 </div>
 <div class="section" id="usage-example">
-<h2>Usage Example<a class="headerlink" href="#usage-example" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id3">Usage Example</a><a class="headerlink" href="#usage-example" title="Permalink to this headline">¶</a></h2>
 <p>In this example some simple code is placed in <strong>application/controllers/Migrate.php</strong>
 to update the schema.:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
 
 <span class="k">class</span> <span class="nc">Migrate</span> <span class="k">extends</span> <span class="nx">CI_Controller</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">library</span><span class="p">(</span><span class="s1">&#39;migration&#39;</span><span class="p">);</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">migration</span><span class="o">-&gt;</span><span class="na">current</span><span class="p">()</span> <span class="o">===</span> <span class="k">FALSE</span><span class="p">)</span>
+        <span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">()</span>
         <span class="p">{</span>
-                <span class="nx">show_error</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">migration</span><span class="o">-&gt;</span><span class="na">error_string</span><span class="p">());</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">library</span><span class="p">(</span><span class="s1">&#39;migration&#39;</span><span class="p">);</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">migration</span><span class="o">-&gt;</span><span class="na">current</span><span class="p">()</span> <span class="o">===</span> <span class="k">FALSE</span><span class="p">)</span>
+                <span class="p">{</span>
+                        <span class="nx">show_error</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">migration</span><span class="o">-&gt;</span><span class="na">error_string</span><span class="p">());</span>
+                <span class="p">}</span>
         <span class="p">}</span>
-    <span class="p">}</span>
+
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="function-reference">
-<h2>Function Reference<a class="headerlink" href="#function-reference" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="this-migration-current">
-<h3>$this-&gt;migration-&gt;current()<a class="headerlink" href="#this-migration-current" title="Permalink to this headline">¶</a></h3>
-<p>The current migration is whatever is set for <strong>$config[&#8216;migration_version&#8217;]</strong> in
-<strong>application/config/migration.php</strong>.</p>
-</div>
-<div class="section" id="this-migration-error-string">
-<h3>$this-&gt;migration-&gt;error_string()<a class="headerlink" href="#this-migration-error-string" title="Permalink to this headline">¶</a></h3>
-<p>This returns a string of errors while performing a migration.</p>
-</div>
-<div class="section" id="this-migration-find-migrations">
-<h3>$this-&gt;migration-&gt;find_migrations()<a class="headerlink" href="#this-migration-find-migrations" title="Permalink to this headline">¶</a></h3>
-<p>An array of migration filenames are returned that are found in the <strong>migration_path</strong>
-property.</p>
-</div>
-<div class="section" id="this-migration-latest">
-<h3>$this-&gt;migration-&gt;latest()<a class="headerlink" href="#this-migration-latest" title="Permalink to this headline">¶</a></h3>
-<p>This works much the same way as current() but instead of looking for
-the <strong>$config[&#8216;migration_version&#8217;]</strong> the Migration class will use the very
-newest migration found in the filesystem.</p>
-</div>
-<div class="section" id="this-migration-version">
-<h3>$this-&gt;migration-&gt;version()<a class="headerlink" href="#this-migration-version" title="Permalink to this headline">¶</a></h3>
-<p>Version can be used to roll back changes or step forwards programmatically to
-specific versions. It works just like current but ignores <strong>$config[&#8216;migration_version&#8217;]</strong>.:</p>
-<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">library</span><span class="p">(</span><span class="s1">&#39;migration&#39;</span><span class="p">);</span>
-
-<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">migration</span><span class="o">-&gt;</span><span class="na">version</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="section" id="migration-preferences">
-<h2>Migration Preferences<a class="headerlink" href="#migration-preferences" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4">Migration Preferences</a><a class="headerlink" href="#migration-preferences" title="Permalink to this headline">¶</a></h2>
 <p>The following is a table of all the config options for migrations.</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -251,13 +231,110 @@ migration files.</td>
 </tbody>
 </table>
 </div>
+<div class="section" id="class-reference">
+<h2><a class="toc-backref" href="#id5">Class Reference</a><a class="headerlink" href="#class-reference" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="CI_Migration">
+<em class="property">class </em><tt class="descname">CI_Migration</tt><a class="headerlink" href="#CI_Migration" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="CI_Migration.current">
+<tt class="descname">current</tt><big>(</big><big>)</big><a class="headerlink" href="#CI_Migration.current" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">TRUE if no migrations are found, current version string on success, FALSE on failure</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">mixed</td>
+</tr>
+</tbody>
+</table>
+<p>Migrates up to the current version (whatever is set for
+<tt class="docutils literal"><span class="pre">$config['migration_version']</span></tt> in <em>application/config/migration.php</em>).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Migration.error_string">
+<tt class="descname">error_string</tt><big>(</big><big>)</big><a class="headerlink" href="#CI_Migration.error_string" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Error messages</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p>This returns a string of errors that were detected while performing a migration.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Migration.find_migrations">
+<tt class="descname">find_migrations</tt><big>(</big><big>)</big><a class="headerlink" href="#CI_Migration.find_migrations" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An array of migration files</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>An array of migration filenames are returned that are found in the <strong>migration_path</strong> property.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Migration.latest">
+<tt class="descname">latest</tt><big>(</big><big>)</big><a class="headerlink" href="#CI_Migration.latest" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">TRUE if no migrations are found, current version string on success, FALSE on failure</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">mixed</td>
+</tr>
+</tbody>
+</table>
+<p>This works much the same way as <tt class="docutils literal"><span class="pre">current()</span></tt> but instead of looking for
+the <tt class="docutils literal"><span class="pre">$config['migration_version']</span></tt> the Migration class will use the very
+newest migration found in the filesystem.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Migration.version">
+<tt class="descname">version</tt><big>(</big><em>$target_version</em><big>)</big><a class="headerlink" href="#CI_Migration.version" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$target_version</strong> (<em>mixed</em>) &#8211; Migration version to process</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">TRUE if no migrations are found, current version string on success, FALSE on failure</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">mixed</td>
+</tr>
+</tbody>
+</table>
+<p>Version can be used to roll back changes or step forwards programmatically to
+specific versions. It works just like <tt class="docutils literal"><span class="pre">current()</span></tt> but ignores <tt class="docutils literal"><span class="pre">$config['migration_version']</span></tt>.</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">migration</span><span class="o">-&gt;</span><span class="na">version</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 
 
 		</div>
 
 		<!-- {user_guide_comments} -->
-					
+		
 		<div id="footer">
 			<p class="top"><a href="#header" title="Return to top">Return to top</a></p>
 			<p><a href="http://codeigniter.com/">CodeIgniter</a> &ndash; Copyright &copy; 2013, EllisLab, Inc.</a></p>
