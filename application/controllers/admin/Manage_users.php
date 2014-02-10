@@ -136,7 +136,7 @@ class Manage_users extends CI_Controller {
     }
 
     // Setup form validation
-    $this->form_validation->set_error_delimiters('<div class="field_error">', '</div>');
+    $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
     $this->form_validation->set_rules(
       array(
         array(
@@ -191,11 +191,29 @@ class Manage_users extends CI_Controller {
       {
 
         // Create a new user
-        if( empty($id) ) {
+        if( empty($id) )
+        {
           $id = $this->Account_model->create(
             $this->input->post('users_username', TRUE), 
             $this->input->post('users_email', TRUE), 
             $this->input->post('users_new_password', TRUE));
+          
+          if($this->input->post('account_creation_info_send', TRUE) === 'send')
+          {
+            //send e-mail with user information to the user's e-mail
+            $this->load->library('email');
+            $this->email->from('no-reply@a3m.net', 'A3M');
+            $this->email->to($this->input->post('users_email', TRUE));
+            
+            $this->email->subject(lang('users_creation_email_subject'));
+            $this->email->message($this->load->view('admin/manage_users_info_email', array('username' => $this->input->post('users_username', TRUE), 'password' => $this->input->post('users_new_password', TRUE)), TRUE));
+            
+            if( ! $this->email->send())
+            {
+              //there was an error sending the e-mail
+              print_debugger();
+            }
+          }
         }
         // Update existing user information
         else 
@@ -228,6 +246,12 @@ class Manage_users extends CI_Controller {
               $this->Account_model->remove_suspended_datetime($id);
             }
           }
+          
+          //force password reset on a user
+          if($this->input->post('force_reset_pass', TRUE))
+          {
+            $this->Account_model->force_reset_password($id, TRUE);
+          }
         }
 
         // Update account details
@@ -248,7 +272,7 @@ class Manage_users extends CI_Controller {
         }
         $this->Rel_account_role_model->delete_update_batch($id, $roles);
 
-        redirect("admin/manage_users"); 
+        redirect("admin/manage_users");
       }
     }
 

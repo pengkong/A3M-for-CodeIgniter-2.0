@@ -21,6 +21,8 @@
 	    <script type="text/javascript" src="../_static/jquery.js"></script>
 	    <script type="text/javascript" src="../_static/underscore.js"></script>
 	    <script type="text/javascript" src="../_static/doctools.js"></script>
+
+	    <script type="text/javascript" src="../_static/asset/js/method-toc.js"></script>
 	    <link rel="top" title="CodeIgniter 3.0-dev documentation" href="../index.html" />
 	    <link rel="up" title="Helpers" href="index.html" />
 	    <link rel="next" title="URL Helper" href="url_helper.html" />
@@ -29,7 +31,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x1d68cf8>
+			<function <lambda> at 0x2d01578>
 			</div>
 		</div>
 
@@ -68,34 +70,28 @@
 
 		<div class="section body" id="content">
   <div class="section" id="typography-helper">
-<h1><a class="toc-backref" href="#id1">Typography Helper</a><a class="headerlink" href="#typography-helper" title="Permalink to this headline">¶</a></h1>
+<h1>Typography Helper<a class="headerlink" href="#typography-helper" title="Permalink to this headline">¶</a></h1>
 <p>The Typography Helper file contains functions that help your format text
 in semantically relevant ways.</p>
-<div class="contents topic" id="page-contents">
-<p class="topic-title first">Page Contents</p>
+<div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#typography-helper" id="id1">Typography Helper</a><ul>
-<li><a class="reference internal" href="#loading-this-helper" id="id2">Loading this Helper</a></li>
-<li><a class="reference internal" href="#auto-typography" id="id3">auto_typography()</a></li>
-<li><a class="reference internal" href="#nl2br-except-pre" id="id4">nl2br_except_pre()</a></li>
-<li><a class="reference internal" href="#entity-decode" id="id5">entity_decode()</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#loading-this-helper" id="id1">Loading this Helper</a></li>
+<li><a class="reference internal" href="#available-functions" id="id2">Available Functions</a></li>
 </ul>
 </div>
-<div class="section" id="loading-this-helper">
-<h2><a class="toc-backref" href="#id2">Loading this Helper</a><a class="headerlink" href="#loading-this-helper" title="Permalink to this headline">¶</a></h2>
+<div class="custom-index container"></div><div class="section" id="loading-this-helper">
+<h2><a class="toc-backref" href="#id1">Loading this Helper</a><a class="headerlink" href="#loading-this-helper" title="Permalink to this headline">¶</a></h2>
 <p>This helper is loaded using the following code:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">helper</span><span class="p">(</span><span class="s1">&#39;typography&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>The following functions are available:</p>
 </div>
-<div class="section" id="auto-typography">
-<h2><a class="toc-backref" href="#id3">auto_typography()</a><a class="headerlink" href="#auto-typography" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="available-functions">
+<h2><a class="toc-backref" href="#id2">Available Functions</a><a class="headerlink" href="#available-functions" title="Permalink to this headline">¶</a></h2>
+<p>The following functions are available:</p>
 <dl class="function">
 <dt id="auto_typography">
-<tt class="descname">auto_typography</tt><big>(</big><em>$str</em>, <em>$reduce_linebreaks = FALSE</em><big>)</big><a class="headerlink" href="#auto_typography" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">auto_typography</tt><big>(</big><em>$str</em><span class="optional">[</span>, <em>$reduce_linebreaks = FALSE</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#auto_typography" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -106,13 +102,14 @@ in semantically relevant ways.</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">string</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">HTML-formatted typography-safe string</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
 </td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
 <p>Formats text so that it is semantically and typographically correct
 HTML.</p>
 <p>This function is an alias for <tt class="docutils literal"><span class="pre">CI_Typography::auto_typography</span></tt>.
@@ -128,9 +125,8 @@ you have a lot of content being formatted. If you choose to use this
 function you may want to consider <cite>caching &lt;../general/caching&gt;</cite> your
 pages.</p>
 </div>
-</div>
-<div class="section" id="nl2br-except-pre">
-<h2><a class="toc-backref" href="#id4">nl2br_except_pre()</a><a class="headerlink" href="#nl2br-except-pre" title="Permalink to this headline">¶</a></h2>
+</dd></dl>
+
 <dl class="function">
 <dt id="nl2br_except_pre">
 <tt class="descname">nl2br_except_pre</tt><big>(</big><em>$str</em><big>)</big><a class="headerlink" href="#nl2br_except_pre" title="Permalink to this definition">¶</a></dt>
@@ -138,18 +134,14 @@ pages.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>$str</strong> (<em>string</em>) &#8211; Input string</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$str</strong> (<em>string</em>) &#8211; Input string</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">string</p>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">String with HTML-formatted line breaks</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
 <p>Converts newlines to &lt;br /&gt; tags unless they appear within &lt;pre&gt; tags.
 This function is identical to the native PHP <tt class="docutils literal"><span class="pre">nl2br()</span></tt> function,
 except that it ignores &lt;pre&gt; tags.</p>
@@ -157,9 +149,8 @@ except that it ignores &lt;pre&gt; tags.</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$string</span> <span class="o">=</span> <span class="nx">nl2br_except_pre</span><span class="p">(</span><span class="nv">$string</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="entity-decode">
-<h2><a class="toc-backref" href="#id5">entity_decode()</a><a class="headerlink" href="#entity-decode" title="Permalink to this headline">¶</a></h2>
+</dd></dl>
+
 <dl class="function">
 <dt id="entity_decode">
 <tt class="descname">entity_decode</tt><big>(</big><em>$str</em>, <em>$charset = NULL</em><big>)</big><a class="headerlink" href="#entity_decode" title="Permalink to this definition">¶</a></dt>
@@ -173,15 +164,18 @@ except that it ignores &lt;pre&gt; tags.</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">string</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">String with decoded HTML entities</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
 </td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
 <p>This function is an alias for <tt class="docutils literal"><span class="pre">CI_Security::entity_decode()</span></tt>.
 Fore more info, please see the <a class="reference internal" href="../libraries/security.html"><em>Security Library</em></a> documentation.</p>
+</dd></dl>
+
 </div>
 </div>
 
@@ -189,7 +183,7 @@ Fore more info, please see the <a class="reference internal" href="../libraries/
 		</div>
 
 		<!-- {user_guide_comments} -->
-					
+		
 		<div id="footer">
 			<p class="top"><a href="#header" title="Return to top">Return to top</a></p>
 			<p><a href="http://codeigniter.com/">CodeIgniter</a> &ndash; Copyright &copy; 2013, EllisLab, Inc.</a></p>

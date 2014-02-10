@@ -21,6 +21,8 @@
 	    <script type="text/javascript" src="../_static/jquery.js"></script>
 	    <script type="text/javascript" src="../_static/underscore.js"></script>
 	    <script type="text/javascript" src="../_static/doctools.js"></script>
+
+	    <script type="text/javascript" src="../_static/asset/js/method-toc.js"></script>
 	    <link rel="top" title="CodeIgniter 3.0-dev documentation" href="../index.html" />
 	    <link rel="up" title="General Topics" href="index.html" />
 	    <link rel="next" title="Web Page Caching" href="caching.html" />
@@ -29,7 +31,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x22e4398>
+			<function <lambda> at 0x4b1f2a8>
 			</div>
 		</div>
 
@@ -94,8 +96,6 @@ defined in <em>application/config/constants.php</em>. While exit status codes
 are most useful in CLI settings, returning the proper code helps server
 software keep track of your scripts and the health of your application.</p>
 <p>The following functions let you generate errors:</p>
-<div class="section" id="show-error">
-<h2>show_error()<a class="headerlink" href="#show-error" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="show_error">
 <tt class="descname">show_error</tt><big>(</big><em>$message</em>, <em>$status_code</em>, <em>$heading = 'An Error Was Encountered'</em><big>)</big><a class="headerlink" href="#show_error" title="Permalink to this definition">¶</a></dt>
@@ -110,7 +110,7 @@ software keep track of your scripts and the health of your application.</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">void</p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">void</p>
 </td>
 </tr>
 </tbody>
@@ -129,9 +129,6 @@ be set to <tt class="docutils literal"><span class="pre">$status_code</span> <sp
 <tt class="docutils literal"><span class="pre">EXIT__AUTO_MAX</span></tt>, or if <tt class="docutils literal"><span class="pre">$status_code</span></tt> is 100 or higher, the exit
 status code will be set to <tt class="docutils literal"><span class="pre">EXIT_ERROR</span></tt>. You can check in
 <em>application/config/constants.php</em> for more detail.</p>
-</div>
-<div class="section" id="show-404">
-<h2>show_404()<a class="headerlink" href="#show-404" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="show_404">
 <tt class="descname">show_404</tt><big>(</big><em>$page = ''</em>, <em>$log_error = TRUE</em><big>)</big><a class="headerlink" href="#show_404" title="Permalink to this definition">¶</a></dt>
@@ -145,7 +142,7 @@ status code will be set to <tt class="docutils literal"><span class="pre">EXIT_E
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">void</p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">void</p>
 </td>
 </tr>
 </tbody>
@@ -163,9 +160,6 @@ Note that CodeIgniter automatically shows 404 messages if controllers are
 not found.</p>
 <p>CodeIgniter automatically logs any <tt class="docutils literal"><span class="pre">show_404()</span></tt> calls. Setting the
 optional second parameter to FALSE will skip logging.</p>
-</div>
-<div class="section" id="log-message">
-<h2>log_message()<a class="headerlink" href="#log-message" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="log_message">
 <tt class="descname">log_message</tt><big>(</big><em>$level</em>, <em>$message</em>, <em>$php_error = FALSE</em><big>)</big><a class="headerlink" href="#log_message" title="Permalink to this definition">¶</a></dt>
@@ -180,7 +174,7 @@ optional second parameter to FALSE will skip logging.</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">void</p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">void</p>
 </td>
 </tr>
 </tbody>
@@ -225,13 +219,12 @@ only want error messages to be logged, and not the other two types.
 If you set it to zero logging will be disabled.</p>
 </div>
 </div>
-</div>
 
 
 		</div>
 
 		<!-- {user_guide_comments} -->
-					
+		
 		<div id="footer">
 			<p class="top"><a href="#header" title="Return to top">Return to top</a></p>
 			<p><a href="http://codeigniter.com/">CodeIgniter</a> &ndash; Copyright &copy; 2013, EllisLab, Inc.</a></p>

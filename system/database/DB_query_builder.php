@@ -263,7 +263,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 			$select = explode(',', $select);
 		}
 
-		// If the escape value was not set will will base it on the global setting
+		// If the escape value was not set, we will base it on the global setting
 		is_bool($escape) OR $escape = $this->_protect_identifiers;
 
 		foreach ($select as $val)
@@ -2367,7 +2367,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 			for ($i = 0, $c = count($this->qb_groupby); $i < $c; $i++)
 			{
 				// Is it already compiled?
-				if (is_string($this->qb_groupby))
+				if (is_string($this->qb_groupby[$i]))
 				{
 					continue;
 				}

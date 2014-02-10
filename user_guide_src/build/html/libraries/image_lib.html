@@ -21,6 +21,8 @@
 	    <script type="text/javascript" src="../_static/jquery.js"></script>
 	    <script type="text/javascript" src="../_static/underscore.js"></script>
 	    <script type="text/javascript" src="../_static/doctools.js"></script>
+
+	    <script type="text/javascript" src="../_static/asset/js/method-toc.js"></script>
 	    <link rel="top" title="CodeIgniter 3.0-dev documentation" href="../index.html" />
 	    <link rel="up" title="Libraries" href="index.html" />
 	    <link rel="next" title="Input Class" href="input.html" />
@@ -29,7 +31,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x295f0c8>
+			<function <lambda> at 0x5477de8>
 			</div>
 		</div>
 
@@ -87,17 +89,39 @@ addition, even though other libraries are supported, GD is required in
 order for the script to calculate the image properties. The image
 processing, however, will be performed with the library you specify.</p>
 </div>
-<div class="section" id="initializing-the-class">
-<h2>Initializing the Class<a class="headerlink" href="#initializing-the-class" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#initializing-the-class" id="id1">Initializing the Class</a><ul>
+<li><a class="reference internal" href="#processing-an-image" id="id2">Processing an Image</a></li>
+<li><a class="reference internal" href="#processing-methods" id="id3">Processing Methods</a></li>
+<li><a class="reference internal" href="#preferences" id="id4">Preferences</a></li>
+<li><a class="reference internal" href="#setting-preferences-in-a-config-file" id="id5">Setting preferences in a config file</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#image-watermarking" id="id6">Image Watermarking</a><ul>
+<li><a class="reference internal" href="#two-types-of-watermarking" id="id7">Two Types of Watermarking</a></li>
+<li><a class="reference internal" href="#watermarking-an-image" id="id8">Watermarking an Image</a></li>
+<li><a class="reference internal" href="#watermarking-preferences" id="id9">Watermarking Preferences</a><ul>
+<li><a class="reference internal" href="#text-preferences" id="id10">Text Preferences</a></li>
+<li><a class="reference internal" href="#overlay-preferences" id="id11">Overlay Preferences</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-reference" id="id12">Class Reference</a></li>
+</ul>
+</div>
+<div class="custom-index container"></div><div class="section" id="initializing-the-class">
+<h2><a class="toc-backref" href="#id1">Initializing the Class</a><a class="headerlink" href="#initializing-the-class" title="Permalink to this headline">¶</a></h2>
 <p>Like most other classes in CodeIgniter, the image class is initialized
 in your controller using the $this-&gt;load-&gt;library function:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">library</span><span class="p">(</span><span class="s1">&#39;image_lib&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Once the library is loaded it will be ready for use. The image library
-object you will use to call all functions is: $this-&gt;image_lib</p>
+object you will use to call all functions is: <tt class="docutils literal"><span class="pre">$this-&gt;image_lib</span></tt></p>
 <div class="section" id="processing-an-image">
-<h3>Processing an Image<a class="headerlink" href="#processing-an-image" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id2">Processing an Image</a><a class="headerlink" href="#processing-an-image" title="Permalink to this headline">¶</a></h3>
 <p>Regardless of the type of processing you would like to perform
 (resizing, cropping, rotation, or watermarking), the general process is
 identical. You will set some preferences corresponding to the action you
@@ -135,17 +159,16 @@ while processing images you may need to limit their maximum size, and/or
 adjust PHP memory limits.</p>
 </div>
 </div>
-<div class="section" id="processing-functions">
-<h3>Processing Functions<a class="headerlink" href="#processing-functions" title="Permalink to this headline">¶</a></h3>
-<p>There are four available processing functions:</p>
+<div class="section" id="processing-methods">
+<h3><a class="toc-backref" href="#id3">Processing Methods</a><a class="headerlink" href="#processing-methods" title="Permalink to this headline">¶</a></h3>
+<p>There are four available processing methods:</p>
 <ul class="simple">
 <li>$this-&gt;image_lib-&gt;resize()</li>
 <li>$this-&gt;image_lib-&gt;crop()</li>
 <li>$this-&gt;image_lib-&gt;rotate()</li>
 <li>$this-&gt;image_lib-&gt;watermark()</li>
-<li>$this-&gt;image_lib-&gt;clear()</li>
 </ul>
-<p>These functions return boolean TRUE upon success and FALSE for failure.
+<p>These methods return boolean TRUE upon success and FALSE for failure.
 If they fail you can retrieve the error message using this function:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">image_lib</span><span class="o">-&gt;</span><span class="na">display_errors</span><span class="p">();</span>
 </pre></div>
@@ -154,7 +177,7 @@ If they fail you can retrieve the error message using this function:</p>
 error upon failure, like this:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span> <span class="o">!</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">image_lib</span><span class="o">-&gt;</span><span class="na">resize</span><span class="p">())</span>
 <span class="p">{</span>
-    <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">image_lib</span><span class="o">-&gt;</span><span class="na">display_errors</span><span class="p">();</span>
+        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">image_lib</span><span class="o">-&gt;</span><span class="na">display_errors</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -169,7 +192,7 @@ like this:</p>
 </div>
 </div>
 <div class="section" id="preferences">
-<h3>Preferences<a class="headerlink" href="#preferences" title="Permalink to this headline">¶</a></h3>
+<span id="processing-preferences"></span><h3><a class="toc-backref" href="#id4">Preferences</a><a class="headerlink" href="#preferences" title="Permalink to this headline">¶</a></h3>
 <p>The preferences described below allow you to tailor the image processing
 to suit your needs.</p>
 <p>Note that not all preferences are available for every function. For
@@ -287,7 +310,7 @@ thumbs. For example, let&#8217;s say you want to resize an image to 100 X 75
 pixels. If the source image size does not allow perfect resizing to
 those dimensions, this setting determines which axis should be used as
 the hard value. &#8220;auto&#8221; sets the axis automatically based on whether the
-image is taller then wider, or vice versa.</td>
+image is taller than wider, or vice versa.</td>
 <td>R</td>
 </tr>
 <tr class="row-even"><td><strong>rotation_angle</strong></td>
@@ -316,137 +339,20 @@ setting of 30 will crop an image 30 pixels from the top.</td>
 </table>
 </div>
 <div class="section" id="setting-preferences-in-a-config-file">
-<h3>Setting preferences in a config file<a class="headerlink" href="#setting-preferences-in-a-config-file" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id5">Setting preferences in a config file</a><a class="headerlink" href="#setting-preferences-in-a-config-file" title="Permalink to this headline">¶</a></h3>
 <p>If you prefer not to set preferences using the above method, you can
 instead put them into a config file. Simply create a new file called
 image_lib.php, add the $config array in that file. Then save the file
-in: config/image_lib.php and it will be used automatically. You will
-NOT need to use the $this-&gt;image_lib-&gt;initialize function if you save
+in <em>config/image_lib.php</em> and it will be used automatically. You will
+NOT need to use the <tt class="docutils literal"><span class="pre">$this-&gt;image_lib-&gt;initialize()</span></tt> method if you save
 your preferences in a config file.</p>
-</div>
-<div class="section" id="this-image-lib-resize">
-<h3>$this-&gt;image_lib-&gt;resize()<a class="headerlink" href="#this-image-lib-resize" title="Permalink to this headline">¶</a></h3>
-<p>The image resizing function lets you resize the original image, create a
-copy (with or without resizing), or create a thumbnail image.</p>
-<p>For practical purposes there is no difference between creating a copy
-and creating a thumbnail except a thumb will have the thumbnail marker
-as part of the name (ie, mypic_thumb.jpg).</p>
-<p>All preferences listed in the table above are available for this
-function except these three: rotation_angle, x_axis, and y_axis.</p>
-<div class="section" id="creating-a-thumbnail">
-<h4>Creating a Thumbnail<a class="headerlink" href="#creating-a-thumbnail" title="Permalink to this headline">¶</a></h4>
-<p>The resizing function will create a thumbnail file (and preserve the
-original) if you set this preference to TRUE:</p>
-<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;create_thumb&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">TRUE</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>This single preference determines whether a thumbnail is created or not.</p>
-</div>
-<div class="section" id="creating-a-copy">
-<h4>Creating a Copy<a class="headerlink" href="#creating-a-copy" title="Permalink to this headline">¶</a></h4>
-<p>The resizing function will create a copy of the image file (and preserve
-the original) if you set a path and/or a new filename using this
-preference:</p>
-<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;new_image&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/path/to/new_image.jpg&#39;</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Notes regarding this preference:</p>
-<ul class="simple">
-<li>If only the new image name is specified it will be placed in the same
-folder as the original</li>
-<li>If only the path is specified, the new image will be placed in the
-destination with the same name as the original.</li>
-<li>If both the path and image name are specified it will placed in its
-own destination and given the new name.</li>
-</ul>
-</div>
-<div class="section" id="resizing-the-original-image">
-<h4>Resizing the Original Image<a class="headerlink" href="#resizing-the-original-image" title="Permalink to this headline">¶</a></h4>
-<p>If neither of the two preferences listed above (create_thumb, and
-new_image) are used, the resizing function will instead target the
-original image for processing.</p>
-</div>
-</div>
-<div class="section" id="this-image-lib-crop">
-<h3>$this-&gt;image_lib-&gt;crop()<a class="headerlink" href="#this-image-lib-crop" title="Permalink to this headline">¶</a></h3>
-<p>The cropping function works nearly identically to the resizing function
-except it requires that you set preferences for the X and Y axis (in
-pixels) specifying where to crop, like this:</p>
-<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;x_axis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;100&#39;</span><span class="p">;</span>
-<span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;y_axis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;40&#39;</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>All preferences listed in the table above are available for this
-function except these: rotation_angle, create_thumb, new_image.</p>
-<p>Here&#8217;s an example showing how you might crop an image:</p>
-<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;image_library&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;imagemagick&#39;</span><span class="p">;</span>
-<span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;library_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/usr/X11R6/bin/&#39;</span><span class="p">;</span>
-<span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;source_image&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/path/to/image/mypic.jpg&#39;</span><span class="p">;</span>
-<span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;x_axis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;100&#39;</span><span class="p">;</span>
-<span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;y_axis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;60&#39;</span><span class="p">;</span>
-
-<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">image_lib</span><span class="o">-&gt;</span><span class="na">initialize</span><span class="p">(</span><span class="nv">$config</span><span class="p">);</span>
-
-<span class="k">if</span> <span class="p">(</span> <span class="o">!</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">image_lib</span><span class="o">-&gt;</span><span class="na">crop</span><span class="p">())</span>
-<span class="p">{</span>
-    <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">image_lib</span><span class="o">-&gt;</span><span class="na">display_errors</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Without a visual interface it is difficult to crop images, so this
-function is not very useful unless you intend to build such an
-interface. That&#8217;s exactly what we did using for the photo gallery module
-in ExpressionEngine, the CMS we develop. We added a JavaScript UI that
-lets the cropping area be selected.</p>
-</div>
-</div>
-<div class="section" id="this-image-lib-rotate">
-<h3>$this-&gt;image_lib-&gt;rotate()<a class="headerlink" href="#this-image-lib-rotate" title="Permalink to this headline">¶</a></h3>
-<p>The image rotation function requires that the angle of rotation be set
-via its preference:</p>
-<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;rotation_angle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;90&#39;</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>There are 5 rotation options:</p>
-<ol class="arabic simple">
-<li>90 - rotates counter-clockwise by 90 degrees.</li>
-<li>180 - rotates counter-clockwise by 180 degrees.</li>
-<li>270 - rotates counter-clockwise by 270 degrees.</li>
-<li>hor - flips the image horizontally.</li>
-<li>vrt - flips the image vertically.</li>
-</ol>
-<p>Here&#8217;s an example showing how you might rotate an image:</p>
-<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;image_library&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;netpbm&#39;</span><span class="p">;</span>
-<span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;library_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/usr/bin/&#39;</span><span class="p">;</span>
-<span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;source_image&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/path/to/image/mypic.jpg&#39;</span><span class="p">;</span>
-<span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;rotation_angle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;hor&#39;</span><span class="p">;</span>
-
-<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">image_lib</span><span class="o">-&gt;</span><span class="na">initialize</span><span class="p">(</span><span class="nv">$config</span><span class="p">);</span>
-
-<span class="k">if</span> <span class="p">(</span> <span class="o">!</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">image_lib</span><span class="o">-&gt;</span><span class="na">rotate</span><span class="p">())</span>
-<span class="p">{</span>
-    <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">image_lib</span><span class="o">-&gt;</span><span class="na">display_errors</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="this-image-lib-clear">
-<h3>$this-&gt;image_lib-&gt;clear()<a class="headerlink" href="#this-image-lib-clear" title="Permalink to this headline">¶</a></h3>
-<p>The clear function resets all of the values used when processing an
-image. You will want to call this if you are processing images in a
-loop.</p>
-<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">image_lib</span><span class="o">-&gt;</span><span class="na">clear</span><span class="p">();</span>
-</pre></div>
-</div>
 </div>
 </div>
 <div class="section" id="image-watermarking">
-<h2>Image Watermarking<a class="headerlink" href="#image-watermarking" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id6">Image Watermarking</a><a class="headerlink" href="#image-watermarking" title="Permalink to this headline">¶</a></h2>
 <p>The Watermarking feature requires the GD/GD2 library.</p>
 <div class="section" id="two-types-of-watermarking">
-<h3>Two Types of Watermarking<a class="headerlink" href="#two-types-of-watermarking" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id7">Two Types of Watermarking</a><a class="headerlink" href="#two-types-of-watermarking" title="Permalink to this headline">¶</a></h3>
 <p>There are two types of watermarking that you can use:</p>
 <ul class="simple">
 <li><strong>Text</strong>: The watermark message will be generating using text, either
@@ -460,8 +366,8 @@ over the source image.</li>
 </ul>
 </div>
 <div class="section" id="watermarking-an-image">
-<h3>Watermarking an Image<a class="headerlink" href="#watermarking-an-image" title="Permalink to this headline">¶</a></h3>
-<p>Just as with the other functions (resizing, cropping, and rotating) the
+<span id="watermarking"></span><h3><a class="toc-backref" href="#id8">Watermarking an Image</a><a class="headerlink" href="#watermarking-an-image" title="Permalink to this headline">¶</a></h3>
+<p>Just as with the other methods (resizing, cropping, and rotating) the
 general process for watermarking involves setting the preferences
 corresponding to the action you intend to perform, then calling the
 watermark function. Here is an example:</p>
@@ -491,7 +397,7 @@ For example, 777.</p>
 </div>
 </div>
 <div class="section" id="watermarking-preferences">
-<h3>Watermarking Preferences<a class="headerlink" href="#watermarking-preferences" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id9">Watermarking Preferences</a><a class="headerlink" href="#watermarking-preferences" title="Permalink to this headline">¶</a></h3>
 <p>This table shown the preferences that are available for both types of
 watermarking (text or overlay)</p>
 <table border="1" class="docutils">
@@ -570,7 +476,7 @@ watermark toward the top of the image.</td>
 </tbody>
 </table>
 <div class="section" id="text-preferences">
-<h4>Text Preferences<a class="headerlink" href="#text-preferences" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id10">Text Preferences</a><a class="headerlink" href="#text-preferences" title="Permalink to this headline">¶</a></h4>
 <p>This table shown the preferences that are available for the text type of
 watermarking.</p>
 <table border="1" class="docutils">
@@ -630,7 +536,7 @@ appear.</td>
 </table>
 </div>
 <div class="section" id="overlay-preferences">
-<h4>Overlay Preferences<a class="headerlink" href="#overlay-preferences" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id11">Overlay Preferences</a><a class="headerlink" href="#overlay-preferences" title="Permalink to this headline">¶</a></h4>
 <p>This table shown the preferences that are available for the overlay type
 of watermarking.</p>
 <table border="1" class="docutils">
@@ -684,13 +590,240 @@ transparent.</td>
 </div>
 </div>
 </div>
+<div class="section" id="class-reference">
+<h2><a class="toc-backref" href="#id12">Class Reference</a><a class="headerlink" href="#class-reference" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="CI_Image_lib">
+<em class="property">class </em><tt class="descname">CI_Image_lib</tt><a class="headerlink" href="#CI_Image_lib" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="CI_Image_lib.initialize">
+<tt class="descname">initialize</tt><big>(</big><span class="optional">[</span><em>$props = array()</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#CI_Image_lib.initialize" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$props</strong> (<em>array</em>) &#8211; Image processing preferences</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">TRUE on success, FALSE in case of invalid settings</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+<p>Initializes the class for processing an image.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Image_lib.resize">
+<tt class="descname">resize</tt><big>(</big><big>)</big><a class="headerlink" href="#CI_Image_lib.resize" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">TRUE on success, FALSE on failure</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+<p>The image resizing method lets you resize the original image, create a
+copy (with or without resizing), or create a thumbnail image.</p>
+<p>For practical purposes there is no difference between creating a copy
+and creating a thumbnail except a thumb will have the thumbnail marker
+as part of the name (i.e. mypic_thumb.jpg).</p>
+<p>All preferences listed in the <a class="reference internal" href="#processing-preferences"><em>Preferences</em></a> table are available for this
+method except these three: <em>rotation_angle</em>, <em>x_axis</em> and <em>y_axis</em>.</p>
+<p><strong>Creating a Thumbnail</strong></p>
+<p>The resizing method will create a thumbnail file (and preserve the
+original) if you set this preference to TRUE:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;create_thumb&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">TRUE</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This single preference determines whether a thumbnail is created or not.</p>
+<p><strong>Creating a Copy</strong></p>
+<p>The resizing method will create a copy of the image file (and preserve
+the original) if you set a path and/or a new filename using this
+preference:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;new_image&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/path/to/new_image.jpg&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Notes regarding this preference:</p>
+<ul class="simple">
+<li>If only the new image name is specified it will be placed in the same
+folder as the original</li>
+<li>If only the path is specified, the new image will be placed in the
+destination with the same name as the original.</li>
+<li>If both the path and image name are specified it will placed in its
+own destination and given the new name.</li>
+</ul>
+<p><strong>Resizing the Original Image</strong></p>
+<p>If neither of the two preferences listed above (create_thumb, and
+new_image) are used, the resizing method will instead target the
+original image for processing.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Image_lib.crop">
+<tt class="descname">crop</tt><big>(</big><big>)</big><a class="headerlink" href="#CI_Image_lib.crop" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">TRUE on success, FALSE on failure</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+<p>The cropping method works nearly identically to the resizing function
+except it requires that you set preferences for the X and Y axis (in
+pixels) specifying where to crop, like this:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;x_axis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;y_axis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">40</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>All preferences listed in the <a class="reference internal" href="#processing-preferences"><em>Preferences</em></a> table are available for this
+method except these: <em>rotation_angle</em>, <em>create_thumb</em> and <em>new_image</em>.</p>
+<p>Here&#8217;s an example showing how you might crop an image:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;image_library&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;imagemagick&#39;</span><span class="p">;</span>
+<span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;library_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/usr/X11R6/bin/&#39;</span><span class="p">;</span>
+<span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;source_image&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/path/to/image/mypic.jpg&#39;</span><span class="p">;</span>
+<span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;x_axis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;y_axis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">60</span><span class="p">;</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">image_lib</span><span class="o">-&gt;</span><span class="na">initialize</span><span class="p">(</span><span class="nv">$config</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span> <span class="o">!</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">image_lib</span><span class="o">-&gt;</span><span class="na">crop</span><span class="p">())</span>
+<span class="p">{</span>
+        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">image_lib</span><span class="o">-&gt;</span><span class="na">display_errors</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Without a visual interface it is difficult to crop images, so this
+method is not very useful unless you intend to build such an
+interface. That&#8217;s exactly what we did using for the photo gallery module
+in ExpressionEngine, the CMS we develop. We added a JavaScript UI that
+lets the cropping area be selected.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Image_lib.rotate">
+<tt class="descname">rotate</tt><big>(</big><big>)</big><a class="headerlink" href="#CI_Image_lib.rotate" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">TRUE on success, FALSE on failure</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+<p>The image rotation method requires that the angle of rotation be set
+via its preference:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;rotation_angle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;90&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>There are 5 rotation options:</p>
+<ol class="arabic simple">
+<li>90 - rotates counter-clockwise by 90 degrees.</li>
+<li>180 - rotates counter-clockwise by 180 degrees.</li>
+<li>270 - rotates counter-clockwise by 270 degrees.</li>
+<li>hor - flips the image horizontally.</li>
+<li>vrt - flips the image vertically.</li>
+</ol>
+<p>Here&#8217;s an example showing how you might rotate an image:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;image_library&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;netpbm&#39;</span><span class="p">;</span>
+<span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;library_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/usr/bin/&#39;</span><span class="p">;</span>
+<span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;source_image&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/path/to/image/mypic.jpg&#39;</span><span class="p">;</span>
+<span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;rotation_angle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;hor&#39;</span><span class="p">;</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">image_lib</span><span class="o">-&gt;</span><span class="na">initialize</span><span class="p">(</span><span class="nv">$config</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span> <span class="o">!</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">image_lib</span><span class="o">-&gt;</span><span class="na">rotate</span><span class="p">())</span>
+<span class="p">{</span>
+        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">image_lib</span><span class="o">-&gt;</span><span class="na">display_errors</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Image_lib.watermark">
+<tt class="descname">watermark</tt><big>(</big><big>)</big><a class="headerlink" href="#CI_Image_lib.watermark" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">TRUE on success, FALSE on failure</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+<p>Creates a watermark over an image, please refer to the <a class="reference internal" href="#watermarking"><em>Watermarking an Image</em></a>
+section for more info.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Image_lib.clear">
+<tt class="descname">clear</tt><big>(</big><big>)</big><a class="headerlink" href="#CI_Image_lib.clear" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">void</td>
+</tr>
+</tbody>
+</table>
+<p>The clear method resets all of the values used when processing an
+image. You will want to call this if you are processing images in a
+loop.</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">image_lib</span><span class="o">-&gt;</span><span class="na">clear</span><span class="p">();</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Image_lib.display_errors">
+<tt class="descname">display_errors</tt><big>(</big><span class="optional">[</span><em>$open = '&lt;p&gt;</em><span class="optional">[</span>, <em>$close = '&lt;/p&gt;'</em><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#CI_Image_lib.display_errors" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$open</strong> (<em>string</em>) &#8211; Error message opening tag</li>
+<li><strong>$close</strong> (<em>string</em>) &#8211; Error message closing tag</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Error messages</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns all detected errors formatted as a string.</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">image_lib</span><span class="o">-&gt;</span><span class="na">diplay_errors</span><span class="p">();</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 
 
 		</div>
 
 		<!-- {user_guide_comments} -->
-					
+		
 		<div id="footer">
 			<p class="top"><a href="#header" title="Return to top">Return to top</a></p>
 			<p><a href="http://codeigniter.com/">CodeIgniter</a> &ndash; Copyright &copy; 2013, EllisLab, Inc.</a></p>

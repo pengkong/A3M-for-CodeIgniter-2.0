@@ -30,14 +30,14 @@ class Password extends CI_Controller {
 		// Redirect unauthenticated users to signin page
 		if ( ! $this->authentication->is_signed_in())
 		{
-			redirect('account/sign_in/?continue='.urlencode(base_url().'account/password'));
+			redirect('account/sign_in/?continue='.urlencode(base_url('account/password')));
 		}
 
 		// Retrieve sign in user
 		$data['account'] = $this->Account_model->get_by_id($this->session->userdata('account_id'));
 
 		// No access to users without a password
-		if ( ! $data['account']->password) redirect('');
+		if ( ! $data['account']->password) redirect(base_url());
 
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
 		$this->form_validation->set_rules(array(array('field' => 'password_new_password', 'label' => 'lang:password_new_password', 'rules' => 'trim|required|min_length[6]'), array('field' => 'password_retype_new_password', 'label' => 'lang:password_retype_new_password', 'rules' => 'trim|required|matches[password_new_password]')));

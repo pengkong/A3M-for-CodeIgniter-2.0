@@ -21,6 +21,8 @@
 	    <script type="text/javascript" src="../_static/jquery.js"></script>
 	    <script type="text/javascript" src="../_static/underscore.js"></script>
 	    <script type="text/javascript" src="../_static/doctools.js"></script>
+
+	    <script type="text/javascript" src="../_static/asset/js/method-toc.js"></script>
 	    <link rel="top" title="CodeIgniter 3.0-dev documentation" href="../index.html" />
 	    <link rel="up" title="Helpers" href="index.html" />
 	    <link rel="next" title="Language Helper" href="language_helper.html" />
@@ -29,7 +31,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x22e4c80>
+			<function <lambda> at 0x33e89b0>
 			</div>
 		</div>
 
@@ -68,143 +70,114 @@
 
 		<div class="section body" id="content">
   <div class="section" id="inflector-helper">
-<h1><a class="toc-backref" href="#id1">Inflector Helper</a><a class="headerlink" href="#inflector-helper" title="Permalink to this headline">¶</a></h1>
+<h1>Inflector Helper<a class="headerlink" href="#inflector-helper" title="Permalink to this headline">¶</a></h1>
 <p>The Inflector Helper file contains functions that permits you to change
 words to plural, singular, camel case, etc.</p>
-<div class="contents topic" id="page-contents">
-<p class="topic-title first">Page Contents</p>
+<div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#inflector-helper" id="id1">Inflector Helper</a><ul>
-<li><a class="reference internal" href="#loading-this-helper" id="id2">Loading this Helper</a></li>
-<li><a class="reference internal" href="#singular" id="id3">singular()</a></li>
-<li><a class="reference internal" href="#plural" id="id4">plural()</a></li>
-<li><a class="reference internal" href="#camelize" id="id5">camelize()</a></li>
-<li><a class="reference internal" href="#underscore" id="id6">underscore()</a></li>
-<li><a class="reference internal" href="#humanize" id="id7">humanize()</a></li>
-<li><a class="reference internal" href="#is-countable" id="id8">is_countable()</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#loading-this-helper" id="id1">Loading this Helper</a></li>
+<li><a class="reference internal" href="#available-functions" id="id2">Available Functions</a></li>
 </ul>
 </div>
-<div class="section" id="loading-this-helper">
-<h2><a class="toc-backref" href="#id2">Loading this Helper</a><a class="headerlink" href="#loading-this-helper" title="Permalink to this headline">¶</a></h2>
+<div class="custom-index container"></div><div class="section" id="loading-this-helper">
+<h2><a class="toc-backref" href="#id1">Loading this Helper</a><a class="headerlink" href="#loading-this-helper" title="Permalink to this headline">¶</a></h2>
 <p>This helper is loaded using the following code:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">helper</span><span class="p">(</span><span class="s1">&#39;inflector&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>The following functions are available:</p>
 </div>
-<div class="section" id="singular">
-<h2><a class="toc-backref" href="#id3">singular()</a><a class="headerlink" href="#singular" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="available-functions">
+<h2><a class="toc-backref" href="#id2">Available Functions</a><a class="headerlink" href="#available-functions" title="Permalink to this headline">¶</a></h2>
+<p>The following functions are available:</p>
 <dl class="function">
-<dt>
-<tt class="descname">singular</tt><big>(</big><em>$str</em><big>)</big></dt>
+<dt id="singular">
+<tt class="descname">singular</tt><big>(</big><em>$str</em><big>)</big><a class="headerlink" href="#singular" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>$str</strong> (<em>string</em>) &#8211; Input string</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$str</strong> (<em>string</em>) &#8211; Input string</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">string</p>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A singular word</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
 <p>Changes a plural word to singular. Example:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="k">echo</span> <span class="nx">singular</span><span class="p">(</span><span class="s1">&#39;dogs&#39;</span><span class="p">);</span> <span class="c1">// Prints &#39;dog&#39;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="plural">
-<h2><a class="toc-backref" href="#id4">plural()</a><a class="headerlink" href="#plural" title="Permalink to this headline">¶</a></h2>
+</dd></dl>
+
 <dl class="function">
-<dt>
-<tt class="descname">plural</tt><big>(</big><em>$str</em><big>)</big></dt>
+<dt id="plural">
+<tt class="descname">plural</tt><big>(</big><em>$str</em><big>)</big><a class="headerlink" href="#plural" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>$str</strong> (<em>string</em>) &#8211; Input string</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$str</strong> (<em>string</em>) &#8211; Input string</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">string</p>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A plular word</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
 <p>Changes a singular word to plural. Example:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="k">echo</span> <span class="nx">plural</span><span class="p">(</span><span class="s1">&#39;dog&#39;</span><span class="p">);</span> <span class="c1">// Prints &#39;dogs&#39;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="camelize">
-<h2><a class="toc-backref" href="#id5">camelize()</a><a class="headerlink" href="#camelize" title="Permalink to this headline">¶</a></h2>
+</dd></dl>
+
 <dl class="function">
-<dt>
-<tt class="descname">camelize</tt><big>(</big><em>$str</em><big>)</big></dt>
+<dt id="camelize">
+<tt class="descname">camelize</tt><big>(</big><em>$str</em><big>)</big><a class="headerlink" href="#camelize" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>$str</strong> (<em>string</em>) &#8211; Input string</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$str</strong> (<em>string</em>) &#8211; Input string</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">string</p>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Camelized string</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
 <p>Changes a string of words separated by spaces or underscores to camel
 case. Example:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="k">echo</span> <span class="nx">camelize</span><span class="p">(</span><span class="s1">&#39;my_dog_spot&#39;</span><span class="p">);</span> <span class="c1">// Prints &#39;myDogSpot&#39;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="underscore">
-<h2><a class="toc-backref" href="#id6">underscore()</a><a class="headerlink" href="#underscore" title="Permalink to this headline">¶</a></h2>
+</dd></dl>
+
 <dl class="function">
-<dt>
-<tt class="descname">camelize</tt><big>(</big><em>$str</em><big>)</big></dt>
+<dt id="underscore">
+<tt class="descname">underscore</tt><big>(</big><em>$str</em><big>)</big><a class="headerlink" href="#underscore" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>$str</strong> (<em>string</em>) &#8211; Input string</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$str</strong> (<em>string</em>) &#8211; Input string</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">string</p>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">String containing underscores instead of spaces</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
 <p>Takes multiple words separated by spaces and underscores them.
 Example:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="k">echo</span> <span class="nx">underscore</span><span class="p">(</span><span class="s1">&#39;my dog spot&#39;</span><span class="p">);</span> <span class="c1">// Prints &#39;my_dog_spot&#39;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="humanize">
-<h2><a class="toc-backref" href="#id7">humanize()</a><a class="headerlink" href="#humanize" title="Permalink to this headline">¶</a></h2>
+</dd></dl>
+
 <dl class="function">
-<dt>
-<tt class="descname">camelize</tt><big>(</big><em>$str</em><big>)</big></dt>
+<dt id="humanize">
+<tt class="descname">humanize</tt><big>(</big><em>$str</em><span class="optional">[</span>, <em>$separator = '_'</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#humanize" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -215,13 +188,14 @@ Example:</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">string</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Humanized string</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
 </td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
 <p>Takes multiple words separated by underscores and adds spaces between
 them. Each word is capitalized.</p>
 <p>Example:</p>
@@ -232,9 +206,8 @@ them. Each word is capitalized.</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="k">echo</span> <span class="nx">humanize</span><span class="p">(</span><span class="s1">&#39;my-dog-spot&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">);</span> <span class="c1">// Prints &#39;My Dog Spot&#39;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="is-countable">
-<h2><a class="toc-backref" href="#id8">is_countable()</a><a class="headerlink" href="#is-countable" title="Permalink to this headline">¶</a></h2>
+</dd></dl>
+
 <dl class="function">
 <dt id="is_countable">
 <tt class="descname">is_countable</tt><big>(</big><em>$word</em><big>)</big><a class="headerlink" href="#is_countable" title="Permalink to this definition">¶</a></dt>
@@ -242,22 +215,20 @@ them. Each word is capitalized.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>$word</strong> (<em>string</em>) &#8211; Input string</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$word</strong> (<em>string</em>) &#8211; Input string</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">bool</p>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">TRUE if the word is countable or FALSE if not</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
 <p>Checks if the given word has a plural version. Example:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nx">is_countable</span><span class="p">(</span><span class="s1">&#39;equipment&#39;</span><span class="p">);</span> <span class="c1">// Returns FALSE</span>
 </pre></div>
 </div>
+</dd></dl>
+
 </div>
 </div>
 
@@ -265,7 +236,7 @@ them. Each word is capitalized.</p>
 		</div>
 
 		<!-- {user_guide_comments} -->
-					
+		
 		<div id="footer">
 			<p class="top"><a href="#header" title="Return to top">Return to top</a></p>
 			<p><a href="http://codeigniter.com/">CodeIgniter</a> &ndash; Copyright &copy; 2013, EllisLab, Inc.</a></p>

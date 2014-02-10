@@ -21,6 +21,8 @@
 	    <script type="text/javascript" src="../_static/jquery.js"></script>
 	    <script type="text/javascript" src="../_static/underscore.js"></script>
 	    <script type="text/javascript" src="../_static/doctools.js"></script>
+
+	    <script type="text/javascript" src="../_static/asset/js/method-toc.js"></script>
 	    <link rel="top" title="CodeIgniter 3.0-dev documentation" href="../index.html" />
 	    <link rel="up" title="Libraries" href="index.html" />
 	    <link rel="next" title="Shopping Cart Class" href="cart.html" />
@@ -29,7 +31,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x5394ed8>
+			<function <lambda> at 0x40e46e0>
 			</div>
 		</div>
 
@@ -73,8 +75,24 @@
 calendars can be formatted through the use of a calendar template,
 allowing 100% control over every aspect of its design. In addition, you
 can pass data to your calendar cells.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#using-the-calendaring-class" id="id1">Using the Calendaring Class</a><ul>
+<li><a class="reference internal" href="#initializing-the-class" id="id2">Initializing the Class</a></li>
+<li><a class="reference internal" href="#displaying-a-calendar" id="id3">Displaying a Calendar</a></li>
+<li><a class="reference internal" href="#passing-data-to-your-calendar-cells" id="id4">Passing Data to your Calendar Cells</a></li>
+<li><a class="reference internal" href="#setting-display-preferences" id="id5">Setting Display Preferences</a></li>
+<li><a class="reference internal" href="#showing-next-previous-month-links" id="id6">Showing Next/Previous Month Links</a></li>
+<li><a class="reference internal" href="#creating-a-calendar-template" id="id7">Creating a Calendar Template</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#class-reference" id="id8">Class Reference</a></li>
+</ul>
+</div>
+<div class="custom-index container"></div><div class="section" id="using-the-calendaring-class">
+<h2><a class="toc-backref" href="#id1">Using the Calendaring Class</a><a class="headerlink" href="#using-the-calendaring-class" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="initializing-the-class">
-<h2>Initializing the Class<a class="headerlink" href="#initializing-the-class" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id2">Initializing the Class</a><a class="headerlink" href="#initializing-the-class" title="Permalink to this headline">¶</a></h3>
 <p>Like most other classes in CodeIgniter, the Calendar class is
 initialized in your controller using the $this-&gt;load-&gt;library function:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">library</span><span class="p">(</span><span class="s1">&#39;calendar&#39;</span><span class="p">);</span>
@@ -86,7 +104,7 @@ initialized in your controller using the $this-&gt;load-&gt;library function:</p
 </div>
 </div>
 <div class="section" id="displaying-a-calendar">
-<h2>Displaying a Calendar<a class="headerlink" href="#displaying-a-calendar" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id3">Displaying a Calendar</a><a class="headerlink" href="#displaying-a-calendar" title="Permalink to this headline">¶</a></h3>
 <p>Here is a very simple example showing how you can display a calendar:</p>
 <div class="highlight-ci"><div class="highlight"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">library</span><span class="p">(</span><span class="s1">&#39;calendar&#39;</span><span class="p">);</span>
 <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">calendar</span><span class="o">-&gt;</span><span class="na">generate</span><span class="p">();</span>
@@ -104,7 +122,7 @@ you will pass this information to the calendar generating function:</p>
 specifies the month.</p>
 </div>
 <div class="section" id="passing-data-to-your-calendar-cells">
-<h2>Passing Data to your Calendar Cells<a class="headerlink" href="#passing-data-to-your-calendar-cells" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id4">Passing Data to your Calendar Cells</a><a class="headerlink" href="#passing-data-to-your-calendar-cells" title="Permalink to this headline">¶</a></h3>
 <p>To add data to your calendar cells involves creating an associative
 array in which the keys correspond to the days you wish to populate and
 the array value contains the data. The array is passed to the third
@@ -132,7 +150,7 @@ pass different types of information.</p>
 </div>
 </div>
 <div class="section" id="setting-display-preferences">
-<h2>Setting Display Preferences<a class="headerlink" href="#setting-display-preferences" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id5">Setting Display Preferences</a><a class="headerlink" href="#setting-display-preferences" title="Permalink to this headline">¶</a></h3>
 <p>There are seven preferences you can set to control various aspects of
 the calendar. Preferences are set by passing an array of preferences in
 the second parameter of the loading function. Here is an example:</p>
@@ -152,10 +170,10 @@ month heading, and the &#8220;short&#8221; day names. More information regarding
 preferences below.</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="14%" />
+<col width="15%" />
 <col width="11%" />
-<col width="31%" />
-<col width="44%" />
+<col width="29%" />
+<col width="45%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Preference</th>
@@ -229,7 +247,7 @@ preferences below.</p>
 </table>
 </div>
 <div class="section" id="showing-next-previous-month-links">
-<h2>Showing Next/Previous Month Links<a class="headerlink" href="#showing-next-previous-month-links" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id6">Showing Next/Previous Month Links</a><a class="headerlink" href="#showing-next-previous-month-links" title="Permalink to this headline">¶</a></h3>
 <p>To allow your calendar to dynamically increment/decrement via the
 next/previous links requires that you set up your calendar code similar
 to this example:</p>
@@ -256,7 +274,7 @@ provide.).</li>
 </ul>
 </div>
 <div class="section" id="creating-a-calendar-template">
-<h2>Creating a Calendar Template<a class="headerlink" href="#creating-a-calendar-template" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id7">Creating a Calendar Template</a><a class="headerlink" href="#creating-a-calendar-template" title="Permalink to this headline">¶</a></h3>
 <p>By creating a calendar template you have 100% control over the design of
 your calendar. Each component of your calendar will be placed within a
 pair of pseudo-variables as shown here:</p>
@@ -306,12 +324,202 @@ pair of pseudo-variables as shown here:</p>
 </div>
 </div>
 </div>
+<div class="section" id="class-reference">
+<h2><a class="toc-backref" href="#id8">Class Reference</a><a class="headerlink" href="#class-reference" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="CI_Calendar">
+<em class="property">class </em><tt class="descname">CI_Calendar</tt><a class="headerlink" href="#CI_Calendar" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="CI_Calendar.initialize">
+<tt class="descname">initialize</tt><big>(</big><span class="optional">[</span><em>$config = array()</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#CI_Calendar.initialize" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$config</strong> (<em>array</em>) &#8211; Configuration parameters</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">CI_Calendar instance (method chaining)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">CI_Calendar</td>
+</tr>
+</tbody>
+</table>
+<p>Initializes the Calendaring preferences. Accepts an associative array as input, containing display preferences.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Calendar.generate">
+<tt class="descname">generate</tt><big>(</big><span class="optional">[</span><em>$year = ''</em><span class="optional">[</span>, <em>$month = ''</em><span class="optional">[</span>, <em>$data = array()</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#CI_Calendar.generate" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$year</strong> (<em>int</em>) &#8211; Year</li>
+<li><strong>$month</strong> (<em>int</em>) &#8211; Month</li>
+<li><strong>$data</strong> (<em>array</em>) &#8211; Data to be shown in the calendar cells</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">HTML-formatted calendar</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Generate the calendar.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Calendar.get_month_name">
+<tt class="descname">get_month_name</tt><big>(</big><em>$month</em><big>)</big><a class="headerlink" href="#CI_Calendar.get_month_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$month</strong> (<em>int</em>) &#8211; Month</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Month name</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p>Generates a textual month name based on the numeric month provided.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Calendar.get_day_names">
+<tt class="descname">get_day_names</tt><big>(</big><em>$day_type = ''</em><big>)</big><a class="headerlink" href="#CI_Calendar.get_day_names" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>$day_type</strong> (<em>string</em>) &#8211; &#8216;long&#8217;, &#8216;short&#8217;, or &#8216;abr&#8217;</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Array of day names</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>Returns an array of day names (Sunday, Monday, etc.) based on the type
+provided. Options: long, short, abr. If no <tt class="docutils literal"><span class="pre">$day_type</span></tt> is provided (or
+if an invalid type is provided) this method will return the &#8220;abbreviated&#8221;
+style.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Calendar.adjust_date">
+<tt class="descname">adjust_date</tt><big>(</big><em>$month</em>, <em>$year</em><big>)</big><a class="headerlink" href="#CI_Calendar.adjust_date" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$month</strong> (<em>int</em>) &#8211; Month</li>
+<li><strong>$year</strong> (<em>int</em>) &#8211; Year</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">An associative array containing month and year</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">array</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This method makes sure that you have a valid month/year. For example, if
+you submit 13 as the month, the year will increment and the month will
+become January:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nb">print_r</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">calendar</span><span class="o">-&gt;</span><span class="na">adjust_date</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">2013</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>outputs:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="k">Array</span>
+<span class="p">(</span>
+        <span class="p">[</span><span class="nx">month</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;01&#39;</span>
+        <span class="p">[</span><span class="nx">year</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;2014&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Calendar.get_total_days">
+<tt class="descname">get_total_days</tt><big>(</big><em>$month</em>, <em>$year</em><big>)</big><a class="headerlink" href="#CI_Calendar.get_total_days" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$month</strong> (<em>int</em>) &#8211; Month</li>
+<li><strong>$year</strong> (<em>int</em>) &#8211; Year</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Count of days in the specified month</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Total days in a given month:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">calendar</span><span class="o">-&gt;</span><span class="na">get_total_days</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2012</span><span class="p">);</span>
+<span class="c1">// 29</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Calendar.default_template">
+<tt class="descname">default_template</tt><big>(</big><big>)</big><a class="headerlink" href="#CI_Calendar.default_template" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An array of template values</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>Sets the default template. This method is used when you have not created
+your own template.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Calendar.parse_template">
+<tt class="descname">parse_template</tt><big>(</big><big>)</big><a class="headerlink" href="#CI_Calendar.parse_template" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">CI_Calendar instance (method chaining)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">CI_Calendar</td>
+</tr>
+</tbody>
+</table>
+<p>Harvests the data within the template <tt class="docutils literal"><span class="pre">{pseudo-variables}</span></tt> used to
+display the calendar.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
 
 
 		</div>
 
 		<!-- {user_guide_comments} -->
-					
+		
 		<div id="footer">
 			<p class="top"><a href="#header" title="Return to top">Return to top</a></p>
 			<p><a href="http://codeigniter.com/">CodeIgniter</a> &ndash; Copyright &copy; 2013, EllisLab, Inc.</a></p>

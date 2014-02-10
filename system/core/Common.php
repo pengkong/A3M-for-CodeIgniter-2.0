@@ -76,6 +76,7 @@ if ( ! function_exists('is_really_writable'))
 	 * the file, based on the read-only attribute. is_writable() is also unreliable
 	 * on Unix servers if safe_mode is on.
 	 *
+	 * @link	https://bugs.php.net/bug.php?id=54709
 	 * @param	string
 	 * @return	void
 	 */
@@ -597,13 +598,13 @@ if ( ! function_exists('_exception_handler'))
 			return;
 		}
 
+		$_error->log_exception($severity, $message, $filepath, $line);
+
 		// Should we display the error?
 		if ((bool) ini_get('display_errors') === TRUE)
 		{
 			$_error->show_php_error($severity, $message, $filepath, $line);
 		}
-
-		$_error->log_exception($severity, $message, $filepath, $line);
 
 		// If the error is fatal, the execution of the script should be stopped because
 		// errors can't be recovered from. Halting the script conforms with PHP's
@@ -754,6 +755,11 @@ if ( ! function_exists('function_usable'))
 	 * setting, but not for *suhosin.executor.func.blacklist* and
 	 * *suhosin.executor.disable_eval*. These settings will just
 	 * terminate script execution if a disabled function is executed.
+	 *
+	 * The above described behavior turned out to be a bug in Suhosin,
+	 * but even though a fix was commited for 0.9.34 on 2012-02-12,
+	 * that version is yet to be released. This function will therefore
+	 * be just temporary, but would probably be kept for a few years.
 	 *
 	 * @link	http://www.hardened-php.net/suhosin/
 	 * @param	string	$function_name	Function to check for

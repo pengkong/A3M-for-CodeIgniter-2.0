@@ -41,6 +41,8 @@ $config['forgot_password_recaptcha_enabled'] 	= TRUE;
 /*
 |--------------------------------------------------------------------------
 | Third Party Auth
+| Adding more services:
+| http://hybridauth.sourceforge.net/userguide.html
 |--------------------------------------------------------------------------
 */
 $config['openid_what_is_url'] = 'http://openidexplained.com/';
@@ -56,7 +58,7 @@ $config['third_party_auth'] = array(
 
         "Yahoo" => array (
                 "enabled" => FALSE,
-                "keys"    => array ( "id" => "", "secret" => "" ),
+                "keys"    => array ( "key" => "", "secret" => "" ),
         ),
 
         "AOL"  => array (

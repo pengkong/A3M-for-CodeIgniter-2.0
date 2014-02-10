@@ -38,13 +38,10 @@
       <div class="col-lg-10">
         <?php echo form_textarea(array('name' => 'permission_description', 'id' => 'permission_description', 'class' => 'form-control', 'value' => set_value('permission_description') ? set_value('permission_description') : (isset($permission->description) ? $permission->description : ''), 'maxlength' => 160, 'rows'=>'4')); ?>
 
-        <?php if (form_error('permission_description') || isset($permission_name_error)) : ?>
-          <span class="help-inline">
-          <?php
-            echo form_error('permission_description');
-          ?>
-          </span>
-        <?php endif; ?>
+        <?php if (form_error('permission_description') || isset($permission_name_error))
+        {
+          echo form_error('permission_description');
+        } ?>
       </div>
   </div>
 
@@ -84,9 +81,12 @@
       if( $this->authorization->is_permitted('delete_permissions') && $action == 'update' && ! $is_system )
       {
         echo '<span>' . lang('admin_or') . '</span>';
-        if( isset($permission->suspendedon) ){
+        if( isset($permission->suspendedon) )
+        {
           echo form_submit('manage_permission_unban', lang('permissions_unban'), 'class="btn btn-danger"');
-        } else {
+        }
+        else
+        {
           echo form_submit('manage_permission_ban', lang('permissions_ban'), 'class="btn btn-danger"');
         }
       }?>

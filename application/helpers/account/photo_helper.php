@@ -1,5 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+/**
+ * Shows users photo
+ * @param string $picture Description
+ * @param Array $param Array with parameters to be included in the generated img tag (height, width, id, align, check, nocache, title, class)
+ * @return string
+ */
 function showPhoto($picture = NULL, $param = NULL)
 {
 

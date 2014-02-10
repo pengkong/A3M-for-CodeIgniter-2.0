@@ -96,7 +96,7 @@ class Connect extends CI_Controller
 			else //start creating a new account
 			{
 			    // Store user's data in session
-			    $this->session->set_userdata('connect_create', array($provider => $user_profile));
+			    $this->session->set_userdata('connect_create', array($provider => (array)$user_profile));
 			    
 			    // Create a3m account
 			    redirect('account/connect_create');
@@ -124,18 +124,20 @@ class Connect extends CI_Controller
                 case 3 : $error = 'Unknown or disabled provider.'; break;
                 case 4 : $error = 'Missing provider application credentials.'; break;
                 case 5 : log_message('debug', 'controllers.HAuth.login: Authentification failed. The user has canceled the authentication or the provider refused the connection.');
-                         //redirect();
-                         if (isset($service))
-                         {
-                                log_message('debug', 'controllers.HAuth.login: logging out from service.');
-                                $service->logout();
-                         }
-                         show_error('User has cancelled the authentication or the provider refused the connection.');
-                         break;
+                        //redirect();
+                        if (isset($service))
+                        {
+                            log_message('debug', 'controllers.HAuth.login: logging out from service.');
+                            $service->logout();
+                        }
+                        show_error('User has cancelled the authentication or the provider refused the connection.');
+                        break;
                 case 6 : $error = 'User profile request failed. Most likely the user is not connected to the provider and he should to authenticate again.';
-                         break;
+                        break;
                 case 7 : $error = 'User not connected to the provider.';
-                         break;
+                        break;
+		default : $error = 'Unspecified error.';
+		    break;
             }
             
             if (isset($service))

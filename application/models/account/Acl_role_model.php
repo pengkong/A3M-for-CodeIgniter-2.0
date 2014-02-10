@@ -95,7 +95,9 @@ class Acl_role_model extends CI_Model {
     $this->db->select('a3m_acl_role.*');
     $this->db->from('a3m_acl_role');
     $this->db->join('a3m_rel_account_role', 'a3m_acl_role.id = a3m_rel_account_role.role_id');
-    $this->db->where("a3m_rel_account_role.account_id = $account_id AND a3m_acl_role.suspendedon IS NULL AND a3m_acl_role.name = '$role_name'");
+    $this->db->where("a3m_rel_account_role.account_id", $account_id);
+    $this->db->where("a3m_acl_role.suspendedon IS NULL");
+    $this->db->where("a3m_acl_role.name", $role_name);
     
     return ($this->db->count_all_results() > 0);
   }

@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS `a3m_account` (
   `resetsenton` datetime DEFAULT NULL,
   `deletedon` datetime DEFAULT NULL,
   `suspendedon` datetime DEFAULT NULL,
+  `forceresetpass` tinyint(2) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
@@ -100,7 +101,8 @@ INSERT INTO `a3m_acl_permission` (`key`, `description`, `is_system`) VALUES
 ('retrieve_users', 'View existing users', 1),
 ('update_users', 'Update existing users', 1),
 ('delete_users', 'Delete existing users', 1),
-('ban_users', 'Ban and Unban existing users', 1);
+('ban_users', 'Ban and Unban existing users', 1),
+('password_reset_users', 'Force user to reset password upon next login', 1);
 
 -- --------------------------------------------------------
 
@@ -185,7 +187,7 @@ CREATE TABLE IF NOT EXISTS  `ci_sessions` (
     `user_data` text NOT NULL,
     PRIMARY KEY (`session_id`, `ip_address`, `user_agent`),
     KEY `last_activity_idx` (`last_activity`)
-);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
