@@ -30,7 +30,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x4ad2c08>
+			<function <lambda> at 0x46056e0>
 			</div>
 		</div>
 
@@ -323,6 +323,13 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 </ul>
 </li>
 <li>Libraries<ul>
+<li>Added a new <a class="reference internal" href="libraries/encryption.html"><em>Encryption Library</em></a> to replace the old, largely insecure <a class="reference internal" href="libraries/encrypt.html"><em>Encrypt Library</em></a>.</li>
+<li><a class="reference internal" href="libraries/encrypt.html"><em>Encrypt Library</em></a> changes include:<ul>
+<li>Deprecated the library in favor of the new <a class="reference internal" href="libraries/encryption.html"><em>Encryption Library</em></a>.</li>
+<li>Added support for hashing algorithms other than SHA1 and MD5.</li>
+<li>Removed previously deprecated <tt class="docutils literal"><span class="pre">sha1()</span></tt> method.</li>
+</ul>
+</li>
 <li><a class="reference internal" href="libraries/sessions.html"><em>Session Library</em></a> changes include:<ul>
 <li>Library changed to <a class="reference internal" href="general/drivers.html"><em>Driver</em></a> with classic &#8216;cookie&#8217; driver as the default.</li>
 <li>Added a &#8216;native&#8217; PHP Session driver to work with <tt class="docutils literal"><span class="pre">$_SESSION</span></tt>.</li>
@@ -424,11 +431,6 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Deprecated usage of the &#8220;anchor_class&#8221; setting (use the new &#8220;attributes&#8221; setting instead).</li>
 <li>Added $config[&#8216;reuse_query_string&#8217;] to allow automatic repopulation of query string arguments, combined with normal URI segments.</li>
 <li>Removed the default <tt class="docutils literal"><span class="pre">&amp;nbsp;</span></tt> from a number of the configuration variables.</li>
-</ul>
-</li>
-<li><a class="reference internal" href="libraries/encryption.html"><em>Encryption Library</em></a> changes include:<ul>
-<li>Added support for hashing algorithms other than SHA1 and MD5.</li>
-<li>Removed previously deprecated <tt class="docutils literal"><span class="pre">sha1()</span></tt> method.</li>
 </ul>
 </li>
 <li><a class="reference internal" href="general/profiling.html"><em>Profiler Library</em></a> changes include:<ul>
@@ -645,7 +647,7 @@ Only entries in <tt class="docutils literal"><span class="pre">$autoload['librar
 <li>Fixed a bug (#1264) - <a class="reference internal" href="database/forge.html"><em>Database Forge</em></a> and <a class="reference internal" href="database/utilities.html"><em>Database Utilities</em></a> didn&#8217;t update/reset the databases and tables list cache when a table or a database is created, dropped or renamed.</li>
 <li>Fixed a bug (#7) - <a class="reference internal" href="database/query_builder.html"><em>Query Builder</em></a> method <tt class="docutils literal"><span class="pre">join()</span></tt> only escaped one set of conditions.</li>
 <li>Fixed a bug (#1321) - <tt class="docutils literal"><span class="pre">CI_Exceptions</span></tt> couldn&#8217;t find the <em>errors/</em> directory in some cases.</li>
-<li>Fixed a bug (#1202) - <a class="reference internal" href="libraries/encryption.html"><em>Encryption Library</em></a> <tt class="docutils literal"><span class="pre">encode_from_legacy()</span></tt> didn&#8217;t set back the encrypt mode on failure.</li>
+<li>Fixed a bug (#1202) - <a class="reference internal" href="libraries/encrypt.html"><em>Encrypt Library</em></a> <tt class="docutils literal"><span class="pre">encode_from_legacy()</span></tt> didn&#8217;t set back the encrypt mode on failure.</li>
 <li>Fixed a bug (#145) - <a class="reference internal" href="database/index.html"><em>Database Class</em></a> method <tt class="docutils literal"><span class="pre">compile_binds()</span></tt> failed when the bind marker was present in a literal string within the query.</li>
 <li>Fixed a bug in <a class="reference internal" href="database/query_builder.html"><em>Query Builder</em></a> method <tt class="docutils literal"><span class="pre">protect_identifiers()</span></tt> where if passed along with the field names, operators got escaped as well.</li>
 <li>Fixed a bug (#10) - <a class="reference internal" href="libraries/uri.html"><em>URI Library</em></a> internal method <tt class="docutils literal"><span class="pre">_detect_uri()</span></tt> failed with paths containing a colon.</li>
@@ -1378,7 +1380,7 @@ it is really needed (Output caching)</li>
 <li>Documented append_output() in the <a class="reference internal" href="libraries/output.html"><em>Output
 Class</em></a>.</li>
 <li>Documented a second argument in the decode() function for the
-<a class="reference internal" href="libraries/encryption.html"><em>Encryption Class</em></a>.</li>
+<a class="reference internal" href="libraries/encrypt.html"><em>Encrypt Class</em></a>.</li>
 <li>Documented db-&gt;close().</li>
 <li>Updated the router to support a default route with any number of
 segments.</li>

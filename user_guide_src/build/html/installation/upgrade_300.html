@@ -31,7 +31,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x4b17ed8>
+			<function <lambda> at 0x30bda28>
 			</div>
 		</div>
 
@@ -362,7 +362,7 @@ number of other functionalities that have been removed in CodeIgniter 3.0.0:</p>
 <h3>The SHA1 library<a class="headerlink" href="#the-sha1-library" title="Permalink to this headline">¶</a></h3>
 <p>The previously deprecated SHA1 library has been removed, alter your code to use PHP&#8217;s native
 <tt class="docutils literal"><span class="pre">sha1()</span></tt> function to generate a SHA1 hash.</p>
-<p>Additionally, the <tt class="docutils literal"><span class="pre">sha1()</span></tt> method in the <a class="reference internal" href="../libraries/encryption.html"><em>Encryption Library</em></a> has been removed.</p>
+<p>Additionally, the <tt class="docutils literal"><span class="pre">sha1()</span></tt> method in the <a class="reference internal" href="../libraries/encrypt.html"><em>Encrypt Library</em></a> has been removed.</p>
 </div>
 <div class="section" id="the-ext-constant">
 <h3>The EXT constant<a class="headerlink" href="#the-ext-constant" title="Permalink to this headline">¶</a></h3>
@@ -374,6 +374,25 @@ the <tt class="docutils literal"><span class="pre">EXT</span></tt> constant has 
 <h3>Smiley helper js_insert_smiley()<a class="headerlink" href="#smiley-helper-js-insert-smiley" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="../helpers/smiley_helper.html"><em>Smiley Helper</em></a> function <tt class="docutils literal"><span class="pre">js_insert_smiley()</span></tt> has been deprecated
 since CodeIgniter 1.7.2 and is now removed. You&#8217;ll need to switch to <tt class="docutils literal"><span class="pre">smiley_js()</span></tt> instead.</p>
+</div>
+<div class="section" id="the-encrypt-library">
+<h3>The Encrypt library<a class="headerlink" href="#the-encrypt-library" title="Permalink to this headline">¶</a></h3>
+<p>Following numerous vulnerability reports, the <a class="reference internal" href="../libraries/encrypt.html"><em>Encrypt Library</em></a> has
+been deprecated and a new, <a class="reference internal" href="../libraries/encryption.html"><em>Encryption Library</em></a> is added to take
+its place.</p>
+<p>The new library requires either the <a class="reference external" href="http://php.net/mcrypt">MCrypt extension</a> (and /dev/urandom
+availability) or PHP 5.3.3 and the <a class="reference external" href="http://php.net/openssl">OpenSSL extension</a>.
+While this might be rather inconvenient, it is a requirement that allows us to have properly
+implemented cryptographic functions.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <a class="reference internal" href="../libraries/encrypt.html"><em>Encrypt Library</em></a> is still available for the purpose
+of keeping backwards compatibility.</p>
+</div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">You are strongly encouraged to switch to the new <a class="reference internal" href="../libraries/encryption.html"><em>Encryption Library</em></a> as soon as possible!</p>
+</div>
 </div>
 <div class="section" id="database-drivers-mysql-sqlite-mssql-pdo-dblib">
 <h3>Database drivers &#8216;mysql&#8217;, &#8216;sqlite&#8217;, &#8216;mssql&#8217;, &#8216;pdo/dblib&#8217;<a class="headerlink" href="#database-drivers-mysql-sqlite-mssql-pdo-dblib" title="Permalink to this headline">¶</a></h3>
@@ -617,6 +636,17 @@ CodeIgniter 3.1+.</p>
 <p class="first admonition-title">Note</p>
 <p class="last">This method is still available, but you&#8217;re strongly encouraged to remove its usage
 sooner rather than later.</p>
+</div>
+<div class="section" id="the-javascript-library">
+<h4>The Javascript library<a class="headerlink" href="#the-javascript-library" title="Permalink to this headline">¶</a></h4>
+<p>The <a class="reference internal" href="../libraries/javascript.html"><em>Javascript Library</em></a> has always had an
+&#8216;experimental&#8217; status and was never really useful, nor a proper solution.</p>
+<p>It is now deprecated and scheduled for removal in CodeIgniter 3.1+.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This library is still available, but you&#8217;re strongly encouraged to remove its usage
+sooner rather than later.</p>
+</div>
 </div>
 </div>
 </div>

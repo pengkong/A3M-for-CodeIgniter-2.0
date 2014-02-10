@@ -31,7 +31,7 @@
 	<body>
 		<div id="table-contents">
 			<div class="toctree-wrapper compound">
-			<function <lambda> at 0x3b2ef50>
+			<function <lambda> at 0x322c320>
 			</div>
 		</div>
 
@@ -117,11 +117,11 @@ your helpers folder, and change all instances of:</p>
 <h3>Step 4: Update stored encrypted data<a class="headerlink" href="#step-4-update-stored-encrypted-data" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If your application does not use the Encryption library, does
+<p class="last">If your application does not use the Encrypt library, does
 not store Encrypted data permanently, or is on an environment that does
 not support Mcrypt, you may skip this step.</p>
 </div>
-<p>The Encryption library has had a number of improvements, some for
+<p>The Encrypt library has had a number of improvements, some for
 encryption strength and some for performance, that has an unavoidable
 consequence of making it no longer possible to decode encrypted data
 produced by the original version of this library. To help with the
@@ -130,8 +130,8 @@ will decode the data with the original algorithm and return a re-encoded
 string using the improved methods. This will enable you to easily
 replace stale encrypted data with fresh in your applications, either on
 the fly or en masse.</p>
-<p>Please read <a class="reference external" href="../libraries/encryption.html#legacy">how to use this
-method</a> in the Encryption library
+<p>Please read <a class="reference external" href="../libraries/encrypt.html#legacy">how to use this
+method</a> in the Encrypt library
 documentation.</p>
 </div>
 <div class="section" id="step-5-remove-loading-calls-for-the-compatibility-helper">

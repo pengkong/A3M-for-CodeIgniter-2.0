@@ -257,6 +257,14 @@ Release Date: Not Released
 
 -  Libraries
 
+   -  Added a new :doc:`Encryption Library <libraries/encryption>` to replace the old, largely insecure :doc:`Encrypt Library <libraries/encrypt>`.
+
+   -  :doc:`Encrypt Library <libraries/encrypt>` changes include:
+
+      -  Deprecated the library in favor of the new :doc:`Encryption Library <libraries/encryption>`.
+      -  Added support for hashing algorithms other than SHA1 and MD5.
+      -  Removed previously deprecated ``sha1()`` method.
+
    -  :doc:`Session Library <libraries/sessions>` changes include:
 
       -  Library changed to :doc:`Driver <general/drivers>` with classic 'cookie' driver as the default.
@@ -359,11 +367,6 @@ Release Date: Not Released
       -  Deprecated usage of the "anchor_class" setting (use the new "attributes" setting instead).
       -  Added $config['reuse_query_string'] to allow automatic repopulation of query string arguments, combined with normal URI segments.
       -  Removed the default ``&nbsp;`` from a number of the configuration variables.
-
-   -  :doc:`Encryption Library <libraries/encryption>` changes include:
-
-      -  Added support for hashing algorithms other than SHA1 and MD5.
-      -  Removed previously deprecated ``sha1()`` method.
 
    -  :doc:`Profiler Library <general/profiling>` changes include:
 
@@ -579,7 +582,7 @@ Bug fixes for 3.0
 -  Fixed a bug (#1264) - :doc:`Database Forge <database/forge>` and :doc:`Database Utilities <database/utilities>` didn't update/reset the databases and tables list cache when a table or a database is created, dropped or renamed.
 -  Fixed a bug (#7) - :doc:`Query Builder <database/query_builder>` method ``join()`` only escaped one set of conditions.
 -  Fixed a bug (#1321) - ``CI_Exceptions`` couldn't find the *errors/* directory in some cases.
--  Fixed a bug (#1202) - :doc:`Encryption Library <libraries/encryption>` ``encode_from_legacy()`` didn't set back the encrypt mode on failure.
+-  Fixed a bug (#1202) - :doc:`Encrypt Library <libraries/encrypt>` ``encode_from_legacy()`` didn't set back the encrypt mode on failure.
 -  Fixed a bug (#145) - :doc:`Database Class <database/index>` method ``compile_binds()`` failed when the bind marker was present in a literal string within the query.
 -  Fixed a bug in :doc:`Query Builder <database/query_builder>` method ``protect_identifiers()`` where if passed along with the field names, operators got escaped as well.
 -  Fixed a bug (#10) - :doc:`URI Library <libraries/uri>` internal method ``_detect_uri()`` failed with paths containing a colon.
@@ -1295,7 +1298,7 @@ Hg Tag: v2.0.0
    -  Documented append_output() in the :doc:`Output
       Class <libraries/output>`.
    -  Documented a second argument in the decode() function for the
-      :doc:`Encryption Class <libraries/encryption>`.
+      :doc:`Encrypt Class <libraries/encrypt>`.
    -  Documented db->close().
    -  Updated the router to support a default route with any number of
       segments.
